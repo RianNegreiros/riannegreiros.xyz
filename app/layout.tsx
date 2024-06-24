@@ -13,17 +13,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-white text-black dark:bg-gray-900 dark:selection:bg-gray-900 dark:text-white h-full selection:bg-gray-50`}>
-        <Providers>
+      <body className={inter.className}>
+        <Providers
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <Navbar />
-          <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            {children}
-          </main>
+          <main className="max-w-2xl mx-auto px-4">{children}</main>
         </Providers>
       </body>
     </html>
