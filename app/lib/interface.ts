@@ -1,10 +1,13 @@
-export interface Post {
+export interface simpleBlogCard {
   title: string;
-  overview: string;
+  smallDescription: string;
+  currentSlug: string;
+  titleImage: any;
+}
+
+export interface post {
+  currentSlug: string;
+  title: string;
   content: any;
-  _id: string;
-  slug: {
-    current: string;
-  };
-  _createdAt: string;
+  titleImage: any;
 }
