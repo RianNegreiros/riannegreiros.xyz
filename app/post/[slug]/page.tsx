@@ -3,51 +3,64 @@ import { client, urlFor } from "@/app/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 
-export const revalidate = 30; // revalidate at most 30 seconds
-
 async function getData(slug: string) {
-  const query = `
-    *[_type == "post" && slug.current == '${slug}'] {
-        "currentSlug": slug.current,
-          title,
-          content,
-          titleImage
-      }[0]`;
+  const query = `*[_type == "post" && slug.current == "${slug}"][0]`;
 
   const data = await client.fetch(query);
+
   return data;
 }
 
-export default async function BlogArticle({
+export default async function SlugPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const data: post = await getData(params.slug);
+  const data = (await getData(params.slug)) as post;
+
+  const PortableTextComponent = {
+    types: {
+      image: ({ value }: { value: any }) => (
+        <Image
+          src={urlFor(value).url()}
+          alt="Image"
+          className="rounded-lg"
+          width={800}
+          height={800}
+        />
+      ),
+    },
+  };
 
   return (
-    <div className="mt-8">
-      <h1>
-        <span className="block text-base text-center text-primary font-semibold tracking-wide uppercase">
-          Rian N. Dos Santos - Blog
-        </span>
-        <span className="mt-2 block text-3xl text-center leading-8 font-bold tracking-tight sm:text-4xl">
-          {data.title}
-        </span>
-      </h1>
+    <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
+      <header className="pt-6 xl:pb-6">
+        <div className="space-y-1 text-center">
+          <div className="space-y-10">
+            <div>
+              <p className="text-base font-medium leading-6 text-blue-500">
+                {new Date(data._createdAt).toISOString().split("T")[0]}
+              </p>
+            </div>
+          </div>
 
-      {data.titleImage && (
-        <Image
-          src={urlFor(data.titleImage).url()}
-          alt="image"
-          width={500}
-          height={500}
-          className="rounded-t-lg h-[200px] object-cover"
-        />
-      )}
+          <div>
+            <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+              {data.title}
+            </h1>
+          </div>
+        </div>
+      </header>
 
-      <div className="mt-16 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary">
-        <PortableText value={data.content} />
+      <div className="divide-y divide-gray-200 pb-7 dark:divide-gray-700 xl:divide-y-0">
+        <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+          <div className="prose max-w-none pb-8 pt-10 dark:prose-invert prose-lg">
+            <PortableText
+              value={data.content}
+              components={PortableTextComponent}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

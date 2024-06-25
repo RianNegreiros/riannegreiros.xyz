@@ -6,25 +6,20 @@ export default {
     {
       name: 'title',
       type: 'string',
-      title: 'Title of blog article',
+      title: 'Title',
+    },
+    {
+      name: 'overview',
+      type: 'string',
+      title: 'Overview',
     },
     {
       name: 'slug',
       type: 'slug',
-      title: 'Slug of your blog article',
+      title: 'Slug',
       options: {
         source: 'title',
       },
-    },
-    {
-      name: 'titleImage',
-      type: 'image',
-      title: 'Title Image',
-    },
-    {
-      name: 'smallDescription',
-      type: 'text',
-      title: 'Small Description',
     },
     {
       name: 'content',
@@ -32,9 +27,19 @@ export default {
       title: 'Content',
       of: [
         {
-          type: 'block'
+          type: 'block',
         },
-      ]
-    }
-  ]
+        {
+          type: 'image',
+          fields: [
+            {
+              type: 'text',
+              name: 'alt',
+              title: 'Alternative Text',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 }
