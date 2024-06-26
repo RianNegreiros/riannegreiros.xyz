@@ -23,23 +23,8 @@ export default {
     },
     {
       name: 'content',
-      type: 'array',
+      type: 'markdown',
       title: 'Content',
-      of: [
-        {
-          type: 'block',
-        },
-        {
-          type: 'image',
-          fields: [
-            {
-              type: 'text',
-              name: 'alt',
-              title: 'Alternative Text',
-            },
-          ],
-        },
-      ],
     },
   ],
 }
