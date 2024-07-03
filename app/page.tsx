@@ -3,7 +3,7 @@ import { post } from "./lib/interface";
 import { client } from "./lib/sanity";
 
 async function getData() {
-  const query = `*[_type == "post"] | order(_createdAt desc)`;
+  const query = `*[_type == "post"] | order(firstPublishedDate desc)`;
 
   const data = await client.fetch(query);
 
@@ -21,7 +21,7 @@ export default async function IndexPage() {
             <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
               <div>
                 <p className="text-base font-medium leading-6 text-blue-500">
-                  {new Date(post._createdAt).toISOString().split("T")[0]}
+                  {new Date(post.firstPublishedDate).toISOString().split("T")[0]}
                 </p>
               </div>
 

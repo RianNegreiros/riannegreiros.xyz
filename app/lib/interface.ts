@@ -14,6 +14,7 @@ export interface post {
     current: string;
   };
   _createdAt: string;
+  firstPublishedDate: string;
 }
 
 export interface ProjectsCard {
