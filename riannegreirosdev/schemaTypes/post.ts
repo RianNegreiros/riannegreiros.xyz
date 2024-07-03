@@ -22,6 +22,11 @@ export default {
       },
     },
     {
+      name: 'firstPublishedDate',
+      type: 'datetime',
+      title: 'First Published Date',
+    },
+    {
       name: 'content',
       type: 'markdown',
       title: 'Content',
