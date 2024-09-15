@@ -34,7 +34,7 @@ export default async function ProjectsPage() {
             <div className="relative aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl">
               <Image
                 src={item.imageUrl}
-                alt="Image Description"
+                alt={`Project titled ${item.title} featuring ${item.description}`}
                 fill
                 sizes="100%"
                 priority
