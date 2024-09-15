@@ -23,7 +23,7 @@ export default async function ProjectsPage() {
 
   return (
     <section className="max-w-7xl w-full px-4 md:px-8 mx-auto">
-      <div className="py-12 grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
+      <div className="py-12 grid md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
         {data.map((item) => (
           <a
             href={item.link}
@@ -34,7 +34,7 @@ export default async function ProjectsPage() {
             <div className="relative aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl">
               <Image
                 src={item.imageUrl}
-                alt="Image Description"
+                alt={`Project titled ${item.title} featuring ${item.description}`}
                 fill
                 sizes="100%"
                 priority
