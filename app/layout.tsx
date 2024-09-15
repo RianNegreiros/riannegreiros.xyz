@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Rian N. Dos Santos",
-  description: "Rian Negreiros Dos Santos personal website",
+  description: "Rian Negreiros Dos Santos blog and portfolio",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="max-w-2xl mx-auto px-4">{children}</main>
+          <main className="max-w-6xl mx-auto px-4">{children}</main>
         </Providers>
       </body>
     </html>
