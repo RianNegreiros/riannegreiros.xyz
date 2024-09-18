@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -10,7 +9,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MobileMenu } from "./MobileMenu";
 import { ModeToggle } from "./ModeToggle";
 
 export const navigationItems = [
