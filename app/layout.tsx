@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./components/Providers";
 import { Navbar } from "./components/Navbar";
+import 'highlight.js/styles/github-dark.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +27,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="max-w-6xl mx-auto px-4">{children}</main>
+          <main className="max-w-4xl mx-auto px-4">{children}</main>
         </Providers>
       </body>
     </html>
