@@ -1,14 +1,14 @@
 import { post } from "@/app/lib/interface";
 import { client } from "@/app/lib/sanity";
 import ReactMarkdown from 'react-markdown';
-import rehypeHighlight from 'rehype-highlight'
-import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
 
 export const revalidate = 30; // revalidate at most 30 seconds
 
 async function getData(slug: string) {
-  const query = `
-    *[_type == "post" && slug.current == '${slug}'] {
+  const query =
+    `*[_type == "post" && slug.current == '${slug}'] {
         "currentSlug": slug.current,
           title,
           content,
@@ -28,12 +28,12 @@ export default async function BlogArticle({
   const data: post = await getData(params.slug);
 
   return (
-    <div className="mt-8">
-      <h1>
-        <span className="block text-base text-center text-primary font-semibold tracking-wide uppercase">
+    <div className="mt-8 flex flex-col items-center">
+      <h1 className="text-center">
+        <span className="block text-base text-primary font-semibold tracking-wide uppercase">
           {new Date(data.firstPublishedDate).toISOString().split("T")[0]}
         </span>
-        <span className="mt-2 block text-3xl text-center leading-8 font-bold tracking-tight sm:text-4xl">
+        <span className="mt-2 block text-3xl leading-8 font-bold tracking-tight sm:text-4xl">
           {data.title}
         </span>
       </h1>
