@@ -74,10 +74,10 @@ module.exports = {
         DEFAULT: {
           css: {
             'code::before': {
-              content: '&nbsp;&nbsp;',
+              content: '"\\00a0\\00a0"',
             },
             'code::after': {
-              content: '&nbsp;&nbsp;',
+              content: '"\\00a0\\00a0"',
             },
           },
         },
