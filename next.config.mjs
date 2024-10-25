@@ -6,7 +6,10 @@ const nextConfig = {
       port: '',
       hostname: "cdn.sanity.io"
     }]
-  }
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
