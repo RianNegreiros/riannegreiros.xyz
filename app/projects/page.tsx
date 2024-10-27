@@ -23,7 +23,7 @@ export default async function ProjectsPage() {
 
   return (
     <section>
-      <div className="py-12 grid md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
+      <div className="py-12 grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
         {data.map((item) => (
           <a
             href={item.link}
