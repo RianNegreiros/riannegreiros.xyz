@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Providers } from "./components/Providers";
-import { Navbar } from "./components/Navbar";
-import 'highlight.js/styles/github-dark.css';
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { Providers } from './components/Providers'
+import { Navbar } from './components/Navbar'
+import 'highlight.js/styles/github-dark.css'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Rian N. Dos Santos",
-  description: "Rian Negreiros Dos Santos blog and portfolio",
-};
+  title: 'Rian N. Dos Santos',
+  description: 'Rian Negreiros Dos Santos blog and portfolio',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
@@ -31,5 +31,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  );
+  )
 }

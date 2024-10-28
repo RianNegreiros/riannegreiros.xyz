@@ -1,17 +1,17 @@
-import Link from "next/link";
-import { post } from "./lib/interface";
-import { client } from "./lib/sanity";
+import Link from 'next/link'
+import { post } from './lib/interface'
+import { client } from './lib/sanity'
 
 async function getData() {
-  const query = `*[_type == "post"] | order(firstPublishedDate desc)`;
+  const query = `*[_type == "post"] | order(firstPublishedDate desc)`
 
-  const data = await client.fetch(query);
+  const data = await client.fetch(query)
 
-  return data;
+  return data
 }
 
 export default async function IndexPage() {
-  const data = (await getData()) as post[];
+  const data = (await getData()) as post[]
 
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700 mt-5">
@@ -21,7 +21,11 @@ export default async function IndexPage() {
             <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
               <div>
                 <p className="text-base font-medium leading-6 text-blue-500">
-                  {new Date(post.firstPublishedDate).toISOString().split("T")[0]}
+                  {
+                    new Date(post.firstPublishedDate)
+                      .toISOString()
+                      .split('T')[0]
+                  }
                 </p>
               </div>
 
@@ -45,5 +49,5 @@ export default async function IndexPage() {
         ))}
       </ul>
     </div>
-  );
+  )
 }

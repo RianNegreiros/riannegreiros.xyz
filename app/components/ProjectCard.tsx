@@ -1,38 +1,35 @@
-"use client"
+'use client'
 
-import { ProjectsCard } from "../lib/interface";
-import { useEffect, useState } from "react";
-import Modal from "./Modal";
-import Image from "next/image";
+import { ProjectsCard } from '../lib/interface'
+import { useEffect, useState } from 'react'
+import Modal from './Modal'
+import Image from 'next/image'
 
 interface ProjectCardModal {
-  data: ProjectsCard[];
+  data: ProjectsCard[]
 }
 
 export default function ProjectCard({ data }: ProjectCardModal) {
-  const [selected, setSelected] = useState<ProjectsCard | null>(null);
+  const [selected, setSelected] = useState<ProjectsCard | null>(null)
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setSelected(null);
+      if (event.key === 'Escape') {
+        setSelected(null)
       }
-    };
+    }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown)
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [setSelected]);
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [setSelected])
 
   return (
     <section>
       <div className="py-12 grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
         {data.map((item) => (
-          <div
-            key={item._id}
-            className="group block"
-          >
+          <div key={item._id} className="group block">
             <div className="relative aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl">
               <Image
                 src={item.imageUrl}
@@ -42,14 +39,12 @@ export default function ProjectCard({ data }: ProjectCardModal) {
                 priority
                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl cursor-zoom-in"
                 onClick={() => {
-                  setSelected(item);
+                  setSelected(item)
                 }}
               />
             </div>
             <div className="mt-4">
-              <a href={item.link}
-                target="_blank"
-              >
+              <a href={item.link} target="_blank">
                 <h2 className="font-medium text-lg hover:underline">
                   {item.title}
                 </h2>
@@ -71,9 +66,7 @@ export default function ProjectCard({ data }: ProjectCardModal) {
           </div>
         ))}
       </div>
-      {selected && (
-        <Modal selected={selected} setSelected={setSelected} />
-      )}
+      {selected && <Modal selected={selected} setSelected={setSelected} />}
     </section>
   )
 }

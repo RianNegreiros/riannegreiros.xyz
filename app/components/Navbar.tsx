@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   NavigationMenu,
@@ -6,25 +6,25 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ModeToggle } from "./ModeToggle";
-import { MobileMenu } from "./MobileMenu";
+} from '@/components/ui/navigation-menu'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { ModeToggle } from './ModeToggle'
+import { MobileMenu } from './MobileMenu'
 
 export const navigationItems = [
   {
-    name: "Posts",
-    href: "/",
+    name: 'Posts',
+    href: '/',
   },
   {
-    name: "Projetos",
-    href: "/projects",
+    name: 'Projetos',
+    href: '/projects',
   },
-];
+]
 
 export function Navbar() {
-  const pathname = usePathname();
+  const pathname = usePathname()
   return (
     <nav className="max-w-7xl mx-auto px-4 md:px-8 py-5 grid grid-cols-12">
       <div className="col-span-6 flex md:col-span-3">
@@ -62,7 +62,6 @@ export function Navbar() {
           <MobileMenu />
         </div>
       </div>
-
     </nav>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import { motion } from "framer-motion";
-import { ProjectsCard } from "../lib/interface";
-import { X } from "lucide-react";
+import { motion } from 'framer-motion'
+import { ProjectsCard } from '../lib/interface'
+import { X } from 'lucide-react'
 
 interface ModalProps {
-  selected: ProjectsCard | null;
-  setSelected: React.Dispatch<React.SetStateAction<ProjectsCard | null>>;
+  selected: ProjectsCard | null
+  setSelected: React.Dispatch<React.SetStateAction<ProjectsCard | null>>
 }
 
 export default function Modal({ selected, setSelected }: ModalProps) {
   if (!selected) {
-    return <></>;
+    return <></>
   }
 
   return (
@@ -48,7 +48,9 @@ export default function Modal({ selected, setSelected }: ModalProps) {
           }}
           className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-b-2xl shadow-lg relative"
         >
-          <h3 className="text-xl sm:text-2xl font-bold mb-2 text-primary dark:text-white">{selected.title}</h3>
+          <h3 className="text-xl sm:text-2xl font-bold mb-2 text-primary dark:text-white">
+            {selected.title}
+          </h3>
           <div className="flex flex-wrap gap-2 mb-4">
             {selected.tags.map((tag) => (
               <span
@@ -59,7 +61,9 @@ export default function Modal({ selected, setSelected }: ModalProps) {
               </span>
             ))}
           </div>
-          <p className="my-4 text-sm sm:text-base text-muted-foreground dark:text-gray-400">{selected.description}</p>
+          <p className="my-4 text-sm sm:text-base text-muted-foreground dark:text-gray-400">
+            {selected.description}
+          </p>
           <a href={selected.link} target="_blank" rel="noopener noreferrer">
             <button className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark transition duration-300 dark:bg-primary-dark dark:hover:bg-primary">
               Github
@@ -68,5 +72,5 @@ export default function Modal({ selected, setSelected }: ModalProps) {
         </motion.div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import { ProjectsCard } from "../lib/interface";
-import { client } from "../lib/sanity";
-import ProjectCard from "../components/ProjectCard";
+import { ProjectsCard } from '../lib/interface'
+import { client } from '../lib/sanity'
+import ProjectCard from '../components/ProjectCard'
 
 async function getData() {
   const query = `*[_type == 'project'] | order(_createdAt desc) {
@@ -11,18 +11,15 @@ async function getData() {
           tags,
           "imageUrl": image.asset->url
         
-    }`;
+    }`
 
-  const data = await client.fetch(query, {}, { next: { revalidate: 30 } });
+  const data = await client.fetch(query, {}, { next: { revalidate: 30 } })
 
-  return data;
+  return data
 }
 
 export default async function ProjectsPage() {
-  const data: ProjectsCard[] = await getData();
+  const data: ProjectsCard[] = await getData()
 
-  return (
-
-    <ProjectCard data={data} />
-  );
+  return <ProjectCard data={data} />
 }
