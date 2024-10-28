@@ -55,7 +55,7 @@ export function Navbar() {
       </div>
 
       <div className="flex items-center justify-between md:col-span-3 col-span-6">
-        <div className="flex justify-center sm:hidden">
+        <div className="flex justify-center">
           <ModeToggle />
         </div>
         <div className="flex justify-end sm:hidden">
