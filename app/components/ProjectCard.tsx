@@ -1,7 +1,7 @@
 "use client"
 
 import { ProjectsCard } from "../lib/interface";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import Image from "next/image";
 
@@ -12,9 +12,22 @@ interface ProjectCardModal {
 export default function ProjectCard({ data }: ProjectCardModal) {
   const [selected, setSelected] = useState<ProjectsCard | null>(null);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelected(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [setSelected]);
+
   return (
     <section>
-      <div className="py-12 grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
+      <div className="py-12 grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
         {data.map((item) => (
           <div
             key={item._id}
