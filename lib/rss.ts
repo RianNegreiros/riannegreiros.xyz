@@ -1,3 +1,4 @@
+import { post } from '@/app/lib/interface'
 import { client } from '@/app/lib/sanity'
 import RSS from 'rss'
 
@@ -18,7 +19,7 @@ export async function generateRssFeed() {
     content
     }`)
 
-  posts.forEach((post: any) => {
+  posts.forEach((post: post) => {
     feed.item({
       title: post.title,
       description: post.content,

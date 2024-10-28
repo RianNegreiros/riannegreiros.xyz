@@ -7,7 +7,7 @@ export async function GET() {
     return new NextResponse(rss, {
       headers: { 'Content-Type': 'application/rss+xml' },
     })
-  } catch (error) {
+  } catch {
     return new NextResponse(
       JSON.stringify({ error: 'Failed to generate RSS feed' }),
       {

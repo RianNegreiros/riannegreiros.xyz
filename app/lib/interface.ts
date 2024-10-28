@@ -2,13 +2,13 @@ export interface simplePostCard {
   title: string
   smallDescription: string
   currentSlug: string
-  titleImage: any
+  titleImage: string
 }
 
 export interface post {
   title: string
   overview: string
-  content: any
+  content: string
   _id: string
   slug: {
     current: string
