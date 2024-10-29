@@ -5,7 +5,9 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetFooter,
+  SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
@@ -14,6 +16,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
 export function MobileMenu() {
   const location = usePathname()
@@ -22,6 +25,7 @@ export function MobileMenu() {
   useEffect(() => {
     setOpen(false)
   }, [location])
+
   return (
     <Sheet open={open} onOpenChange={(state) => setOpen(state)}>
       <SheetTrigger asChild>
@@ -30,6 +34,14 @@ export function MobileMenu() {
         </Button>
       </SheetTrigger>
       <SheetContent>
+        <VisuallyHidden.Root>
+          <SheetTitle>Mobile Menu</SheetTitle>
+        </VisuallyHidden.Root>
+        <VisuallyHidden.Root>
+          <SheetDescription>
+            Navegation bar turn to sheet for mobile devices
+          </SheetDescription>
+        </VisuallyHidden.Root>
         <div className="mt-5 flex px-2 space-y-1 flex-col">
           {navigationItems.map((item, index) => (
             <Link
