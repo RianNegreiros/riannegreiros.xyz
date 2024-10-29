@@ -1,76 +1,80 @@
-import { motion } from 'framer-motion'
-import { ProjectsCard } from '../lib/interface'
-import { X } from 'lucide-react'
+import { motion } from 'framer-motion';
+import { ProjectsCard } from '../lib/interface';
+import { Dialog, DialogOverlay, DialogContent, DialogClose, DialogTitle, DialogDescription } from '@radix-ui/react-dialog';
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
 interface ModalProps {
-  selected: ProjectsCard | null
-  setSelected: React.Dispatch<React.SetStateAction<ProjectsCard | null>>
+  selected: ProjectsCard | null;
+  setSelected: React.Dispatch<React.SetStateAction<ProjectsCard | null>>;
 }
 
 export default function Modal({ selected, setSelected }: ModalProps) {
   if (!selected) {
-    return <></>
+    return <></>;
   }
 
   return (
-    <div
-      onClick={() => setSelected(null)}
-      className="fixed inset-0 bg-black/50 z-50 cursor-pointer overflow-y-scroll"
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-[90%] sm:max-w-[700px] mx-auto my-8 px-4 sm:px-8 cursor-default relative"
+    <Dialog open={!!selected} onOpenChange={() => setSelected(null)} modal>
+      <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50 z-10" />
+      <DialogContent
+        aria-description=''
+        aria-describedby="dialog-description"
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 max-w-screen-md w-full z-20"
       >
-        <motion.div layoutId={`card-${selected._id}`}>
+        <VisuallyHidden.Root>
+          <DialogDescription>Project Dialog</DialogDescription>
+        </VisuallyHidden.Root>
+        <motion.div
+          layoutId={`card-${selected._id}`}
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden max-w-screen-2xl"
+        >
+          <DialogTitle className="sr-only">{selected.title}</DialogTitle>
           <img
             src={selected.imageUrl}
             alt={selected.title}
             className="rounded-t-2xl object-cover w-full"
           />
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 50,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            className="p-4 sm:p-6"
+          >
+            <h3 className="text-xl sm:text-2xl font-bold mb-2 text-primary dark:text-white">
+              {selected.title}
+            </h3>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {selected.tags.map((tag) => (
+                <span
+                  className="inline-flex items-center rounded-md bg-primary/10 dark:bg-primary/20 px-3 py-1.5 text-xs sm:text-sm font-medium text-primary ring-2 ring-inset ring-primary/20 dark:ring-primary/30"
+                  key={tag}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <p className="my-4 text-sm sm:text-base text-muted-foreground dark:text-gray-400">
+              {selected.description}
+            </p>
+            <a href={selected.link} target="_blank" rel="noopener noreferrer">
+              <button className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark transition duration-300 dark:bg-primary-dark dark:hover:bg-primary">
+                Github
+              </button>
+            </a>
+          </motion.div>
         </motion.div>
-        <button
-          onClick={() => setSelected(null)}
-          className="absolute top-1 right-5 bg-primary/20 text-white rounded-full p-1 transition duration-300 sm:hidden"
-        >
-          <X />
-        </button>
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 50,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.5,
-          }}
-          className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-b-2xl shadow-lg relative"
-        >
-          <h3 className="text-xl sm:text-2xl font-bold mb-2 text-primary dark:text-white">
-            {selected.title}
-          </h3>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {selected.tags.map((tag) => (
-              <span
-                className="inline-flex items-center rounded-md bg-primary/10 dark:bg-primary/20 px-3 py-1.5 text-xs sm:text-sm font-medium text-primary ring-2 ring-inset ring-primary/20 dark:ring-primary/30"
-                key={tag}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <p className="my-4 text-sm sm:text-base text-muted-foreground dark:text-gray-400">
-            {selected.description}
-          </p>
-          <a href={selected.link} target="_blank" rel="noopener noreferrer">
-            <button className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark transition duration-300 dark:bg-primary-dark dark:hover:bg-primary">
-              Github
-            </button>
-          </a>
-        </motion.div>
-      </div>
-    </div>
-  )
+        <DialogClose className="absolute top-4 right-4 text-white">
+          &times;
+        </DialogClose>
+      </DialogContent>
+    </Dialog>
+  );
 }
