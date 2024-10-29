@@ -1,23 +1,30 @@
-import { motion } from 'framer-motion';
-import { ProjectsCard } from '../lib/interface';
-import { Dialog, DialogOverlay, DialogContent, DialogClose, DialogTitle, DialogDescription } from '@radix-ui/react-dialog';
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import { motion } from 'framer-motion'
+import { ProjectsCard } from '../lib/interface'
+import {
+  Dialog,
+  DialogOverlay,
+  DialogContent,
+  DialogClose,
+  DialogTitle,
+  DialogDescription,
+} from '@radix-ui/react-dialog'
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 
 interface ModalProps {
-  selected: ProjectsCard | null;
-  setSelected: React.Dispatch<React.SetStateAction<ProjectsCard | null>>;
+  selected: ProjectsCard | null
+  setSelected: React.Dispatch<React.SetStateAction<ProjectsCard | null>>
 }
 
 export default function Modal({ selected, setSelected }: ModalProps) {
   if (!selected) {
-    return <></>;
+    return <></>
   }
 
   return (
     <Dialog open={!!selected} onOpenChange={() => setSelected(null)} modal>
       <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50 z-10" />
       <DialogContent
-        aria-description=''
+        aria-description=""
         aria-describedby="dialog-description"
         className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 max-w-screen-md w-full z-20"
       >
@@ -76,5 +83,5 @@ export default function Modal({ selected, setSelected }: ModalProps) {
         </DialogClose>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

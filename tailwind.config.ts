@@ -1,6 +1,6 @@
-import tailwindcssAnimate from 'tailwindcss-animate';
-import typography from '@tailwindcss/typography';
-import aspectRatio from '@tailwindcss/aspect-ratio';
+import tailwindcssAnimate from 'tailwindcss-animate'
+import typography from '@tailwindcss/typography'
+import aspectRatio from '@tailwindcss/aspect-ratio'
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -88,9 +88,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    tailwindcssAnimate,
-    typography,
-    aspectRatio,
-  ],
+  plugins: [tailwindcssAnimate, typography, aspectRatio],
 }

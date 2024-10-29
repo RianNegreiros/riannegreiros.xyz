@@ -16,7 +16,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 
 export function MobileMenu() {
   const location = usePathname()
