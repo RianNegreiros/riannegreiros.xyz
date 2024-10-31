@@ -9,6 +9,7 @@ import {
   DialogDescription,
 } from '@radix-ui/react-dialog'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
+import { X } from 'lucide-react'
 
 interface ModalProps {
   selected: ProjectsCard | null
@@ -72,14 +73,14 @@ export default function Modal({ selected, setSelected }: ModalProps) {
               {selected.description}
             </p>
             <a href={selected.link} target="_blank" rel="noopener noreferrer">
-              <button className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark transition duration-300 dark:bg-primary-dark dark:hover:bg-primary">
+              <button className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md transition duration-300 hover:text-primary hover:bg-primary/10 hover:border-2 hover:border-primary dark:hover:border-primary">
                 Github
               </button>
             </a>
           </motion.div>
         </motion.div>
         <DialogClose className="absolute top-4 right-4 text-white">
-          &times;
+          <X size={16} className='text-primary dark:text-white dark:hover:text-primary hover:text-white transition duration-300' />
         </DialogClose>
       </DialogContent>
     </Dialog>
