@@ -80,7 +80,10 @@ export default function Modal({ selected, setSelected }: ModalProps) {
           </motion.div>
         </motion.div>
         <DialogClose className="absolute top-4 right-4 text-white">
-          <X size={16} className='text-primary dark:text-white dark:hover:text-primary hover:text-white transition duration-300' />
+          <X
+            size={16}
+            className="text-primary dark:text-white dark:hover:text-primary hover:text-white transition duration-300"
+          />
         </DialogClose>
       </DialogContent>
     </Dialog>
