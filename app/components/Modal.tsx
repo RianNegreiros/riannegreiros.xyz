@@ -73,7 +73,7 @@ export default function Modal({ selected, setSelected }: ModalProps) {
               {selected.description}
             </p>
             <a href={selected.link} target="_blank" rel="noopener noreferrer">
-              <button className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md transition duration-300 hover:text-primary hover:bg-primary/10 hover:border-2 hover:border-primary dark:hover:border-primary">
+              <button className="w-full py-2 px-4 bg-primary text-white border-2 font-semibold rounded-md transition duration-300 hover:text-primary hover:bg-primary/10 hover:border-primary dark:hover:border-primary">
                 Github
               </button>
             </a>
