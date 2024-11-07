@@ -10,6 +10,7 @@ import {
 } from '@radix-ui/react-dialog'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import { X } from 'lucide-react'
+import Image from 'next/image'
 
 interface ModalProps {
   selected: ProjectsCard | null
@@ -37,10 +38,13 @@ export default function Modal({ selected, setSelected }: ModalProps) {
           className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden max-w-screen-2xl"
         >
           <DialogTitle className="sr-only">{selected.title}</DialogTitle>
-          <img
+          <Image
             src={selected.imageUrl}
-            alt={selected.title}
-            className="rounded-t-2xl object-cover w-full"
+            alt={`Project titled ${selected.title} featuring ${selected.description}`}
+            width={700}
+            height={475}
+            priority
+            className="w-full"
           />
           <motion.div
             initial={{
