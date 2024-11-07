@@ -41,10 +41,11 @@ export default function Modal({ selected, setSelected }: ModalProps) {
           <Image
             src={selected.imageUrl}
             alt={`Project titled ${selected.title} featuring ${selected.description}`}
-            width={700}
-            height={475}
+            width={0}
+            height={0}
+            sizes='100vw'
             priority
-            className="w-full"
+            style={{ width: '100%', height: 'auto' }}
           />
           <motion.div
             initial={{
