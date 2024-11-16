@@ -43,7 +43,7 @@ export default function Modal({ selected, setSelected }: ModalProps) {
             alt={`Project titled ${selected.title} featuring ${selected.description}`}
             width={0}
             height={0}
-            sizes='100vw'
+            sizes="100vw"
             priority
             style={{ width: '100%', height: 'auto' }}
           />

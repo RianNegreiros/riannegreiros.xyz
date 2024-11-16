@@ -19,12 +19,11 @@ async function getData(slug: string) {
   return data
 }
 
-export default async function BlogArticle({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const data: post = await getData(params.slug)
+type tParams = Promise<{ slug: string }>
+
+export default async function BlogArticle(props: { params: tParams }) {
+  const { slug } = await props.params
+  const data: post = await getData(slug)
 
   return (
     <div className="mt-8 flex flex-col items-center">
