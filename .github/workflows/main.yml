@@ -2,7 +2,7 @@ name: Metrics embed
 
 on:
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: '0 0 1 * *' # Run once a month
 
 jobs:
   build:
@@ -23,5 +23,8 @@ jobs:
         plugin_screenshot: 'yes'
         plugin_screenshot_title: riannegreiros.dev
         plugin_screenshot_url: 'https://riannegreiros.dev'
-        plugin_screenshot_background: no
-        plugin_screenshot_viewport: '{"width": 1280, "height": 160}'
+        plugin_screenshot_viewport: |
+          {
+            "width": 1280,
+            "height": 640
+          }
