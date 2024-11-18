@@ -23,8 +23,4 @@ jobs:
         plugin_screenshot: 'yes'
         plugin_screenshot_title: riannegreiros.dev
         plugin_screenshot_url: 'https://riannegreiros.dev'
-        plugin_screenshot_viewport: |
-          {
-            "width": 50,
-            "height": 50
-          }
+        plugin_screenshot_viewport: "640x640"
