@@ -1,9 +1,9 @@
 - name: Metrics embed
-  uses: lowlighter/metricts@v3.34
+  uses: lowlighter/metrics@v3.34
   with:
     filename: metrics.plugin.screenshot.svg
     token: NOT_NEEDED
-    base: ''
-    plugin_screenshot: 'yes'
+    base: ""
+    plugin_screenshot: yes
     plugin_screenshot_title: riannegreiros.dev
-    plugin_screenshot_url: 'riannegreiros.dev'
+    plugin_screenshot_url: https://riannegreiros.dev
