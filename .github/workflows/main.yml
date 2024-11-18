@@ -21,6 +21,5 @@ jobs:
         token: NOT_NEEDED
         base: ''
         plugin_screenshot: 'yes'
-        plugin_screenshot_title: riannegreiros.dev
+        plugin_screenshot_title: ''
         plugin_screenshot_url: 'https://riannegreiros.dev'
-        plugin_screenshot_viewport: "640x640"
