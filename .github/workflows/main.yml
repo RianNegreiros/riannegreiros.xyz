@@ -1,9 +1,26 @@
-- name: Metrics embed
-  uses: lowlighter/metrics@v3.34
-  with:
-    filename: metrics.plugin.screenshot.svg
-    token: NOT_NEEDED
-    base: ""
-    plugin_screenshot: yes
-    plugin_screenshot_title: riannegreiros.dev
-    plugin_screenshot_url: https://riannegreiros.dev
+name: Metrics embed
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 1 * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Generate Metrics
+      uses: lowlighter/metrics@v3.34
+      with:
+        filename: metrics.plugin.screenshot.svg
+        token: NOT_NEEDED
+        base: ''
+        plugin_screenshot: 'yes'
+        plugin_screenshot_title: riannegreiros.dev
+        plugin_screenshot_url: 'https://riannegreiros.dev'
