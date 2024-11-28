@@ -81,7 +81,17 @@ export const RESUME_DATA = {
       description:
         'Projeto feito durante a imersão Fullcycle 14, mas usando ASP.NET Core no lugar do NestJS',
       link: {
-        label: 'https://github.com/RianNegreiros/imersao14-aspnet-core',
+        label: 'github.com/RianNegreiros/imersao14-aspnet-core',
+        href: '',
+      },
+    },
+    {
+      title: 'Chat Bot Application',
+      techStack: ['ASP.NET Core', 'Next.js', 'Typescript', 'TailwindCSS'],
+      description:
+        'Este é um aplicativo full stack criado com ASP.NET Core 8 e Next.js com TypeScript e TailwindCSS. O aplicativo é um bot de bate-papo alimentado pelo PaLM 2',
+      link: {
+        label: 'github.com/RianNegreiros/DotNetChatBot',
         href: '',
       },
     },
