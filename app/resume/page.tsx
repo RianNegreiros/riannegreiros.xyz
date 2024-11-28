@@ -1,12 +1,12 @@
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { CommandMenu } from '@/components/command-menu'
+import { CommandMenu } from '@/app/components/command-menu'
 import { Metadata } from 'next'
 import { Section } from '@/components/ui/section'
 import { MailIcon, PhoneIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { RESUME_DATA } from '@/data/resume-data'
-import { ProjectCard } from '@/components/project-card'
+import { ProjectCard } from '@/app/components/project-card'
 
 export const metadata: Metadata = {
   title: `${RESUME_DATA.name} | ${RESUME_DATA.about}`,
@@ -73,7 +73,7 @@ export default function Page() {
         </div>
         <Section>
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            About
+            Sobre
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 print:text-[12px]">
             {RESUME_DATA.summary}
@@ -81,7 +81,7 @@ export default function Page() {
         </Section>
         <Section>
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            Education
+            Educação
           </h2>
           {RESUME_DATA.education.map((education) => (
             <Card key={education.school}>
@@ -101,7 +101,7 @@ export default function Page() {
         </Section>
         <Section>
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            Skills
+            Conhecimentos
           </h2>
           <div className="flex flex-wrap gap-1">
             {RESUME_DATA.skills.map((skill) => (
@@ -113,16 +113,16 @@ export default function Page() {
         </Section>
         <Section className="scroll-mb-16 print-force-new-page">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            Projects
+            Projetos
           </h2>
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-2">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-2 print:gap-2">
             {RESUME_DATA.projects.map((project) => (
               <ProjectCard
                 key={project.title}
                 title={project.title}
                 description={project.description}
                 tags={project.techStack}
-                link={'link' in project ? project.link.href : undefined}
+                link={project.link}
               />
             ))}
           </div>
@@ -130,10 +130,6 @@ export default function Page() {
       </section>
       <CommandMenu
         links={[
-          {
-            url: RESUME_DATA.personalWebsiteUrl,
-            title: 'Personal Website',
-          },
           ...RESUME_DATA.contact.social.map((socialMediaLink) => ({
             url: socialMediaLink.url,
             title: socialMediaLink.name,

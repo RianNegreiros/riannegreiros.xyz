@@ -4,37 +4,49 @@ import {
   CardContent,
   CardDescription,
   CardTitle,
-} from './ui/card'
-import { Badge } from './ui/badge'
+} from '../../components/ui/card'
+import { Badge } from '../../components/ui/badge'
+
+interface Link {
+  label: string
+  href: string
+}
 
 interface Props {
   title: string
   description: string
   tags: readonly string[]
-  link?: string
+  link?: Link
 }
 
 export function ProjectCard({ title, description, tags, link }: Props) {
+  const displayLink = link?.href || link?.label || '#'
+
   return (
     <Card className="flex flex-col overflow-hidden border border-muted p-3">
-      <CardHeader className="">
+      <CardHeader>
         <div className="space-y-1">
           <CardTitle className="text-base">
             {link ? (
               <a
-                href={link}
+                href={displayLink}
                 target="_blank"
                 className="inline-flex items-center gap-1 hover:underline"
               >
                 {title}{' '}
-                <span className="size-1 rounded-full bg-green-500"></span>
+                <span
+                  className={`size-1 rounded-full ${link.href ? 'bg-green-500' : ''}`}
+                ></span>
               </a>
             ) : (
               title
             )}
           </CardTitle>
           <div className="hidden font-mono text-xs underline print:visible">
-            {link?.replace('https://', '').replace('www.', '').replace('/', '')}
+            {displayLink
+              .replace('https://', '')
+              .replace('www.', '')
+              .replace('/', '')}
           </div>
           <CardDescription className="font-mono text-xs print:text-[10px]">
             {description}
