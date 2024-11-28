@@ -22,9 +22,9 @@ export const navigationItems = [
     href: '/projects',
   },
   {
-    name: "Currículo",
-    href: "/resume"
-  }
+    name: 'Currículo',
+    href: '/resume',
+  },
 ]
 
 export function Navbar() {
