@@ -5,6 +5,12 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ignores: ['node_modules', 'build', '.next'],
+    ignores: [
+      'node_modules',
+      'build',
+      '.next',
+      'components',
+      'riannegreirosdev',
+    ],
   }
 )
