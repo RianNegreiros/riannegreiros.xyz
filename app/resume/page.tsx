@@ -9,7 +9,7 @@ import { RESUME_DATA } from '@/data/resume-data'
 import { ProjectCard } from '@/app/components/project-card'
 
 export const metadata: Metadata = {
-  title: `${RESUME_DATA.name} | ${RESUME_DATA.about}`,
+  title: `Currículo ${RESUME_DATA.about}`,
   description: RESUME_DATA.summary,
 }
 
@@ -69,7 +69,7 @@ export default function Page() {
                 </a>
               )}
               {RESUME_DATA.contact.social.map((social) => (
-                <a href={social.url}>
+                <a key={social.name} href={social.url}>
                   <span className="underline">{social.name}</span>
                 </a>
               ))}
