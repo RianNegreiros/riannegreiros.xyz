@@ -68,6 +68,11 @@ export default function Page() {
                   <span className="underline">{RESUME_DATA.contact.tel}</span>
                 </a>
               )}
+              {RESUME_DATA.contact.social.map((social) => (
+                <a href={social.url}>
+                  <span className="underline">{social.name}</span>
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -111,7 +116,7 @@ export default function Page() {
             ))}
           </div>
         </Section>
-        <Section className="scroll-mb-16 print-force-new-page">
+        <Section className="scroll-mb-16">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
             Projetos
           </h2>
