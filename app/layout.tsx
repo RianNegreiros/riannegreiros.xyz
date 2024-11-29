@@ -4,6 +4,8 @@ import './globals.css'
 import { Providers } from './components/Providers'
 import { Navbar } from './components/Navbar'
 import 'highlight.js/styles/github-dark.css'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,9 +15,11 @@ export const metadata: Metadata = {
     default: 'Rian Negreiros Dos Santos',
     template: '%s | Rian Negreiros Dos Santos ',
   },
+  description: 'Rian Negreiros Dos Santos blog and portfolio',
   authors: [{ name: 'Rian Negreiros Dos Santos' }],
   openGraph: {
     title: 'Rian Negreiros Dos Santos',
+    description: 'Rian Negreiros Dos Santos blog and portfolio',
     type: 'website',
     locale: 'pt_BR',
     url: 'https://www.riannegreiros.dev/',
@@ -40,6 +44,8 @@ export default function RootLayout({
           <Navbar />
           <main className="max-w-4xl mx-auto px-4">{children}</main>
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
