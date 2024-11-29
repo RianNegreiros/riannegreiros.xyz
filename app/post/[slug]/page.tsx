@@ -1,10 +1,11 @@
 import { post } from '@/app/lib/interface'
 import { client } from '@/app/lib/sanity'
+import { redirect } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
 
-export const revalidate = 30 // revalidate at most 30 seconds
+export const revalidate = 30
 
 async function getData(slug: string) {
   const query = `*[_type == "post" && slug.current == '${slug}'] {
@@ -21,9 +22,34 @@ async function getData(slug: string) {
 
 type tParams = Promise<{ slug: string }>
 
+export async function generateMetadata(props: { params: tParams }) {
+  const { slug } = await props.params
+  const data: post = await getData(slug)
+  if (!data) {
+    return
+  }
+
+  return {
+    title: data.title,
+    description: data.overview,
+    openGraph: {
+      title: data.title,
+      description: data.overview,
+      type: 'article',
+      locale: 'pt_BR',
+      url: `https://www.riannegreiros.dev/${slug}`,
+      siteName: 'riannegreiros.dev',
+    },
+  }
+}
+
 export default async function BlogArticle(props: { params: tParams }) {
   const { slug } = await props.params
   const data: post = await getData(slug)
+
+  if (!data) {
+    redirect('/not-found')
+  }
 
   return (
     <div className="mt-8 flex flex-col items-center">

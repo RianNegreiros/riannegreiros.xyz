@@ -8,8 +8,19 @@ import 'highlight.js/styles/github-dark.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Rian N. Dos Santos',
-  description: 'Rian Negreiros Dos Santos blog and portfolio',
+  metadataBase: new URL('https://www.riannegreiros.dev/'),
+  title: {
+    default: 'Rian Negreiros Dos Santos',
+    template: '%s | Rian Negreiros Dos Santos ',
+  },
+  authors: [{ name: 'Rian Negreiros Dos Santos' }],
+  openGraph: {
+    title: 'Rian Negreiros Dos Santos',
+    type: 'website',
+    locale: 'pt_BR',
+    url: 'https://www.riannegreiros.dev/',
+    siteName: 'riannegreiros.dev',
+  },
 }
 
 export default function RootLayout({
