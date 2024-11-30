@@ -1,10 +1,12 @@
 import tailwindcssAnimate from 'tailwindcss-animate'
 import typography from '@tailwindcss/typography'
 import aspectRatio from '@tailwindcss/aspect-ratio'
+import tailwindDracula from 'tailwind-dracula'
+import plugin from 'tailwindcss/plugin'
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class'],
+  darkMode: false,
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -88,5 +90,9 @@ module.exports = {
       },
     },
   },
-  plugins: [tailwindcssAnimate, typography, aspectRatio],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant("dracula", ".dracula &")
+    }),
+    tailwindcssAnimate, typography, aspectRatio, tailwindDracula('dracula', true)],
 }

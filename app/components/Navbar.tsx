@@ -34,7 +34,7 @@ export function Navbar() {
       <div className="col-span-6 flex md:col-span-3">
         <Link href="/">
           <h1 className="text-3xl font-semibold">
-            Rian <span className="text-blue-500">Negreiros</span>
+            Rian <span className="text-primary">Negreiros</span>
           </h1>
         </Link>
       </div>
