@@ -15,11 +15,13 @@ export const metadata: Metadata = {
     default: 'Rian Negreiros Dos Santos',
     template: '%s | Rian Negreiros Dos Santos ',
   },
-  description: 'Rian Negreiros Dos Santos blog and portfolio',
+  description:
+    'Bem-vindo ao site pessoal de Rian Negreiros dos Santos. Explore meu blog para obter insights e histórias, descubra meus projetos que mostram minhas habilidades e criatividade e veja meu currículo para saber mais sobre minha jornada profissional.',
   authors: [{ name: 'Rian Negreiros Dos Santos' }],
   openGraph: {
     title: 'Rian Negreiros Dos Santos',
-    description: 'Rian Negreiros Dos Santos blog and portfolio',
+    description:
+      'Bem-vindo ao site pessoal de Rian Negreiros dos Santos. Explore meu blog para obter insights e histórias, descubra meus projetos que mostram minhas habilidades e criatividade e veja meu currículo para saber mais sobre minha jornada profissional.',
     type: 'website',
     locale: 'pt_BR',
     url: 'https://www.riannegreiros.dev/',
@@ -43,9 +45,9 @@ export default function RootLayout({
         >
           <Navbar />
           <main className="max-w-4xl mx-auto px-4">{children}</main>
-          <Analytics />
-          <SpeedInsights />
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
