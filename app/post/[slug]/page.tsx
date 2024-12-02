@@ -1,3 +1,4 @@
+import ShareButtons from '@/app/components/ShareButtons'
 import { post } from '@/app/lib/interface'
 import { client } from '@/app/lib/sanity'
 import { redirect } from 'next/navigation'
@@ -51,6 +52,12 @@ export default async function BlogArticle(props: { params: tParams }) {
     redirect('/not-found')
   }
 
+  const shareParams = {
+    slug,
+    body: `Check out this article: ${data.title}. Read more at: `,
+    title: data.title
+  };
+
   return (
     <div className="mt-8 flex flex-col items-center">
       <h1 className="text-center">
@@ -70,6 +77,7 @@ export default async function BlogArticle(props: { params: tParams }) {
           {data.content}
         </ReactMarkdown>
       </div>
+      <ShareButtons params={shareParams} />
     </div>
   )
 }
