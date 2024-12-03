@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { post } from './lib/interface'
 import { client } from './lib/sanity'
-import { Metadata } from 'next'
 
 async function getData() {
   const query = `*[_type == "post"] | order(firstPublishedDate desc)`
@@ -9,10 +8,6 @@ async function getData() {
   const data = await client.fetch(query)
 
   return data
-}
-
-export const metadata: Metadata = {
-  title: 'Postagens',
 }
 
 export default async function IndexPage() {
