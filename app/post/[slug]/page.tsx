@@ -61,15 +61,25 @@ export default async function BlogArticle(props: { params: tParams }) {
   return (
     <div className="mt-8 flex flex-col items-center">
       <h1 className="text-center">
-        <span className="block text-base text-primary font-semibold tracking-wide uppercase">
-          {new Date(data.firstPublishedDate).toISOString().split('T')[0]}
+        <span className='font-bold'>Publicado</span> {' '}
+        <span className="text-base font-semibold tracking-wide text-gray-500 dark:text-gray-400">
+          {new Date(data.firstPublishedDate).toLocaleString('pt-BR', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: false,
+            timeZoneName: 'short'
+          })}
         </span>
+
         <span className="mt-2 block text-3xl leading-8 font-bold tracking-tight sm:text-4xl">
           {data.title}
         </span>
       </h1>
 
-      <div className="mt-16 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary">
+      <div className="prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight]}
