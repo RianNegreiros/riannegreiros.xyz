@@ -1,6 +1,12 @@
 services:
   app:
+    env_file:
+      - '.env.local'
     build:
       context: .
+      dockerfile: Dockerfile
+    container_name: riannegreirosdev-nextjs
     ports:
       - '3000:3000'
+    volumes:
+      - .:/app
