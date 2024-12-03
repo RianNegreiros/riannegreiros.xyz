@@ -24,61 +24,68 @@ type tParams = {
 }
 
 export default function ShareButtons(props: { params: tParams }) {
+  const buttonDivClass = "py-2.5 px-5 text-sm font-medium text-gray-900 rounded-lg focus:outline-none bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700";
+  const buttonClass = "transition-transform duration-100 my-2"
   return (
-    <div data-dial-init className="fixed end-6 bottom-6 group">
-      <div className="flex-col items-center group-hover:flex group-hover:visible hidden mb-4 space-y-2">
-        <motion.div whileHover={{ scale: 1.1 }} className="transition-transform duration-200">
-          <LinkedinShareButton url={`https://www.riannegreiros.dev/${props.params.slug}`}>
-            <LinkedinIcon size={32} round />
+    <div data-dial-init className="fixed end-6 bottom-6 group hidden md:block">
+      <div className={`hidden flex-col items-center group-hover:flex group-hover:visible mb-4 ${buttonDivClass}`}>
+        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
+          <LinkedinShareButton url={`https://www.riannegreiros.dev/${props.params.slug}`} aria-label="Share on LinkedIn">
+            <LinkedinIcon size={28} round />
           </LinkedinShareButton>
         </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className="transition-transform duration-100">
+        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
           <TwitterShareButton
             url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
             title={props.params.title}
+            aria-label="Share on Twitter"
           >
-            <TwitterIcon size={32} round />
+            <TwitterIcon size={28} round />
           </TwitterShareButton>
         </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className="transition-transform duration-100">
+        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
           <EmailShareButton
             url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
             subject={props.params.title}
             body={props.params.body}
+            aria-label="Share via Email"
           >
-            <EmailIcon size={32} round />
+            <EmailIcon size={28} round />
           </EmailShareButton>
         </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className="transition-transform duration-100">
+        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
           <WhatsappShareButton
             url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
             title={props.params.title}
             separator=":: "
+            aria-label="Share on WhatsApp"
           >
-            <WhatsappIcon size={32} round />
+            <WhatsappIcon size={28} round />
           </WhatsappShareButton>
         </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className="transition-transform duration-100">
+        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
           <TelegramShareButton
             url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
             title={props.params.title}
+            aria-label="Share on Telegram"
           >
-            <TelegramIcon size={32} round />
+            <TelegramIcon size={28} round />
           </TelegramShareButton>
         </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className="transition-transform duration-100">
+        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
           <PocketShareButton
             url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
             title={props.params.title}
+            aria-label="Save to Pocket"
           >
-            <PocketIcon size={32} round />
+            <PocketIcon size={28} round />
           </PocketShareButton>
         </motion.div>
       </div>
-      <button type="button" data-dial-toggle="speed-dial-menu-bottom-right" aria-controls="speed-dial-menu-bottom-right" aria-expanded="false" className="flex items-center justify-center text-white bg-blue-500 rounded-full w-10 h-10 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-600">
-        <Share2 />
+      <div className={`flex items-center justify-center ${buttonDivClass}`}>
+        <Share2 size={28} />
         <span className="sr-only">Open share menu</span>
-      </button>
+      </div>
     </div>
   )
 }
