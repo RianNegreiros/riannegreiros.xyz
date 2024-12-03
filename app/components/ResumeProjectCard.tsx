@@ -19,7 +19,7 @@ interface Props {
   link?: Link
 }
 
-export function ProjectCard({ title, description, tags, link }: Props) {
+export function ResumeProjectCard({ title, description, tags, link }: Props) {
   const displayLink = link?.href || link?.label || '#'
 
   return (

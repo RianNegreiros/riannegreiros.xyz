@@ -1,12 +1,12 @@
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { CommandMenu } from '@/app/components/command-menu'
+import { CommandMenu } from '@/app/components/CommandMenu'
 import { Metadata } from 'next'
 import { Section } from '@/components/ui/section'
 import { MailIcon, PhoneIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { RESUME_DATA } from '@/data/resume-data'
-import { ProjectCard } from '@/app/components/project-card'
+import { ResumeProjectCard } from '../components/ResumeProjectCard'
 
 export const metadata: Metadata = {
   title: `Currículo ${RESUME_DATA.about}`,
@@ -122,7 +122,7 @@ export default function Page() {
           </h2>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-2 print:gap-2">
             {RESUME_DATA.projects.map((project) => (
-              <ProjectCard
+              <ResumeProjectCard
                 key={project.title}
                 title={project.title}
                 description={project.description}

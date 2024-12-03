@@ -1,4 +1,4 @@
-import ShareButtons from '@/app/components/ShareButtons'
+import ShareButtons from '@/app/components/ShareMenu'
 import { post } from '@/app/lib/interface'
 import { client } from '@/app/lib/sanity'
 import { redirect } from 'next/navigation'
