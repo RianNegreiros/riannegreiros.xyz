@@ -1,17 +1,34 @@
 import Link from 'next/link'
 import { post } from './lib/interface'
 import { client } from './lib/sanity'
+import PaginationNav from './components/PaginationNav'
 
-async function getData() {
-  const query = `*[_type == "post"] | order(firstPublishedDate desc)`
-
+async function getData(pageNum: number = 0, postsPerPage: number = 10) {
+  const start = pageNum * postsPerPage
+  const end = start + postsPerPage
+  const query = `*[_type == "post"] | order(firstPublishedDate desc) [${start}...${end}]`
   const data = await client.fetch(query)
-
   return data
 }
 
-export default async function IndexPage() {
-  const data = (await getData()) as post[]
+const getTotalPosts = async () => {
+  const query = `count(*[_type == 'post'])`
+  return client.fetch(query)
+}
+
+export default async function IndexPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{
+    page?: string
+  }>
+}) {
+  const page = await searchParams
+  const pageNum = Number(page?.page ?? 0)
+  const postsPerPage = 10
+  const data: post[] = await getData(pageNum, postsPerPage)
+  const postsNum = await getTotalPosts()
+  const maxPage = Math.ceil(postsNum / postsPerPage)
 
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700 mt-5">
@@ -47,6 +64,7 @@ export default async function IndexPage() {
             </article>
           </li>
         ))}
+        <PaginationNav maxPage={maxPage} />
       </ul>
     </div>
   )
