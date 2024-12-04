@@ -14,23 +14,27 @@ Make sure you have the following installed on your machine:
 ### Installation and Setup
 
 1. **Clone the repository:**
+
 ```bash
   git clone https://github.com/RianNegreiros/riannegreiros.dev.git
   cd riannegreiros.dev
 ```
 
 2. **Install dependencies:**
-Using npm:
+   Using npm:
+
 ```bash
   npm install
 ```
 
 Or using Yarn
+
 ```bash
   yarn install
 ```
 
 3. **Rename the `.env.local.example` and add your environment variables**
+
 ```bash
    cp .env.local.example .env.local
 ```
@@ -40,11 +44,13 @@ Or using Yarn
 To start the development server, run:
 
 Using npm:
+
 ```bash
   npm run dev
 ```
 
 Or using Yarn:
+
 ```bash
   yarn dev
 ```
@@ -58,7 +64,8 @@ To run the application using Docker Compose, follow these steps:
 ```bash
   docker-compose up --build
 ```
-This command will build the Docker images and start the 
+
+This command will build the Docker images and start the
 containers as defined in your docker-compose.yml file.
 
 2. **Access the application:** Open `http://localhost:3000` in your browser to see the application running in a Docker container.

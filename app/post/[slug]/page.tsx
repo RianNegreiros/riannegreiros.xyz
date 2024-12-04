@@ -55,13 +55,13 @@ export default async function BlogArticle(props: { params: tParams }) {
   const shareParams = {
     slug,
     body: `Check out this article: ${data.title}. Read more at: `,
-    title: data.title
-  };
+    title: data.title,
+  }
 
   return (
-    <div className="mt-8 flex flex-col items-center">
+    <div className="mt-8 flex flex-col items-center max-w-full overflow-hidden">
       <h1 className="text-center">
-        <span className='font-bold'>Publicado</span> {' '}
+        <span className="font-bold">Publicado</span>{' '}
         <span className="text-base font-semibold tracking-wide text-gray-500 dark:text-gray-400">
           {new Date(data.firstPublishedDate).toLocaleString('pt-BR', {
             month: 'long',
@@ -70,19 +70,23 @@ export default async function BlogArticle(props: { params: tParams }) {
             hour: 'numeric',
             minute: 'numeric',
             hour12: false,
-            timeZoneName: 'short'
+            timeZoneName: 'short',
           })}
         </span>
-
         <span className="mt-2 block text-3xl leading-8 font-bold tracking-tight sm:text-4xl">
           {data.title}
         </span>
       </h1>
 
-      <div className="prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary">
+      <div className="prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary max-w-full overflow-x-auto">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight]}
+          components={{
+            img: ({ ...props }) => (
+              <img {...props} className="max-w-full h-auto" alt={props.alt} />
+            ),
+          }}
         >
           {data.content}
         </ReactMarkdown>
