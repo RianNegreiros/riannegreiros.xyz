@@ -16,6 +16,7 @@ import {
   WhatsappShareButton,
 } from 'next-share'
 import { motion } from 'framer-motion'
+import { Button } from '@/components/ui/button'
 
 type tParams = {
   slug: string
@@ -25,7 +26,7 @@ type tParams = {
 
 export default function ShareMenu(props: { params: tParams }) {
   const buttonDivClass =
-    'py-1.5 px-3 text-sm font-medium text-gray-900 rounded-lg focus:outline-none bg-white hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+    'py-1.5 px-3 text-sm font-medium rounded-lg focus:outline-none hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:border-gray-600 dark:hover:bg-gray-700'
   const buttonClass = 'transition-transform duration-100 my-2'
   return (
     <div className="fixed end-4 bottom-4 group hidden md:block">
@@ -88,10 +89,11 @@ export default function ShareMenu(props: { params: tParams }) {
           </PocketShareButton>
         </motion.div>
       </div>
-      <div className={`flex items-center justify-center ${buttonDivClass}`}>
-        <Share2 size={26} />
+
+      <Button className='flex items-center justify-center' variant="outline">
+        <Share2 className="h-[1.2rem] w-[1.2rem]" />
         <span className="sr-only">Open share menu</span>
-      </div>
+      </Button>
     </div>
   )
 }
