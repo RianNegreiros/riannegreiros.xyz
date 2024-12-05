@@ -124,7 +124,7 @@ export default function Page() {
             {RESUME_DATA.skills.map((skill) => (
               <Badge
                 key={skill}
-                className="text-sm text-gray-800 dark:text-gray-200 print:text-[10px]"
+                className="text-sm bg-primary/10 dark:text-gray-200 print:text-[10px]"
               >
                 {skill}
               </Badge>
@@ -135,7 +135,7 @@ export default function Page() {
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
             Projetos
           </h2>
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-2 print:gap-2">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 print:grid-cols-2 print:gap-2">
             {RESUME_DATA.projects.map((project) => (
               <ResumeProjectCard
                 key={project.title}
