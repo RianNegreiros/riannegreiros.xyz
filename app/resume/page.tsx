@@ -37,22 +37,34 @@ export default function Page() {
             <div className="flex gap-x-2 pt-1 print:hidden">
               {RESUME_DATA.contact.email && (
                 <Button variant="outline" size="icon" asChild>
-                  <a href={`mailto:${RESUME_DATA.contact.email}`}>
+                  <a
+                    href={`mailto:${RESUME_DATA.contact.email}`}
+                    aria-label="Send email to Rian Negreiros"
+                  >
                     <MailIcon className="w-4 h-4" />
+                    <span className="sr-only">Email</span>
                   </a>
                 </Button>
               )}
               {RESUME_DATA.contact.tel && (
                 <Button variant="outline" size="icon" asChild>
-                  <a href={`tel:${RESUME_DATA.contact.tel}`}>
+                  <a
+                    href={`tel:${RESUME_DATA.contact.tel}`}
+                    aria-label="Call Rian Negreiros"
+                  >
                     <PhoneIcon className="w-4 h-4" />
+                    <span className="sr-only">Phone</span>
                   </a>
                 </Button>
               )}
               {RESUME_DATA.contact.social.map((social) => (
                 <Button key={social.name} variant="outline" size="icon" asChild>
-                  <a href={social.url}>
+                  <a
+                    href={social.url}
+                    aria-label={`Visit ${social.name} profile`}
+                  >
                     <social.icon className="w-4 h-4" />
+                    <span className="sr-only">{social.name}</span>
                   </a>
                 </Button>
               ))}
@@ -110,7 +122,10 @@ export default function Page() {
           </h2>
           <div className="flex flex-wrap gap-1">
             {RESUME_DATA.skills.map((skill) => (
-              <Badge key={skill} className="text-sm text-gray-700 dark:text-gray-300 print:text-[10px]">
+              <Badge
+                key={skill}
+                className="text-sm text-gray-800 dark:text-gray-200 print:text-[10px]"
+              >
                 {skill}
               </Badge>
             ))}
