@@ -90,7 +90,7 @@ export default function ShareMenu(props: { params: tParams }) {
         </motion.div>
       </div>
 
-      <Button className='flex items-center justify-center' variant="outline">
+      <Button className="flex items-center justify-center" variant="outline">
         <Share2 className="h-[1.2rem] w-[1.2rem]" />
         <span className="sr-only">Open share menu</span>
       </Button>
