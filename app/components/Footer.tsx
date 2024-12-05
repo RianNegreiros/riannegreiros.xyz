@@ -1,21 +1,7 @@
+import { navigationItems } from '@/data/navigation-items'
 import { RESUME_DATA } from '@/data/resume-data'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const navigationItems = [
-  {
-    name: 'Posts',
-    href: '/',
-  },
-  {
-    name: 'Projetos',
-    href: '/projects',
-  },
-  {
-    name: 'Currículo',
-    href: '/resume',
-  },
-]
 
 export default function Footer() {
   return (

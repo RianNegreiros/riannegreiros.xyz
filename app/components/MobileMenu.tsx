@@ -11,12 +11,12 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
-import { navigationItems } from './Navbar'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
+import { navigationItems } from '@/data/navigation-items'
 
 export function MobileMenu() {
   const location = usePathname()

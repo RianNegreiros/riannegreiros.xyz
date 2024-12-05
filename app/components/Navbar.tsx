@@ -11,21 +11,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ModeToggle } from './ModeToggle'
 import { MobileMenu } from './MobileMenu'
-
-export const navigationItems = [
-  {
-    name: 'Posts',
-    href: '/',
-  },
-  {
-    name: 'Projetos',
-    href: '/projects',
-  },
-  {
-    name: 'Currículo',
-    href: '/resume',
-  },
-]
+import { navigationItems } from '@/data/navigation-items'
 
 export function Navbar() {
   const pathname = usePathname()
