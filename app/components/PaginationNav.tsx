@@ -28,7 +28,6 @@ export default function PaginationNav({ maxPage }: { maxPage: number }) {
   }, [searchParams])
 
   const goToPage = (page: number) => {
-    setPageNum(page)
     const params = new URLSearchParams(searchParams)
     params.set('page', page.toString())
     replace(`${pathname}?${params}`)
