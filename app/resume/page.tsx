@@ -15,17 +15,17 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="container mx-auto p-4 md:p-16 bg-white dark:bg-gray-900 rounded-sm print:p-12">
+    <main className="container mx-auto p-4 mb-4 md:p-16 bg-white dark:bg-gray-900 rounded-sm print:p-12">
       <section className="max-w-2xl mx-auto space-y-8 print:space-y-4">
         <div className="flex items-center justify-between">
           <div className="space-y-2">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
               {RESUME_DATA.name}
             </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400 print:text-[12px]">
+            <p className="text-sm text-gray-700 dark:text-gray-300 print:text-[12px]">
               {RESUME_DATA.about}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
+            <p className="text-xs text-gray-700 dark:text-gray-300">
               <a
                 className="hover:underline"
                 href={RESUME_DATA.locationLink}
@@ -93,7 +93,7 @@ export default function Page() {
               <CardHeader>
                 <div className="flex justify-between text-base">
                   <h3 className="font-semibold">{education.school}</h3>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm text-gray-700 dark:text-gray-300">
                     {education.start} - {education.end}
                   </div>
                 </div>
@@ -110,7 +110,7 @@ export default function Page() {
           </h2>
           <div className="flex flex-wrap gap-1">
             {RESUME_DATA.skills.map((skill) => (
-              <Badge key={skill} className="text-sm print:text-[10px]">
+              <Badge key={skill} className="text-sm text-gray-700 dark:text-gray-300 print:text-[10px]">
                 {skill}
               </Badge>
             ))}
