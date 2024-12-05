@@ -6,6 +6,7 @@ import { Navbar } from './components/Navbar'
 import 'highlight.js/styles/github-dark.css'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import Footer from './components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -45,6 +46,7 @@ export default function RootLayout({
         >
           <Navbar />
           <main className="max-w-4xl mx-auto px-4">{children}</main>
+          <Footer />
         </Providers>
         <Analytics />
         <SpeedInsights />
