@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { Share2 } from 'lucide-react'
@@ -24,70 +25,84 @@ type tParams = {
   body: string
 }
 
+type ShareButtonProps = {
+  Component: React.ComponentType<any>
+  Icon: React.ComponentType<any>
+  url: string
+  title?: string
+  body?: string
+  separator?: string
+  ariaLabel: string
+}
+
+const ShareButton = ({
+  Component,
+  Icon,
+  url,
+  title,
+  body,
+  separator,
+  ariaLabel,
+}: ShareButtonProps) => (
+  <motion.div whileHover={{ scale: 1.1 }} className="transition-transform duration-100 my-2">
+    <Component url={url} title={title} body={body} separator={separator} aria-label={ariaLabel}>
+      <Icon size={26} round />
+    </Component>
+  </motion.div>
+)
+
 export default function ShareMenu(props: { params: tParams }) {
   const buttonDivClass =
     'py-1.5 px-3 text-sm font-medium rounded-lg focus:outline-none hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:border-gray-600 dark:hover:bg-gray-700'
-  const buttonClass = 'transition-transform duration-100 my-2'
+  const baseUrl = process.env.BASE_URL
+  const { slug, title, body } = props.params
+
   return (
     <div className="fixed end-4 bottom-4 group hidden md:block">
-      <div
-        className={`hidden flex-col items-center group-hover:flex group-hover:visible mb-4 ${buttonDivClass}`}
-      >
-        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
-          <LinkedinShareButton
-            url={`https://www.riannegreiros.dev/${props.params.slug}`}
-            aria-label="Share on LinkedIn"
-          >
-            <LinkedinIcon size={26} round />
-          </LinkedinShareButton>
-        </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
-          <TwitterShareButton
-            url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
-            title={props.params.title}
-            aria-label="Share on Twitter"
-          >
-            <TwitterIcon size={26} round />
-          </TwitterShareButton>
-        </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
-          <EmailShareButton
-            url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
-            subject={props.params.title}
-            body={props.params.body}
-            aria-label="Share via Email"
-          >
-            <EmailIcon size={26} round />
-          </EmailShareButton>
-        </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
-          <WhatsappShareButton
-            url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
-            title={props.params.title}
-            separator=":: "
-            aria-label="Share on WhatsApp"
-          >
-            <WhatsappIcon size={26} round />
-          </WhatsappShareButton>
-        </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
-          <TelegramShareButton
-            url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
-            title={props.params.title}
-            aria-label="Share on Telegram"
-          >
-            <TelegramIcon size={26} round />
-          </TelegramShareButton>
-        </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }} className={buttonClass}>
-          <PocketShareButton
-            url={`https://www.riannegreiros.dev/post/${props.params.slug}`}
-            title={props.params.title}
-            aria-label="Save to Pocket"
-          >
-            <PocketIcon size={26} round />
-          </PocketShareButton>
-        </motion.div>
+      <div className={`hidden flex-col items-center group-hover:flex group-hover:visible mb-4 ${buttonDivClass}`}>
+        <ShareButton
+          Component={LinkedinShareButton}
+          Icon={LinkedinIcon}
+          url={`${baseUrl}/post/${slug}`}
+          ariaLabel="Share on LinkedIn"
+        />
+        <ShareButton
+          Component={TwitterShareButton}
+          Icon={TwitterIcon}
+          url={`${baseUrl}/post/${slug}`}
+          title={title}
+          ariaLabel="Share on Twitter"
+        />
+        <ShareButton
+          Component={EmailShareButton}
+          Icon={EmailIcon}
+          url={`${baseUrl}/post/${slug}`}
+          title={title}
+          body={body}
+          ariaLabel="Share via Email"
+        />
+        <ShareButton
+          Component={WhatsappShareButton}
+          Icon={WhatsappIcon}
+          url={`${baseUrl}/post/${slug}`}
+          title={title}
+          separator=":: "
+          ariaLabel="Share on WhatsApp"
+        />
+        <ShareButton
+          Component={TelegramShareButton}
+          Icon={TelegramIcon}
+          url={`${baseUrl}/post/${slug}`}
+          title={title}
+          ariaLabel="Share on Telegram"
+        />
+        <ShareButton
+          Component={PocketShareButton}
+          Icon={PocketIcon}
+          url={`${baseUrl}/post/${slug}`}
+          title={title}
+          ariaLabel="Save to Pocket"
+        />
       </div>
 
       <Button className="flex items-center justify-center" variant="outline">
