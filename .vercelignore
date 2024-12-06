@@ -3,8 +3,6 @@ README.md
 compose.yaml
 eslint.config.mjs
 node_modules
-postcss.config.mjs
-tailwind.config.ts
 riannegreirosdev
 .env.local.example
 .github
