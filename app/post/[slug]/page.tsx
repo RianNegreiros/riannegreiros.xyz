@@ -38,7 +38,7 @@ export async function generateMetadata(props: { params: tParams }) {
       description: data.overview,
       type: 'article',
       locale: 'pt_BR',
-      url: `https://www.riannegreiros.dev/${slug}`,
+      url: `${process.env.BASE_URL}/post/${slug}`,
       siteName: 'riannegreiros.dev',
     },
   }

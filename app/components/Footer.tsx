@@ -28,13 +28,18 @@ export default function Footer() {
               </Link>
             </li>
           ))}
+          <li>
+            <Link className='mr-4 hover:underline md:mr-6' href="/api/rss">
+              RSS Feed
+            </Link>
+          </li>
         </ul>
         <div className="px-4 py-6 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
             © {new Date().getFullYear()}{' '}
             <Link
               className="hover:underline"
-              href="https://www.riannegreiros.dev/"
+              href={`${process.env.BASE_URL}`}
             >
               riannegreiros.dev
             </Link>

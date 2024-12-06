@@ -11,7 +11,7 @@ import Footer from './components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.riannegreiros.dev/'),
+  metadataBase: new URL(`${process.env.BASE_URL}`),
   title: {
     default: 'Rian Negreiros Dos Santos',
     template: '%s | Rian Negreiros Dos Santos ',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       'Bem-vindo ao site pessoal de Rian Negreiros dos Santos. Explore meu blog para obter insights e histórias, descubra meus projetos que mostram minhas habilidades e criatividade e veja meu currículo para saber mais sobre minha jornada profissional.',
     type: 'website',
     locale: 'pt_BR',
-    url: 'https://www.riannegreiros.dev/',
+    url: process.env.BASE_URL,
     siteName: 'riannegreiros.dev',
   },
 }

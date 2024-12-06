@@ -14,13 +14,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts: post[] = await getData()
 
   const postUrls = posts.map((post) => ({
-    url: `https://www.riannegreiros.dev/${post.slug.current}`,
+    url: `${process.env.BASE_URL}/${post.slug.current}`,
     lastModified: new Date(post.firstPublishedDate),
   }))
 
   return [
     {
-      url: `https://www.riannegreiros.dev/`,
+      url: `${process.env.BASE_URL}`,
       lastModified: new Date(),
     },
     ...postUrls,
