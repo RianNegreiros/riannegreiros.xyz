@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { generateRssFeed } from '@/lib/rss'
+import { generateRssFeed } from '@/app/lib/rss'
 
 export async function GET() {
   try {
