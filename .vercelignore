@@ -2,7 +2,7 @@ Dockerfile
 README.md
 compose.yaml
 eslint.config.mjs
-node_modules
+.prettierrc
 riannegreirosdev
 .env.local.example
-.github
+.dockerignore
