@@ -20,10 +20,10 @@ riannegreiros.dev is a personal website that includes a blog, project portfolio,
 
 ## Features
 
-- Personal Blog: [Home Page](riannegreiros.dev/) - Share insights and experiences through blog posts.
-- Project Showcase: [Projects Page](riannegreiros.dev/projects) - Display various projects with detailed descriptions and links.
-- Professional Resume: [Resume Page](riannegreiros.dev/resume) - Provide a professional resume with contact information and skills
-- RSS Feed: [RSS Feed](riannegreiros.dev/api/rss) - Allow users to subscribe to updates from the blog.
+- Personal Blog: [Home Page](https://www.riannegreiros.dev/) - Share insights and experiences through blog posts.
+- Project Showcase: [Projects Page](https://www.riannegreiros.dev/projects) - Display various projects with detailed descriptions and links.
+- Professional Resume: [Resume Page](https://www.riannegreiros.dev/resume) - Provide a professional resume with contact information and skills
+- RSS Feed: [RSS Feed](https://www.riannegreiros.dev/api/rss) - Allow users to subscribe to updates from the blog.
 
 ## Technologies Used
 
