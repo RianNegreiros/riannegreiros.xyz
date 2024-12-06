@@ -1,4 +1,4 @@
-# Riannegreiros.dev
+# riannegreiros.dev
 
 This is the personal website and blog of Rian Negreiros, built with Next.js, TypeScript, and TailwindCSS. It serves as a platform to showcase projects, share blog posts, and provide a professional resume.
 
@@ -16,14 +16,14 @@ This is the personal website and blog of Rian Negreiros, built with Next.js, Typ
 
 ## Project Overview
 
-Riannegreiros.dev is a personal website that includes a blog, project portfolio, and resume. It is designed to be a central hub for Rian's professional presence online.
+riannegreiros.dev is a personal website that includes a blog, project portfolio, and resume. It is designed to be a central hub for Rian's professional presence online.
 
 ## Features
 
-- Personal blog for sharing insights and experiences
-- Project showcase with detailed descriptions and links
-- Professional resume with contact information and skills
-- Responsive design using TailwindCSS
+- Personal Blog: [Home Page](riannegreiros.dev/) - Share insights and experiences through blog posts.
+- Project Showcase: [Projects Page](riannegreiros.dev/projects) - Display various projects with detailed descriptions and links.
+- Professional Resume: [Resume Page](riannegreiros.dev/resume) - Provide a professional resume with contact information and skills
+- RSS Feed: [RSS Feed](riannegreiros.dev/api/rss) - Allow users to subscribe to updates from the blog.
 
 ## Technologies Used
 
