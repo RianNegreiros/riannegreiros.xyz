@@ -124,7 +124,7 @@ export default function Page() {
             {RESUME_DATA.skills.map((skill) => (
               <Badge
                 key={skill}
-                className="text-sm dark:bg-primary/10 dark:text-gray-200 print:text-[10px]"
+                className="text-sm bg-primary dark:bg-primary/10 dark:hover:bg-primary dark:text-gray-200 print:text-[10px]"
               >
                 {skill}
               </Badge>
