@@ -10,12 +10,11 @@ export default function Footer() {
       <div className="mx-auto max-w-screen-xl text-center p-2 py-4">
         <Link
           href="/"
-          className="flex justify-center items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+          className="inline-block mb-4"
         >
           <Image
             src="/favicon.ico"
             alt="Site Logo"
-            className="mr-2 h-8"
             width={32}
             height={32}
           />
