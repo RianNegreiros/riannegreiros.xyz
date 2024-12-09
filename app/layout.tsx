@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Providers } from './components/Providers'
 import { Navbar } from './components/Navbar'
 import 'highlight.js/styles/github-dark.css'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/Footer'
+import { ThemeProvider } from './components/Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={inter.className}>
-        <Providers
+        <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -47,7 +47,7 @@ export default function RootLayout({
           <Navbar />
           <main className="max-w-4xl mx-auto px-4">{children}</main>
           <Footer />
-        </Providers>
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>
