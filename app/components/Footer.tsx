@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="px-4 md:px-8 lg:px-10 print:hidden">
       <hr className="mb-4 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-      <div className="mx-auto max-w-screen-xl text-center">
+      <div className="mx-auto max-w-screen-xl text-center p-2 py-4">
         <Link
           href="/"
           className="flex justify-center items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
