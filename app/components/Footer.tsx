@@ -29,7 +29,7 @@ export default function Footer() {
             </li>
           ))}
           <li>
-            <Link className='mr-4 hover:underline md:mr-6' href="/api/rss">
+            <Link className="mr-4 hover:underline md:mr-6" href="/api/rss">
               RSS Feed
             </Link>
           </li>
@@ -37,10 +37,7 @@ export default function Footer() {
         <div className="px-4 py-6 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
             © {new Date().getFullYear()}{' '}
-            <Link
-              className="hover:underline"
-              href={`${process.env.BASE_URL}`}
-            >
+            <Link className="hover:underline" href={`${process.env.BASE_URL}`}>
               riannegreiros.dev
             </Link>
             . Todos os direitos reservados.
