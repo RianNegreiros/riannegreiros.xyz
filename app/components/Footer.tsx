@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="px-4 md:px-8 lg:px-10 print:hidden">
       <hr className="mb-4 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-      <div className="mx-auto max-w-screen-xl text-center">
+      <div className="mx-auto max-w-screen-xl text-center p-2 py-4">
         <Link
           href="/"
           className="flex justify-center items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
@@ -29,7 +29,7 @@ export default function Footer() {
             </li>
           ))}
           <li>
-            <Link className='mr-4 hover:underline md:mr-6' href="/api/rss">
+            <Link className="mr-4 hover:underline md:mr-6" href="/api/rss">
               RSS Feed
             </Link>
           </li>
@@ -37,10 +37,7 @@ export default function Footer() {
         <div className="px-4 py-6 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
             © {new Date().getFullYear()}{' '}
-            <Link
-              className="hover:underline"
-              href={`${process.env.BASE_URL}`}
-            >
+            <Link className="hover:underline" href={`${process.env.BASE_URL}`}>
               riannegreiros.dev
             </Link>
             . Todos os direitos reservados.

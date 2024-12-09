@@ -44,8 +44,17 @@ const ShareButton = ({
   separator,
   ariaLabel,
 }: ShareButtonProps) => (
-  <motion.div whileHover={{ scale: 1.1 }} className="transition-transform duration-100 my-2">
-    <Component url={url} title={title} body={body} separator={separator} aria-label={ariaLabel}>
+  <motion.div
+    whileHover={{ scale: 1.1 }}
+    className="transition-transform duration-100 my-2"
+  >
+    <Component
+      url={url}
+      title={title}
+      body={body}
+      separator={separator}
+      aria-label={ariaLabel}
+    >
       <Icon size={26} round />
     </Component>
   </motion.div>
@@ -59,7 +68,9 @@ export default function ShareMenu(props: { params: tParams }) {
 
   return (
     <div className="fixed end-4 bottom-4 group hidden md:block">
-      <div className={`hidden flex-col items-center group-hover:flex group-hover:visible mb-4 ${buttonDivClass}`}>
+      <div
+        className={`hidden flex-col items-center group-hover:flex group-hover:visible mb-4 ${buttonDivClass}`}
+      >
         <ShareButton
           Component={LinkedinShareButton}
           Icon={LinkedinIcon}
