@@ -38,11 +38,14 @@ export default async function IndexPage({
             <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
               <div>
                 <p className="text-base font-medium leading-6 text-blue-500">
-                  {
-                    new Date(post.firstPublishedDate)
-                      .toISOString()
-                      .split('T')[0]
-                  }
+                  {new Date(post.firstPublishedDate).toLocaleDateString(
+                    'pt-BR',
+                    {
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric',
+                    }
+                  )}
                 </p>
               </div>
 
