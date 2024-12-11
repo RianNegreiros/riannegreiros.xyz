@@ -77,7 +77,7 @@ export default async function Timeline() {
                 }
               )}
             </time>
-            <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+            <p className="mb-4 prose max-w-none text-gray-500 dark:text-gray-400 line-clamp-2">
               {_type === 'post' ? overview : description}
             </p>
             {link && (
