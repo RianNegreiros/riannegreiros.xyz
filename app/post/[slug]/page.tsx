@@ -9,15 +9,14 @@ import remarkGfm from 'remark-gfm'
 export const revalidate = 30
 
 async function getData(slug: string) {
-  const query = `*[_type == "post" && slug.current == '${slug}'] {
+  const query = `*[_type == 'post' && slug.current == '${slug}'] {
         "currentSlug": slug.current,
           title,
           content,
-          _createdAt,
           firstPublishedDate
       }[0]`
 
-  const data = await client.fetch(query)
+  const data = await client.fetch(query, {}, { next: { revalidate: 30 } })
   return data
 }
 

@@ -6,8 +6,14 @@ import PaginationNav from './components/PaginationNav'
 async function getData(pageNum: number = 0, postsPerPage: number = 10) {
   const start = pageNum * postsPerPage
   const end = start + postsPerPage
-  const query = `*[_type == "post"] | order(firstPublishedDate desc) [${start}...${end}]`
-  const data = await client.fetch(query)
+  const query = `*[_type == 'post'] | order(firstPublishedDate desc) [${start}...${end}] {
+    title,
+    _id,
+    overview,
+    slug,
+    firstPublishedDate
+  }`
+  const data = await client.fetch(query, {}, { next: { revalidate: 30 } })
   return data
 }
 
