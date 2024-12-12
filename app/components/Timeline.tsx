@@ -22,7 +22,7 @@ async function fetchPostsAndProjects() {
     }
   }`
 
-  const data = await client.fetch(query)
+  const data = await client.fetch(query, {}, { next: { revalidate: 60 } })
   return data
 }
 
