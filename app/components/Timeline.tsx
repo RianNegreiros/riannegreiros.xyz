@@ -68,11 +68,14 @@ export default async function Timeline() {
               </h2>
             )}
             <time className="block mb-2 text-sm font-normal leading-none text-blue-500">
-              {new Date(firstPublishedDate || publishedDate).toLocaleDateString('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-              })}
+              {new Date(firstPublishedDate || publishedDate).toLocaleDateString(
+                'pt-BR',
+                {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+                }
+              )}
             </time>
             <p className="mb-4 prose max-w-none text-gray-500 dark:text-gray-400 line-clamp-2">
               {_type === 'post' ? overview : description}
@@ -90,5 +93,5 @@ export default async function Timeline() {
         )
       )}
     </ol>
-  );
+  )
 }
