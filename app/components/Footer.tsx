@@ -29,7 +29,7 @@ export default function Footer() {
           <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
             © {new Date().getFullYear()}{' '}
             <Link className="hover:underline" href={`${process.env.BASE_URL}`}>
-              riannegreiros.dev
+              riannegreiros.xyz
             </Link>
             . Todos os direitos reservados.
           </span>

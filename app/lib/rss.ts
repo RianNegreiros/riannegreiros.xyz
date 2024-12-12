@@ -23,7 +23,7 @@ export async function generateRssFeed() {
     feed.item({
       title: post.title,
       description: post.content,
-      url: `${process.env.BASE_URL}/posts/${post.slug.current}`,
+      url: `${process.env.BASE_URL}/post/${post.slug.current}`,
       date: post.firstPublishedDate,
     })
   })
