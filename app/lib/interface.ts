@@ -15,6 +15,12 @@ export interface post {
   }
   _createdAt: string
   firstPublishedDate: string
+  translations?: {
+    [key: string]: {
+      title: string
+      content: string
+    }
+  }
 }
 
 export interface ProjectsCard {

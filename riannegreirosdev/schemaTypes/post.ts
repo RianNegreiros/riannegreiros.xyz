@@ -31,5 +31,20 @@ export default {
       type: 'markdown',
       title: 'Content',
     },
+    {
+      name: 'translations',
+      type: 'object',
+      fields: [
+        {
+          name: 'en',
+          type: 'object',
+          fields: [
+            {name: 'title', type: 'string'},
+            {name: 'content', type: 'markdown'},
+            {name: 'slug', type: 'slug', options: {source: 'translations.en.title'}},
+          ],
+        },
+      ],
+    },
   ],
 }
