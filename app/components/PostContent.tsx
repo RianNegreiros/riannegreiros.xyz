@@ -20,10 +20,10 @@ export default function PostContent({ slug, data }: PostContentProps) {
     currentLang === 'pt'
       ? data
       : {
-        ...data,
-        title: data.translations?.en.title || data.title,
-        content: data.translations?.en.content || data.content,
-      }
+          ...data,
+          title: data.translations?.en.title || data.title,
+          content: data.translations?.en.content || data.content,
+        }
 
   const handleLanguageToggle = (language: string) => {
     setCurrentLang(language)
@@ -59,7 +59,10 @@ export default function PostContent({ slug, data }: PostContentProps) {
           )}
         </span>
         {data.translations && Object.keys(data.translations).length > 0 && (
-          <LanguageToggle language={currentLang} onToggle={handleLanguageToggle} />
+          <LanguageToggle
+            language={currentLang}
+            onToggle={handleLanguageToggle}
+          />
         )}
         <span className="mt-2 block text-3xl leading-8 font-bold tracking-tight sm:text-4xl">
           {postContent.title}
