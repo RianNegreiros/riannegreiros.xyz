@@ -20,7 +20,11 @@ export default function Footer() {
             </li>
           ))}
           <li>
-            <Link className="mr-4 hover:underline md:mr-6" href="/api/rss">
+            <Link
+              className="mr-4 hover:underline md:mr-6"
+              href="/api/rss"
+              target="_blank"
+            >
               RSS Feed
             </Link>
           </li>
@@ -40,6 +44,7 @@ export default function Footer() {
                 key={social.name}
                 className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 aria-label={social.name}
+                target="_blank"
               >
                 <social.icon className="w-4 h-4" />
               </a>

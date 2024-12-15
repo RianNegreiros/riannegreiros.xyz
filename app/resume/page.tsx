@@ -62,6 +62,7 @@ export default function Page() {
                   <a
                     href={social.url}
                     aria-label={`Visit ${social.name} profile`}
+                    target="_blank"
                   >
                     <social.icon className="w-4 h-4" />
                     <span className="sr-only">{social.name}</span>
@@ -81,7 +82,7 @@ export default function Page() {
                 </a>
               )}
               {RESUME_DATA.contact.social.map((social) => (
-                <a key={social.name} href={social.url}>
+                <a key={social.name} href={social.url} target="_blank">
                   <span className="underline">{social.name}</span>
                 </a>
               ))}
