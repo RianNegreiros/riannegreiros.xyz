@@ -44,22 +44,22 @@ export default function TimelineItem({
       </span>
       {_type === 'post' ? (
         <Link href={`/posts/${slug?.current}`} prefetch>
-          <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+          <h2 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
             {title}
-          </h3>
+          </h2>
         </Link>
       ) : (
-        <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+        <h2 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
           {title}
-        </h3>
+        </h2>
       )}
-      <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+      <time className="block mb-2 text-sm font-normal leading-none text-blue-400 dark:text-blue-500">
         {displayDate
           ? new Date(displayDate).toLocaleDateString('pt-BR', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-            })
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          })
           : 'No date available'}
       </time>
       <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">

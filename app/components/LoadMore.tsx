@@ -29,7 +29,7 @@ export default function LoadMore() {
         page++
 
         if (data.length + res.length + itemsPerPage >= totalItems) {
-          setHasMore(true)
+          setHasMore(false)
         }
       })
     }
