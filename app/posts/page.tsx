@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { post } from '../lib/interface'
 import { client } from '../lib/sanity'
 import PaginationNav from '../components/PaginationNav'
+import { getTotalPosts } from '../utils/api'
 
 async function getData(pageNum: number = 0, postsPerPage: number = 10) {
   const start = pageNum * postsPerPage
@@ -15,11 +16,6 @@ async function getData(pageNum: number = 0, postsPerPage: number = 10) {
   }`
   const data = await client.fetch(query, {}, { next: { revalidate: 30 } })
   return data
-}
-
-const getTotalPosts = async () => {
-  const query = `count(*[_type == 'post'])`
-  return client.fetch(query)
 }
 
 export default async function PostsPage({

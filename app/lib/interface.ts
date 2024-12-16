@@ -31,3 +31,14 @@ export interface ProjectsCard {
   description: string
   link: string
 }
+
+export interface TimelineItemProps {
+  _id: string
+  _type: 'post' | 'project'
+  title: string
+  slug?: { current: string }
+  overview?: string
+  description?: string
+  link?: string
+  firstPublishedDate?: string
+}
