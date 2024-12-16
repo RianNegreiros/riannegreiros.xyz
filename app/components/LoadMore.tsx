@@ -36,7 +36,7 @@ export default function LoadMore() {
   }, [inView, hasMore, totalItems])
 
   return (
-    <div>
+    <>
       {data}
       {hasMore && (
         <div ref={ref} className="flex items-center justify-center mb-4">
@@ -44,6 +44,6 @@ export default function LoadMore() {
           <span className="sr-only">Loading...</span>
         </div>
       )}
-    </div>
+    </>
   )
 }
