@@ -32,9 +32,9 @@ export const project = defineType({
       of: [{type: 'string'}],
     }),
     {
-      name: 'releaseDate',
+      name: 'firstPublishedDate',
       type: 'datetime',
-      title: 'First version release date',
+      title: 'First Published Date',
     },
   ],
 })
