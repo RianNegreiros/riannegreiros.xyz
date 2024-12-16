@@ -41,4 +41,5 @@ export interface TimelineItemProps {
   description?: string
   link?: string
   firstPublishedDate?: string
+  index: number
 }

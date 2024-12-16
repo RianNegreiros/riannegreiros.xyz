@@ -2,22 +2,22 @@
 
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { getAll, getTotal } from '../utils/api'
-import TimelineItem from './TimelineItem'
-import { TimelineItemProps } from '../lib/interface'
+import { getAll, getTotal } from '../action'
 
-let page = 2;
-const itemsPerPage = 10;
+export type TimelineItem = JSX.Element
+
+let page = 1
+const itemsPerPage = 10
 
 export default function LoadMore() {
   const { ref, inView } = useInView()
-  const [data, setData] = useState<TimelineItemProps[]>([])
+  const [data, setData] = useState<TimelineItem[]>([])
   const [hasMore, setHasMore] = useState<boolean>(true)
   const [totalItems, setTotalItems] = useState<number>(0)
 
   useEffect(() => {
     getTotal().then((total) => {
-      setTotalItems(Math.ceil(total / itemsPerPage))
+      setTotalItems(total)
     })
   }, [])
 
@@ -27,18 +27,16 @@ export default function LoadMore() {
         setData((prevData) => [...prevData, ...res])
         page++
 
-        if (data.length + res.length >= totalItems) {
+        if (data.length + res.length + itemsPerPage >= totalItems) {
           setHasMore(false)
         }
       })
     }
-  }, [inView, hasMore, data, totalItems])
+  }, [inView, hasMore, totalItems])
 
   return (
-    <>
-      {data.map((item) => (
-        <TimelineItem key={item._id} {...item} />
-      ))}
+    <div>
+      {data}
       {hasMore && (
         <div ref={ref} className="flex items-center justify-center mb-4">
           <svg
@@ -60,6 +58,6 @@ export default function LoadMore() {
           <span className="sr-only">Loading...</span>
         </div>
       )}
-    </>
+    </div>
   )
 }
