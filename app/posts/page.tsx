@@ -39,7 +39,7 @@ export default async function PostsPage({
           <li key={post._id} className="py-4">
             <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
               <div>
-                <p className="text-base font-medium leading-6 text-blue-500">
+                <p className="text-base font-medium leading-6 text-primary">
                   {new Date(post.firstPublishedDate).toLocaleDateString(
                     'pt-BR',
                     {

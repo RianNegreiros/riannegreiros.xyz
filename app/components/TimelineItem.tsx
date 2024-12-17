@@ -52,7 +52,7 @@ export default function TimelineItem({
           </span>
         </h2>
       </Link>
-      <time className="block mb-2 text-sm font-normal leading-none text-blue-400 dark:text-blue-500">
+      <time className="block mb-2 text-sm font-normal leading-none text-primary">
         {displayDate
           ? new Date(displayDate).toLocaleDateString('pt-BR', {
             day: '2-digit',
