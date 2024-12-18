@@ -44,6 +44,15 @@ export default {
             },
           ],
         },
+        {
+          type: 'code',
+          name: 'code',
+          title: 'Code',
+          options: {
+            withFilename: true,
+            highlightedLines: true,
+          },
+        },
       ],
     },
     {
@@ -54,13 +63,13 @@ export default {
           name: 'en',
           type: 'object',
           fields: [
-            { name: 'title', type: 'string' },
+            {name: 'title', type: 'string'},
             {
               name: 'content',
               type: 'array',
               title: 'Content',
               of: [
-                { type: 'block' },
+                {type: 'block'},
                 {
                   type: 'image',
                   fields: [
@@ -70,6 +79,15 @@ export default {
                       title: 'Alternative Text',
                     },
                   ],
+                },
+                {
+                  type: 'code',
+                  name: 'code',
+                  title: 'Code',
+                  options: {
+                    withFilename: true,
+                    highlightedLines: true,
+                  },
                 },
               ],
             },

@@ -1,12 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client'
 
-import { post } from '../lib/interface'
-import ShareMenu from './ShareMenu'
 import { useState } from 'react'
-import LanguageToggle from './LanguageToggle'
 import { PortableText } from '@portabletext/react'
 import { urlFor } from '../lib/sanity'
 import Image from 'next/image'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { useTheme } from 'next-themes'
+import { dark, lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { post } from '../lib/interface'
+import LanguageToggle from './LanguageToggle'
+import ShareMenu from './ShareMenu'
+import { CopyButton } from './CopyButton'
 
 interface PostContentProps {
   slug: string
@@ -15,15 +21,16 @@ interface PostContentProps {
 
 export default function PostContent({ slug, data }: PostContentProps) {
   const [currentLang, setCurrentLang] = useState<string>('pt')
+  const { resolvedTheme } = useTheme()
 
   const postContent =
     currentLang === 'pt'
       ? data
       : {
-        ...data,
-        title: data.translations?.en.title || data.title,
-        content: data.translations?.en.content || data.content,
-      }
+          ...data,
+          title: data.translations?.en.title || data.title,
+          content: data.translations?.en.content || data.content,
+        }
 
   const handleLanguageToggle = (language: string) => {
     setCurrentLang(language)
@@ -40,7 +47,6 @@ export default function PostContent({ slug, data }: PostContentProps) {
 
   const PortableTextComponent = {
     types: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       image: ({ value }: { value: any }) => (
         <Image
           src={urlFor(value).url()}
@@ -49,6 +55,18 @@ export default function PostContent({ slug, data }: PostContentProps) {
           width={800}
           height={800}
         />
+      ),
+      code: ({ value }: { value: any }) => (
+        <div style={{ position: 'relative' }}>
+          <CopyButton value={value.code} className="absolute right-0 top-0" />
+          <SyntaxHighlighter
+            language={value.language}
+            style={resolvedTheme === 'dark' ? dark : lightfair}
+            showLineNumbers
+          >
+            {value.code}
+          </SyntaxHighlighter>
+        </div>
       ),
     },
   }
@@ -85,7 +103,10 @@ export default function PostContent({ slug, data }: PostContentProps) {
       </h1>
 
       <div className="mt-4 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary max-w-full overflow-x-auto">
-        <PortableText value={postContent.content} components={PortableTextComponent} />
+        <PortableText
+          value={postContent.content}
+          components={PortableTextComponent}
+        />
       </div>
       <ShareMenu params={shareParams} />
     </div>
