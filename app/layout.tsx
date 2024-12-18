@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Navbar } from './components/Navbar'
-import 'highlight.js/styles/github-dark.css'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/Footer'
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     url: process.env.BASE_URL,
-    siteName: 'riannegreiros.dev',
+    siteName: 'riannegreiros.xyz',
   },
 }
 

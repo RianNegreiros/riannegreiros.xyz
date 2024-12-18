@@ -1,12 +1,12 @@
 'use client'
 
-import ReactMarkdown from 'react-markdown'
-import rehypeHighlight from 'rehype-highlight'
-import remarkGfm from 'remark-gfm'
 import { post } from '../lib/interface'
 import ShareMenu from './ShareMenu'
 import { useState } from 'react'
 import LanguageToggle from './LanguageToggle'
+import { PortableText } from '@portabletext/react'
+import { urlFor } from '../lib/sanity'
+import Image from 'next/image'
 
 interface PostContentProps {
   slug: string
@@ -38,8 +38,23 @@ export default function PostContent({ slug, data }: PostContentProps) {
     title: postContent.title,
   }
 
+  const PortableTextComponent = {
+    types: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      image: ({ value }: { value: any }) => (
+        <Image
+          src={urlFor(value).url()}
+          alt="Image"
+          className="rounded-lg"
+          width={800}
+          height={800}
+        />
+      ),
+    },
+  }
+
   return (
-    <div className="mt-8 flex flex-col items-center max-w-full overflow-hidden">
+    <div className="m-8 flex flex-col items-center max-w-full overflow-hidden">
       <h1 className="text-center">
         <span className="font-bold">
           {currentLang === 'en' ? 'Published' : 'Publicado'}
@@ -70,17 +85,7 @@ export default function PostContent({ slug, data }: PostContentProps) {
       </h1>
 
       <div className="mt-4 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary max-w-full overflow-x-auto">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeHighlight]}
-          components={{
-            img: ({ ...props }) => (
-              <img {...props} className="max-w-full h-auto" alt={props.alt} />
-            ),
-          }}
-        >
-          {postContent.content}
-        </ReactMarkdown>
+        <PortableText value={data.content} components={PortableTextComponent} />
       </div>
       <ShareMenu params={shareParams} />
     </div>

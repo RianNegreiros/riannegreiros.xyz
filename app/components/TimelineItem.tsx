@@ -42,23 +42,30 @@ export default function TimelineItem({
           <Briefcase className="w-2.5 h-2.5 text-blue-800 dark:text-blue-400" />
         )}
       </span>
-      <Link href={_type === 'post' ? `/posts/${slug.current}` : link} target={_type === 'project' ? '_blank' : ''} prefetch>
+      <Link
+        href={_type === 'post' ? `/posts/${slug.current}` : link}
+        target={_type === 'project' ? '_blank' : ''}
+        prefetch
+      >
         <h2 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
           {title}
-          <span className={`text-xs font-medium ml-2 px-2 py-0.5 rounded ms-3 ${_type === 'post' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'}`}>
+          <span
+            className={`text-xs font-medium ml-2 px-2 py-0.5 rounded ms-3 ${_type === 'post' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'}`}
+          >
             {_type === 'post' ? 'Post' : 'Projeto'}
           </span>
-          <span className={`ml-2 px-2 py-0.5 rounded text-xs font-medium `}>
-          </span>
+          <span
+            className={`ml-2 px-2 py-0.5 rounded text-xs font-medium `}
+          ></span>
         </h2>
       </Link>
       <time className="block mb-2 text-sm font-normal leading-none text-primary">
         {displayDate
           ? new Date(displayDate).toLocaleDateString('pt-BR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-          })
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })
           : 'No date available'}
       </time>
       <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
