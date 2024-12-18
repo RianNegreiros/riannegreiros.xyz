@@ -54,12 +54,13 @@ export default {
           name: 'en',
           type: 'object',
           fields: [
-            {name: 'title', type: 'string'},
+            { name: 'title', type: 'string' },
             {
               name: 'content',
               type: 'array',
+              title: 'Content',
               of: [
-                {type: 'block'},
+                { type: 'block' },
                 {
                   type: 'image',
                   fields: [
