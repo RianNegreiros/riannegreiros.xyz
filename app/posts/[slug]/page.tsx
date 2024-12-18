@@ -6,13 +6,7 @@ import { redirect } from 'next/navigation'
 type tParams = Promise<{ slug: string }>
 
 async function getData(slug: string) {
-  const query = `*[_type == 'post' && slug.current == '${slug}'] {
-    "currentSlug": slug.current,
-    title,
-    content,
-    firstPublishedDate,
-    translations
-  }[0]`
+  const query = `*[_type == 'post' && slug.current == '${slug}'][0]`
 
   return await client.fetch(query, {}, { next: { revalidate: 30 } })
 }

@@ -28,8 +28,23 @@ export default {
     },
     {
       name: 'content',
-      type: 'markdown',
+      type: 'array',
       title: 'Content',
+      of: [
+        {
+          type: 'block',
+        },
+        {
+          type: 'image',
+          fields: [
+            {
+              type: 'text',
+              name: 'alt',
+              title: 'Alternative Text',
+            },
+          ],
+        },
+      ],
     },
     {
       name: 'translations',
@@ -40,8 +55,23 @@ export default {
           type: 'object',
           fields: [
             {name: 'title', type: 'string'},
-            {name: 'content', type: 'markdown'},
-            {name: 'slug', type: 'slug', options: {source: 'translations.en.title'}},
+            {
+              name: 'content',
+              type: 'array',
+              of: [
+                {type: 'block'},
+                {
+                  type: 'image',
+                  fields: [
+                    {
+                      type: 'text',
+                      name: 'alt',
+                      title: 'Alternative Text',
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],

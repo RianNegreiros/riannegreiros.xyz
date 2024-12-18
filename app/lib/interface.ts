@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface simplePostCard {
   title: string
   smallDescription: string
@@ -8,7 +9,7 @@ export interface simplePostCard {
 export interface post {
   title: string
   overview: string
-  content: string
+  content: any
   _id: string
   slug: {
     current: string
@@ -18,7 +19,7 @@ export interface post {
   translations?: {
     [key: string]: {
       title: string
-      content: string
+      content: any
     }
   }
 }
