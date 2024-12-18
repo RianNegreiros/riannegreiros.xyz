@@ -15,7 +15,7 @@ export function CopyButton({ value, className }: SimpleCopyButtonProps) {
   const handleCopy = () => {
     navigator.clipboard.writeText(value).then(() => {
       setHasCopied(true)
-      setTimeout(() => setHasCopied(false), 2000)
+      setTimeout(() => setHasCopied(false), 1000)
     })
   }
 
@@ -23,7 +23,7 @@ export function CopyButton({ value, className }: SimpleCopyButtonProps) {
     <Button
       size="icon"
       variant="ghost"
-      className={`relative z-10 h-8 w-8 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50 ${className}`}
+      className={`relative z-10 h-8 w-8 dark:text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50 ${className}`}
       onClick={handleCopy}
     >
       <span className="sr-only">Copy</span>
