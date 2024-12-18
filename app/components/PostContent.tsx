@@ -20,10 +20,10 @@ export default function PostContent({ slug, data }: PostContentProps) {
     currentLang === 'pt'
       ? data
       : {
-          ...data,
-          title: data.translations?.en.title || data.title,
-          content: data.translations?.en.content || data.content,
-        }
+        ...data,
+        title: data.translations?.en.title || data.title,
+        content: data.translations?.en.content || data.content,
+      }
 
   const handleLanguageToggle = (language: string) => {
     setCurrentLang(language)
@@ -85,7 +85,7 @@ export default function PostContent({ slug, data }: PostContentProps) {
       </h1>
 
       <div className="mt-4 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary max-w-full overflow-x-auto">
-        <PortableText value={data.content} components={PortableTextComponent} />
+        <PortableText value={postContent.content} components={PortableTextComponent} />
       </div>
       <ShareMenu params={shareParams} />
     </div>
