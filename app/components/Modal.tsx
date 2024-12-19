@@ -42,7 +42,7 @@ export default function Modal({ selected, setSelected }: ModalProps) {
             src={selected.imageUrl}
             alt={`Projeto entitulado ${selected.title} apresentando ${selected.description}`}
             width={800}
-            height={800}
+            height={400}
             priority
             placeholder="blur"
             blurDataURL={selected.blurImage}
