@@ -10,8 +10,8 @@ async function getData() {
           link,
           description,
           tags,
-          "imageUrl": image.asset->url
-        
+          "imageUrl": image.asset->url,
+          "blurImage": image.asset->metadata.lqip
     }`
 
   const data = await client.fetch(query, {}, { next: { revalidate: 30 } })
