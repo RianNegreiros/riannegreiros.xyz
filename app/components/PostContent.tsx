@@ -8,7 +8,10 @@ import { urlFor } from '../lib/sanity'
 import Image from 'next/image'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { useTheme } from 'next-themes'
-import { dark, lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import {
+  dracula,
+  atomOneLight,
+} from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { post } from '../lib/interface'
 import LanguageToggle from './LanguageToggle'
 import ShareMenu from './ShareMenu'
@@ -61,7 +64,7 @@ export default function PostContent({ slug, data }: PostContentProps) {
           <CopyButton value={value.code} className="absolute right-0 top-0" />
           <SyntaxHighlighter
             language={value.language}
-            style={resolvedTheme === 'dark' ? dark : lightfair}
+            style={resolvedTheme === 'dark' ? dracula : atomOneLight}
             showLineNumbers
           >
             {value.code}
