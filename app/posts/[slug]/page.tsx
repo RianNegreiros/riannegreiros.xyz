@@ -6,7 +6,29 @@ import { redirect } from 'next/navigation'
 type tParams = Promise<{ slug: string }>
 
 async function getData(slug: string) {
-  const query = `*[_type == 'post' && slug.current == '${slug}'][0]`
+  const query = `*[_type == 'post' && slug.current == '${slug}'][0]{
+    title,
+    firstPublishedDate,
+    content[]{
+      ...,
+      _type == 'image' => {
+        ...,
+        "blurImage": asset->metadata.lqip
+      }
+    },
+    translations {
+      en {
+        title,
+        content[]{
+          ...,
+          _type == 'image' => {
+            ...,
+            "blurImage": asset->metadata.lqip
+          }
+        }
+      }
+    }
+  }`
 
   return await client.fetch(query, {}, { next: { revalidate: 30 } })
 }
@@ -39,6 +61,8 @@ export default async function BlogPost({ params }: { params: tParams }) {
   if (!data) {
     redirect('/not-found')
   }
+
+  console.log(data)
 
   return <PostContent slug={slug} data={data} />
 }
