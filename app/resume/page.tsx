@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="container relative mx-auto my-8 scroll-my-12 overflow-auto p-4 rounded-lg print:p-11 md:p-16 dark:bg-gray-900">
+    <main className="container relative mx-auto my-8 scroll-my-12 overflow-auto p-4 rounded-lg print:p-11 print:my-0 md:p-16 dark:bg-gray-900">
       <div className="sr-only">
         <h1>{RESUME_DATA.name}&apos;s Resume</h1>
       </div>
