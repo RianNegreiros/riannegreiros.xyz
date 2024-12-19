@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-11 md:p-16 bg-white dark:bg-gray-900">
+    <main className="container relative mx-auto my-8 scroll-my-12 overflow-auto p-4 rounded-lg print:p-11 md:p-16 dark:bg-gray-900">
       <div className="sr-only">
         <h1>{RESUME_DATA.name}&apos;s Resume</h1>
       </div>
 
       <section
-        className="max-w-2xl mx-auto space-y-8 print:space-y-4"
+        className="mx-auto w-full max-w-2xl space-y-8 print:space-y-4"
         aria-label="Resume Content"
       >
         <Header />
