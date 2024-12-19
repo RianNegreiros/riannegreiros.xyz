@@ -56,7 +56,9 @@ export default function PostContent({ slug, data }: PostContentProps) {
           alt="Image"
           className="rounded-lg"
           width={800}
-          height={800}
+          height={400}
+          placeholder="blur"
+          blurDataURL={value.blurImage}
         />
       ),
       code: ({ value }: { value: any }) => (

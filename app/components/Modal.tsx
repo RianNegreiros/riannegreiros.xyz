@@ -40,12 +40,12 @@ export default function Modal({ selected, setSelected }: ModalProps) {
           <DialogTitle className="sr-only">{selected.title}</DialogTitle>
           <Image
             src={selected.imageUrl}
-            alt={`Project titled ${selected.title} featuring ${selected.description}`}
-            width={0}
-            height={0}
-            sizes="100vw"
+            alt={`Projeto entitulado ${selected.title} apresentando ${selected.description}`}
+            width={800}
+            height={800}
             priority
-            style={{ width: '100%', height: 'auto' }}
+            placeholder="blur"
+            blurDataURL={selected.blurImage}
           />
           <motion.div
             initial={{

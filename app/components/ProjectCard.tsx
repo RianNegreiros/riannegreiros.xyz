@@ -33,10 +33,12 @@ export default function ProjectCard({ data }: ProjectCardModal) {
             <div className="relative aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl">
               <Image
                 src={item.imageUrl}
-                alt={`Project titled ${item.title} featuring ${item.description}`}
+                alt={`Projeto entitulado ${item.title} apresentando ${item.description}`}
                 fill
-                sizes="100%"
                 priority
+                sizes="100%"
+                placeholder="blur"
+                blurDataURL={item.blurImage}
                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl cursor-zoom-in"
                 onClick={() => {
                   setSelected(item)
