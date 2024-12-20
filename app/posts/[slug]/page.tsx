@@ -62,7 +62,5 @@ export default async function BlogPost({ params }: { params: tParams }) {
     redirect('/not-found')
   }
 
-  console.log(data)
-
   return <PostContent slug={slug} data={data} />
 }
