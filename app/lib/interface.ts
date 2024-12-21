@@ -6,6 +6,21 @@ export interface simplePostCard {
   titleImage: string
 }
 
+interface Span {
+  _type: string
+  marks: string[]
+  text: string
+  _key: string
+}
+
+export interface Heading {
+  _type: string
+  style: string
+  _key: string
+  markDefs: any[]
+  children: Span[]
+}
+
 export interface post {
   title: string
   overview: string
@@ -16,10 +31,12 @@ export interface post {
   }
   _createdAt: string
   firstPublishedDate: string
+  headings: Heading[]
   translations?: {
     [key: string]: {
       title: string
       content: any
+      headings: Heading[]
     }
   }
 }
