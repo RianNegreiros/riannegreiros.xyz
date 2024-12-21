@@ -25,8 +25,14 @@ async function getData(slug: string) {
             ...,
             "blurImage": asset->metadata.lqip
           }
-        }
+        },
+            "headings": content[]{
+      _type == "block" && style match "h*" => @
+    }
       }
+    },
+    "headings": content[]{
+      _type == "block" && style match "h*" => @
     }
   }`
 
