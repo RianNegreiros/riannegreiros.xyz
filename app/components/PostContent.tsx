@@ -31,11 +31,11 @@ export default function PostContent({ slug, data }: PostContentProps) {
     currentLang === 'pt'
       ? data
       : {
-          ...data,
-          title: data.translations?.en.title || data.title,
-          content: data.translations?.en.content || data.content,
-          headings: data.translations?.en.headings || data.headings,
-        }
+        ...data,
+        title: data.translations?.en.title || data.title,
+        content: data.translations?.en.content || data.content,
+        headings: data.translations?.en.headings || data.headings,
+      }
 
   const handleLanguageToggle = (language: string) => {
     setCurrentLang(language)
@@ -136,7 +136,7 @@ export default function PostContent({ slug, data }: PostContentProps) {
         </div>
         <ShareMenu params={shareParams} />
       </main>
-      <aside className="w-1/4 fixed right-0 h-full overflow-y-auto p-4 invisible lg:visible">
+      <aside className="w-1/4 fixed right-0 overflow-y-auto p-4 invisible lg:visible">
         <TableOfContents
           headings={postContent.headings}
           currentLang={currentLang}
