@@ -15,6 +15,11 @@ export default function TableOfContents({
   const filteredData = headings.filter(
     (heading) => Object.keys(heading).length !== 0
   )
+
+  const itemHeight = 40
+  const maxHeight = 600
+  const calculatedHeight = Math.min(filteredData.length * itemHeight, maxHeight)
+
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
@@ -23,7 +28,10 @@ export default function TableOfContents({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[600px] w-full rounded-md border p-4">
+        <ScrollArea
+          style={{ height: `${calculatedHeight}px` }}
+          className="w-full rounded-md border p-4"
+        >
           <ol className="space-y-2">
             {filteredData?.map((heading) => (
               <li key={heading._key}>
