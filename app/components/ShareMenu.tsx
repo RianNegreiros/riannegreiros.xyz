@@ -67,7 +67,7 @@ export default function ShareMenu(props: { params: tParams }) {
   const { slug, title, body } = props.params
 
   return (
-    <div className="fixed end-4 bottom-4 group hidden md:block">
+    <div className="fixed end-4 bottom-4 group hidden md:block z-10">
       <div
         className={`hidden flex-col items-center group-hover:flex group-hover:visible mb-4 ${buttonDivClass}`}
       >
