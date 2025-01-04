@@ -14,8 +14,7 @@ async function getData(pageNum: number = 0, postsPerPage: number = 10) {
     slug,
     firstPublishedDate
   }`
-  const data = await client.fetch(query, {}, { next: { revalidate: 30 } })
-  return data
+  return await client.fetch(query, {}, { next: { revalidate: 30 } })
 }
 
 export default async function PostsPage({

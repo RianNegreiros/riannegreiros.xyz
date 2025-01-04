@@ -83,5 +83,28 @@ export const RESUME_DATA = {
         href: '',
       },
     },
+    {
+      title: 'Gerador de vídeos de curtos com IA',
+      techStack: [
+        'ASP.NET Core 9',
+        'Next.js 15',
+        'Typescript',
+        'TailwindCSS',
+        'PostgreSQL',
+        'Google Cloud Text-to-Speech',
+        'Gemini API',
+        'Cloudflare Workers AI',
+        'Remotion',
+        'AssemblyAI',
+        'AWS Lambda',
+        'AWS S3',
+      ],
+      description:
+        'Full Stack ASP.NET Core e Next.js para criar vídeos curtos gerados por IA com legendas.',
+      link: {
+        label: 'https://github.com/RianNegreiros/AiShortsVideosGenerator',
+        href: '',
+      },
+    },
   ],
 } as const

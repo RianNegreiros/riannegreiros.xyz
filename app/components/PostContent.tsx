@@ -31,11 +31,11 @@ export default function PostContent({ slug, data }: PostContentProps) {
     currentLang === 'pt'
       ? data
       : {
-        ...data,
-        title: data.translations?.en.title || data.title,
-        content: data.translations?.en.content || data.content,
-        headings: data.translations?.en.headings || data.headings,
-      }
+          ...data,
+          title: data.translations?.en.title || data.title,
+          content: data.translations?.en.content || data.content,
+          headings: data.translations?.en.headings || data.headings,
+        }
 
   const handleLanguageToggle = (language: string) => {
     setCurrentLang(language)
