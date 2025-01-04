@@ -16,11 +16,12 @@ This is the personal website and blog of Rian Negreiros, built with Next.js, Typ
 
 ## Project Overview
 
-riannegreiros.xyz is a personal website that includes a blog, project portfolio, and resume. It is designed to be a central hub for Rian's professional presence online.
+`riannegreiros.xyz ` is a personal website that includes a blog, project portfolio, and resume. It is designed to be a central hub for Rian's professional presence online.
 
 ## Features
 
-- Personal Blog: [Home Page](https://www.riannegreiros.xyz/posts) - Share insights and experiences through blog posts.
+- Timeline: [Home Page](https://www.riannegreiros.xyz/posts) - Unify posts and projects in a timeline.
+- Personal Blog: [Posts Page](https://www.riannegreiros.xyz/posts) - Share insights and experiences through blog posts.
 - Project Showcase: [Projects Page](https://www.riannegreiros.xyz/projects) - Display various projects with detailed descriptions and links.
 - Professional Resume: [Resume Page](https://www.riannegreiros.xyz/resume) - Provide a professional resume with contact information and skills
 - RSS Feed: [RSS Feed](https://www.riannegreiros.xyz/api/rss) - Allow users to subscribe to updates from the blog.
