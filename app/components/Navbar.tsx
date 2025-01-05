@@ -12,44 +12,46 @@ import { usePathname } from 'next/navigation'
 import { ModeToggle } from './ModeToggle'
 import { MobileMenu } from './MobileMenu'
 import { navigationItems } from '@/data/navigation-items'
+import SearchInput from '@/app/components/SearchInput'
 
 export function Navbar() {
   const pathname = usePathname()
   return (
-    <nav className="max-w-7xl mx-auto px-4 md:px-8 py-5 grid grid-cols-12 print:hidden">
-      <div className="col-span-6 flex md:col-span-3">
-        <Link href="/">
-          <h1 className="text-3xl font-semibold">
-            Rian <span className="text-blue-500">Negreiros</span>
-          </h1>
-        </Link>
-      </div>
-
-      <div className="hidden sm:flex justify-center items-center col-span-6">
-        <NavigationMenu>
-          <NavigationMenuList>
-            {navigationItems.map((item, index) => (
-              <NavigationMenuItem key={index}>
-                <Link href={item.href} legacyBehavior passHref>
-                  <NavigationMenuLink
-                    active={pathname === item.href}
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    {item.name}
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            ))}
-          </NavigationMenuList>
-        </NavigationMenu>
-      </div>
-
-      <div className="flex items-center justify-between md:col-span-3 col-span-6">
-        <div className="flex justify-center">
-          <ModeToggle />
-        </div>
-        <div className="flex justify-end sm:hidden">
-          <MobileMenu />
+    <nav className="bg-background shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="flex-shrink-0">
+            <h1 className="text-3xl font-semibold">
+              Rian <span className="text-blue-500">Negreiros</span>
+            </h1>
+          </Link>
+          <div className="hidden md:flex flex-1 justify-center items-center">
+            <NavigationMenu>
+              <NavigationMenuList>
+                {navigationItems.map((item, index) => (
+                  <NavigationMenuItem key={index}>
+                    <Link href={item.href} legacyBehavior passHref>
+                      <NavigationMenuLink
+                        active={pathname === item.href}
+                        className={navigationMenuTriggerStyle()}
+                      >
+                        {item.name}
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+          <div className="flex items-center">
+            <SearchInput />
+            <div className="ml-4 flex items-center md:ml-6">
+              <ModeToggle />
+            </div>
+            <div className="flex justify-end sm:hidden ml-4">
+              <MobileMenu />
+            </div>
+          </div>
         </div>
       </div>
     </nav>
