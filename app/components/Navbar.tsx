@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation'
 import { ModeToggle } from './ModeToggle'
 import { MobileMenu } from './MobileMenu'
 import { navigationItems } from '@/data/navigation-items'
-import SearchInput from '@/app/components/SearchInput'
+import SearchInput from '@/app/components/SearchBar'
 
 export function Navbar() {
   const pathname = usePathname()

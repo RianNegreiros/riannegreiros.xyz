@@ -4,10 +4,11 @@ import { Input } from '@/components/ui/Input'
 import React, { useEffect, useRef, useState } from 'react'
 import { client } from '@/app/lib/sanity'
 import { post } from '@/app/lib/interface'
-import { File } from 'lucide-react'
+import { File, Search } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
@@ -76,13 +77,24 @@ export default function SearchInput() {
           Procurar por blog posts...
         </span>
         <span className="inline-flex lg:hidden">Procurar...</span>
-        <kbd className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none w-10 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+        <kbd className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none w-10 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium opacity-100 sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
 
+      <Button variant="outline" size="icon"
+        onClick={() => setIsSearchOpen(true)}
+        className='flex md:hidden ml-2 items-center justify-center'
+        aria-label="Open search"
+      >
+        <Search className="h-4 w-4" />
+      </Button>
+
       <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
         <DialogContent className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto p-4 sm:p-6">
+          <DialogDescription className='sr-only'>
+            Procurar por Blog Posts
+          </DialogDescription>
           <DialogHeader>
             <DialogTitle>Procurar por Blog Posts</DialogTitle>
           </DialogHeader>
