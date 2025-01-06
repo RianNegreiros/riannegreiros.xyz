@@ -35,7 +35,7 @@ export default function TimelineItem({
       }}
       viewport={{ amount: 0 }}
     >
-      <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+      <span className="absolute flex items-center justify-center w-5 h-5 bg-blue-100 rounded-full -start-3 ring-4 ring-white dark:ring-gray-900 dark:bg-blue-900">
         {_type === 'post' ? (
           <Pencil className="w-2.5 h-2.5 text-blue-800 dark:text-blue-400" />
         ) : (
@@ -62,10 +62,10 @@ export default function TimelineItem({
       <time className="block mb-2 text-sm font-normal leading-none text-primary">
         {displayDate
           ? new Date(displayDate).toLocaleDateString('pt-BR', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-            })
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          })
           : 'No date available'}
       </time>
       <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
