@@ -82,9 +82,11 @@ export default function SearchInput() {
         </kbd>
       </Button>
 
-      <Button variant="outline" size="icon"
+      <Button
+        variant="outline"
+        size="icon"
         onClick={() => setIsSearchOpen(true)}
-        className='flex md:hidden ml-2 items-center justify-center'
+        className="flex md:hidden ml-2 items-center justify-center"
         aria-label="Open search"
       >
         <Search className="h-4 w-4" />
@@ -92,7 +94,7 @@ export default function SearchInput() {
 
       <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
         <DialogContent className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto p-4 sm:p-6">
-          <DialogDescription className='sr-only'>
+          <DialogDescription className="sr-only">
             Procurar por Blog Posts
           </DialogDescription>
           <DialogHeader>

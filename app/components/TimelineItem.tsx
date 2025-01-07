@@ -62,10 +62,10 @@ export default function TimelineItem({
       <time className="block mb-2 text-sm font-normal leading-none text-primary">
         {displayDate
           ? new Date(displayDate).toLocaleDateString('pt-BR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-          })
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })
           : 'No date available'}
       </time>
       <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">

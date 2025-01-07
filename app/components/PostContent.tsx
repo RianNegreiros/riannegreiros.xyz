@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { PortableText } from '@portabletext/react'
 import { urlFor } from '../lib/sanity'
 import Image from 'next/image'
@@ -11,8 +10,7 @@ import {
   atomOneLight,
 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { post } from '../lib/interface'
-import LanguageToggle from './LanguageToggle'
-import ShareMenu from './ShareMenu'
+import ShareButton from './ShareButton'
 import { CopyButton } from './CopyButton'
 import TableOfContents from './TableOfContents'
 import { slugify } from '../lib/helpers'
@@ -23,30 +21,12 @@ interface PostContentProps {
 }
 
 export default function PostContent({ slug, data }: PostContentProps) {
-  const [currentLang, setCurrentLang] = useState<string>('pt')
   const { resolvedTheme } = useTheme()
-
-  const postContent =
-    currentLang === 'pt'
-      ? data
-      : {
-          ...data,
-          title: data.translations?.en.title || data.title,
-          content: data.translations?.en.content || data.content,
-          headings: data.translations?.en.headings || data.headings,
-        }
-
-  const handleLanguageToggle = (language: string) => {
-    setCurrentLang(language)
-  }
 
   const shareParams = {
     slug,
-    body:
-      currentLang === 'en'
-        ? `Check out this article: ${postContent.title}. Read more at:`
-        : `Confira este artigo: ${postContent.title}. Leia mais em:`,
-    title: postContent.title,
+    body: `Confira este artigo: ${data.title}. Leia mais em:`,
+    title: data.title,
   }
 
   const PortableTextComponent = {
@@ -95,52 +75,44 @@ export default function PostContent({ slug, data }: PostContentProps) {
     },
   }
 
-  return (
-    <div className="flex">
-      <main className="mr-1/4 p-8 flex flex-col items-center max-w-full overflow-hidden">
-        <h1 className="text-center">
-          <span className="font-bold">
-            {currentLang === 'en' ? 'Published' : 'Publicado'}
-          </span>{' '}
-          <span className="mr-4 text-base font-semibold tracking-wide text-gray-500 dark:text-gray-400">
-            {new Date(postContent.firstPublishedDate).toLocaleString(
-              currentLang === 'en' ? 'en-US' : 'pt-BR',
-              {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: false,
-                timeZoneName: 'short',
-              }
-            )}
-          </span>
-          {data.translations && Object.keys(data.translations).length > 0 && (
-            <LanguageToggle
-              language={currentLang}
-              onToggle={handleLanguageToggle}
-            />
-          )}
-          <span className="mt-2 block text-3xl leading-8 font-bold tracking-tight sm:text-4xl">
-            {postContent.title}
-          </span>
-        </h1>
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString)
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }
 
-        <div className="mt-4 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary max-w-full overflow-x-auto">
-          <PortableText
-            value={postContent.content}
-            components={PortableTextComponent}
-          />
+    return `Publicado ${date.toLocaleDateString('pt-BR', options)}`
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <article className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
+        <p className="text-muted-foreground mb-8">
+          {formatDate(data.firstPublishedDate)}
+        </p>
+
+        <div className="lg:grid lg:grid-cols-[1fr_250px] lg:gap-8">
+          <div className="prose prose-lg dark:prose-invert">
+            <PortableText
+              value={data.content}
+              components={PortableTextComponent}
+            />
+          </div>
+          <aside className="mt-8 lg:mt-0">
+            <div className="sticky top-4">
+              <TableOfContents
+                className="hidden lg:block"
+                headings={data.headings}
+              />
+            </div>
+          </aside>
         </div>
-        <ShareMenu params={shareParams} />
-      </main>
-      <aside className="w-1/4 fixed right-0 overflow-y-auto p-4 invisible lg:visible">
-        <TableOfContents
-          headings={postContent.headings}
-          currentLang={currentLang}
-        />
-      </aside>
+      </article>
+
+      <ShareButton params={shareParams} />
     </div>
   )
 }

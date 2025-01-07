@@ -32,7 +32,7 @@ export default async function PostsPage({
   const maxPage = Math.ceil(postsNum / postsPerPage)
 
   return (
-    <div className="mt-5">
+    <div className="max-w-4xl mx-auto mt-5">
       <ul>
         {data.map((post) => (
           <li key={post._id} className="py-4">

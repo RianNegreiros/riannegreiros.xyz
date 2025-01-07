@@ -42,9 +42,6 @@ async function getData(slug: string) {
 export async function generateMetadata(props: { params: tParams }) {
   const { slug } = await props.params
   const data: post = await getData(slug)
-  if (!data) {
-    return
-  }
 
   return {
     title: data.title,

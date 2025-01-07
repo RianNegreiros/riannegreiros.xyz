@@ -27,7 +27,7 @@ export default function ProjectCard({ data }: ProjectCardModal) {
 
   return (
     <section>
-      <div className="py-12 grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
+      <div className="mt-5 max-w-4xl mx-auto grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
         {data.map((item) => (
           <div key={item._id} className="group block">
             <div className="relative aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl">

@@ -1,51 +1,37 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { Heading } from '../lib/interface'
 import { slugify } from '../lib/helpers'
+import { cn } from '@/lib/utils'
 
 interface TableOfContentsProps {
   headings: Heading[]
-  currentLang: string
+  className?: string
 }
 
 export default function TableOfContents({
   headings,
-  currentLang,
+  className,
 }: TableOfContentsProps) {
   const filteredData = headings.filter(
     (heading) => Object.keys(heading).length !== 0
   )
-
-  const itemHeight = 40
-  const maxHeight = 600
-  const calculatedHeight = Math.min(filteredData.length * itemHeight, maxHeight)
-
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle>
-          {currentLang === 'en' ? 'Table of Contents' : 'Tabela de Conteúdos'}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ScrollArea
-          style={{ height: `${calculatedHeight}px` }}
-          className="w-full rounded-md border p-4"
-        >
-          <ol className="space-y-2">
-            {filteredData?.map((heading) => (
-              <li key={heading._key}>
-                <a
-                  href={`#${slugify(heading.children[0].text)}`}
-                  className="text-blue-600 hover:underline"
-                >
-                  {heading.children[0].text}
-                </a>
-              </li>
-            ))}
-          </ol>
-        </ScrollArea>
-      </CardContent>
-    </Card>
+    <nav className={cn('space-y-2', className)}>
+      <h4 className="font-semibold">Tabela de Conteúdos</h4>
+      <ul className="space-y-2 text-sm">
+        {filteredData.map((heading) => (
+          <li
+            key={heading._key}
+            className={cn('', { 'ml-4': heading.style === 'h3' })}
+          >
+            <a
+              href={`#${slugify(heading.children[0].text)}`}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {heading.children[0].text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   )
 }
