@@ -24,27 +24,27 @@ type tParams = {
 }
 
 export default function ShareButton(props: { params: tParams }) {
-  const baseUrl = process.env.BASE_URL
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
   const { slug, title, body } = props.params
 
   const shareOptions = [
     {
       name: 'LinkedIn',
       Component: LinkedinShareButton,
-      url: `${baseUrl}/post/${slug}`,
+      url: `${baseUrl}/posts/${slug}`,
       ariaLabel: 'Compartilhar no LinkedIn',
     },
     {
       name: 'Twitter',
       Component: TwitterShareButton,
-      url: `${baseUrl}/post/${slug}`,
+      url: `${baseUrl}/posts/${slug}`,
       title: title,
       ariaLabel: 'Compartilhar no Twitter',
     },
     {
       name: 'Email',
       Component: EmailShareButton,
-      url: `${baseUrl}/post/${slug}`,
+      url: `${baseUrl}/posts/${slug}`,
       title: title,
       body: body,
       ariaLabel: 'Compartilhar por Email',
@@ -52,7 +52,7 @@ export default function ShareButton(props: { params: tParams }) {
     {
       name: 'WhatsApp',
       Component: WhatsappShareButton,
-      url: `${baseUrl}/post/${slug}`,
+      url: `${baseUrl}/posts/${slug}`,
       title: title,
       separator: ':: ',
       ariaLabel: 'Compartilhar no WhatsApp',
@@ -60,14 +60,14 @@ export default function ShareButton(props: { params: tParams }) {
     {
       name: 'Telegram',
       Component: TelegramShareButton,
-      url: `${baseUrl}/post/${slug}`,
+      url: `${baseUrl}/posts/${slug}`,
       title: title,
       ariaLabel: 'Compartilhar no Telegram',
     },
     {
       name: 'Facebook',
       Component: FacebookShareButton,
-      url: `${baseUrl}/post/${slug}`,
+      url: `${baseUrl}/posts/${slug}`,
       title: title,
       ariaLabel: 'Compartilhar no Facebook',
     },

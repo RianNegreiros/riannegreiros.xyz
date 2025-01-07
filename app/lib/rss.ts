@@ -20,8 +20,8 @@ export async function generateRssFeed() {
   const feed = new RSS({
     title: 'Rian N. Dos Santos Blog',
     description: 'Rian Negreiros Dos Santos blog e portfólio',
-    feed_url: `${process.env.BASE_URL}/api/rss`,
-    site_url: `${process.env.BASE_URL}`,
+    feed_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/rss`,
+    site_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
     language: 'pt-BR',
   })
 
@@ -35,7 +35,7 @@ export async function generateRssFeed() {
       guid: post._id,
       title: post.title,
       description: contentHTML,
-      url: `${process.env.BASE_URL}/posts/${post.slug.current}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/posts/${post.slug.current}`,
       date: post.firstPublishedDate,
     })
   })

@@ -51,7 +51,7 @@ export async function generateMetadata(props: { params: tParams }) {
       description: data.overview,
       type: 'article',
       locale: 'pt_BR',
-      url: `${process.env.BASE_URL}/post/${slug}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/post/${slug}`,
       siteName: 'riannegreiros.xyz',
     },
   }

@@ -20,7 +20,7 @@ This is the personal website and blog of Rian Negreiros, built with Next.js, Typ
 
 ## Features
 
-- Timeline: [Home Page](https://www.riannegreiros.xyz/posts) - Unify posts and projects in a timeline.
+- Timeline: [Home Page](https://www.riannegreiros.xyz) - Unify posts and projects in a timeline.
 - Personal Blog: [Posts Page](https://www.riannegreiros.xyz/posts) - Share insights and experiences through blog posts.
 - Project Showcase: [Projects Page](https://www.riannegreiros.xyz/projects) - Display various projects with detailed descriptions and links.
 - Professional Resume: [Resume Page](https://www.riannegreiros.xyz/resume) - Provide a professional resume with contact information and skills
