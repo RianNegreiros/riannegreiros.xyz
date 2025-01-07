@@ -11,6 +11,7 @@ import {
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import { X } from 'lucide-react'
 import Image from 'next/image'
+import { urlFor } from '../lib/sanity'
 
 interface ModalProps {
   selected: ProjectsCard | null
@@ -39,7 +40,7 @@ export default function Modal({ selected, setSelected }: ModalProps) {
         >
           <DialogTitle className="sr-only">{selected.title}</DialogTitle>
           <Image
-            src={selected.imageUrl}
+            src={urlFor(selected.image).url()}
             alt={`Projeto entitulado ${selected.title} apresentando ${selected.description}`}
             width={800}
             height={400}

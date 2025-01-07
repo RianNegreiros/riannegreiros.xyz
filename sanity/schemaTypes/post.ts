@@ -27,6 +27,11 @@ export default {
       title: 'First Published Date',
     },
     {
+      name: 'image',
+      type: 'image',
+      title: 'Image'
+    },
+    {
       name: 'content',
       type: 'array',
       title: 'Content',

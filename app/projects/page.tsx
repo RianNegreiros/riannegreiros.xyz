@@ -10,13 +10,11 @@ async function getData() {
           link,
           description,
           tags,
-          "imageUrl": image.asset->url,
+          image,
           "blurImage": image.asset->metadata.lqip
     }`
 
-  const data = await client.fetch(query, {}, { next: { revalidate: 30 } })
-
-  return data
+  return await client.fetch(query, {}, { next: { revalidate: 30 } })
 }
 
 export const metadata: Metadata = {

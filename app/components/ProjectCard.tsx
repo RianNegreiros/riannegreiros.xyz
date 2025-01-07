@@ -4,6 +4,7 @@ import { ProjectsCard } from '../lib/interface'
 import { useEffect, useState } from 'react'
 import Modal from './Modal'
 import Image from 'next/image'
+import { urlFor } from '../lib/sanity'
 
 interface ProjectCardModal {
   data: ProjectsCard[]
@@ -32,7 +33,7 @@ export default function ProjectCard({ data }: ProjectCardModal) {
           <div key={item._id} className="group block">
             <div className="relative aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl">
               <Image
-                src={item.imageUrl}
+                src={urlFor(item.image).url()}
                 alt={`Projeto entitulado ${item.title} apresentando ${item.description}`}
                 fill
                 priority

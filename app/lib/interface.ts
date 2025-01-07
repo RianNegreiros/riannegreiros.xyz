@@ -1,10 +1,3 @@
-export interface simplePostCard {
-  title: string
-  smallDescription: string
-  currentSlug: string
-  titleImage: string
-}
-
 interface Span {
   _type: string
   marks: string[]
@@ -31,19 +24,14 @@ export interface post {
   _createdAt: string
   firstPublishedDate: string
   headings: Heading[]
-  translations?: {
-    [key: string]: {
-      title: string
-      content: any
-      headings: Heading[]
-    }
-  }
+  image: string
+  blurImage: string
 }
 
 export interface ProjectsCard {
   title: string
   _id: string
-  imageUrl: string
+  image: string
   blurImage: string
   tags: string[]
   description: string

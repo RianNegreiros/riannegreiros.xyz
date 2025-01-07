@@ -94,6 +94,17 @@ export default function PostContent({ slug, data }: PostContentProps) {
           {formatDate(data.firstPublishedDate)}
         </p>
 
+        {data.image && (
+          <Image
+            src={urlFor(data.image).url()}
+            alt="Blog post cover image"
+            priority
+            width={800}
+            height={400}
+            className="rounded-lg mb-8"
+          />
+        )}
+
         <div className="lg:grid lg:grid-cols-[1fr_250px] lg:gap-8">
           <div className="prose prose-lg dark:prose-invert">
             <PortableText

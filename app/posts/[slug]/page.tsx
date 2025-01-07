@@ -9,26 +9,13 @@ async function getData(slug: string) {
   const query = `*[_type == 'post' && slug.current == '${slug}'][0]{
     title,
     firstPublishedDate,
+    image,
+    "blurImage": asset->metadata.lqip,
     content[]{
       ...,
       _type == 'image' => {
         ...,
         "blurImage": asset->metadata.lqip
-      }
-    },
-    translations {
-      en {
-        title,
-        content[]{
-          ...,
-          _type == 'image' => {
-            ...,
-            "blurImage": asset->metadata.lqip
-          }
-        },
-            "headings": content[]{
-      _type == "block" && style match "h*" => @
-    }
       }
     },
     "headings": content[]{
