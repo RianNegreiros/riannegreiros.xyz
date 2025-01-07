@@ -10,6 +10,7 @@ async function getData(slug: string) {
     title,
     firstPublishedDate,
     image,
+    "blurImage": image.asset->metadata.lqip,
     content[]{
       ...,
       _type == 'image' => {

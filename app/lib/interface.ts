@@ -25,6 +25,7 @@ export interface post {
   firstPublishedDate: string
   headings: Heading[]
   image: any
+  blurImage: string
 }
 
 export interface ProjectsCard {

@@ -102,6 +102,8 @@ export default function PostContent({ slug, data }: PostContentProps) {
             width={800}
             height={400}
             className="rounded-lg mb-8"
+            placeholder="blur"
+            blurDataURL={data.blurImage}
           />
         )}
 
