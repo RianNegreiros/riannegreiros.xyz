@@ -32,7 +32,10 @@ export default function Footer() {
         <div className="px-4 py-6 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
             © {new Date().getFullYear()}{' '}
-            <Link className="hover:underline" href={`${process.env.NEXT_PUBLIC_BASE_URL}`}>
+            <Link
+              className="hover:underline"
+              href={`${process.env.NEXT_PUBLIC_BASE_URL}`}
+            >
               riannegreiros.xyz
             </Link>
             . Todos os direitos reservados.

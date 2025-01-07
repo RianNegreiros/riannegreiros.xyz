@@ -97,7 +97,7 @@ export default function PostContent({ slug, data }: PostContentProps) {
         {data.image && (
           <Image
             src={urlFor(data.image).url()}
-            alt="Blog post cover image"
+            alt={data.image.alt ? data.image.alt : 'Blog post cover image'}
             priority
             width={800}
             height={400}

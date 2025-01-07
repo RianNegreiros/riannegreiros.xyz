@@ -10,7 +10,6 @@ async function getData(slug: string) {
     title,
     firstPublishedDate,
     image,
-    "blurImage": asset->metadata.lqip,
     content[]{
       ...,
       _type == 'image' => {
@@ -38,7 +37,7 @@ export async function generateMetadata(props: { params: tParams }) {
       description: data.overview,
       type: 'article',
       locale: 'pt_BR',
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/post/${slug}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/posts/${slug}`,
       siteName: 'riannegreiros.xyz',
     },
   }
