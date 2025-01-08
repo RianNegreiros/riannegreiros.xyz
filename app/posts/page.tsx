@@ -17,6 +17,15 @@ async function getData(pageNum: number = 0, postsPerPage: number = 10) {
   return await client.fetch(query, {}, { next: { revalidate: 30 } })
 }
 
+function formatDate(dateString: string): string {
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }
+  return new Date(dateString).toLocaleDateString('pt-BR', options)
+}
+
 export default async function PostsPage({
   searchParams,
 }: {
@@ -33,39 +42,28 @@ export default async function PostsPage({
 
   return (
     <div className="max-w-4xl mx-auto mt-5">
-      <ul>
+      <ul className="space-y-4">
         {data.map((post) => (
-          <li key={post._id} className="py-4">
-            <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-              <div>
-                <p className="text-base font-medium leading-6 text-primary">
-                  {new Date(post.firstPublishedDate).toLocaleDateString(
-                    'pt-BR',
-                    {
-                      day: '2-digit',
-                      month: '2-digit',
-                      year: 'numeric',
-                    }
-                  )}
-                </p>
-              </div>
-
-              <Link
-                href={`/posts/${post.slug.current}`}
-                prefetch
-                className="space-y-3 xl:col-span-3"
+          <li key={post._id} className="pb-6">
+            <header className="mb-2">
+              <time
+                dateTime={post.firstPublishedDate}
+                className="text-sm text-gray-500"
               >
-                <div>
-                  <h2 className="text-2xl font-bold leading-8 tracking-tight text-gray-900 dark:text-gray-100">
-                    {post.title}
-                  </h2>
-                </div>
-
-                <p className="prose max-w-none text-gray-500 dark:text-gray-400 line-clamp-2">
-                  {post.overview}
-                </p>
-              </Link>
-            </article>
+                {formatDate(post.firstPublishedDate)}
+              </time>
+              <h2 className="text-xl font-semibold mt-1">
+                <Link
+                  href={`/posts/${post.slug.current}`}
+                  className="text-2xl font-bold leading-8 tracking-tight text-gray-900 dark:text-gray-100"
+                >
+                  {post.title}
+                </Link>
+              </h2>
+            </header>
+            <p className="prose max-w-none text-gray-500 dark:text-gray-400 line-clamp-2">
+              {post.overview}
+            </p>
           </li>
         ))}
       </ul>
