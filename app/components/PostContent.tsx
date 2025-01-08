@@ -13,7 +13,7 @@ import { post } from '../lib/interface'
 import ShareButton from './ShareButton'
 import { CopyButton } from './CopyButton'
 import TableOfContents from './TableOfContents'
-import { slugify } from '../lib/helpers'
+import { formatDate, slugify } from '../lib/helpers'
 
 interface PostContentProps {
   slug: string
@@ -75,23 +75,12 @@ export default function PostContent({ slug, data }: PostContentProps) {
     },
   }
 
-  function formatDate(dateString: string): string {
-    const date = new Date(dateString)
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }
-
-    return `Publicado ${date.toLocaleDateString('pt-BR', options)}`
-  }
-
   return (
     <div className="container mx-auto px-4 py-8">
       <article className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
         <p className="text-muted-foreground mb-8">
-          {formatDate(data.firstPublishedDate)}
+          Publicado {formatDate(data.firstPublishedDate)}
         </p>
 
         {data.image && (

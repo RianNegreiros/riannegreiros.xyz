@@ -3,6 +3,7 @@ import { post } from '../lib/interface'
 import { client } from '../lib/sanity'
 import PaginationNav from '../components/PaginationNav'
 import { getTotalPosts } from '../action'
+import { formatDate } from '../lib/helpers'
 
 async function getData(pageNum: number = 0, postsPerPage: number = 10) {
   const start = pageNum * postsPerPage
@@ -15,15 +16,6 @@ async function getData(pageNum: number = 0, postsPerPage: number = 10) {
     firstPublishedDate
   }`
   return await client.fetch(query, {}, { next: { revalidate: 30 } })
-}
-
-function formatDate(dateString: string): string {
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }
-  return new Date(dateString).toLocaleDateString('pt-BR', options)
 }
 
 export default async function PostsPage({
