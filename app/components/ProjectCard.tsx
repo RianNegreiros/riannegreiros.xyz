@@ -1,10 +1,10 @@
 'use client'
 
 import { ProjectsCard } from '../lib/interface'
-import { useEffect, useState } from 'react'
-import Modal from './Modal'
+import { useState } from 'react'
 import Image from 'next/image'
 import { urlFor } from '../lib/sanity'
+import { ProjectDialog } from '@/app/components/ProjectDialog'
 
 interface ProjectCardModal {
   data: ProjectsCard[]
@@ -13,18 +13,13 @@ interface ProjectCardModal {
 export default function ProjectCard({ data }: ProjectCardModal) {
   const [selected, setSelected] = useState<ProjectsCard | null>(null)
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setSelected(null)
-      }
-    }
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-    window.addEventListener('keydown', handleKeyDown)
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [setSelected])
+  const openModal = (project: ProjectsCard) => {
+    setSelected(project)
+    setIsModalOpen(true)
+  }
+  const closeModal = () => setIsModalOpen(false)
 
   return (
     <section>
@@ -41,9 +36,7 @@ export default function ProjectCard({ data }: ProjectCardModal) {
                 placeholder="blur"
                 blurDataURL={item.blurImage}
                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl cursor-zoom-in"
-                onClick={() => {
-                  setSelected(item)
-                }}
+                onClick={() => openModal(item)}
               />
             </div>
             <div className="mt-4">
@@ -69,7 +62,13 @@ export default function ProjectCard({ data }: ProjectCardModal) {
           </div>
         ))}
       </div>
-      {selected && <Modal selected={selected} setSelected={setSelected} />}
+      {selected && (
+        <ProjectDialog
+          project={selected}
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        />
+      )}
     </section>
   )
 }
