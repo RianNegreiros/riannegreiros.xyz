@@ -10,7 +10,7 @@ async function getData() {
           link,
           description,
           tags,
-          image,
+           "imageUrl": image.asset->url,
           "blurImage": image.asset->metadata.lqip
     }`
 

@@ -31,7 +31,7 @@ export interface post {
 export interface ProjectsCard {
   title: string
   _id: string
-  image: string
+  imageUrl: string
   blurImage: string
   tags: string[]
   description: string

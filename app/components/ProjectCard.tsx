@@ -28,7 +28,7 @@ export default function ProjectCard({ data }: ProjectCardModal) {
           <div key={item._id} className="group block">
             <div className="relative aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl">
               <Image
-                src={urlFor(item.image).url()}
+                src={item.imageUrl}
                 alt={`Projeto entitulado ${item.title} apresentando ${item.description}`}
                 fill
                 priority
