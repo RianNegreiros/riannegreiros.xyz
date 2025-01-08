@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { Github } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -26,7 +25,7 @@ export function ProjectDialog({
   if (!project) return null
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl">{project.title}</DialogTitle>
         </DialogHeader>
@@ -35,11 +34,12 @@ export function ProjectDialog({
         </DialogDescription>
         <div className="mt-4">
           <Image
-            src={urlFor(project.image).url()}
+            src={project.imageUrl}
             alt={project.title}
             className="rounded-md object-cover w-full"
-            width={560}
-            height={315}
+            priority
+            width={800}
+            height={400}
           />
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -52,7 +52,13 @@ export function ProjectDialog({
         <div className="mt-4">
           <Button asChild className="w-full">
             <a href={project.link} target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2 h-4 w-4" />
+              <Image
+                alt="Github logo"
+                className="mr-2 h-4 w-4"
+                height="4"
+                width="4"
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/github.svg"
+              />
               Abrir no GitHub
             </a>
           </Button>
