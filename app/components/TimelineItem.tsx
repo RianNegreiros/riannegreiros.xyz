@@ -1,7 +1,7 @@
 import { Pencil, Briefcase } from 'lucide-react'
 import Link from 'next/link'
-import { TimelineItemProps } from '../lib/interface'
 import { MotionLi } from './MotionLi'
+import { PortfolioItem } from '../lib/interface'
 
 const variants = {
   hidden: { opacity: 0 },
@@ -18,7 +18,7 @@ export default function TimelineItem({
   link,
   firstPublishedDate,
   index,
-}: TimelineItemProps) {
+}: PortfolioItem) {
   const displayDate = firstPublishedDate
 
   return (

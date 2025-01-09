@@ -38,7 +38,7 @@ export interface ProjectsCard {
   link: string
 }
 
-export interface TimelineItemProps {
+export interface PortfolioItem {
   _id: string
   _type: 'post' | 'project'
   title: string
