@@ -41,10 +41,11 @@ export default function SearchInput() {
         <Search className="h-4 w-4 hidden xl:mr-2 xl:flex" />
         <span className="inline-flex">Procurar...</span>
         <span className="sr-only">Procurar</span>
-        <kbd className="pointer-events-none absolute right-1.5 hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 xl:flex">
-          <span className="text-xs">⌘</span>K
+        <kbd className="pointer-events-none absolute right-1.5 hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[15px] font-medium opacity-100 xl:flex">
+          <span className="text-[20px]">⌘</span>K
         </kbd>
       </Button>
+
 
       <Button
         variant="outline"
