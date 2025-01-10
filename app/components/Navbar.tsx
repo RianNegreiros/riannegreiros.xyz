@@ -12,7 +12,6 @@ import { usePathname } from 'next/navigation'
 import { ModeToggle } from './ModeToggle'
 import { MobileMenu } from './MobileMenu'
 import { navigationItems } from '@/data/navigation-items'
-import SearchInput from '@/app/components/SearchBar'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -44,7 +43,6 @@ export function Navbar() {
             </NavigationMenu>
           </div>
           <div className="flex items-center">
-            <SearchInput />
             <div className="ml-4 flex items-center md:ml-6">
               <ModeToggle />
             </div>
