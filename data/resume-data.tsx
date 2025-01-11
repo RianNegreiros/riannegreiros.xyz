@@ -44,7 +44,7 @@ export const RESUME_DATA = {
     'DevOps(CI/CD)',
     'Azure',
     'AWS',
-    'XP/Scrum',
+    'GCP'
   ],
   projects: [
     {
@@ -52,7 +52,7 @@ export const RESUME_DATA = {
       techStack: ['Next.js', 'Sanity.io', 'Typescript', 'TailwindCSS'],
       description: 'Site e blog pessoal. Criado com Next.js e Sanity.io',
       link: {
-        label: 'github.com/RianNegreiros/riannegreiros.xyz',
+        label: 'https://github.com/RianNegreiros/riannegreiros.xyz',
         href: 'https://riannegreiros.xyz',
       },
     },
@@ -77,7 +77,7 @@ export const RESUME_DATA = {
       title: 'Chat Bot Application',
       techStack: ['ASP.NET Core', 'Next.js', 'Typescript', 'TailwindCSS'],
       description:
-        'Este é um aplicativo full stack criado com ASP.NET Core 8 e Next.js com TypeScript e TailwindCSS. O aplicativo é um bot de bate-papo alimentado pelo PaLM 2',
+        'Aplicação Full Stack de um bot de bate-papo alimentado pelo Google Gemini',
       link: {
         label: 'https://github.com/RianNegreiros/DotNetChatBot',
         href: '',
@@ -98,7 +98,7 @@ export const RESUME_DATA = {
         'AWS S3',
       ],
       description:
-        'Full Stack ASP.NET Core e Next.js para criar vídeos curtos gerados por IA com legendas.',
+        'Aplicação Full Stack para criar vídeos curtos gerados por IA com legendas.',
       link: {
         label: 'https://github.com/RianNegreiros/AiShortsVideosGenerator',
         href: '',
