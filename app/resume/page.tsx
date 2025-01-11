@@ -20,7 +20,7 @@ export default function Page() {
       </div>
 
       <section
-        className="mx-auto w-full max-w-2xl space-y-8 print:space-y-4"
+        className="mx-auto w-full max-w-4xl space-y-8 print:space-y-4"
         aria-label="Resume Content"
       >
         <Header />
