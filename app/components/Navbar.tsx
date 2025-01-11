@@ -17,7 +17,10 @@ export function Navbar() {
   const pathname = usePathname()
 
   return (
-    <nav className="bg-background shadow-sm" aria-label="Main navigation">
+    <nav
+      className="bg-background shadow-sm print:hidden"
+      aria-label="Main navigation"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex-shrink-0 md:w-1/4">
