@@ -3,15 +3,7 @@
 import { Pencil, Briefcase, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { PortfolioItem } from '../lib/interface'
 import { formatDate } from '../lib/helpers'
 
@@ -48,7 +40,7 @@ export default function TimelineItem({
       viewport={{ amount: 0.2 }}
     >
       <motion.span
-        className="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-9 top-4 ring-8 ring-background"
+        className="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-9 top-0 ring-8 ring-background"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: index * 0.1 + 0.2, duration: 0.3 }}
@@ -65,37 +57,29 @@ export default function TimelineItem({
           />
         )}
       </motion.span>
-      <Card className="w-full">
-        <CardHeader>
-          <div className="flex justify-between items-start">
-            <div>
-              <CardTitle className="text-xl font-bold">{title}</CardTitle>
-              <CardDescription className="text-sm text-muted-foreground">
-                {formatDate(firstPublishedDate)}
-              </CardDescription>
-            </div>
-            <Badge variant={isPost ? 'default' : 'secondary'}>
-              {isPost ? 'Post' : 'Projeto'}
-            </Badge>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p className="mb-4 text-base text-card-foreground">
-            {isPost ? overview : description}
-          </p>
-          <Button asChild variant="outline">
-            <Link
-              href={isPost ? `/posts/${slug.current}` : link}
-              target={isPost ? '' : '_blank'}
-              rel={isPost ? '' : 'noopener noreferrer'}
-              className="inline-flex items-center"
-            >
-              {isPost ? 'Ler Mais' : 'Ver Projeto'}
-              <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" />
-            </Link>
-          </Button>
-        </CardContent>
-      </Card>
+      <Link
+        href={isPost ? `/posts/${slug.current}` : link}
+        target={isPost ? '' : '_blank'}
+        rel={isPost ? '' : 'noopener noreferrer'}
+        className="block p-4 bg-card hover:bg-accent rounded-lg transition-colors duration-200 ease-in-out"
+      >
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+          <Badge
+            variant={isPost ? 'default' : 'secondary'}
+            className="flex items-center"
+          >
+            {isPost ? 'Post' : 'Projeto'}
+            <ArrowUpRight className="ml-1 h-3 w-3" aria-hidden="true" />
+          </Badge>
+        </div>
+        <p className="text-sm text-muted-foreground mb-2">
+          {formatDate(firstPublishedDate)}
+        </p>
+        <p className="text-sm text-foreground line-clamp-2">
+          {isPost ? overview : description}
+        </p>
+      </Link>
     </motion.li>
   )
 }
