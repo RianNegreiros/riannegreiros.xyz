@@ -1,11 +1,23 @@
-import { Pencil, Briefcase } from 'lucide-react'
+'use client'
+
+import { Pencil, Briefcase, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
-import { MotionLi } from './MotionLi'
+import { motion } from 'framer-motion'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { PortfolioItem } from '../lib/interface'
+import { formatDate } from '../lib/helpers'
 
 const variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0 },
 }
 
 export default function TimelineItem({
@@ -19,58 +31,71 @@ export default function TimelineItem({
   firstPublishedDate,
   index,
 }: PortfolioItem) {
-  const displayDate = firstPublishedDate
+  const isPost = _type === 'post'
 
   return (
-    <MotionLi
+    <motion.li
       key={`${_type}-${_id}`}
-      className="mb-10 ms-6"
+      className="mb-8 ms-6 relative"
       variants={variants}
       initial="hidden"
       animate="visible"
       transition={{
-        delay: index * 0.25,
+        delay: index * 0.1,
         ease: 'easeInOut',
         duration: 0.5,
       }}
-      viewport={{ amount: 0 }}
+      viewport={{ amount: 0.2 }}
     >
-      <span className="absolute flex items-center justify-center w-5 h-5 bg-blue-100 rounded-full -start-3 ring-4 ring-white dark:ring-gray-900 dark:bg-blue-900">
-        {_type === 'post' ? (
-          <Pencil className="w-2.5 h-2.5 text-blue-800 dark:text-blue-400" />
-        ) : (
-          <Briefcase className="w-2.5 h-2.5 text-blue-800 dark:text-blue-400" />
-        )}
-      </span>
-      <Link
-        href={_type === 'post' ? `/posts/${slug.current}` : link}
-        target={_type === 'project' ? '_blank' : ''}
-        prefetch
+      <motion.span
+        className="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-9 top-4 ring-8 ring-background"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: index * 0.1 + 0.2, duration: 0.3 }}
       >
-        <h2 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
-          {title}
-          <span
-            className={`text-xs font-medium ml-2 px-2 py-0.5 rounded ms-3 ${_type === 'post' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'}`}
-          >
-            {_type === 'post' ? 'Post' : 'Projeto'}
-          </span>
-          <span
-            className={`ml-2 px-2 py-0.5 rounded text-xs font-medium `}
-          ></span>
-        </h2>
-      </Link>
-      <time className="block mb-2 text-sm font-normal leading-none text-primary">
-        {displayDate
-          ? new Date(displayDate).toLocaleDateString('pt-BR', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-            })
-          : 'No date available'}
-      </time>
-      <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-        {_type === 'post' ? overview : description}
-      </p>
-    </MotionLi>
+        {isPost ? (
+          <Pencil
+            className="w-3 h-3 text-primary-foreground"
+            aria-hidden="true"
+          />
+        ) : (
+          <Briefcase
+            className="w-3 h-3 text-primary-foreground"
+            aria-hidden="true"
+          />
+        )}
+      </motion.span>
+      <Card className="w-full">
+        <CardHeader>
+          <div className="flex justify-between items-start">
+            <div>
+              <CardTitle className="text-xl font-bold">{title}</CardTitle>
+              <CardDescription className="text-sm text-muted-foreground">
+                {formatDate(firstPublishedDate)}
+              </CardDescription>
+            </div>
+            <Badge variant={isPost ? 'default' : 'secondary'}>
+              {isPost ? 'Post' : 'Projeto'}
+            </Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-4 text-base text-card-foreground">
+            {isPost ? overview : description}
+          </p>
+          <Button asChild variant="outline">
+            <Link
+              href={isPost ? `/posts/${slug.current}` : link}
+              target={isPost ? '' : '_blank'}
+              rel={isPost ? '' : 'noopener noreferrer'}
+              className="inline-flex items-center"
+            >
+              {isPost ? 'Ler Mais' : 'Ver Projeto'}
+              <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
+    </motion.li>
   )
 }

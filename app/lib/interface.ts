@@ -46,6 +46,6 @@ export interface PortfolioItem {
   overview?: string
   description?: string
   link: string
-  firstPublishedDate?: string
+  firstPublishedDate: string
   index: number
 }

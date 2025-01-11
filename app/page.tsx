@@ -1,12 +1,9 @@
-import { getAll } from '@/app/action'
-import LoadMore from '@/app/components/LoadMore'
+import Timeline from './components/Timeline'
 
-export default async function IndexPage() {
-  const data = await getAll()
+export default function TimelinePage() {
   return (
-    <ol className="relative max-w-4xl mx-auto mt-5 border-s border-gray-200 dark:border-gray-700">
-      {data}
-      <LoadMore />
-    </ol>
+    <div className="container mx-auto max-w-4xl px-4 py-8">
+      <Timeline />
+    </div>
   )
 }

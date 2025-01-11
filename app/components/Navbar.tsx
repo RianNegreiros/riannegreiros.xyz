@@ -5,7 +5,13 @@ import { usePathname } from 'next/navigation'
 import { ModeToggle } from './ModeToggle'
 import { MobileMenu } from './MobileMenu'
 import { navigationItems } from '@/data/navigation-items'
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu'
 
 export function Navbar() {
   const pathname = usePathname()
