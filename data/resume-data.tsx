@@ -44,7 +44,7 @@ export const RESUME_DATA = {
     'DevOps(CI/CD)',
     'Azure',
     'AWS',
-    'GCP'
+    'GCP',
   ],
   projects: [
     {

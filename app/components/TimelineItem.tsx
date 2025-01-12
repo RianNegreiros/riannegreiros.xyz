@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { PortfolioItem } from '../lib/interface'
 import { formatDate } from '../lib/helpers'
+import { MotionLi } from './MotionList'
 
 const variants = {
   hidden: { opacity: 0, y: 50 },
@@ -26,7 +27,7 @@ export default function TimelineItem({
   const isPost = _type === 'post'
 
   return (
-    <motion.li
+    <MotionLi
       key={`${_type}-${_id}`}
       className="mb-8 ms-6 relative"
       variants={variants}
@@ -80,6 +81,6 @@ export default function TimelineItem({
           {isPost ? overview : description}
         </p>
       </Link>
-    </motion.li>
+    </MotionLi>
   )
 }

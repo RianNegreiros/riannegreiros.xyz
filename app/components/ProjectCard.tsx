@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ProjectDialog } from '@/app/components/ProjectDialog'
+import Link from 'next/link'
 
 interface ProjectCardModal {
   data: ProjectsCard[]
@@ -50,11 +51,11 @@ export default function ProjectCard({ data }: ProjectCardModal) {
               />
             </div>
             <div className="mt-4">
-              <a href={item.link} target="_blank" rel="noopener noreferrer">
+              <Link href={item.link} target="_blank" rel="noopener noreferrer">
                 <h2 className="font-medium text-lg hover:underline">
                   {item.title}
                 </h2>
-              </a>
+              </Link>
               <p className="mt-1 text-muted-foreground line-clamp-3">
                 {item.description}
               </p>
