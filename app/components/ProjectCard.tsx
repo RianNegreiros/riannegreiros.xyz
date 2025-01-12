@@ -3,7 +3,7 @@
 import { ProjectsCard } from '../lib/interface'
 import { useState } from 'react'
 import Image from 'next/image'
-import { urlFor } from '../lib/sanity'
+import { motion } from 'framer-motion'
 import { ProjectDialog } from '@/app/components/ProjectDialog'
 
 interface ProjectCardModal {
@@ -12,7 +12,6 @@ interface ProjectCardModal {
 
 export default function ProjectCard({ data }: ProjectCardModal) {
   const [selected, setSelected] = useState<ProjectsCard | null>(null)
-
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = (project: ProjectsCard) => {
@@ -23,9 +22,20 @@ export default function ProjectCard({ data }: ProjectCardModal) {
 
   return (
     <section>
-      <div className="mt-5 max-w-4xl mx-auto grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
-        {data.map((item) => (
-          <div key={item._id} className="group block">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="m-5 max-w-4xl mx-auto grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1"
+      >
+        {data.map((item, index) => (
+          <motion.div
+            key={item._id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="group block"
+          >
             <div className="relative aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl">
               <Image
                 src={item.imageUrl}
@@ -40,7 +50,7 @@ export default function ProjectCard({ data }: ProjectCardModal) {
               />
             </div>
             <div className="mt-4">
-              <a href={item.link} target="_blank">
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
                 <h2 className="font-medium text-lg hover:underline">
                   {item.title}
                 </h2>
@@ -59,9 +69,9 @@ export default function ProjectCard({ data }: ProjectCardModal) {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
       {selected && (
         <ProjectDialog
           project={selected}
