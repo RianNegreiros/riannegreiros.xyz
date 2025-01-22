@@ -1,10 +1,10 @@
 'use client'
 
-import { ProjectsCard } from '../lib/interface'
+import { ProjectsCard } from '@/app/lib/interface'
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ProjectDialog } from '@/app/components/ProjectDialog'
+import { ProjectDialog } from './ProjectDialog'
 import Link from 'next/link'
 
 interface ProjectCardModal {
