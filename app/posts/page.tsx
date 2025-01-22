@@ -1,11 +1,10 @@
 import Link from 'next/link'
-import { post } from '../lib/interface'
-import { client } from '../lib/sanity'
-import PaginationNav from '../components/PaginationNav'
-import { getTotalPosts } from '../action'
-import { formatDate } from '../lib/helpers'
-import { motion } from 'framer-motion'
-import { MotionLi, MotionUl } from '../components/MotionList'
+import { post } from '@/app/lib/interface'
+import { client } from '@/app/lib/sanity'
+import PaginationNav from './_components/PaginationNav'
+import { getTotalPosts } from '@/app/action'
+import { formatDate } from '@/app/lib/helpers'
+import { MotionLi, MotionUl } from '@/app/components/MotionList'
 
 async function getData(pageNum: number = 0, postsPerPage: number = 10) {
   const start = pageNum * postsPerPage
