@@ -1,6 +1,6 @@
-import { ProjectsCard } from '../lib/interface'
-import { client } from '../lib/sanity'
-import ProjectCard from '../components/ProjectCard'
+import { ProjectsCard } from '@/app/lib/interface'
+import { client } from '@/app/lib/sanity'
+import ProjectCard from './_components/ProjectCard'
 import { Metadata } from 'next'
 
 async function getData() {

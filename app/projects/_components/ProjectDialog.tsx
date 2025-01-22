@@ -9,7 +9,6 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog'
 import { ProjectsCard } from '@/app/lib/interface'
-import { urlFor } from '@/app/lib/sanity'
 
 interface ProjectDialogProps {
   project: ProjectsCard

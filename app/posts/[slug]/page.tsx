@@ -1,4 +1,4 @@
-import PostContent from '@/app/components/PostContent'
+import PostContent from './_components/PostContent'
 import { post } from '@/app/lib/interface'
 import { client } from '@/app/lib/sanity'
 import { redirect } from 'next/navigation'
