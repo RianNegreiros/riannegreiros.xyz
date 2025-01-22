@@ -1,5 +1,5 @@
-import { Heading } from '../lib/interface'
-import { slugify } from '../lib/helpers'
+import { Heading } from '@/app/lib/interface'
+import { slugify } from '@/app/lib/helpers'
 import { cn } from '@/lib/utils'
 
 interface TableOfContentsProps {

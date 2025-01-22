@@ -1,7 +1,7 @@
 'use client'
 
 import { PortableText } from '@portabletext/react'
-import { urlFor } from '../lib/sanity'
+import { urlFor } from '@/app/lib/sanity'
 import Image from 'next/image'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { useTheme } from 'next-themes'
@@ -9,11 +9,11 @@ import {
   dracula,
   atomOneLight,
 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
-import { post } from '../lib/interface'
+import { post } from '@/app/lib/interface'
 import ShareButton from './ShareButton'
 import { CopyButton } from './CopyButton'
 import TableOfContents from './TableOfContents'
-import { formatDate, slugify } from '../lib/helpers'
+import { formatDate, slugify } from '@/app/lib/helpers'
 
 interface PostContentProps {
   slug: string
