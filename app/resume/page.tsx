@@ -1,10 +1,10 @@
-import { CommandMenu } from '@/app/resume/_components/CommandMenu'
+import { CommandMenu } from './_components/CommandMenu'
 import { Metadata } from 'next'
 import { RESUME_DATA } from '@/data/resume-data'
 import { Education } from './_components/Education'
 import { Projects } from './_components/Projects'
-import { Skills } from '../components/Skills'
-import { Summary } from '../components/Summary'
+import { Skills } from './_components/Skills'
+import { Summary } from './_components/Summary'
 import { Header } from './_components/Header'
 
 export const metadata: Metadata = {
