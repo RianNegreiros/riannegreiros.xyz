@@ -1,13 +1,13 @@
-import { Badge } from '../../components/ui/badge'
+import { Badge } from '@/components/ui/badge'
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from '../../components/ui/card'
-import { Section } from '../../components/ui/section'
-import { RESUME_DATA } from '../../data/resume-data'
+} from '@/components/ui/card'
+import { Section } from '@/components/ui/section'
+import { RESUME_DATA } from '@/data/resume-data'
 
 type ProjectTags = readonly string[]
 

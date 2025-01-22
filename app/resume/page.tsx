@@ -1,11 +1,11 @@
-import { CommandMenu } from '@/app/components/CommandMenu'
+import { CommandMenu } from '@/app/resume/_components/CommandMenu'
 import { Metadata } from 'next'
 import { RESUME_DATA } from '@/data/resume-data'
-import { Education } from '../components/Education'
-import { Projects } from '../components/Projects'
+import { Education } from './_components/Education'
+import { Projects } from './_components/Projects'
 import { Skills } from '../components/Skills'
 import { Summary } from '../components/Summary'
-import { Header } from '../components/Header'
+import { Header } from './_components/Header'
 
 export const metadata: Metadata = {
   title: `Currículo ${RESUME_DATA.about}`,

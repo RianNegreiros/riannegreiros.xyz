@@ -11,7 +11,7 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import { Button } from '../../components/ui/button'
+import { Button } from '@/components/ui/button'
 import { CommandIcon } from 'lucide-react'
 
 interface Props {
