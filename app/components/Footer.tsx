@@ -42,7 +42,7 @@ export default function Footer() {
           </span>
           <div className="flex sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse">
             {RESUME_DATA.contact.social.map((social) => (
-              <a
+              <Link
                 href={social.url}
                 key={social.name}
                 className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
@@ -50,7 +50,7 @@ export default function Footer() {
                 target="_blank"
               >
                 <social.icon className="w-4 h-4" />
-              </a>
+              </Link>
             ))}
           </div>
         </div>
