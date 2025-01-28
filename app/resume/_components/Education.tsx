@@ -4,28 +4,12 @@ import { RESUME_DATA } from '@/data/resume-data'
 
 type Education = (typeof RESUME_DATA)['education'][number]
 
-interface EducationPeriodProps {
-  start: Education['start']
-  end: Education['end']
-}
-
-function EducationPeriod({ start, end }: EducationPeriodProps) {
-  return (
-    <div
-      className="text-sm tabular-nums text-gray-500"
-      aria-label={`Period: ${start} to ${end}`}
-    >
-      {start} - {end}
-    </div>
-  )
-}
-
 interface EducationItemProps {
   education: Education
 }
 
 function EducationItem({ education }: EducationItemProps) {
-  const { school, start, end, degree } = education
+  const { school, degree } = education
 
   return (
     <Card>
@@ -37,7 +21,6 @@ function EducationItem({ education }: EducationItemProps) {
           >
             {school}
           </h3>
-          <EducationPeriod start={start} end={end} />
         </div>
       </CardHeader>
       <CardContent

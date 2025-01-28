@@ -30,8 +30,6 @@ export const RESUME_DATA = {
     {
       school: 'Estácio de Sá',
       degree: 'Graduação Tecnológica - Análise e Desenvolvimento de Sistemas',
-      start: '08/2020',
-      end: '12/2023',
     },
   ],
   skills: [
