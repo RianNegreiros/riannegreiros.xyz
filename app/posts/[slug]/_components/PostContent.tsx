@@ -16,15 +16,14 @@ import TableOfContents from './TableOfContents'
 import { formatDate, slugify } from '@/app/lib/helpers'
 
 interface PostContentProps {
-  slug: string
   data: post
 }
 
-export default function PostContent({ slug, data }: PostContentProps) {
+export default function PostContent({ data }: PostContentProps) {
   const { resolvedTheme } = useTheme()
 
   const shareParams = {
-    slug,
+    slug: data.slug.current,
     body: `Confira este artigo: ${data.title}. Leia mais em:`,
     title: data.title,
   }
