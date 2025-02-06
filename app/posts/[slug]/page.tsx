@@ -2,6 +2,8 @@ import PostContent from './_components/PostContent'
 import { post } from '@/app/lib/interface'
 import { client } from '@/app/lib/sanity'
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
+import BlogPostSkeleton from './_components/BlogPostSkeleton'
 
 type tParams = Promise<{ slug: string }>
 
@@ -10,6 +12,7 @@ async function getData(slug: string) {
     title,
     firstPublishedDate,
     image,
+    slug,
     "blurImage": image.asset->metadata.lqip,
     content[]{
       ...,
@@ -52,5 +55,9 @@ export default async function BlogPost({ params }: { params: tParams }) {
     redirect('/not-found')
   }
 
-  return <PostContent slug={slug} data={data} />
+  return (
+    <Suspense fallback={<BlogPostSkeleton />}>
+      <PostContent data={data} />
+    </Suspense>
+  )
 }
