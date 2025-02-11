@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect, useTransition } from 'react'
+import { useState, useEffect } from 'react'
 import { ProjectsCard } from '@/app/lib/interface'
 import { client } from '@/app/lib/sanity'
 import ProjectCard from './ProjectCard'
-import ProjectsListSkeleton from './ProjectsListSkeleton'
+import ProjectsListSkeleton from './Loading'
 
 async function getData() {
   const query = `*[_type == 'project'] | order(_createdAt desc) {
@@ -21,19 +21,19 @@ async function getData() {
 
 export default function ProjectsList() {
   const [data, setData] = useState<ProjectsCard[]>([])
-  const [isPending, startTransition] = useTransition()
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    startTransition(() => {
-      const fetchData = async () => {
-        const fetchedData = await getData()
-        setData(fetchedData)
-      }
-      fetchData()
-    })
+    const fetchData = async () => {
+      setIsLoading(true)
+      const fetchedData = await getData()
+      setData(fetchedData)
+      setIsLoading(false)
+    }
+    fetchData()
   }, [])
 
-  if (isPending || !data) {
+  if (isLoading || !data) {
     return <ProjectsListSkeleton />
   }
 

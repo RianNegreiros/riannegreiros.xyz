@@ -1,4 +1,4 @@
-import PostsList from './[slug]/_components/PostsList'
+import PostsList from './_components/PostsList'
 import PaginationNav from './_components/PaginationNav'
 import { getTotalPosts } from '@/app/action'
 

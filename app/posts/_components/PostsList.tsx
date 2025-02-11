@@ -1,12 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect, useTransition } from 'react'
+import { useState, useEffect } from 'react'
 import { post } from '@/app/lib/interface'
 import { client } from '@/app/lib/sanity'
 import { formatDate } from '@/app/lib/helpers'
 import { MotionLi, MotionUl } from '@/app/components/MotionComponents'
-import BlogPostListSkeleton from './BlogPostListSkeleton'
+import Loading from './Loading'
 
 async function getData(pageNum: number = 0, postsPerPage: number = 10) {
   const start = pageNum * postsPerPage
@@ -27,23 +27,22 @@ export default function PostsList({
   searchParams?: Promise<{ page?: string }>
 }) {
   const [data, setData] = useState<post[]>([])
-  const [isPending, startTransition] = useTransition()
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    startTransition(() => {
-      const fetchData = async () => {
-        const page = await searchParams
-        const pageNum = Number(page?.page ?? 0)
-        const postsPerPage = 10
-        const fetchedData = await getData(pageNum, postsPerPage)
-        setData(fetchedData)
-      }
-      fetchData()
-    })
+    const fetchData = async () => {
+      const page = await searchParams
+      const pageNum = Number(page?.page ?? 0)
+      const postsPerPage = 10
+      const fetchedData = await getData(pageNum, postsPerPage)
+      setData(fetchedData)
+      setIsLoading(false)
+    }
+    fetchData()
   }, [searchParams])
 
-  if (isPending || !data) {
-    return <BlogPostListSkeleton />
+  if (isLoading || !data) {
+    return <Loading />
   }
 
   return (

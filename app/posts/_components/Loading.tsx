@@ -1,6 +1,6 @@
 import { MotionLi, MotionUl } from '@/app/components/MotionComponents'
 
-export default function BlogPostListSkeleton() {
+export default function Loading() {
   return (
     <div className="max-w-4xl mx-auto mt-5">
       <MotionUl

@@ -1,6 +1,6 @@
 import { MotionDiv } from '@/app/components/MotionComponents'
 
-export default function ProjectsListSkeleton() {
+export default function Loading() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {[...Array(6)].map((_, index) => (

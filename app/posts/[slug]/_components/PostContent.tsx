@@ -15,8 +15,8 @@ import { CopyButton } from './CopyButton'
 import TableOfContents from './TableOfContents'
 import { formatDate, slugify } from '@/app/lib/helpers'
 import { useTransition, useState, useEffect } from 'react'
-import BlogPostSkeleton from './BlogPostSkeleton'
 import { useRouter } from 'next/navigation'
+import Loading from './Loading'
 
 async function getData(slug: string) {
   const query = `*[_type == 'post' && slug.current == '${slug}'][0]{
@@ -45,14 +45,14 @@ export default function PostContent({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { resolvedTheme } = useTheme()
-
-  const [isPending, startTransition] = useTransition()
   const [data, setData] = useState<post | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const { resolvedTheme } = useTheme()
   const router = useRouter()
 
   useEffect(() => {
-    startTransition(async () => {
+    const fetchData = async () => {
+      setIsLoading(true)
       const { slug } = await params
       const fetchedData = await getData(slug)
 
@@ -61,11 +61,13 @@ export default function PostContent({
       } else {
         setData(fetchedData)
       }
-    })
+      setIsLoading(false)
+    }
+    fetchData()
   }, [params])
 
-  if (isPending || !data) {
-    return <BlogPostSkeleton />
+  if (isLoading || !data) {
+    return <Loading />
   }
 
   const shareParams = {
