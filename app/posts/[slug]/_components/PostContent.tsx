@@ -1,7 +1,7 @@
 'use client'
 
 import { PortableText } from '@portabletext/react'
-import { urlFor } from '@/app/lib/sanity'
+import { client, urlFor } from '@/app/lib/sanity'
 import Image from 'next/image'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { useTheme } from 'next-themes'
@@ -14,13 +14,59 @@ import ShareButton from './ShareButton'
 import { CopyButton } from './CopyButton'
 import TableOfContents from './TableOfContents'
 import { formatDate, slugify } from '@/app/lib/helpers'
+import { useTransition, useState, useEffect } from 'react'
+import BlogPostSkeleton from './BlogPostSkeleton'
+import { useRouter } from 'next/navigation'
 
-interface PostContentProps {
-  data: post
+async function getData(slug: string) {
+  const query = `*[_type == 'post' && slug.current == '${slug}'][0]{
+    title,
+    firstPublishedDate,
+    image,
+    slug,
+    "blurImage": image.asset->metadata.lqip,
+    content[]{
+      ...,
+      _type == 'image' => {
+        ...,
+        "blurImage": asset->metadata.lqip
+      }
+    },
+    "headings": content[]{
+      _type == "block" && style match "h*" => @
+    }
+  }`
+
+  return await client.fetch(query, {}, { next: { revalidate: 30 } })
 }
 
-export default function PostContent({ data }: PostContentProps) {
+export default function PostContent({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
   const { resolvedTheme } = useTheme()
+
+  const [isPending, startTransition] = useTransition()
+  const [data, setData] = useState<post | null>(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    startTransition(async () => {
+      const { slug } = await params
+      const fetchedData = await getData(slug)
+
+      if (!fetchedData) {
+        router.push('/not-found')
+      } else {
+        setData(fetchedData)
+      }
+    })
+  }, [params])
+
+  if (isPending || !data) {
+    return <BlogPostSkeleton />
+  }
 
   const shareParams = {
     slug: data.slug.current,

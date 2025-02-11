@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { PortfolioItem } from '../lib/interface'
 import { formatDate } from '../lib/helpers'
-import { MotionLi } from './MotionList'
+import { MotionLi } from './MotionComponents'
 
 const variants = {
   hidden: { opacity: 0, y: 50 },
