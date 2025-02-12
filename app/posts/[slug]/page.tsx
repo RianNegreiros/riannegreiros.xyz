@@ -5,15 +5,16 @@ import PostContent from './_components/PostContent'
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
+  const resolvedParams = await params
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
     overview,
     slug,
     image
   }`
-  const data = await client.fetch(query, { slug: params.slug })
+  const data = await client.fetch(query, { slug: resolvedParams.slug })
 
   if (!data) {
     return {
