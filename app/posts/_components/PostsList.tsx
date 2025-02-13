@@ -21,25 +21,19 @@ async function getData(pageNum: number = 0, postsPerPage: number = 10) {
   return await client.fetch(query, {}, { next: { revalidate: 30 } })
 }
 
-export default function PostsList({
-  searchParams,
-}: {
-  searchParams?: Promise<{ page?: string }>
-}) {
+export default function PostsList({ pageNum }: { pageNum: number }) {
   const [data, setData] = useState<post[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
-      const page = await searchParams
-      const pageNum = Number(page?.page ?? 0)
       const postsPerPage = 10
       const fetchedData = await getData(pageNum, postsPerPage)
       setData(fetchedData)
       setIsLoading(false)
     }
     fetchData()
-  }, [searchParams])
+  }, [pageNum])
 
   if (isLoading || !data) {
     return <Loading />

@@ -9,12 +9,15 @@ export default async function PostsPage({
     page?: string
   }>
 }) {
+  const page = await searchParams
+  const pageNum = Number(page?.page ?? 0)
+  const postsPerPage = 10
   const postsNum = await getTotalPosts()
-  const maxPage = Math.ceil(postsNum / 10)
+  const maxPage = Math.ceil(postsNum / postsPerPage)
 
   return (
     <div className="max-w-4xl mx-auto mt-5">
-      <PostsList searchParams={searchParams} />
+      <PostsList pageNum={pageNum} />
       <PaginationNav maxPage={maxPage} />
     </div>
   )
