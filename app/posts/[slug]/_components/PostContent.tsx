@@ -40,7 +40,11 @@ async function getData(slug: string) {
   return await client.fetch(query, {}, { next: { revalidate: 30 } })
 }
 
-export default function PostContent({ params }: { params: { slug: string } }) {
+export default function PostContent({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
   const [data, setData] = useState<post | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const { resolvedTheme } = useTheme()
