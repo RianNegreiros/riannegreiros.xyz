@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { ProjectsCard } from '@/app/lib/interface'
 import { client } from '@/app/lib/sanity'
 import ProjectCard from './ProjectCard'
-import ProjectsListSkeleton from './Loading'
+import Loading from './Loading'
 
 async function getData() {
   const query = `*[_type == 'project'] | order(_createdAt desc) {
@@ -34,7 +34,7 @@ export default function ProjectsList() {
   }, [])
 
   if (isLoading || !data) {
-    return <ProjectsListSkeleton />
+    return <Loading />
   }
 
   return <ProjectCard data={data} />
