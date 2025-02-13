@@ -42,6 +42,10 @@ export async function generateMetadata({
   }
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+export default function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
   return <PostContent params={params} />
 }
