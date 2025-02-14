@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/posts',
       disallow: ['/', '/projects'],
     },
-    sitemap: `${process.env.NEXT_PUBLIC_BASE_URL}/api/sitemap`,
+    sitemap: "https://www.riannegreiros.xyz/sitemap.xml",
   }
 }
