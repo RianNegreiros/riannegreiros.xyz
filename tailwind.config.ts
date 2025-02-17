@@ -77,11 +77,33 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
-            'code::before': {
-              content: '"\\00a0\\00a0"',
+            'code::before': { content: 'none' },
+            'code::after': { content: 'none' },
+            code: {
+              display: 'inline',
+              padding: '0.1em 0.2em',
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
             },
-            'code::after': {
-              content: '"\\00a0\\00a0"',
+            strong: {
+              display: 'inline',
+              wordBreak: 'break-word',
+            },
+            h1: {
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              fontSize: '2rem',
+            },
+            h2: {
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              fontSize: '1.75rem',
+            },
+            h3: {
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              fontSize: '1.5rem',
             },
           },
         },
