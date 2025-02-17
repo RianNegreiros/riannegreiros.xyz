@@ -73,7 +73,23 @@ export default function ShareButton(props: { params: tParams }) {
     },
   ]
 
-  return (
+  const isMobile = typeof window !== 'undefined' && window.navigator?.share
+
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      await navigator.share({
+        title,
+        text: body,
+        url: `${baseUrl}/posts/${slug}`,
+      })
+    }
+  }
+
+  return isMobile ? (
+    <Button onClick={handleNativeShare} variant='outline' className="fixed bottom-4 right-4 rounded-full">
+      <Share2 className="h-4 w-4" />
+    </Button>
+  ) : (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
