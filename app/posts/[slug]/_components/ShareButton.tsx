@@ -16,6 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useEffect, useState } from 'react'
 
 type tParams = {
   slug: string
@@ -73,7 +74,16 @@ export default function ShareButton(props: { params: tParams }) {
     },
   ]
 
-  const isMobile = typeof window !== 'undefined' && window.navigator?.share
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      if (typeof window !== 'undefined') {
+        setIsMobile(/Mobi|Android|iPhone/i.test(navigator.userAgent))
+      }
+    }
+    checkMobile()
+  }, [])
 
   const handleNativeShare = async () => {
     if (navigator.share) {
@@ -86,7 +96,11 @@ export default function ShareButton(props: { params: tParams }) {
   }
 
   return isMobile ? (
-    <Button onClick={handleNativeShare} variant='outline' className="fixed bottom-4 right-4 rounded-full">
+    <Button
+      onClick={handleNativeShare}
+      variant="outline"
+      className="fixed bottom-4 right-4 rounded-full"
+    >
       <Share2 className="h-4 w-4" />
     </Button>
   ) : (
