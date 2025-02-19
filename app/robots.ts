@@ -5,7 +5,11 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: [
+          '/',
+          '/api/sitemap',
+          '/api/rss'
+        ],
         disallow: [
           '/projects',
           '/api/',
