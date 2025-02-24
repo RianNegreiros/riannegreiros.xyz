@@ -18,7 +18,7 @@ function convertPortableTextToHTML(content: PortableTextBlock[]): string {
 
 export async function generateRssFeed() {
   const feed = new RSS({
-    title: 'Rian N. Dos Santos Blog',
+    title: 'Rian Negreiros Dos Santos Blog',
     description: 'Rian Negreiros Dos Santos blog e portfólio',
     feed_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/rss`,
     site_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
