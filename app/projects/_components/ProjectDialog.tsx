@@ -1,56 +1,64 @@
-import Image from 'next/image'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog'
-import { ProjectsCard } from '@/app/lib/interface'
+  DialogFooter,
+} from "@/components/ui/dialog"
+import type { ProjectsCard } from "@/app/lib/interface"
 
 interface ProjectDialogProps {
-  project: ProjectsCard
+  project: ProjectsCard | null
   isOpen: boolean
   onClose: () => void
 }
 
-export function ProjectDialog({
-  project,
-  isOpen,
-  onClose,
-}: ProjectDialogProps) {
+export function ProjectDialog({ project, isOpen, onClose }: ProjectDialogProps) {
   if (!project) return null
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
-        <DialogHeader>
-          <DialogTitle className="text-2xl">{project.title}</DialogTitle>
+      <DialogContent className="max-w-3xl mx-auto p-6 overflow-hidden">
+        <DialogHeader className="space-y-2">
+          <DialogTitle className="text-2xl font-bold">{project.title}</DialogTitle>
+          <DialogDescription className="text-base text-muted-foreground">{project.description}</DialogDescription>
         </DialogHeader>
-        <DialogDescription className="mt-2">
-          {project.description}
-        </DialogDescription>
-        <div className="mt-4">
+
+        <div className="mt-6 aspect-video relative rounded-lg overflow-hidden border">
           <Image
             src={project.imageUrl}
             alt={project.title}
-            className="rounded-md object-cover w-full"
             priority
             width={800}
             height={400}
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
           />
         </div>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">
-              {tag}
-            </Badge>
-          ))}
+
+        <div className="mt-6">
+          <h3 className="text-sm font-medium mb-2">Tecnologias</h3>
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <Badge key={tag} variant="secondary">
+                {tag}
+              </Badge>
+            ))}
+          </div>
         </div>
-        <div className="mt-4">
-          <Button asChild className="w-full">
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
+
+        <DialogFooter className="mt-6">
+          <Button asChild className="w-full sm:w-auto" variant="default">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center"
+            >
               <Image
                 alt="Github logo"
                 className="mr-2 h-4 w-4"
@@ -58,11 +66,12 @@ export function ProjectDialog({
                 width="4"
                 src="https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/github.svg"
               />
-              Abrir no GitHub
+              Ver código-fonte no Github
             </a>
           </Button>
-        </div>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )
 }
+
