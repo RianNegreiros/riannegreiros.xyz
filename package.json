@@ -50,7 +50,7 @@
     "@types/react-dom": "^18",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/rss": "^0.0.32",
-    "eslint": "^9.15.0",
+    "eslint": "^9.23.0",
     "eslint-config-next": "^15.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
