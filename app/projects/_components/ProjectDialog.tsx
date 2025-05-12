@@ -1,6 +1,6 @@
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import {
   Dialog,
   DialogContent,
@@ -8,8 +8,8 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog"
-import type { ProjectsCard } from "@/app/lib/interface"
+} from '@/components/ui/dialog'
+import type { ProjectsCard } from '@/app/lib/interface'
 
 interface ProjectDialogProps {
   project: ProjectsCard | null
@@ -17,15 +17,23 @@ interface ProjectDialogProps {
   onClose: () => void
 }
 
-export function ProjectDialog({ project, isOpen, onClose }: ProjectDialogProps) {
+export function ProjectDialog({
+  project,
+  isOpen,
+  onClose,
+}: ProjectDialogProps) {
   if (!project) return null
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl mx-auto p-6 overflow-hidden">
         <DialogHeader className="space-y-2">
-          <DialogTitle className="text-2xl font-bold">{project.title}</DialogTitle>
-          <DialogDescription className="text-base text-muted-foreground">{project.description}</DialogDescription>
+          <DialogTitle className="text-2xl font-bold">
+            {project.title}
+          </DialogTitle>
+          <DialogDescription className="text-base text-muted-foreground">
+            {project.description}
+          </DialogDescription>
         </DialogHeader>
 
         <div className="mt-6 aspect-video relative rounded-lg overflow-hidden border">
@@ -74,4 +82,3 @@ export function ProjectDialog({ project, isOpen, onClose }: ProjectDialogProps) 
     </Dialog>
   )
 }
-

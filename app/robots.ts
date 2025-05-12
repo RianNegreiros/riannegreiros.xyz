@@ -17,9 +17,20 @@ export default function robots(): MetadataRoute.Robots {
           '/swagger/',
           '/github.com/',
           '/*.json$',
+          '/_next/',
+          '/static/',
         ],
+      },
+      {
+        userAgent: 'GPTBot',
+        disallow: ['/'],
+      },
+      {
+        userAgent: 'CCBot',
+        disallow: ['/'],
       },
     ],
     sitemap: `${process.env.NEXT_PUBLIC_BASE_URL}/api/sitemap`,
+    host: process.env.NEXT_PUBLIC_BASE_URL,
   }
 }

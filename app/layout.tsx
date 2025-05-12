@@ -14,11 +14,32 @@ export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
   title: {
     default: 'Rian Negreiros Dos Santos',
-    template: '%s | Rian Negreiros Dos Santos ',
+    template: '%s | Rian Negreiros Dos Santos',
   },
   description:
     'Bem-vindo ao site pessoal de Rian Negreiros dos Santos. Explore meu blog para obter insights e histórias, descubra meus projetos que mostram minhas habilidades e criatividade e veja meu currículo para saber mais sobre minha jornada profissional.',
-  authors: [{ name: 'Rian Negreiros Dos Santos' }],
+  keywords: [
+    'software engineer',
+    'developer',
+    'portfolio',
+    'blog',
+    'Rian Negreiros',
+    'web development',
+    'backend development',
+  ],
+  authors: [
+    {
+      name: 'Rian Negreiros Dos Santos',
+      url: process.env.NEXT_PUBLIC_BASE_URL,
+    },
+  ],
+  creator: 'Rian Negreiros Dos Santos',
+  publisher: 'Rian Negreiros Dos Santos',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     title: 'Rian Negreiros Dos Santos',
     description:
@@ -27,6 +48,31 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: process.env.NEXT_PUBLIC_BASE_URL,
     siteName: 'riannegreiros.xyz',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Rian Negreiros Dos Santos',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rian Negreiros Dos Santos',
+    description: 'Personal website and portfolio of Rian Negreiros Dos Santos',
+    images: ['/opengraph-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 

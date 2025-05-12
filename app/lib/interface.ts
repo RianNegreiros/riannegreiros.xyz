@@ -23,9 +23,11 @@ export interface post {
   }
   _createdAt: string
   firstPublishedDate: string
+  updatedAt?: string
   headings: Heading[]
   image: any
   blurImage: string
+  tags?: string[]
 }
 
 export interface ProjectsCard {

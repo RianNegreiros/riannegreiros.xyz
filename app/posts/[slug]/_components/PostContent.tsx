@@ -22,8 +22,11 @@ async function getData(slug: string) {
   const query = `*[_type == 'post' && slug.current == '${slug}'][0]{
     title,
     firstPublishedDate,
+    updatedAt,
     image,
     slug,
+    overview,
+    tags,
     "blurImage": image.asset->metadata.lqip,
     content[]{
       ...,
