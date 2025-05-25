@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { getAll, getTotal } from '../action'
 import { LoaderCircle } from 'lucide-react'
 
-export type TimelineItem = JSX.Element
+export type TimelineItem = React.JSX.Element
 
 let page = 1
 const itemsPerPage = 10
