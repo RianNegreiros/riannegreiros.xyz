@@ -7,36 +7,64 @@ import { client } from '@/app/lib/sanity'
 import { formatDate } from '@/app/lib/helpers'
 import { MotionLi, MotionUl } from '@/app/components/MotionComponents'
 import Loading from './Loading'
+import { useSearchParams } from 'next/navigation'
 
-async function getData(pageNum: number = 0, postsPerPage: number = 10) {
+async function getData(
+  pageNum: number = 0,
+  postsPerPage: number = 10,
+  searchQuery?: string
+) {
   const start = pageNum * postsPerPage
   const end = start + postsPerPage
-  const query = `*[_type == 'post'] | order(firstPublishedDate desc) [${start}...${end}] {
+
+  let query = `*[_type == 'post']`
+
+  if (searchQuery) {
+    query += `[title match "*${searchQuery}*" || overview match "*${searchQuery}*"]`
+  }
+
+  query += ` | order(firstPublishedDate desc) [${start}...${end}] {
     title,
     _id,
     overview,
     slug,
     firstPublishedDate
   }`
+
   return await client.fetch(query, {}, { next: { revalidate: 30 } })
 }
 
 export default function PostsList({ pageNum }: { pageNum: number }) {
   const [data, setData] = useState<post[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const searchParams = useSearchParams()
+  const searchQuery = searchParams.get('search') ?? ''
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       const postsPerPage = 10
-      const fetchedData = await getData(pageNum, postsPerPage)
+      const fetchedData = await getData(pageNum, postsPerPage, searchQuery)
       setData(fetchedData)
       setIsLoading(false)
     }
     fetchData()
-  }, [pageNum])
+  }, [pageNum, searchQuery])
 
   if (isLoading || !data) {
     return <Loading />
+  }
+
+  if (data.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-lg text-muted-foreground">
+          {searchQuery
+            ? 'Nenhum post encontrado para sua busca.'
+            : 'Nenhum post encontrado.'}
+        </p>
+      </div>
+    )
   }
 
   return (
