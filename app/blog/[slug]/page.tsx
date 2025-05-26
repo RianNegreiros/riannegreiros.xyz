@@ -3,6 +3,8 @@ import { client, urlFor } from '@/app/lib/sanity'
 import PostContent from './_components/PostContent'
 import StructuredData from './_components/StructuredData'
 
+export const revalidate = 3600 // revalidate every hour
+
 export async function generateMetadata({
   params,
 }: {
@@ -31,7 +33,7 @@ export async function generateMetadata({
     }
   }
 
-  const canonicalUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/posts/${data.slug.current}`
+  const canonicalUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${data.slug.current}`
   const imageUrl = data.image ? urlFor(data.image).url() : undefined
 
   return {

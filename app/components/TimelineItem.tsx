@@ -59,7 +59,7 @@ export default function TimelineItem({
         )}
       </motion.span>
       <Link
-        href={isPost ? `/posts/${slug.current}` : link}
+        href={isPost ? `/blog/${slug.current}` : link}
         target={isPost ? '' : '_blank'}
         rel={isPost ? '' : 'noopener noreferrer'}
         className="block p-4 bg-card hover:bg-accent rounded-lg transition-colors duration-200 ease-in-out"

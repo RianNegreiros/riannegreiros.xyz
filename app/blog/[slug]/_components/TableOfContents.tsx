@@ -1,3 +1,5 @@
+'use client'
+
 import { Heading } from '@/app/lib/interface'
 import { slugify } from '@/app/lib/helpers'
 import { cn } from '@/lib/utils'

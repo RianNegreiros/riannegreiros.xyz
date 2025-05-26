@@ -35,7 +35,7 @@ export async function generateRssFeed() {
       guid: post._id,
       title: post.title,
       description: contentHTML,
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/posts/${post.slug.current}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug.current}`,
       date: post.firstPublishedDate,
     })
   })

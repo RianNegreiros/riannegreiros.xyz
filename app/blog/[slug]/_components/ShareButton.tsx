@@ -32,20 +32,20 @@ export default function ShareButton(props: { params: tParams }) {
     {
       name: 'LinkedIn',
       Component: LinkedinShareButton,
-      url: `${baseUrl}/posts/${slug}`,
+      url: `${baseUrl}/blog/${slug}`,
       ariaLabel: 'Compartilhar no LinkedIn',
     },
     {
       name: 'Twitter',
       Component: TwitterShareButton,
-      url: `${baseUrl}/posts/${slug}`,
+      url: `${baseUrl}/blog/${slug}`,
       title: title,
       ariaLabel: 'Compartilhar no Twitter',
     },
     {
       name: 'Email',
       Component: EmailShareButton,
-      url: `${baseUrl}/posts/${slug}`,
+      url: `${baseUrl}/blog/${slug}`,
       title: title,
       body: body,
       ariaLabel: 'Compartilhar por Email',
@@ -53,7 +53,7 @@ export default function ShareButton(props: { params: tParams }) {
     {
       name: 'WhatsApp',
       Component: WhatsappShareButton,
-      url: `${baseUrl}/posts/${slug}`,
+      url: `${baseUrl}/blog/${slug}`,
       title: title,
       separator: ':: ',
       ariaLabel: 'Compartilhar no WhatsApp',
@@ -61,14 +61,14 @@ export default function ShareButton(props: { params: tParams }) {
     {
       name: 'Telegram',
       Component: TelegramShareButton,
-      url: `${baseUrl}/posts/${slug}`,
+      url: `${baseUrl}/blog/${slug}`,
       title: title,
       ariaLabel: 'Compartilhar no Telegram',
     },
     {
       name: 'Facebook',
       Component: FacebookShareButton,
-      url: `${baseUrl}/posts/${slug}`,
+      url: `${baseUrl}/blog/${slug}`,
       title: title,
       ariaLabel: 'Compartilhar no Facebook',
     },
@@ -90,7 +90,7 @@ export default function ShareButton(props: { params: tParams }) {
       await navigator.share({
         title,
         text: body,
-        url: `${baseUrl}/posts/${slug}`,
+        url: `${baseUrl}/blog/${slug}`,
       })
     }
   }

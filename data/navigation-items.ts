@@ -1,7 +1,7 @@
 export const navigationItems = [
   {
-    name: 'Posts',
-    href: '/posts',
+    name: 'Blog',
+    href: '/blog',
   },
   {
     name: 'Projetos',

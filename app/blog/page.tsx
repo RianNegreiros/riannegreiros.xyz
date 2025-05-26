@@ -2,6 +2,8 @@ import PostsList from './_components/PostsList'
 import PaginationNav from './_components/PaginationNav'
 import SearchInput from './_components/SearchInput'
 import { getTotalPosts } from '@/app/action'
+import { Suspense } from 'react'
+import Loading from './_components/Loading'
 
 export default async function PostsPage({
   searchParams,
@@ -20,7 +22,9 @@ export default async function PostsPage({
   return (
     <div className="max-w-4xl mx-auto mt-5">
       <SearchInput />
-      <PostsList pageNum={pageNum} />
+      <Suspense fallback={<Loading />}>
+        <PostsList pageNum={pageNum} searchQuery={params?.search} />
+      </Suspense>
       <PaginationNav maxPage={maxPage} />
     </div>
   )

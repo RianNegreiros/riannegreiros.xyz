@@ -1,61 +1,18 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
 import { post } from '@/app/lib/interface'
-import { client } from '@/app/lib/sanity'
 import { formatDate } from '@/app/lib/helpers'
 import { MotionLi, MotionUl } from '@/app/components/MotionComponents'
-import Loading from './Loading'
-import { useSearchParams } from 'next/navigation'
 
-async function getData(
-  pageNum: number = 0,
-  postsPerPage: number = 10,
+export default function PostsListClient({
+  data,
+  searchQuery,
+}: {
+  data: post[]
   searchQuery?: string
-) {
-  const start = pageNum * postsPerPage
-  const end = start + postsPerPage
-
-  let query = `*[_type == 'post']`
-
-  if (searchQuery) {
-    query += `[title match "*${searchQuery}*" || overview match "*${searchQuery}*"]`
-  }
-
-  query += ` | order(firstPublishedDate desc) [${start}...${end}] {
-    title,
-    _id,
-    overview,
-    slug,
-    firstPublishedDate
-  }`
-
-  return await client.fetch(query, {}, { next: { revalidate: 30 } })
-}
-
-export default function PostsList({ pageNum }: { pageNum: number }) {
-  const [data, setData] = useState<post[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const searchParams = useSearchParams()
-  const searchQuery = searchParams.get('search') ?? ''
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true)
-      const postsPerPage = 10
-      const fetchedData = await getData(pageNum, postsPerPage, searchQuery)
-      setData(fetchedData)
-      setIsLoading(false)
-    }
-    fetchData()
-  }, [pageNum, searchQuery])
-
-  if (isLoading || !data) {
-    return <Loading />
-  }
-
-  if (data.length === 0) {
+}) {
+  if (!data || data.length === 0) {
     return (
       <div className="text-center py-8">
         <p className="text-lg text-muted-foreground">
@@ -74,7 +31,7 @@ export default function PostsList({ pageNum }: { pageNum: number }) {
       transition={{ duration: 0.5 }}
       className="space-y-4"
     >
-      {data.map((post, index) => (
+      {data.map((post: post, index: number) => (
         <MotionLi
           key={post._id}
           initial={{ opacity: 0, y: 20 }}
@@ -91,7 +48,7 @@ export default function PostsList({ pageNum }: { pageNum: number }) {
             </time>
             <h2 className="text-xl font-semibold mt-1">
               <Link
-                href={`/posts/${post.slug.current}`}
+                href={`/blog/${post.slug.current}`}
                 className="text-2xl font-bold leading-8 tracking-tight text-gray-900 dark:text-gray-100"
               >
                 {post.title}

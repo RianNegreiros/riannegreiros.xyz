@@ -31,7 +31,7 @@ export async function GET() {
       priority: '1.0',
     },
     {
-      url: `${baseUrl}/posts`,
+      url: `${baseUrl}/blog`,
       lastModified: new Date().toISOString(),
       changeFreq: 'daily',
       priority: '0.9',
@@ -54,7 +54,7 @@ export async function GET() {
         firstPublishedDate: string
         updatedAt: string
       }) => ({
-        url: `${baseUrl}/posts/${post.slug}`,
+        url: `${baseUrl}/blog/${post.slug}`,
         lastModified: new Date(
           post.updatedAt || post.firstPublishedDate
         ).toISOString(),
@@ -76,16 +76,16 @@ export async function GET() {
             xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
       ${urls
-        .map(
-          ({ url, lastModified, changeFreq, priority }) => `
+      .map(
+        ({ url, lastModified, changeFreq, priority }) => `
           <url>
             <loc>${url}</loc>
             <lastmod>${lastModified}</lastmod>
             <changefreq>${changeFreq}</changefreq>
             <priority>${priority}</priority>
           </url>`
-        )
-        .join('')}
+      )
+      .join('')}
     </urlset>`
 
   return new NextResponse(sitemap, {
