@@ -14,15 +14,6 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   reactStrictMode: true,
-  async redirects() {
-    return [
-      {
-        source: '/sitemap.xml',
-        destination: '/api/sitemap',
-        permanent: true
-      }
-    ]
-  }
 }
 
 export default nextConfig

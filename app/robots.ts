@@ -30,7 +30,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/'],
       },
     ],
-    sitemap: `${process.env.NEXT_PUBLIC_BASE_URL}/api/sitemap`,
+    sitemap: `${process.env.NEXT_PUBLIC_BASE_URL}/sitemap.xml`,
     host: process.env.NEXT_PUBLIC_BASE_URL,
   }
 }
