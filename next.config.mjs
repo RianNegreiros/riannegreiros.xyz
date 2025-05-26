@@ -8,10 +8,12 @@ const nextConfig = {
         hostname: 'cdn.sanity.io',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
   },
   eslint: {
     ignoreDuringBuilds: true,
   },
+  reactStrictMode: true,
   async redirects() {
     return [
       {
