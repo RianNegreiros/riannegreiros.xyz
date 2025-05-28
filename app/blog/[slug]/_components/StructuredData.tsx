@@ -1,8 +1,8 @@
-import { urlFor } from '@/app/lib/sanity'
-import { post } from '@/app/lib/interface'
+import { urlFor } from '@/app/lib/services/sanity'
+import { Post } from '@/app/lib/types/sanity'
 
 interface StructuredDataProps {
-  post: post
+  post: Post
   baseUrl: string
 }
 

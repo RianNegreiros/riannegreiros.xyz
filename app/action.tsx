@@ -1,32 +1,23 @@
 'use server'
 
-import { client } from './lib/sanity'
-import { PortfolioItem } from './lib/interface'
+import { fetchSanityData } from './lib/services/sanity'
+import { queries } from './lib/services/sanity.queries'
+import { PortfolioItem } from './lib/types/sanity'
 import TimelineItem from './components/TimelineItem'
 
 export async function getTotalPosts() {
-  return client.fetch(`count(*[_type == 'post'])`)
+  return fetchSanityData<number>(queries.posts.count)
 }
 
 export async function getTotal() {
-  return client.fetch(`count(*[_type in ['post', 'project']])`)
+  return fetchSanityData<number>(queries.portfolio.count)
 }
 
 export async function getAll(pageNum: number = 0, itemsPerPage: number = 10) {
   const start = pageNum * itemsPerPage
   const end = start + itemsPerPage
-  const query = `*[_type == "post" || _type == "project"] | order(firstPublishedDate desc) [${start}...${end}] {
-    title,
-    _id,
-    _type,
-    link,
-    slug,
-    overview,
-    description,
-    firstPublishedDate
-  }`
-
-  const data: PortfolioItem[] = await client.fetch(query)
+  const query = queries.portfolio.timeline(start, end)
+  const data = await fetchSanityData<PortfolioItem[]>(query)
 
   return data.map((item, index) => (
     <TimelineItem key={item._id} {...item} index={index} />

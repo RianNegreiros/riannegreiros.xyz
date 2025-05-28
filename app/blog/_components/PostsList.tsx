@@ -1,6 +1,8 @@
-import { client } from '@/app/lib/sanity'
+import { queries } from '@/app/lib/services/sanity.queries'
 import { cache } from 'react'
 import PostsListClient from './PostsListClient'
+import { fetchSanityData } from '@/app/lib/services/sanity'
+import { Post } from '@/app/lib/types/sanity'
 
 const getData = cache(
   async (
@@ -10,22 +12,8 @@ const getData = cache(
   ) => {
     const start = pageNum * postsPerPage
     const end = start + postsPerPage
-
-    let query = `*[_type == 'post']`
-
-    if (searchQuery) {
-      query += `[title match "*${searchQuery}*" || overview match "*${searchQuery}*"]`
-    }
-
-    query += ` | order(firstPublishedDate desc) [${start}...${end}] {
-    title,
-    _id,
-    overview,
-    slug,
-    firstPublishedDate
-  }`
-
-    return await client.fetch(query, {}, { next: { revalidate: 30 } })
+    const query = queries.posts.list(start, end, searchQuery)
+    return await fetchSanityData<Post[]>(query)
   }
 )
 

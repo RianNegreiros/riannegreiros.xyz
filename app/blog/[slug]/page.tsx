@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
-import { client, urlFor } from '@/app/lib/sanity'
 import PostContent from './_components/PostContent'
 import StructuredData from './_components/StructuredData'
+import { client, urlFor } from '@/app/lib/services/sanity'
 
 export const revalidate = 3600 // revalidate every hour
 

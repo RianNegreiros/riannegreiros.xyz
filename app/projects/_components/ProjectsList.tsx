@@ -1,26 +1,19 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ProjectsCard } from '@/app/lib/interface'
-import { client } from '@/app/lib/sanity'
 import ProjectCard from './ProjectCard'
 import Loading from './Loading'
+import { fetchSanityData } from '@/app/lib/services/sanity'
+import { queries } from '@/app/lib/services/sanity.queries'
+import { Project } from '@/app/lib/types/sanity'
 
 async function getData() {
-  const query = `*[_type == 'project'] | order(_createdAt desc) {
-    title,
-    _id,
-    link,
-    description,
-    tags,
-    "imageUrl": image.asset->url,
-    "blurImage": image.asset->metadata.lqip
-  }`
-  return await client.fetch(query, {}, { next: { revalidate: 30 } })
+  const query = queries.projects.list
+  return await fetchSanityData<Project[]>(query)
 }
 
 export default function ProjectsList() {
-  const [data, setData] = useState<ProjectsCard[]>([])
+  const [data, setData] = useState<Project[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
