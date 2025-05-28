@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export type Heading = {
   _type: 'block'
   _key: string

@@ -23,7 +23,7 @@ export default function PaginationNav({ maxPage }: { maxPage: number }) {
   const [pageNum, setPageNum] = useState(0)
 
   useEffect(() => {
-    const currentPage = parseInt(searchParams.get('page') || '0', 10)
+    const currentPage = parseInt(searchParams.get('page') ?? '0', 10)
     setPageNum(currentPage)
   }, [searchParams])
 

@@ -2,10 +2,10 @@ import { Badge } from '@/components/ui/badge'
 import { Section } from '@/components/ui/section'
 import { cn } from '@/lib/utils'
 
-type Skills = readonly string[]
+type SkillsArray = readonly string[]
 
 interface SkillsListProps {
-  skills: Skills
+  skills: SkillsArray
   className?: string
 }
 
@@ -27,7 +27,7 @@ function SkillsList({ skills, className }: SkillsListProps) {
 }
 
 interface SkillsProps {
-  skills: Skills
+  skills: SkillsArray
   className?: string
 }
 

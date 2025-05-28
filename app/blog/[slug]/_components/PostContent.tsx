@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { PortableText } from '@portabletext/react'
 import { urlFor, fetchSanityData } from '@/app/lib/services/sanity'
 import { queries } from '@/app/lib/services/sanity.queries'
@@ -80,7 +82,7 @@ export default async function PostContent({
           {data.image && (
             <Image
               src={urlFor(data.image).url()}
-              alt={data.image.alt ? data.image.alt : 'Blog post cover image'}
+              alt={data.image.alt ?? 'Blog post cover image'}
               priority
               width={800}
               height={400}

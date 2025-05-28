@@ -9,7 +9,7 @@ function convertPortableTextToHTML(content: PortableTextBlock[]): string {
     components: {
       types: {
         image: ({ value }) =>
-          `<img src="${urlFor(value).url()}" alt="${value.alt || 'Image'}" />`,
+          `<img src="${urlFor(value).url()}" alt="${value.alt ?? 'Image'}" />`,
         code: ({ value }) => `<pre><code>${value.code}</code></pre>`,
       },
     },

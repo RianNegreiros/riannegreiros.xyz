@@ -23,7 +23,7 @@ export function urlFor(source: SanityImageSource) {
 export async function fetchSanityData<T>(query: string, params = {}) {
   return client.fetch<T>(query, params, {
     next: {
-      revalidate: 3600, // 1 hour
+      revalidate: 3600,
     },
   })
 }
