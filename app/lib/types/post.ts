@@ -13,7 +13,7 @@ export interface Heading {
   children: Span[]
 }
 
-export interface post {
+export interface Post {
   title: string
   overview: string
   content: any
@@ -28,26 +28,4 @@ export interface post {
   image: any
   blurImage: string
   tags?: string[]
-}
-
-export interface ProjectsCard {
-  title: string
-  _id: string
-  imageUrl: string
-  blurImage: string
-  tags: string[]
-  description: string
-  link: string
-}
-
-export interface PortfolioItem {
-  _id: string
-  _type: 'post' | 'project'
-  title: string
-  slug: { current: string }
-  overview?: string
-  description?: string
-  link: string
-  firstPublishedDate: string
-  index: number
 }
