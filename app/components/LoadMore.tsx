@@ -33,7 +33,7 @@ export default function LoadMore() {
         }
       })
     }
-  }, [inView, hasMore, totalItems])
+  }, [inView, hasMore, totalItems, data.length])
 
   return (
     <>

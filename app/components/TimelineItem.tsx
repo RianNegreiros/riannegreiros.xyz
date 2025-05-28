@@ -4,9 +4,9 @@ import { Pencil, Briefcase, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
-import { PortfolioItem } from '../lib/interface'
-import { formatDate } from '../lib/helpers'
 import { MotionLi } from './MotionComponents'
+import { PortfolioItem } from '@/app/lib/types/sanity'
+import { formatDate } from '@/app/lib/utils'
 
 const variants = {
   hidden: { opacity: 0, y: 50 },
@@ -22,7 +22,7 @@ export default function TimelineItem({
   description,
   link,
   firstPublishedDate,
-  index,
+  index = 0,
 }: PortfolioItem) {
   const isPost = _type === 'post'
 
@@ -59,7 +59,7 @@ export default function TimelineItem({
         )}
       </motion.span>
       <Link
-        href={isPost ? `/blog/${slug.current}` : link}
+        href={isPost ? `/blog/${slug.current}` : (link ?? '#')}
         target={isPost ? '' : '_blank'}
         rel={isPost ? '' : 'noopener noreferrer'}
         className="block p-4 bg-card hover:bg-accent rounded-lg transition-colors duration-200 ease-in-out"

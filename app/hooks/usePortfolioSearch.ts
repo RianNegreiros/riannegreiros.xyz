@@ -1,22 +1,13 @@
 import { useState, useMemo, useEffect } from 'react'
-import { client } from '@/app/lib/sanity'
-import { PortfolioItem } from '../lib/interface'
+import { fetchSanityData } from '@/app/lib/services/sanity'
+import { queries } from '@/app/lib/services/sanity.queries'
+import { PortfolioItem } from '@/app/lib/types/sanity'
 
 async function fetchPortfolioData(
   searchParam: string
 ): Promise<PortfolioItem[]> {
-  const query = `*[_type in ['post', 'project'] && (title match '${searchParam}*')]{
-    _id,
-    _type,
-    title,
-    slug,
-    overview,
-    description,
-    link,
-    firstPublishedDate,
-    "index": order
-  }`
-  return await client.fetch(query)
+  const query = queries.portfolio.search(searchParam)
+  return await fetchSanityData<PortfolioItem[]>(query)
 }
 
 export function usePortfolioSearch() {

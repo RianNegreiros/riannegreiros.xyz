@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
-import { client, urlFor } from '@/app/lib/sanity'
 import PostContent from './_components/PostContent'
 import StructuredData from './_components/StructuredData'
+import { client, urlFor } from '@/app/lib/services/sanity'
 
-export const revalidate = 3600 // revalidate every hour
+export const revalidate = 3600
 
 export async function generateMetadata({
   params,
@@ -38,24 +38,24 @@ export async function generateMetadata({
 
   return {
     title: data.title,
-    description: data.overview || 'Leia esta postagem no blog.',
-    keywords: data.tags || [],
+    description: data.overview ?? 'Leia esta postagem no blog.',
+    keywords: data.tags ?? [],
     authors: [{ name: data.author.name, url: data.author.url }],
     openGraph: {
       type: 'article',
       title: data.title,
-      description: data.overview || 'Leia esta postagem no blog.',
+      description: data.overview ?? 'Leia esta postagem no blog.',
       images: imageUrl ? [{ url: imageUrl }] : [],
       url: canonicalUrl,
       publishedTime: data.firstPublishedDate,
-      modifiedTime: data.updatedAt || data.firstPublishedDate,
+      modifiedTime: data.updatedAt ?? data.firstPublishedDate,
       authors: [data.author.name],
-      tags: data.tags || [],
+      tags: data.tags ?? [],
     },
     twitter: {
       card: 'summary_large_image',
       title: data.title,
-      description: data.overview || 'Leia esta postagem no blog.',
+      description: data.overview ?? 'Leia esta postagem no blog.',
       images: imageUrl ? [imageUrl] : [],
       creator: '@riannegreiros',
     },

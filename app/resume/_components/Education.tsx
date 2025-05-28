@@ -2,10 +2,10 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Section } from '@/components/ui/section'
 import { RESUME_DATA } from '@/data/resume-data'
 
-type Education = (typeof RESUME_DATA)['education'][number]
+type EducationData = (typeof RESUME_DATA)['education'][number]
 
 interface EducationItemProps {
-  education: Education
+  education: EducationData
 }
 
 function EducationItem({ education }: EducationItemProps) {
@@ -36,7 +36,7 @@ function EducationItem({ education }: EducationItemProps) {
 }
 
 interface EducationListProps {
-  education: readonly Education[]
+  education: readonly EducationData[]
 }
 
 export function Education({ education }: EducationListProps) {

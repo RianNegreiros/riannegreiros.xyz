@@ -1,15 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { post } from '@/app/lib/interface'
-import { formatDate } from '@/app/lib/helpers'
+import { Post } from '@/app/lib/types/sanity'
+import { formatDate } from '@/app/lib/utils'
 import { MotionLi, MotionUl } from '@/app/components/MotionComponents'
 
 export default function PostsListClient({
   data,
   searchQuery,
 }: {
-  data: post[]
+  data: Post[]
   searchQuery?: string
 }) {
   if (!data || data.length === 0) {
@@ -31,7 +31,7 @@ export default function PostsListClient({
       transition={{ duration: 0.5 }}
       className="space-y-4"
     >
-      {data.map((post: post, index: number) => (
+      {data.map((post: Post, index: number) => (
         <MotionLi
           key={post._id}
           initial={{ opacity: 0, y: 20 }}

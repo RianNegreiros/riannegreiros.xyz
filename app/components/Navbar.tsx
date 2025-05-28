@@ -1,21 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { ModeToggle } from './ModeToggle'
 import { MobileMenu } from './MobileMenu'
 import { navigationItems } from '@/data/navigation-items'
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 
 export function Navbar() {
-  const pathname = usePathname()
-
   return (
     <nav
       className="bg-background shadow-sm print:hidden"

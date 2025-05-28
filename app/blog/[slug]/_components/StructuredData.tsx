@@ -1,8 +1,8 @@
-import { urlFor } from '@/app/lib/sanity'
-import { post } from '@/app/lib/interface'
+import { urlFor } from '@/app/lib/services/sanity'
+import { Post } from '@/app/lib/types/sanity'
 
 interface StructuredDataProps {
-  post: post
+  post: Post
   baseUrl: string
 }
 
@@ -13,7 +13,7 @@ export default function StructuredData({ post, baseUrl }: StructuredDataProps) {
     headline: post.title,
     image: post.image ? urlFor(post.image).url() : undefined,
     datePublished: post.firstPublishedDate,
-    dateModified: post.updatedAt || post.firstPublishedDate,
+    dateModified: post.updatedAt ?? post.firstPublishedDate,
     author: {
       '@type': 'Person',
       name: 'Rian Negreiros Dos Santos',
@@ -32,7 +32,7 @@ export default function StructuredData({ post, baseUrl }: StructuredDataProps) {
       '@type': 'WebPage',
       '@id': `${baseUrl}/blog/${post.slug.current}`,
     },
-    keywords: post.tags || [],
+    keywords: post.tags ?? [],
   }
 
   return (

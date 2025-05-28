@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog'
-import type { ProjectsCard } from '@/app/lib/interface'
+import { ProjectsCard } from '@/app/lib/types'
 
 interface ProjectDialogProps {
   project: ProjectsCard | null

@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { client } from '@/app/lib/sanity'
+import { client } from './lib/services/sanity'
 
 interface Post {
   slug: string

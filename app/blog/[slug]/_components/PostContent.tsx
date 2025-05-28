@@ -1,36 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { PortableText } from '@portabletext/react'
-import { client, urlFor } from '@/app/lib/sanity'
+import { urlFor, fetchSanityData } from '@/app/lib/services/sanity'
+import { queries } from '@/app/lib/services/sanity.queries'
+import { Post } from '@/app/lib/types/sanity'
 import Image from 'next/image'
 import ShareButton from './ShareButton'
 import TableOfContents from './TableOfContents'
-import { formatDate, slugify } from '@/app/lib/helpers'
 import { Suspense } from 'react'
 import Loading from './Loading'
 import CodeBlock from './CodeBlock'
+import { slugify, formatDate } from '@/app/lib/utils'
 
 async function getData(slug: string) {
-  const query = `*[_type == 'post' && slug.current == '${slug}'][0]{
-    title,
-    firstPublishedDate,
-    updatedAt,
-    image,
-    slug,
-    overview,
-    tags,
-    "blurImage": image.asset->metadata.lqip,
-    content[]{
-      ...,
-      _type == 'image' => {
-        ...,
-        "blurImage": asset->metadata.lqip
-      }
-    },
-    "headings": content[]{
-      _type == "block" && style match "h*" => @
-    }
-  }`
-
-  return await client.fetch(query, {}, { next: { revalidate: 3600 } })
+  const query = queries.posts.bySlug(slug)
+  return await fetchSanityData<Post>(query)
 }
 
 const PortableTextComponent = {
@@ -98,7 +82,7 @@ export default async function PostContent({
           {data.image && (
             <Image
               src={urlFor(data.image).url()}
-              alt={data.image.alt ? data.image.alt : 'Blog post cover image'}
+              alt={data.image.alt ?? 'Blog post cover image'}
               priority
               width={800}
               height={400}
