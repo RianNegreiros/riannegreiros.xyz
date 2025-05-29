@@ -25,7 +25,7 @@ export default async function PostsPage({
       <Suspense fallback={<Loading />}>
         <PostsList pageNum={pageNum} searchQuery={params?.search} />
       </Suspense>
-      <PaginationNav maxPage={maxPage} />
+      {!params?.search && <PaginationNav maxPage={maxPage} />}
     </div>
   )
 }
