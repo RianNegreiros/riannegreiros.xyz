@@ -5,6 +5,8 @@ import { getTotalPosts } from '@/app/action'
 import { Suspense } from 'react'
 import Loading from './_components/Loading'
 
+export const revalidate = 3600
+
 export default async function PostsPage({
   searchParams,
 }: {

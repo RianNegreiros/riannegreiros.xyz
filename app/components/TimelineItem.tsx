@@ -13,8 +13,12 @@ const variants = {
   visible: { opacity: 1, y: 0 },
 }
 
+interface TimelineItemProps extends PortfolioItem {
+  index?: number
+}
+
 export default function TimelineItem({
-  _id,
+  id,
   _type,
   title,
   slug,
@@ -23,12 +27,12 @@ export default function TimelineItem({
   link,
   firstPublishedDate,
   index = 0,
-}: PortfolioItem) {
+}: TimelineItemProps) {
   const isPost = _type === 'post'
 
   return (
     <MotionLi
-      key={`${_type}-${_id}`}
+      key={`${_type}-${id}`}
       className="mb-8 ms-6 relative"
       variants={variants}
       initial="hidden"
@@ -59,7 +63,7 @@ export default function TimelineItem({
         )}
       </motion.span>
       <Link
-        href={isPost ? `/blog/${slug.current}` : (link ?? '#')}
+        href={isPost ? `/blog/${slug}` : (link ?? '#')}
         target={isPost ? '' : '_blank'}
         rel={isPost ? '' : 'noopener noreferrer'}
         className="block p-4 bg-card hover:bg-accent rounded-lg transition-colors duration-200 ease-in-out"

@@ -30,7 +30,7 @@ export default function StructuredData({ post, baseUrl }: StructuredDataProps) {
     description: post.overview,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${baseUrl}/blog/${post.slug.current}`,
+      '@id': `${baseUrl}/blog/${post.slug}`,
     },
     keywords: post.tags ?? [],
   }

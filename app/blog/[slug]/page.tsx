@@ -2,15 +2,11 @@ import { Metadata } from 'next'
 import PostContent from './_components/PostContent'
 import StructuredData from './_components/StructuredData'
 import { client, urlFor } from '@/app/lib/services/sanity'
+import { cache } from 'react'
 
-export const revalidate = 3600
+export const revalidate = 86400
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}): Promise<Metadata> {
-  const resolvedParams = await params
+const getPostMetadata = cache(async (slug: string) => {
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
     overview,
@@ -24,7 +20,21 @@ export async function generateMetadata({
       "url": "${process.env.NEXT_PUBLIC_BASE_URL}"
     }
   }`
-  const data = await client.fetch(query, { slug: resolvedParams.slug })
+  return await client.fetch(query, { slug })
+})
+
+const getPostContent = cache(async (slug: string) => {
+  const query = `*[_type == "post" && slug.current == $slug][0]`
+  return await client.fetch(query, { slug })
+})
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const resolvedParams = await params
+  const data = await getPostMetadata(resolvedParams.slug)
 
   if (!data) {
     return {
@@ -82,8 +92,7 @@ export default async function BlogPost({
   params: Promise<{ slug: string }>
 }) {
   const resolvedParams = await params
-  const query = `*[_type == "post" && slug.current == $slug][0]`
-  const post = await client.fetch(query, { slug: resolvedParams.slug })
+  const post = await getPostContent(resolvedParams.slug)
 
   return (
     <>

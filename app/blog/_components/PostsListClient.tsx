@@ -33,7 +33,7 @@ export default function PostsListClient({
     >
       {data.map((post: Post, index: number) => (
         <MotionLi
-          key={post._id}
+          key={post.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -48,7 +48,7 @@ export default function PostsListClient({
             </time>
             <h2 className="text-xl font-semibold mt-1">
               <Link
-                href={`/blog/${post.slug.current}`}
+                href={`/blog/${post.slug}`}
                 className="text-2xl font-bold leading-8 tracking-tight text-gray-900 dark:text-gray-100"
               >
                 {post.title}
