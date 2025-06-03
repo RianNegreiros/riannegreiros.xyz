@@ -1,21 +1,23 @@
 export const queries = {
   posts: {
     list: (start: number, end: number, searchQuery?: string) => {
-      let query = `*[_type == 'post']`
+      let query = `*[_type == 'post'`
       if (searchQuery) {
-        query += `[title match "*${searchQuery}*" ^ 2 || overview match "*${searchQuery}*"]`
+        query += ` && (title match $searchQuery || overview match $searchQuery)]`
+      } else {
+        query += ']'
       }
       query += ` | order(firstPublishedDate desc) [${start}...${end}] {
         "id": _id,
         title,
         overview,
         "slug": slug.current,
-        firstPublishedDate,
-        "imageUrl": image.asset->url,
-        "blurImage": image.asset->metadata.lqip,
-        "tags": tags[0..3]
+        firstPublishedDate
       }`
-      return query
+      return {
+        query,
+        params: searchQuery ? { searchQuery: `*${searchQuery}*` } : {}
+      }
     },
     bySlug: (
       slug: string
@@ -27,7 +29,6 @@ export const queries = {
       image,
       "slug": slug.current,
       overview,
-      tags,
       "blurImage": image.asset->metadata.lqip,
       content[]{
         ...,
@@ -61,17 +62,18 @@ export const queries = {
   portfolio: {
     search: (
       searchParam: string
-    ) => `*[_type in ['post', 'project'] && (title match "*${searchParam}*" ^ 2 || overview match "*${searchParam}*" || description match "*${searchParam}*")]{
-      "id": _id,
-      _type,
-      title,
-      "slug": slug.current,
-      overview,
-      description,
-      link,
-      firstPublishedDate,
-      "createdAt": _createdAt
-    }`,
+    ) => ({
+      query: `*[_type in ['post', 'project'] && (title match $searchQuery || overview match $searchQuery || description match $searchQuery)]{
+        "id": _id,
+        _type,
+        title,
+        "slug": slug.current,
+        overview,
+        description,
+        firstPublishedDate
+      }`,
+      params: { searchQuery: `*${searchParam}*` }
+    }),
     count: `count(*[_type in ['post', 'project']])`,
     timeline: (
       start: number,

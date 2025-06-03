@@ -6,8 +6,8 @@ import { PortfolioItem } from '@/app/lib/types/sanity'
 async function fetchPortfolioData(
   searchParam: string
 ): Promise<PortfolioItem[]> {
-  const query = queries.portfolio.search(searchParam)
-  return await fetchSanityData<PortfolioItem[]>(query)
+  const queryResult = queries.portfolio.search(searchParam)
+  return await fetchSanityData<PortfolioItem[]>(queryResult)
 }
 
 export function usePortfolioSearch() {

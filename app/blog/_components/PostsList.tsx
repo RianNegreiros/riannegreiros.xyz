@@ -12,8 +12,8 @@ const getData = cache(
   ) => {
     const start = pageNum * postsPerPage
     const end = start + postsPerPage
-    const query = queries.posts.list(start, end, searchQuery)
-    return await fetchSanityData<Post[]>(query)
+    const queryResult = queries.posts.list(start, end, searchQuery)
+    return await fetchSanityData<Post[]>(queryResult)
   }
 )
 

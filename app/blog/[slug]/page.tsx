@@ -14,7 +14,6 @@ const getPostMetadata = cache(async (slug: string) => {
     image,
     firstPublishedDate,
     updatedAt,
-    tags,
     "author": {
       "name": "Rian Negreiros Dos Santos",
       "url": "${process.env.NEXT_PUBLIC_BASE_URL}"
@@ -49,7 +48,6 @@ export async function generateMetadata({
   return {
     title: data.title,
     description: data.overview ?? 'Leia esta postagem no blog.',
-    keywords: data.tags ?? [],
     authors: [{ name: data.author.name, url: data.author.url }],
     openGraph: {
       type: 'article',
@@ -59,8 +57,7 @@ export async function generateMetadata({
       url: canonicalUrl,
       publishedTime: data.firstPublishedDate,
       modifiedTime: data.updatedAt ?? data.firstPublishedDate,
-      authors: [data.author.name],
-      tags: data.tags ?? [],
+      authors: [data.author.name]
     },
     twitter: {
       card: 'summary_large_image',

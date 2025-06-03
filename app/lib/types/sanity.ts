@@ -13,7 +13,6 @@ export type Post = {
   firstPublishedDate: string
   updatedAt?: string
   image?: any
-  tags?: string[]
   content?: any[]
   headings: Heading[]
   blurImage?: string
