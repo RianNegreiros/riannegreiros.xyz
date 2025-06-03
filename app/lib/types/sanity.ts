@@ -1,19 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export type Heading = {
-  _type: 'block'
-  _key: string
-  style: string
-  children: Array<{
-    text: string
-  }>
+  text: string
+  level: string
 }
 
 export type Post = {
+  id: string
   title: string
-  _id: string
   overview: string
-  slug: { current: string }
+  slug: string
   firstPublishedDate: string
   updatedAt?: string
   image?: any
@@ -24,23 +20,24 @@ export type Post = {
 }
 
 export type Project = {
+  id: string
   title: string
-  _id: string
   link: string
   description: string
   tags: string[]
   imageUrl: string
   blurImage: string
+  createdAt: string
 }
 
 export type PortfolioItem = {
-  _id: string
+  id: string
   _type: 'post' | 'project'
   title: string
-  slug: { current: string }
+  slug: string
   overview?: string
   description?: string
   link?: string
   firstPublishedDate: string
-  index?: number
+  createdAt: string
 }

@@ -40,11 +40,12 @@ export function ProjectDialog({
           <Image
             src={project.imageUrl}
             alt={project.title}
-            priority
             width={800}
             height={400}
             className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
+            placeholder="blur"
+            blurDataURL={project.blurImage}
           />
         </div>
 
@@ -72,7 +73,7 @@ export function ProjectDialog({
                 className="mr-2 h-4 w-4"
                 height="4"
                 width="4"
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v14/icons/github.svg"
+                src="/icons/github.svg"
               />
               Ver código-fonte no Github
             </a>

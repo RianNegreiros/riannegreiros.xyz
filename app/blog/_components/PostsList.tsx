@@ -25,5 +25,10 @@ export default async function PostsList({
   searchQuery?: string
 }) {
   const data = await getData(pageNum, 10, searchQuery)
+
+  if (data.length === 10) {
+    getData(pageNum + 1, 10, searchQuery)
+  }
+
   return <PostsListClient data={data} searchQuery={searchQuery} />
 }

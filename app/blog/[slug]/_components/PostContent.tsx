@@ -21,7 +21,7 @@ const PortableTextComponent = {
   types: {
     image: ({ value }: { value: any }) => (
       <Image
-        src={urlFor(value).url()}
+        src={value.url}
         alt="Image"
         className="rounded-lg w-full h-auto"
         width={0}
@@ -34,21 +34,26 @@ const PortableTextComponent = {
     code: ({ value }: { value: any }) => <CodeBlock value={value} />,
   },
   block: {
-    h2: ({ value }: { value: any }) => (
-      <h2 id={slugify(value.children[0].text)}>{value.children[0].text}</h2>
-    ),
-    h3: ({ value }: { value: any }) => (
-      <h3 id={slugify(value.children[0].text)}>{value.children[0].text}</h3>
-    ),
-    h4: ({ value }: { value: any }) => (
-      <h4 id={slugify(value.children[0].text)}>{value.children[0].text}</h4>
-    ),
-    h5: ({ value }: { value: any }) => (
-      <h5 id={slugify(value.children[0].text)}>{value.children[0].text}</h5>
-    ),
-    h6: ({ value }: { value: any }) => (
-      <h6 id={slugify(value.children[0].text)}>{value.children[0].text}</h6>
-    ),
+    h2: ({ value }: { value: any }) => {
+      const text = value.children?.[0]?.text ?? ''
+      return <h2 id={slugify(text)}>{text}</h2>
+    },
+    h3: ({ value }: { value: any }) => {
+      const text = value.children?.[0]?.text ?? ''
+      return <h3 id={slugify(text)}>{text}</h3>
+    },
+    h4: ({ value }: { value: any }) => {
+      const text = value.children?.[0]?.text ?? ''
+      return <h4 id={slugify(text)}>{text}</h4>
+    },
+    h5: ({ value }: { value: any }) => {
+      const text = value.children?.[0]?.text ?? ''
+      return <h5 id={slugify(text)}>{text}</h5>
+    },
+    h6: ({ value }: { value: any }) => {
+      const text = value.children?.[0]?.text ?? ''
+      return <h6 id={slugify(text)}>{text}</h6>
+    },
   },
 }
 
@@ -65,7 +70,7 @@ export default async function PostContent({
   }
 
   const shareParams = {
-    slug: data.slug.current,
+    slug: data.slug,
     body: `Confira este artigo: ${data.title}. Leia mais em:`,
     title: data.title,
   }
@@ -84,11 +89,12 @@ export default async function PostContent({
               src={urlFor(data.image).url()}
               alt={data.image.alt ?? 'Blog post cover image'}
               priority
-              width={800}
-              height={400}
-              className="rounded-lg mb-8"
+              width={1200}
+              height={600}
+              className="rounded-lg mb-8 w-full h-auto"
               placeholder="blur"
               blurDataURL={data.blurImage}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           )}
 

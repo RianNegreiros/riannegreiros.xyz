@@ -31,19 +31,19 @@ export default function ProjectCard({ data }: ProjectCardModal) {
       >
         {data.map((item, index) => (
           <motion.div
-            key={item._id}
+            key={item.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="group block"
           >
-            <div className="relative aspect-w-16 aspect-h-12 overflow-hidden rounded-2xl">
+            <div className="relative aspect-[16/12] overflow-hidden rounded-2xl">
               <Image
                 src={item.imageUrl}
                 alt={`Projeto entitulado ${item.title} apresentando ${item.description}`}
                 fill
-                priority
-                sizes="100%"
+                priority={index < 3}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 placeholder="blur"
                 blurDataURL={item.blurImage}
                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl cursor-zoom-in"

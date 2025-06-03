@@ -20,16 +20,16 @@ export default function TableOfContents({
     <nav className={cn('space-y-2', className)}>
       <h4 className="font-semibold">Tabela de Conteúdos</h4>
       <ul className="space-y-2 text-sm">
-        {filteredData.map((heading) => (
+        {filteredData.map((heading, index) => (
           <li
-            key={heading._key}
-            className={cn('', { 'ml-4': heading.style === 'h3' })}
+            key={`${heading.text}-${index}`}
+            className={cn('', { 'ml-4': heading.level === 'h3' })}
           >
             <a
-              href={`#${slugify(heading.children[0].text)}`}
+              href={`#${slugify(heading.text)}`}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              {heading.children[0].text}
+              {heading.text}
             </a>
           </li>
         ))}

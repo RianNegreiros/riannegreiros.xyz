@@ -6,7 +6,7 @@ export default async function Timeline() {
 
   return (
     <ol className="relative border-s border-gray-200 dark:border-gray-700">
-      {items.map((item) => item)}
+      {items}
       <LoadMore />
     </ol>
   )

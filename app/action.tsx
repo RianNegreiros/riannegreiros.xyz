@@ -20,6 +20,6 @@ export async function getAll(pageNum: number = 0, itemsPerPage: number = 10) {
   const data = await fetchSanityData<PortfolioItem[]>(query)
 
   return data.map((item, index) => (
-    <TimelineItem key={item._id} {...item} index={index} />
+    <TimelineItem key={item.id} {...item} index={index} />
   ))
 }
