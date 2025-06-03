@@ -129,6 +129,7 @@ export default [
       'tailwind.config.js',
       'tailwind.config.ts',
       'components/**',
+      '@sanity/**',
     ],
   },
 ]
