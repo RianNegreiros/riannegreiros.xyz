@@ -10,6 +10,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog'
 import { ProjectsCard } from '@/app/lib/types'
+import { GitHubIcon } from '@/components/icons'
 
 interface ProjectDialogProps {
   project: ProjectsCard | null
@@ -68,13 +69,7 @@ export function ProjectDialog({
               rel="noopener noreferrer"
               className="flex items-center justify-center"
             >
-              <Image
-                alt="Github logo"
-                className="mr-2 h-4 w-4"
-                height="4"
-                width="4"
-                src="/icons/github.svg"
-              />
+              <GitHubIcon className='mr-2 w-4 h-4' />
               Ver código-fonte no Github
             </a>
           </Button>
