@@ -69,7 +69,7 @@ export function ProjectDialog({
               rel="noopener noreferrer"
               className="flex items-center justify-center"
             >
-              <GitHubIcon className='mr-2 w-4 h-4' />
+              <GitHubIcon className="mr-2 w-4 h-4" />
               Ver código-fonte no Github
             </a>
           </Button>

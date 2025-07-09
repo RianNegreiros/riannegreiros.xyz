@@ -24,14 +24,14 @@ export default function StructuredData({ post, baseUrl }: StructuredDataProps) {
       name: 'Rian Negreiros Dos Santos',
       logo: {
         '@type': 'ImageObject',
-        url: `${baseUrl}/opengraph-image.png`,
+        url: `${baseUrl}/favicon.png`,
       },
     },
     description: post.overview,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `${baseUrl}/blog/${post.slug}`,
-    }
+    },
   }
 
   return (

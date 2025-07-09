@@ -20,12 +20,16 @@ export async function fetchSanityData<T>(
   queryOrObject: string | { query: string; params: Record<string, any> }
 ) {
   if (typeof queryOrObject === 'string') {
-    return client.fetch<T>(queryOrObject, {}, {
-      next: {
-        revalidate: 3600,
-        tags: ['sanity'],
-      },
-    })
+    return client.fetch<T>(
+      queryOrObject,
+      {},
+      {
+        next: {
+          revalidate: 3600,
+          tags: ['sanity'],
+        },
+      }
+    )
   }
 
   return client.fetch<T>(queryOrObject.query, queryOrObject.params, {
