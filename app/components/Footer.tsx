@@ -9,7 +9,7 @@ export default function Footer() {
       <hr className="mb-4 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
       <div className="mx-auto max-w-screen-xl text-center p-2 py-4">
         <Link href="/" className="inline-block mb-4">
-          <Image src="/favicon.ico" alt="Site Logo" width={32} height={32} />
+          <Image src="/favicon.png" alt="Site Logo" width={32} height={32} />
         </Link>
         <ul className="flex flex-wrap justify-center items-center text-gray-900 dark:text-white">
           {navigationItems.map((item, index) => (
