@@ -16,7 +16,7 @@ export const queries = {
       }`
       return {
         query,
-        params: searchQuery ? { searchQuery: `*${searchQuery}*` } : {}
+        params: searchQuery ? { searchQuery: `*${searchQuery}*` } : {},
       }
     },
     bySlug: (
@@ -60,9 +60,7 @@ export const queries = {
     }`,
   },
   portfolio: {
-    search: (
-      searchParam: string
-    ) => ({
+    search: (searchParam: string) => ({
       query: `*[_type in ['post', 'project'] && (title match $searchQuery || overview match $searchQuery || description match $searchQuery)]{
         "id": _id,
         _type,
@@ -72,7 +70,7 @@ export const queries = {
         description,
         firstPublishedDate
       }`,
-      params: { searchQuery: `*${searchParam}*` }
+      params: { searchQuery: `*${searchParam}*` },
     }),
     count: `count(*[_type in ['post', 'project']])`,
     timeline: (

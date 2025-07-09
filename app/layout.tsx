@@ -18,12 +18,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}`),
   title: {
-    default: 'Rian Negreiros Dos Santos',
-    template: '%s | Rian Negreiros Dos Santos',
+    default: process.env.NEXT_PUBLIC_SITE_TITLE ?? 'Rian Negreiros Dos Santos',
+    template: `%s | ${process.env.NEXT_PUBLIC_SITE_TITLE ?? 'Rian Negreiros Dos Santos'}`,
   },
   description:
+    process.env.NEXT_PUBLIC_SITE_DESCRIPTION ??
     'Bem-vindo ao site pessoal de Rian Negreiros dos Santos. Explore meu blog para obter insights e histórias, descubra meus projetos que mostram minhas habilidades e criatividade e veja meu currículo para saber mais sobre minha jornada profissional.',
-  keywords: [
+  keywords: process.env.NEXT_PUBLIC_SITE_KEYWORDS?.split(',') ?? [
     'software engineer',
     'developer',
     'portfolio',
@@ -34,38 +35,41 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: 'Rian Negreiros Dos Santos',
+      name: process.env.NEXT_PUBLIC_AUTHOR_NAME ?? 'Rian Negreiros Dos Santos',
       url: process.env.NEXT_PUBLIC_BASE_URL,
     },
   ],
-  creator: 'Rian Negreiros Dos Santos',
-  publisher: 'Rian Negreiros Dos Santos',
+  creator: process.env.NEXT_PUBLIC_AUTHOR_NAME ?? 'Rian Negreiros Dos Santos',
+  publisher: process.env.NEXT_PUBLIC_AUTHOR_NAME ?? 'Rian Negreiros Dos Santos',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: 'Rian Negreiros Dos Santos',
+    title: process.env.NEXT_PUBLIC_SITE_TITLE ?? 'Rian Negreiros Dos Santos',
     description:
+      process.env.NEXT_PUBLIC_SITE_DESCRIPTION ??
       'Bem-vindo ao site pessoal de Rian Negreiros dos Santos. Explore meu blog para obter insights e histórias, descubra meus projetos que mostram minhas habilidades e criatividade e veja meu currículo para saber mais sobre minha jornada profissional.',
     type: 'website',
-    locale: 'pt_BR',
+    locale: process.env.NEXT_PUBLIC_SITE_LOCALE ?? 'pt_BR',
     url: process.env.NEXT_PUBLIC_BASE_URL,
-    siteName: 'riannegreiros.xyz',
+    siteName: process.env.NEXT_PUBLIC_SITE_NAME,
     images: [
       {
-        url: '/opengraph-image.png',
+        url: '/favicon.png',
         width: 1200,
         height: 630,
-        alt: 'Rian Negreiros Dos Santos',
+        alt: process.env.NEXT_PUBLIC_SITE_TITLE ?? 'Rian Negreiros Dos Santos',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Rian Negreiros Dos Santos',
-    description: 'Personal website and portfolio of Rian Negreiros Dos Santos',
+    title: process.env.NEXT_PUBLIC_SITE_TITLE ?? 'Rian Negreiros Dos Santos',
+    description:
+      process.env.NEXT_PUBLIC_TWITTER_DESCRIPTION ??
+      'Personal website and portfolio of Rian Negreiros Dos Santos',
     images: ['/opengraph-image.png'],
   },
   robots: {
