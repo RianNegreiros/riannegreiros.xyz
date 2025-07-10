@@ -17,7 +17,7 @@ export default function TableOfContents({
     (heading) => Object.keys(heading).length !== 0
   )
   return (
-    <nav className={cn('space-y-2', className)}>
+    <nav className={cn('space-y-2', className)} aria-label="Tabela de Conteúdos">
       <h4 className="font-semibold">Tabela de Conteúdos</h4>
       <ul className="space-y-2 text-sm">
         {filteredData.map((heading, index) => (
