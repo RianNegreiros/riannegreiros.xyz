@@ -19,7 +19,7 @@ export default function CodeBlock({ value }: CodeBlockProps) {
   const { resolvedTheme } = useTheme()
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative' }} aria-label="Code block">
       <CopyButton value={value.code} className="absolute right-0 top-0" />
       <SyntaxHighlighter
         language={value.language}

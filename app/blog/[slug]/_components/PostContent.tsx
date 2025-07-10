@@ -87,7 +87,7 @@ export default async function PostContent({
           {data.image && (
             <Image
               src={urlFor(data.image).url()}
-              alt={data.image.alt ?? 'Blog post cover image'}
+              alt={data.image.alt ?? `Imagem de capa do post: ${data.title}`}
               priority
               width={1200}
               height={600}
