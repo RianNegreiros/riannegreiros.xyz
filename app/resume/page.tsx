@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { RESUME_DATA } from '@/data/resume-data'
 import { Education } from './_components/Education'
 import { Projects } from './_components/Projects'
+import { Courses } from './_components/Courses'
 import { Skills } from './_components/Skills'
 import { Summary } from './_components/Summary'
 import { Header } from './_components/Header'
@@ -33,6 +34,8 @@ export default function Page() {
           <Skills skills={RESUME_DATA.skills} />
 
           <Projects projects={RESUME_DATA.projects} />
+
+          <Courses courses={RESUME_DATA.courses} />
         </div>
       </section>
       <CommandMenu

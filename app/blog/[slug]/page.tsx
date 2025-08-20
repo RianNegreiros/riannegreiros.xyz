@@ -3,6 +3,7 @@ import PostContent from './_components/PostContent'
 import StructuredData from './_components/StructuredData'
 import { client, urlFor } from '@/app/lib/services/sanity'
 import { cache } from 'react'
+import { SITE_CONFIG } from '@/lib/constants'
 
 export const revalidate = 86400
 
@@ -15,7 +16,7 @@ const getPostMetadata = cache(async (slug: string) => {
     firstPublishedDate,
     updatedAt,
     "author": {
-      "name": "Rian Negreiros Dos Santos",
+      "name": "${SITE_CONFIG.author}",
       "url": "${process.env.NEXT_PUBLIC_BASE_URL}"
     }
   }`
