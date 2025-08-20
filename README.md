@@ -69,11 +69,15 @@ Or using Yarn
   yarn install
 ```
 
-3. **Rename the `.env.local.example` and add your environment variables**
+3. **Set up environment variables**
 
 ```bash
    cp .env.local.example .env.local
 ```
+
+Then edit `.env.local` and add your Sanity project ID and base URL:
+- `PROJECT_ID`: Your Sanity project ID
+- `NEXT_PUBLIC_BASE_URL`: Your site's base URL (e.g., http://localhost:3000 for development)
 
 ### Running the Development Server
 

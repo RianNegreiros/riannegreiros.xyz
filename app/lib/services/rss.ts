@@ -3,6 +3,7 @@ import { client, urlFor } from '@/app/lib/services/sanity'
 import { PortableTextBlock } from '@portabletext/types'
 import { toHTML } from '@portabletext/to-html'
 import RSS from 'rss'
+import { SITE_CONFIG } from '@/lib/constants'
 
 function convertPortableTextToHTML(content: PortableTextBlock[]): string {
   return toHTML(content, {
@@ -18,8 +19,8 @@ function convertPortableTextToHTML(content: PortableTextBlock[]): string {
 
 export async function generateRssFeed() {
   const feed = new RSS({
-    title: 'Rian Negreiros Dos Santos',
-    description: 'Rian Negreiros Dos Santos blog e portfólio',
+    title: SITE_CONFIG.title,
+    description: `${SITE_CONFIG.title} blog e portfólio`,
     feed_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/rss`,
     site_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
     language: 'pt-BR',

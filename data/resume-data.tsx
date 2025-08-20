@@ -1,7 +1,8 @@
 import { GitHubIcon, LinkedInIcon } from '@/components/icons'
+import { SITE_CONFIG } from '@/lib/constants'
 
 export const RESUME_DATA = {
-  name: 'Rian Negreiros Dos Santos',
+  name: SITE_CONFIG.author,
   initials: 'RN',
   location: 'São João de Meriti, Rio de Janeiro',
   locationLink:
@@ -100,6 +101,17 @@ export const RESUME_DATA = {
       link: {
         label: 'https://github.com/RianNegreiros/AiShortsVideosGenerator',
         href: '',
+      },
+    },
+  ],
+  courses: [
+    {
+      title: 'Imersão Fullcycle 14',
+      platform: 'Fullcycle',
+      description: 'Curso completo de desenvolvimento com NestJS, React e microsserviços',
+      link: {
+        label: 'https://imersaofc.fullcycle.com.br',
+        href: 'https://imersaofc.fullcycle.com.br',
       },
     },
   ],
