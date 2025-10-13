@@ -1,5 +1,5 @@
 {
-  "name": "riannegreirosdev",
+  "name": "riannegreirosxyz",
   "private": true,
   "version": "1.0.0",
   "main": "package.json",
@@ -20,7 +20,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sanity": "^4.0.1",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.15"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.1",
