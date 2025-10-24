@@ -108,10 +108,50 @@ export const RESUME_DATA = {
     {
       title: 'Imersão Fullcycle 14',
       platform: 'Fullcycle',
-      description: 'Curso completo de desenvolvimento com NestJS, React e microsserviços',
+      description:
+        'Evento de desenvolvimento com NestJS, React e microsserviços',
       link: {
         label: 'https://imersaofc.fullcycle.com.br',
         href: 'https://imersaofc.fullcycle.com.br',
+      },
+    },
+    {
+      title: 'NLW Journey - Trilha Java',
+      platform: 'Rocketseat',
+      description: 'Evento de desenvolvimento com Java, Spring Boot',
+      link: {
+        label:
+          'https://rocketseat.com.br/blog/artigos/post/por-que-nlw-e-especial',
+        href: 'https://rocketseat.com.br/blog/artigos/post/por-que-nlw-e-especial',
+      },
+    },
+    {
+      title: 'Especialista Java',
+      platform: 'Algaworks',
+      description: 'Curso de especialização em Java e Spring Boot',
+      link: {
+        label:
+          'https://lp.algaworks.com/wp-content/uploads/2025/10/EJ-Brochura-e-ofertas.pdf',
+        href: 'https://lp.algaworks.com/wp-content/uploads/2025/10/EJ-Brochura-e-ofertas.pdf',
+      },
+    },
+    {
+      title: 'Full Stack Ruby On Rails',
+      platform: 'The Odin Project',
+      description: 'Curso de desenvolvimento com Ruby on Rails',
+      link: {
+        label: 'https://www.theodinproject.com/paths/full-stack-ruby-on-rails',
+        href: 'https://www.theodinproject.com/paths/full-stack-ruby-on-rails',
+      },
+    },
+    {
+      title: 'Curso de JavaScript e TypeScript do básico ao avançado JS/TS',
+      platform: 'Udemy',
+      description: 'Curso de desenvolvimento com Ruby on Rails',
+      link: {
+        label:
+          'https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado',
+        href: 'https://www.udemy.com/course/curso-de-javascript-moderno-do-basico-ao-avancado',
       },
     },
   ],
