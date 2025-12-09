@@ -2,7 +2,11 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export default function Loading() {
   return (
-    <div className="container mx-auto px-4 py-8 animate-pulse" role="status" aria-live="polite">
+    <div
+      className="container mx-auto px-4 py-8 animate-pulse"
+      role="status"
+      aria-live="polite"
+    >
       <article className="max-w-4xl mx-auto">
         <Skeleton className="h-12 w-3/4 mb-4" />
         <Skeleton className="h-6 w-1/2 mb-8" />
