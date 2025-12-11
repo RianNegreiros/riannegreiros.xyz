@@ -10,10 +10,8 @@ const nextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   reactStrictMode: true,
+  bundlePagesRouterDependencies: true,
 }
 
 export default nextConfig
