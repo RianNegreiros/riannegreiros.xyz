@@ -47,12 +47,12 @@ export const RESUME_DATA = {
   ],
   projects: [
     {
-      title: 'riannegreiros.xyz',
+      title: 'riannegreiros.com.br',
       techStack: ['Next.js', 'Sanity.io', 'Typescript', 'TailwindCSS'],
       description: 'Site e blog pessoal. Criado com Next.js e Sanity.io',
       link: {
-        label: 'https://github.com/RianNegreiros/riannegreiros.xyz',
-        href: 'https://riannegreiros.xyz',
+        label: 'https://github.com/RianNegreiros/riannegreiros.com.br',
+        href: 'https://riannegreiros.com.br',
       },
     },
     {

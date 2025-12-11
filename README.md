@@ -1,4 +1,4 @@
-# riannegreiros.xyz
+# riannegreiros.com.br
 
 This is the personal website and blog of Rian Negreiros, built with Next.js, TypeScript, and TailwindCSS. It serves as a platform to showcase projects, share blog posts, and provide a professional resume.
 
@@ -16,15 +16,15 @@ This is the personal website and blog of Rian Negreiros, built with Next.js, Typ
 
 ## Project Overview
 
-`riannegreiros.xyz` is a personal website that includes a blog, project portfolio, and resume. It is designed to be a central hub for Rian's professional presence online.
+`riannegreiros.com.br` is a personal website that includes a blog, project portfolio, and resume. It is designed to be a central hub for Rian's professional presence online.
 
 ## Features
 
-- Timeline: [Home Page](https://www.riannegreiros.xyz) - Unify posts and projects in a timeline.
-- Personal Blog: [Blog Page](https://www.riannegreiros.xyz/blog) - Share insights and experiences through blog posts.
-- Project Showcase: [Projects Page](https://www.riannegreiros.xyz/projects) - Display various projects with detailed descriptions and links.
-- Professional Resume: [Resume Page](https://www.riannegreiros.xyz/resume) - Provide a professional resume with contact information and skills
-- RSS Feed: [RSS Feed](https://www.riannegreiros.xyz/api/rss) - Allow users to subscribe to updates from the blog.
+- Timeline: [Home Page](https://www.riannegreiros.com.br) - Unify posts and projects in a timeline.
+- Personal Blog: [Blog Page](https://www.riannegreiros.com.br/blog) - Share insights and experiences through blog posts.
+- Project Showcase: [Projects Page](https://www.riannegreiros.com.br/projects) - Display various projects with detailed descriptions and links.
+- Professional Resume: [Resume Page](https://www.riannegreiros.com.br/resume) - Provide a professional resume with contact information and skills
+- RSS Feed: [RSS Feed](https://www.riannegreiros.com.br/api/rss) - Allow users to subscribe to updates from the blog.
 
 ## Technologies Used
 
@@ -52,8 +52,8 @@ Make sure you have the following installed on your machine:
 1. **Clone the repository:**
 
 ```bash
-  git clone https://github.com/RianNegreiros/riannegreiros.xyz.git
-  cd riannegreiros.xyz
+  git clone https://github.com/RianNegreiros/riannegreiros.com.br.git
+  cd riannegreiros.com.br
 ```
 
 2. **Install dependencies:**
