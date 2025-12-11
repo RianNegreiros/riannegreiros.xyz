@@ -1,8 +1,8 @@
 'use server'
 
 import { fetchSanityData } from './lib/services/sanity'
-import { queries } from './lib/services/sanity.queries'
-import { PortfolioItem } from './lib/types/sanity'
+import { queries } from './lib/services' // Use services index instead of direct file import
+import type { PortfolioItem } from './lib/types/sanity'
 import TimelineItem from './components/TimelineItem'
 
 export async function getTotalPosts() {
@@ -13,7 +13,7 @@ export async function getTotal() {
   return fetchSanityData<number>(queries.portfolio.count)
 }
 
-export async function getAll(pageNum: number = 0, itemsPerPage: number = 10) {
+export async function getAll(pageNum = 0, itemsPerPage = 10) {
   const start = pageNum * itemsPerPage
   const end = start + itemsPerPage
   const query = queries.portfolio.timeline(start, end)

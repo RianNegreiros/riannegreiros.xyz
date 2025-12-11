@@ -21,10 +21,23 @@ import { navigationItems } from '@/data/navigation-items'
 export function MobileMenu() {
   const location = usePathname()
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     setOpen(false)
   }, [location])
+
+  if (!mounted) {
+    return (
+      <Button variant="outline" size="icon" disabled>
+        <Menu className="h-4 w-4" />
+      </Button>
+    )
+  }
 
   return (
     <Sheet open={open} onOpenChange={(state) => setOpen(state)}>

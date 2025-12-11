@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { useTheme } from 'next-themes'
 import {
@@ -17,6 +18,26 @@ interface CodeBlockProps {
 
 export default function CodeBlock({ value }: CodeBlockProps) {
   const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return (
+      <div style={{ position: 'relative' }} aria-label="Code block">
+        <CopyButton value={value.code} className="absolute right-0 top-0" />
+        <SyntaxHighlighter
+          language={value.language}
+          style={atomOneLight}
+          showLineNumbers
+        >
+          {value.code}
+        </SyntaxHighlighter>
+      </div>
+    )
+  }
 
   return (
     <div style={{ position: 'relative' }} aria-label="Code block">
