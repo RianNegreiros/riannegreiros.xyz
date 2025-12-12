@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import PostsListClient from './_components/PostsListClient'
 import SearchInput from './_components/SearchInput'
+import BlogSkeleton from './_components/BlogSkeleton'
 import { client } from '@/lib/services/sanity'
 import type { Post } from '@/lib/types'
 
@@ -42,13 +43,7 @@ export default function PostsPage() {
   }, [searchQuery])
 
   if (loading) {
-    return (
-      <div className="max-w-4xl mx-auto mt-5">
-        <div className="text-center py-8">
-          <p className="text-lg text-muted-foreground">Carregando posts...</p>
-        </div>
-      </div>
-    )
+    return <BlogSkeleton />
   }
 
   return (
