@@ -1,9 +1,0 @@
-Dockerfile
-README.md
-compose.yaml
-eslint.config.mjs
-.prettierrc
-sanity
-.env.local.example
-.dockerignore
-.github

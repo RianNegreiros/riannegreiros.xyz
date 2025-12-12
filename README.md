@@ -1,115 +1,73 @@
-# riannegreiros.com.br
+# React + TypeScript + Vite
 
-This is the personal website and blog of Rian Negreiros, built with Next.js, TypeScript, and TailwindCSS. It serves as a platform to showcase projects, share blog posts, and provide a professional resume.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Table of Contents
+Currently, two official plugins are available:
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation and Setup](#installation-and-setup)
-  - [Running the Development Server](#running-the-development-server)
-  - [Using Docker Compose](#using-docker-compose)
-- [Acknowledgments](#acknowledgments)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Project Overview
+## React Compiler
 
-`riannegreiros.com.br` is a personal website that includes a blog, project portfolio, and resume. It is designed to be a central hub for Rian's professional presence online.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Features
+## Expanding the ESLint configuration
 
-- Timeline: [Home Page](https://www.riannegreiros.com.br) - Unify posts and projects in a timeline.
-- Personal Blog: [Blog Page](https://www.riannegreiros.com.br/blog) - Share insights and experiences through blog posts.
-- Project Showcase: [Projects Page](https://www.riannegreiros.com.br/projects) - Display various projects with detailed descriptions and links.
-- Professional Resume: [Resume Page](https://www.riannegreiros.com.br/resume) - Provide a professional resume with contact information and skills
-- RSS Feed: [RSS Feed](https://www.riannegreiros.com.br/api/rss) - Allow users to subscribe to updates from the blog.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Technologies Used
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-- **Next.js**: A React framework for server-side rendering and static site generation
-- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript
-- **TailwindCSS**: A utility-first CSS framework for rapid UI development
-- **Sanity.io**: A headless CMS for managing content
-- **Docker**: Containerization platform for deploying applications
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-## Getting Started
-
-These instructions will help you set up and run the project on your local machine for development and testing purposes.
-
-### Prerequisites
-
-Make sure you have the following installed on your machine:
-
-- [Node.js](https://nodejs.org/)
-- [npm](https://www.npmjs.com/) (comes with Node.js) or [Yarn](https://yarnpkg.com/)
-- [Docker](https://www.docker.com/get-started)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-
-### Installation and Setup
-
-1. **Clone the repository:**
-
-```bash
-  git clone https://github.com/RianNegreiros/riannegreiros.com.br.git
-  cd riannegreiros.com.br
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-2. **Install dependencies:**
-   Using npm:
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```bash
-  npm install
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-Or using Yarn
-
-```bash
-  yarn install
-```
-
-3. **Set up environment variables**
-
-```bash
-   cp .env.local.example .env.local
-```
-
-Then edit `.env.local` and add your Sanity project ID and base URL:
-- `PROJECT_ID`: Your Sanity project ID
-- `NEXT_PUBLIC_BASE_URL`: Your site's base URL (e.g., http://localhost:3000 for development)
-
-### Running the Development Server
-
-To start the development server, run:
-
-Using npm:
-
-```bash
-  npm run dev
-```
-
-Or using Yarn:
-
-```bash
-  yarn dev
-```
-
-### Using Docker Compose
-
-To run the application using Docker Compose, follow these steps:
-
-1. **Build and start the containers:**
-
-```bash
-  docker-compose up --build
-```
-
-This command will build the Docker images and start the
-containers as defined in your docker-compose.yml file.
-
-2. **Access the application:** Open `http://localhost:3000` in your browser to see the application running in a Docker container.
-
-## Acknowledgments
-
-The resume page layout is based on [cv](https://github.com/BartoszJarocki/cv) by **Bartosz Jarocki**. Licensed under the MIT License.
