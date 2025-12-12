@@ -1,4 +1,6 @@
 import { MotionLi, MotionUl } from '@/components/MotionComponents'
+import { DateSkeleton, TitleSkeleton, TextSkeleton } from '@/components/ui/skeletons'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function Loading() {
   return (
@@ -9,7 +11,7 @@ export default function Loading() {
         transition={{ duration: 0.5 }}
         className="space-y-4"
       >
-        {[...Array(10)].map((_, index) => (
+        {Array.from({ length: 10 }).map((_, index) => (
           <MotionLi
             key={index}
             initial={{ opacity: 0, y: 20 }}
@@ -17,17 +19,16 @@ export default function Loading() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="pb-6"
           >
-            <div className="mb-2">
-              <div className="w-24 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-              <div className="w-3/4 h-6 mt-2 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+            <div className="space-y-2">
+              <DateSkeleton />
+              <TitleSkeleton />
+              <TextSkeleton count={2} />
             </div>
-            <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-            <div className="w-2/3 h-4 mt-2 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
           </MotionLi>
         ))}
       </MotionUl>
       <div className="mt-8 flex justify-center">
-        <div className="w-64 h-10 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+        <Skeleton className="w-64 h-10" />
       </div>
     </div>
   )
