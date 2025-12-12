@@ -1,6 +1,6 @@
-import { navigationItems } from '@/data/navigation-items'
-import { RESUME_DATA } from '@/data/resume-data'
-import { Link } from 'react-router-dom'
+import { navigationItems } from "@/data/navigation-items";
+import { RESUME_DATA } from "@/data/resume-data";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -21,7 +21,7 @@ export default function Footer() {
           <li>
             <Link
               className="mr-4 hover:underline md:mr-6"
-              to="/api/rss"
+              to="/rss"
               target="_blank"
             >
               RSS Feed
@@ -30,11 +30,8 @@ export default function Footer() {
         </ul>
         <div className="px-4 py-6 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
-            © {new Date().getFullYear()}{' '}
-            <Link
-              className="hover:underline"
-              to={`${import.meta.env.VITE_BASE_URL}`}
-            >
+            © {new Date().getFullYear()}{" "}
+            <Link className="hover:underline" to="/">
               riannegreiros.com.br
             </Link>
             . Todos os direitos reservados.
@@ -55,5 +52,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
