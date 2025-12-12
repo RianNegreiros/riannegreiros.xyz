@@ -10,7 +10,8 @@ import CodeBlock from './_components/CodeBlock'
 import PostSkeleton from './_components/PostSkeleton'
 import ShareButton from './_components/ShareButton'
 
-const PortableTextComponent = {
+// Portable Text Components Configuration
+const createPortableTextComponents = () => ({
   types: {
     image: ({ value }: any) => (
       <figure className="my-8">
@@ -115,7 +116,25 @@ const PortableTextComponent = {
       </a>
     ),
   },
-}
+})
+
+// Sanity Query
+const POST_QUERY = `*[_type == "post" && slug.current == $slug][0] {
+  _id,
+  title,
+  "slug": slug.current,
+  overview,
+  content,
+  image,
+  firstPublishedDate,
+  _updatedAt,
+  "headings": content[]{
+    _type == "block" && style match "h*" => {
+      "text": pt::text(@),
+      "level": style
+    }
+  }
+}`
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
@@ -127,23 +146,7 @@ export default function BlogPost() {
       if (!slug) return
 
       try {
-        const query = `*[_type == "post" && slug.current == $slug][0] {
-          _id,
-          title,
-          "slug": slug.current,
-          overview,
-          content,
-          image,
-          firstPublishedDate,
-          _updatedAt,
-          "headings": content[]{
-            _type == "block" && style match "h*" => {
-              "text": pt::text(@),
-              "level": style
-            }
-          }
-        }`
-        const data = await client.fetch<Post>(query, { slug })
+        const data = await client.fetch<Post>(POST_QUERY, { slug })
         setPost(data)
       } catch (error) {
         console.error('Error fetching post:', error)
@@ -171,43 +174,46 @@ export default function BlogPost() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        <p className="text-muted-foreground mb-8">
-          Publicado {formatDate(post.firstPublishedDate)}
-        </p>
+      <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-8 max-w-6xl mx-auto">
+        <article className="max-w-4xl">
+          <header className="mb-8">
+            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+            <p className="text-muted-foreground">
+              Publicado {formatDate(post.firstPublishedDate)}
+            </p>
+          </header>
 
-        {post.image && (
-          <img
-            src={urlFor(post.image).url()}
-            alt={post.image.alt ?? `Imagem de capa do post: ${post.title}`}
-            className="rounded-lg mb-8 w-full h-auto"
-          />
-        )}
+          {post.image && (
+            <img
+              src={urlFor(post.image).url()}
+              alt={post.image.alt ?? `Imagem de capa do post: ${post.title}`}
+              className="rounded-lg mb-8 w-full h-auto"
+            />
+          )}
 
-        <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-8">
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <PortableText
               value={post.content}
-              components={PortableTextComponent}
+              components={createPortableTextComponents()}
             />
           </div>
-          <aside className="mt-8 lg:mt-0">
-            <div className="sticky top-4">
-              <TableOfContents
-                className="hidden lg:block"
-                headings={post.headings || []}
-              />
-            </div>
-          </aside>
-        </div>
 
-        <ShareButton
-          slug={post.slug.current}
-          title={post.title}
-          body={post.overview || ''}
-        />
-      </article>
+          <ShareButton
+            slug={post.slug.current}
+            title={post.title}
+            body={post.overview || ''}
+          />
+        </article>
+        
+        <aside className="mt-8 lg:mt-0">
+          <div className="sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto toc-scroll">
+            <TableOfContents
+              className="hidden lg:block"
+              headings={post.headings || []}
+            />
+          </div>
+        </aside>
+      </div>
     </div>
   )
 }
