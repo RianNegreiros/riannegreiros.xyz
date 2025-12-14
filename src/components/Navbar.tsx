@@ -6,8 +6,8 @@ import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
+import { navigationMenuTriggerStyle } from "./ui/variants";
 
 export function Navbar() {
   return (
