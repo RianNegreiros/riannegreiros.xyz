@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: 'pnpm'
+  - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'weekly'
@@ -10,7 +10,7 @@ updates:
           - "version-update:semver-minor"
           - "version-update:semver-patch"
 
-  - package-ecosystem: 'pnpm'
+  - package-ecosystem: 'npm'
     directory: '/sanity'
     schedule:
       interval: 'weekly'
