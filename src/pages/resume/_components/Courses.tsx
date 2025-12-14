@@ -1,17 +1,17 @@
-import { Badge } from '@/components/ui/badge'
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from '@/components/ui/card'
-import { Section } from '@/components/ui/section'
-import { RESUME_DATA } from '@/data/resume-data'
+} from "@/components/ui/card";
+import { Section } from "@/components/ui/section";
+import { RESUME_DATA } from "@/data/resume-data";
 
 interface CourseLinkProps {
-  title: string
-  link: { href: string; label: string }
+  title: string;
+  link: { href: string; label: string };
 }
 
 function CourseLink({ title, link }: CourseLinkProps) {
@@ -36,14 +36,14 @@ function CourseLink({ title, link }: CourseLinkProps) {
         className="hidden font-mono text-xs underline print:visible"
         aria-hidden="true"
       >
-        {link.href.replace('https://', '').replace('www.', '').replace('/', '')}
+        {link.href.replace("https://", "").replace("www.", "").replace("/", "")}
       </div>
     </>
-  )
+  );
 }
 
 interface CoursePlatformProps {
-  platform: string
+  platform: string;
 }
 
 function CoursePlatform({ platform }: CoursePlatformProps) {
@@ -54,14 +54,14 @@ function CoursePlatform({ platform }: CoursePlatformProps) {
     >
       {platform}
     </Badge>
-  )
+  );
 }
 
 interface CourseCardProps {
-  title: string
-  description: string
-  platform: string
-  link: { href: string; label: string }
+  title: string;
+  description: string;
+  platform: string;
+  link: { href: string; label: string };
 }
 
 function CourseCard({ title, description, platform, link }: CourseCardProps) {
@@ -87,11 +87,11 @@ function CourseCard({ title, description, platform, link }: CourseCardProps) {
         <CoursePlatform platform={platform} />
       </CardContent>
     </Card>
-  )
+  );
 }
 
 interface CoursesProps {
-  courses: (typeof RESUME_DATA)['courses']
+  courses: (typeof RESUME_DATA)["courses"];
 }
 
 export function Courses({ courses }: CoursesProps) {
@@ -115,5 +115,5 @@ export function Courses({ courses }: CoursesProps) {
         ))}
       </div>
     </Section>
-  )
+  );
 }

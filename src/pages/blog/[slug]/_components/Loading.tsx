@@ -1,4 +1,9 @@
-import { TitleSkeleton, DateSkeleton, ImageSkeleton, TextSkeleton } from '@/components/ui/skeletons'
+import {
+  TitleSkeleton,
+  DateSkeleton,
+  ImageSkeleton,
+  TextSkeleton,
+} from "@/components/ui/skeletons";
 
 export default function Loading() {
   return (
@@ -26,5 +31,5 @@ export default function Loading() {
         </div>
       </article>
     </div>
-  )
+  );
 }

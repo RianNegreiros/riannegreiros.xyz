@@ -1,26 +1,25 @@
-
-import { MotionLi, MotionUl } from '@/components/MotionComponents'
-import { formatDate } from '@/lib'
-import type { Post } from '@/lib/types'
-import { Link } from 'react-router-dom'
+import { MotionLi, MotionUl } from "@/components/MotionComponents";
+import { formatDate } from "@/lib";
+import type { Post } from "@/lib/types";
+import { Link } from "react-router-dom";
 
 export default function PostsListClient({
   data,
   searchQuery,
 }: {
-  data: Post[]
-  searchQuery?: string
+  data: Post[];
+  searchQuery?: string;
 }) {
   if (!data || data.length === 0) {
     return (
       <div className="text-center py-8">
         <p className="text-lg text-muted-foreground">
           {searchQuery
-            ? 'Nenhum post encontrado para sua busca.'
-            : 'Nenhum post encontrado.'}
+            ? "Nenhum post encontrado para sua busca."
+            : "Nenhum post encontrado."}
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -60,5 +59,5 @@ export default function PostsListClient({
         </MotionLi>
       ))}
     </MotionUl>
-  )
+  );
 }

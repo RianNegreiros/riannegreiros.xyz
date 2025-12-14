@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom"
-import { Button } from "./ui/button"
-import { MotionDiv } from "./MotionComponents"
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
+import { MotionDiv } from "./MotionComponents";
 
 export default function NotFound() {
   return (
     <div className="flex items-center justify-center min-h-screen px-4 py-12">
-      <MotionDiv 
+      <MotionDiv
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -17,9 +17,7 @@ export default function NotFound() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="space-y-4"
         >
-          <h1 className="text-8xl font-bold text-primary">
-            404
-          </h1>
+          <h1 className="text-8xl font-bold text-primary">404</h1>
           <h2 className="text-2xl font-semibold text-foreground">
             Página não encontrada
           </h2>
@@ -27,19 +25,17 @@ export default function NotFound() {
             Não foi possível encontrar o recurso solicitado
           </p>
         </MotionDiv>
-        
+
         <MotionDiv
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <Button asChild className="w-full sm:w-auto">
-            <Link to="/">
-              Voltar ao início
-            </Link>
+            <Link to="/">Voltar ao início</Link>
           </Button>
         </MotionDiv>
       </MotionDiv>
     </div>
-  )
+  );
 }

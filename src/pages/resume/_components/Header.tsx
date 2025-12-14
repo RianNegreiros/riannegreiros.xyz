@@ -1,10 +1,10 @@
-import { GlobeIcon, MailIcon, PhoneIcon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { RESUME_DATA } from '@/data/resume-data'
+import { GlobeIcon, MailIcon, PhoneIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { RESUME_DATA } from "@/data/resume-data";
 
 interface LocationLinkProps {
-  location: typeof RESUME_DATA.location
-  locationLink: typeof RESUME_DATA.locationLink
+  location: typeof RESUME_DATA.location;
+  locationLink: typeof RESUME_DATA.locationLink;
 }
 
 function LocationLink({ location, locationLink }: LocationLinkProps) {
@@ -21,13 +21,13 @@ function LocationLink({ location, locationLink }: LocationLinkProps) {
         {location}
       </a>
     </p>
-  )
+  );
 }
 
 interface SocialButtonProps {
-  href: string
-  icon: React.ElementType
-  label: string
+  href: string;
+  icon: React.ElementType;
+  label: string;
 }
 
 function SocialButton({ href, icon: Icon, label }: SocialButtonProps) {
@@ -42,12 +42,12 @@ function SocialButton({ href, icon: Icon, label }: SocialButtonProps) {
         <Icon className="size-4" aria-hidden="true" />
       </a>
     </Button>
-  )
+  );
 }
 
 interface ContactButtonsProps {
-  contact: typeof RESUME_DATA.contact
-  personalWebsiteUrl?: string
+  contact: typeof RESUME_DATA.contact;
+  personalWebsiteUrl?: string;
 }
 
 function ContactButtons({ contact, personalWebsiteUrl }: ContactButtonsProps) {
@@ -87,12 +87,12 @@ function ContactButtons({ contact, personalWebsiteUrl }: ContactButtonsProps) {
         />
       ))}
     </div>
-  )
+  );
 }
 
 interface PrintContactProps {
-  contact: typeof RESUME_DATA.contact
-  personalWebsiteUrl?: string
+  contact: typeof RESUME_DATA.contact;
+  personalWebsiteUrl?: string;
 }
 
 function PrintContact({ contact, personalWebsiteUrl }: PrintContactProps) {
@@ -132,7 +132,7 @@ function PrintContact({ contact, personalWebsiteUrl }: PrintContactProps) {
         </a>
       )}
     </div>
-  )
+  );
 }
 
 export function Header() {
@@ -165,5 +165,5 @@ export function Header() {
         />
       </div>
     </header>
-  )
+  );
 }

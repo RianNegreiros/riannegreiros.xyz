@@ -1,37 +1,37 @@
-import { useEffect, useState } from 'react'
-import { useInView } from 'react-intersection-observer'
-import { LoaderCircle } from 'lucide-react'
-import { getPortfolioData, getTotalPortfolioItems } from '@/lib/api'
-import type { PortfolioItem } from '@/lib/types/sanity'
-import TimelineItem from './TimelineItem'
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { LoaderCircle } from "lucide-react";
+import { getPortfolioData, getTotalPortfolioItems } from "@/lib/api";
+import type { PortfolioItem } from "@/lib/types/sanity";
+import TimelineItem from "./TimelineItem";
 
-let page = 1
-const itemsPerPage = 10
+let page = 1;
+const itemsPerPage = 10;
 
 export default function LoadMore() {
-  const { ref, inView } = useInView()
-  const [data, setData] = useState<PortfolioItem[]>([])
-  const [hasMore, setHasMore] = useState<boolean>(true)
-  const [totalItems, setTotalItems] = useState<number>(0)
+  const { ref, inView } = useInView();
+  const [data, setData] = useState<PortfolioItem[]>([]);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [totalItems, setTotalItems] = useState<number>(0);
 
   useEffect(() => {
     getTotalPortfolioItems().then((total) => {
-      setTotalItems(total)
-    })
-  }, [])
+      setTotalItems(total);
+    });
+  }, []);
 
   useEffect(() => {
     if (inView && hasMore) {
       getPortfolioData(page, itemsPerPage).then((res) => {
-        setData((prevData) => [...prevData, ...res])
-        page++
+        setData((prevData) => [...prevData, ...res]);
+        page++;
 
         if (data.length + res.length + itemsPerPage >= totalItems) {
-          setHasMore(false)
+          setHasMore(false);
         }
-      })
+      });
     }
-  }, [inView, hasMore, totalItems, data.length])
+  }, [inView, hasMore, totalItems, data.length]);
 
   return (
     <>
@@ -45,5 +45,5 @@ export default function LoadMore() {
         </div>
       )}
     </>
-  )
+  );
 }

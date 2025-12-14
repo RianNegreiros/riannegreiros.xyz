@@ -1,23 +1,23 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { ClipboardIcon, CheckIcon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import * as React from "react";
+import { ClipboardIcon, CheckIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface SimpleCopyButtonProps {
-  value: string
-  className?: string
+  value: string;
+  className?: string;
 }
 
 export function CopyButton({ value, className }: SimpleCopyButtonProps) {
-  const [hasCopied, setHasCopied] = React.useState(false)
+  const [hasCopied, setHasCopied] = React.useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(value).then(() => {
-      setHasCopied(true)
-      setTimeout(() => setHasCopied(false), 1000)
-    })
-  }
+      setHasCopied(true);
+      setTimeout(() => setHasCopied(false), 1000);
+    });
+  };
 
   return (
     <Button
@@ -33,5 +33,5 @@ export function CopyButton({ value, className }: SimpleCopyButtonProps) {
         <ClipboardIcon className="h-4 w-4" />
       )}
     </Button>
-  )
+  );
 }

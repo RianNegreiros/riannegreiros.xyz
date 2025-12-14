@@ -1,5 +1,5 @@
-import { MotionDiv } from "@/components/MotionComponents"
-import { CardSkeleton } from "@/components/ui/skeletons"
+import { MotionDiv } from "@/components/MotionComponents";
+import { CardSkeleton } from "@/components/ui/skeletons";
 
 export default function Loading() {
   return (
@@ -16,5 +16,5 @@ export default function Loading() {
         </MotionDiv>
       ))}
     </div>
-  )
+  );
 }

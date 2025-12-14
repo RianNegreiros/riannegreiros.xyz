@@ -1,14 +1,13 @@
-
-import { Link } from 'react-router-dom'
-import { ModeToggle } from './ModeToggle'
-import { MobileMenu } from './MobileMenu'
-import { navigationItems } from '../data/navigation-items'
+import { Link } from "react-router-dom";
+import { ModeToggle } from "./ModeToggle";
+import { MobileMenu } from "./MobileMenu";
+import { navigationItems } from "../data/navigation-items";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from './ui/navigation-menu'
+} from "./ui/navigation-menu";
 
 export function Navbar() {
   return (
@@ -53,5 +52,5 @@ export function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

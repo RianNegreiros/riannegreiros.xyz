@@ -1,6 +1,6 @@
 // Using regular img tag instead of Next.js Image
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -8,15 +8,15 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from '@/components/ui/dialog'
-import { GitHubIcon } from '@/components/icons'
-import { MotionDiv } from '@/components/MotionComponents'
-import type { ProjectsCard } from '@/lib/types'
+} from "@/components/ui/dialog";
+import { GitHubIcon } from "@/components/icons";
+import { MotionDiv } from "@/components/MotionComponents";
+import type { ProjectsCard } from "@/lib/types";
 
 interface ProjectDialogProps {
-  project: ProjectsCard | null
-  isOpen: boolean
-  onClose: () => void
+  project: ProjectsCard | null;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function ProjectDialog({
@@ -24,7 +24,7 @@ export function ProjectDialog({
   isOpen,
   onClose,
 }: ProjectDialogProps) {
-  if (!project) return null
+  if (!project) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -76,9 +76,7 @@ export function ProjectDialog({
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.2, delay: 0.3 + index * 0.05 }}
                 >
-                  <Badge variant="secondary">
-                    {tag}
-                  </Badge>
+                  <Badge variant="secondary">{tag}</Badge>
                 </MotionDiv>
               ))}
             </div>
@@ -106,5 +104,5 @@ export function ProjectDialog({
         </MotionDiv>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

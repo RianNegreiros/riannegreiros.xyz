@@ -1,18 +1,18 @@
-import { Badge } from '@/components/ui/badge'
-import { Section } from '@/components/ui/section'
-import { cn } from '@/lib/utils'
+import { Badge } from "@/components/ui/badge";
+import { Section } from "@/components/ui/section";
+import { cn } from "@/lib/utils";
 
-type SkillsArray = readonly string[]
+type SkillsArray = readonly string[];
 
 interface SkillsListProps {
-  skills: SkillsArray
-  className?: string
+  skills: SkillsArray;
+  className?: string;
 }
 
 function SkillsList({ skills, className }: SkillsListProps) {
   return (
     <ul
-      className={cn('flex list-none flex-wrap gap-1 p-0', className)}
+      className={cn("flex list-none flex-wrap gap-1 p-0", className)}
       aria-label="Lista de habilidades"
     >
       {skills.map((skill) => (
@@ -23,12 +23,12 @@ function SkillsList({ skills, className }: SkillsListProps) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 interface SkillsProps {
-  skills: SkillsArray
-  className?: string
+  skills: SkillsArray;
+  className?: string;
 }
 
 export function Skills({ skills, className }: SkillsProps) {
@@ -39,5 +39,5 @@ export function Skills({ skills, className }: SkillsProps) {
       </h2>
       <SkillsList skills={skills} aria-labelledby="skills-section" />
     </Section>
-  )
+  );
 }

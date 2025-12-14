@@ -1,22 +1,22 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { ProjectDialog } from './ProjectDialog'
-import { ExternalLink } from 'lucide-react'
-import type { ProjectsCard } from '@/lib/types'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { ProjectDialog } from "./ProjectDialog";
+import { ExternalLink } from "lucide-react";
+import type { ProjectsCard } from "@/lib/types";
 
 interface ProjectCardModal {
-  data: ProjectsCard[]
+  data: ProjectsCard[];
 }
 
 export default function ProjectCard({ data }: ProjectCardModal) {
-  const [selected, setSelected] = useState<ProjectsCard | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selected, setSelected] = useState<ProjectsCard | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = (project: ProjectsCard) => {
-    setSelected(project)
-    setIsModalOpen(true)
-  }
-  const closeModal = () => setIsModalOpen(false)
+    setSelected(project);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <section>
@@ -43,7 +43,12 @@ export default function ProjectCard({ data }: ProjectCardModal) {
               />
             </div>
             <div className="mt-4">
-              <a href={item.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
                 <ExternalLink className="h-4 w-4" />
                 <h2 className="font-medium text-lg hover:underline">
                   {item.title}
@@ -74,5 +79,5 @@ export default function ProjectCard({ data }: ProjectCardModal) {
         />
       )}
     </section>
-  )
+  );
 }

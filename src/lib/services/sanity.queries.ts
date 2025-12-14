@@ -1,11 +1,11 @@
 export const queries = {
   posts: {
     list: (start: number, end: number, searchQuery?: string) => {
-      let query = `*[_type == 'post'`
+      let query = `*[_type == 'post'`;
       if (searchQuery) {
-        query += ` && (title match $searchQuery || overview match $searchQuery)]`
+        query += ` && (title match $searchQuery || overview match $searchQuery)]`;
       } else {
-        query += ']'
+        query += "]";
       }
       query += ` | order(firstPublishedDate desc) [${start}...${end}] {
         "id": _id,
@@ -13,14 +13,14 @@ export const queries = {
         overview,
         "slug": slug.current,
         firstPublishedDate
-      }`
+      }`;
       return {
         query,
         params: searchQuery ? { searchQuery: `*${searchQuery}*` } : {},
-      }
+      };
     },
     bySlug: (
-      slug: string
+      slug: string,
     ) => `*[_type == 'post' && slug.current == "${slug}"][0]{
       "id": _id,
       title,
@@ -75,7 +75,7 @@ export const queries = {
     count: `count(*[_type in ['post', 'project']])`,
     timeline: (
       start: number,
-      end: number
+      end: number,
     ) => `*[_type in ["post", "project"]] | order(firstPublishedDate desc, _createdAt desc) [${start}...${end}] {
       "id": _id,
       _type,
@@ -88,4 +88,4 @@ export const queries = {
       "createdAt": _createdAt
     }`,
   },
-}
+};

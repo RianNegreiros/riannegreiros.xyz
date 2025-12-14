@@ -1,5 +1,10 @@
-import { MotionDiv } from "@/components/MotionComponents"
-import { TitleSkeleton, DateSkeleton, ImageSkeleton, TextSkeleton } from "@/components/ui/skeletons"
+import { MotionDiv } from "@/components/MotionComponents";
+import {
+  TitleSkeleton,
+  DateSkeleton,
+  ImageSkeleton,
+  TextSkeleton,
+} from "@/components/ui/skeletons";
 
 export default function PostSkeleton() {
   return (
@@ -13,7 +18,7 @@ export default function PostSkeleton() {
         <TitleSkeleton className="h-10 mb-4" />
         <DateSkeleton className="w-48 mb-8" />
         <ImageSkeleton className="h-64 mb-8" />
-        
+
         <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-8">
           <div className="space-y-4">
             {Array.from({ length: 8 }).map((_, index) => (
@@ -27,7 +32,7 @@ export default function PostSkeleton() {
               </MotionDiv>
             ))}
           </div>
-          
+
           <aside className="mt-8 lg:mt-0">
             <div className="sticky top-4">
               <div className="rounded-lg border bg-card/50 backdrop-blur-sm p-6 shadow-sm">
@@ -39,5 +44,5 @@ export default function PostSkeleton() {
         </div>
       </MotionDiv>
     </div>
-  )
+  );
 }
