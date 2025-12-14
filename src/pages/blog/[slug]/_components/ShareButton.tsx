@@ -1,49 +1,49 @@
-import { Share2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Share2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { useEffect, useState } from 'react'
+} from "@/components/ui/dropdown-menu";
+import { useEffect, useState } from "react";
 
 type ShareButtonProps = {
-  slug: string
-  title: string
-  body: string
-}
+  slug: string;
+  title: string;
+  body: string;
+};
 
 export default function ShareButton({ slug, title, body }: ShareButtonProps) {
-  const baseUrl = import.meta.env.VITE_BASE_URL || window.location.origin
-  const url = `${baseUrl}/blog/${slug}`
+  const baseUrl = import.meta.env.VITE_BASE_URL || window.location.origin;
+  const url = `${baseUrl}/blog/${slug}`;
 
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(/Mobi|Android|iPhone/i.test(navigator.userAgent))
-    }
-    checkMobile()
-  }, [])
+      setIsMobile(/Mobi|Android|iPhone/i.test(navigator.userAgent));
+    };
+    checkMobile();
+  }, []);
 
   const handleNativeShare = async () => {
-    if ('share' in navigator) {
+    if ("share" in navigator) {
       try {
         await navigator.share({
           title,
           text: body,
           url,
-        })
+        });
       } catch (error) {
-        console.log('Share cancelled or failed:', error)
+        console.log("Share cancelled or failed:", error);
       }
     }
-  }
+  };
 
   const handleSocialShare = (platform: string) => {
-    const encodedUrl = encodeURIComponent(url)
-    const encodedTitle = encodeURIComponent(title)
+    const encodedUrl = encodeURIComponent(url);
+    const encodedTitle = encodeURIComponent(title);
 
     const shareUrls = {
       twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
@@ -51,13 +51,13 @@ export default function ShareButton({ slug, title, body }: ShareButtonProps) {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
       whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
       telegram: `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`,
-      email: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`
-    }
+      email: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`,
+    };
 
-    window.open(shareUrls[platform as keyof typeof shareUrls], '_blank')
-  }
+    window.open(shareUrls[platform as keyof typeof shareUrls], "_blank");
+  };
 
-  return isMobile && 'share' in navigator ? (
+  return isMobile && "share" in navigator ? (
     <Button
       onClick={handleNativeShare}
       variant="outline"
@@ -78,25 +78,25 @@ export default function ShareButton({ slug, title, body }: ShareButtonProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => handleSocialShare('twitter')}>
+        <DropdownMenuItem onClick={() => handleSocialShare("twitter")}>
           Twitter
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleSocialShare('linkedin')}>
+        <DropdownMenuItem onClick={() => handleSocialShare("linkedin")}>
           LinkedIn
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleSocialShare('facebook')}>
+        <DropdownMenuItem onClick={() => handleSocialShare("facebook")}>
           Facebook
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleSocialShare('whatsapp')}>
+        <DropdownMenuItem onClick={() => handleSocialShare("whatsapp")}>
           WhatsApp
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleSocialShare('telegram')}>
+        <DropdownMenuItem onClick={() => handleSocialShare("telegram")}>
           Telegram
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => handleSocialShare('email')}>
+        <DropdownMenuItem onClick={() => handleSocialShare("email")}>
           Email
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

@@ -1,5 +1,9 @@
-import { MotionDiv } from "@/components/MotionComponents"
-import { DateSkeleton, TitleSkeleton, TextSkeleton } from "@/components/ui/skeletons"
+import { MotionDiv } from "@/components/MotionComponents";
+import {
+  DateSkeleton,
+  TitleSkeleton,
+  TextSkeleton,
+} from "@/components/ui/skeletons";
 
 export default function BlogSkeleton() {
   return (
@@ -22,5 +26,5 @@ export default function BlogSkeleton() {
         ))}
       </div>
     </div>
-  )
+  );
 }

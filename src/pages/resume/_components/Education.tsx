@@ -1,15 +1,15 @@
-import { Card, CardHeader, CardContent } from '@/components/ui/card'
-import { Section } from '@/components/ui/section'
-import { RESUME_DATA } from '@/data/resume-data'
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Section } from "@/components/ui/section";
+import { RESUME_DATA } from "@/data/resume-data";
 
-type EducationData = (typeof RESUME_DATA)['education'][number]
+type EducationData = (typeof RESUME_DATA)["education"][number];
 
 interface EducationItemProps {
-  education: EducationData
+  education: EducationData;
 }
 
 function EducationItem({ education }: EducationItemProps) {
-  const { school, degree } = education
+  const { school, degree } = education;
 
   return (
     <Card>
@@ -17,7 +17,7 @@ function EducationItem({ education }: EducationItemProps) {
         <div className="flex items-center justify-between gap-x-2 text-base">
           <h3
             className="font-semibold leading-none"
-            id={`education-${school.toLowerCase().replace(/\s+/g, '-')}`}
+            id={`education-${school.toLowerCase().replace(/\s+/g, "-")}`}
           >
             {school}
           </h3>
@@ -27,16 +27,16 @@ function EducationItem({ education }: EducationItemProps) {
         className="mt-2 text-foreground/80 print:text-[12px]"
         aria-labelledby={`education-${school
           .toLowerCase()
-          .replace(/\s+/g, '-')}`}
+          .replace(/\s+/g, "-")}`}
       >
         {degree}
       </CardContent>
     </Card>
-  )
+  );
 }
 
 interface EducationListProps {
-  education: readonly EducationData[]
+  education: readonly EducationData[];
 }
 
 export function Education({ education }: EducationListProps) {
@@ -51,5 +51,5 @@ export function Education({ education }: EducationListProps) {
         ))}
       </div>
     </Section>
-  )
+  );
 }

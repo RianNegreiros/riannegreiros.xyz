@@ -1,18 +1,18 @@
-import { Pencil, Briefcase, ArrowUpRight } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { MotionLi } from '@/components/MotionComponents'
-import type { PortfolioItem } from '@/lib/types/sanity'
-import { formatDate } from '@/lib/date'
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Pencil, Briefcase, ArrowUpRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { MotionLi } from "@/components/MotionComponents";
+import type { PortfolioItem } from "@/lib/types/sanity";
+import { formatDate } from "@/lib/date";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const variants = {
   hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0 },
-}
+};
 
 interface TimelineItemProps extends PortfolioItem {
-  index?: number
+  index?: number;
 }
 
 export default function TimelineItem({
@@ -26,7 +26,7 @@ export default function TimelineItem({
   firstPublishedDate,
   index = 0,
 }: TimelineItemProps) {
-  const isPost = _type === 'post'
+  const isPost = _type === "post";
 
   return (
     <MotionLi
@@ -37,7 +37,7 @@ export default function TimelineItem({
       animate="visible"
       transition={{
         delay: index * 0.1,
-        ease: 'easeInOut',
+        ease: "easeInOut",
         duration: 0.5,
       }}
       viewport={{ amount: 0.2 }}
@@ -68,10 +68,10 @@ export default function TimelineItem({
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-lg font-semibold text-foreground">{title}</h3>
             <Badge
-              variant={isPost ? 'default' : 'secondary'}
+              variant={isPost ? "default" : "secondary"}
               className="flex items-center"
             >
-              {isPost ? 'Post' : 'Projeto'}
+              {isPost ? "Post" : "Projeto"}
               <ArrowUpRight className="ml-1 h-3 w-3" aria-hidden="true" />
             </Badge>
           </div>
@@ -84,7 +84,7 @@ export default function TimelineItem({
         </Link>
       ) : (
         <a
-          href={link ?? '#'}
+          href={link ?? "#"}
           target="_blank"
           rel="noopener noreferrer"
           className="block p-4 bg-card hover:bg-accent rounded-lg transition-colors duration-200 ease-in-out"
@@ -92,10 +92,10 @@ export default function TimelineItem({
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-lg font-semibold text-foreground">{title}</h3>
             <Badge
-              variant={isPost ? 'default' : 'secondary'}
+              variant={isPost ? "default" : "secondary"}
               className="flex items-center"
             >
-              {isPost ? 'Post' : 'Projeto'}
+              {isPost ? "Post" : "Projeto"}
               <ArrowUpRight className="ml-1 h-3 w-3" aria-hidden="true" />
             </Badge>
           </div>
@@ -107,6 +107,6 @@ export default function TimelineItem({
           </p>
         </a>
       )}
-    </MotionLi >
-  )
+    </MotionLi>
+  );
 }

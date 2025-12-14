@@ -1,20 +1,26 @@
-import { createClient } from '@sanity/client';
-import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
+import { createClient } from "@sanity/client";
+import {
+  createImageUrlBuilder,
+  type SanityImageSource,
+} from "@sanity/image-url";
 
 export const client = createClient({
-  apiVersion: '2024-03-13',
-  dataset: 'production',
-  projectId: '091jywj8',
+  apiVersion: "2024-03-13",
+  dataset: "production",
+  projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
   useCdn: true,
-})
+});
 
-const builder = createImageUrlBuilder(client)
+const builder = createImageUrlBuilder(client);
 
 export function urlFor(source: SanityImageSource) {
-  return builder.image(source)
+  return builder.image(source);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function fetchSanityData<T>(query: string, params?: Record<string, any>): Promise<T> {
-  return client.fetch(query, params)
+export async function fetchSanityData<T>(
+  query: string,
+  params?: Record<string, any>,
+): Promise<T> {
+  return client.fetch(query, params);
 }

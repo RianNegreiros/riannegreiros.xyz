@@ -1,9 +1,9 @@
-import { RESUME_DATA } from '@/data/resume-data'
-import { Section } from '@/components/ui/section'
+import { RESUME_DATA } from "@/data/resume-data";
+import { Section } from "@/components/ui/section";
 
 interface AboutProps {
-  summary: typeof RESUME_DATA.summary
-  className?: string
+  summary: typeof RESUME_DATA.summary;
+  className?: string;
 }
 
 export function Summary({ summary, className }: AboutProps) {
@@ -19,5 +19,5 @@ export function Summary({ summary, className }: AboutProps) {
         {summary}
       </div>
     </Section>
-  )
+  );
 }

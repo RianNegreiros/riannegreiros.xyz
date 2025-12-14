@@ -1,6 +1,10 @@
-import { MotionLi, MotionUl } from '@/components/MotionComponents'
-import { DateSkeleton, TitleSkeleton, TextSkeleton } from '@/components/ui/skeletons'
-import { Skeleton } from '@/components/ui/skeleton'
+import { MotionLi, MotionUl } from "@/components/MotionComponents";
+import {
+  DateSkeleton,
+  TitleSkeleton,
+  TextSkeleton,
+} from "@/components/ui/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
@@ -31,5 +35,5 @@ export default function Loading() {
         <Skeleton className="w-64 h-10" />
       </div>
     </div>
-  )
+  );
 }

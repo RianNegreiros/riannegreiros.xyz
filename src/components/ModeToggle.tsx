@@ -1,23 +1,22 @@
+import * as React from "react";
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "../contexts/ThemeContext";
 
-import * as React from 'react'
-import { Sun, Moon } from 'lucide-react'
-import { useTheme } from '../contexts/ThemeContext'
-
-import { Button } from './ui/button'
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu'
+} from "./ui/dropdown-menu";
 
 export function ModeToggle() {
-  const { setTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
+  const { setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
     return (
@@ -25,7 +24,7 @@ export function ModeToggle() {
         <Sun className="h-[1.2rem] w-[1.2rem]" />
         <span className="sr-only">Toggle theme</span>
       </Button>
-    )
+    );
   }
 
   return (
@@ -38,16 +37,16 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
+        <DropdownMenuItem onClick={() => setTheme("light")}>
           Claro
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
           Escuro
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
           Sistema
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

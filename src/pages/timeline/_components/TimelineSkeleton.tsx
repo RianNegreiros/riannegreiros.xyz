@@ -1,6 +1,11 @@
-import { MotionLi } from "@/components/MotionComponents"
-import { DateSkeleton, TitleSkeleton, TextSkeleton, TagsSkeleton } from "@/components/ui/skeletons"
-import { Skeleton } from "@/components/ui/skeleton"
+import { MotionLi } from "@/components/MotionComponents";
+import {
+  DateSkeleton,
+  TitleSkeleton,
+  TextSkeleton,
+  TagsSkeleton,
+} from "@/components/ui/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function TimelineSkeleton() {
   return (
@@ -14,7 +19,7 @@ export default function TimelineSkeleton() {
           className="mb-10 ms-6"
         >
           <Skeleton className="absolute w-6 h-6 rounded-full -start-3" />
-          
+
           <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <DateSkeleton className="mb-2" />
             <TitleSkeleton className="mb-3" />
@@ -24,5 +29,5 @@ export default function TimelineSkeleton() {
         </MotionLi>
       ))}
     </ol>
-  )
+  );
 }

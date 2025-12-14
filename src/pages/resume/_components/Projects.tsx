@@ -1,19 +1,19 @@
-import { Badge } from '@/components/ui/badge'
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from '@/components/ui/card'
-import { Section } from '@/components/ui/section'
-import { RESUME_DATA } from '@/data/resume-data'
+} from "@/components/ui/card";
+import { Section } from "@/components/ui/section";
+import { RESUME_DATA } from "@/data/resume-data";
 
-type ProjectTagsArray = readonly string[]
+type ProjectTagsArray = readonly string[];
 
 interface ProjectLinkProps {
-  title: string
-  link: { href: string; label: string }
+  title: string;
+  link: { href: string; label: string };
 }
 
 function ProjectLink({ title, link }: ProjectLinkProps) {
@@ -38,18 +38,18 @@ function ProjectLink({ title, link }: ProjectLinkProps) {
         className="hidden font-mono text-xs underline print:visible"
         aria-hidden="true"
       >
-        {link.href.replace('https://', '').replace('www.', '').replace('/', '')}
+        {link.href.replace("https://", "").replace("www.", "").replace("/", "")}
       </div>
     </>
-  )
+  );
 }
 
 interface ProjectTagsProps {
-  tags: ProjectTagsArray
+  tags: ProjectTagsArray;
 }
 
 function ProjectTags({ tags }: ProjectTagsProps) {
-  if (tags.length === 0) return null
+  if (tags.length === 0) return null;
 
   return (
     <ul
@@ -67,14 +67,14 @@ function ProjectTags({ tags }: ProjectTagsProps) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 interface ProjectCardProps {
-  title: string
-  description: string
-  tags: ProjectTagsArray
-  link: { href: string; label: string }
+  title: string;
+  description: string;
+  tags: ProjectTagsArray;
+  link: { href: string; label: string };
 }
 
 function ProjectCard({ title, description, tags, link }: ProjectCardProps) {
@@ -100,11 +100,11 @@ function ProjectCard({ title, description, tags, link }: ProjectCardProps) {
         <ProjectTags tags={tags} />
       </CardContent>
     </Card>
-  )
+  );
 }
 
 interface ProjectsProps {
-  projects: (typeof RESUME_DATA)['projects']
+  projects: (typeof RESUME_DATA)["projects"];
 }
 
 export function Projects({ projects }: ProjectsProps) {
@@ -128,5 +128,5 @@ export function Projects({ projects }: ProjectsProps) {
         ))}
       </div>
     </Section>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-import { cn } from "@/lib/utils"
-import { Skeleton } from "./skeleton"
+import { cn } from "@/lib/utils";
+import { Skeleton } from "./skeleton";
 
 interface SkeletonProps {
-  className?: string
-  count?: number
+  className?: string;
+  count?: number;
 }
 
 export function TextSkeleton({ className, count = 1 }: SkeletonProps) {
@@ -13,19 +13,19 @@ export function TextSkeleton({ className, count = 1 }: SkeletonProps) {
         <Skeleton key={i} className={cn("h-4", className)} />
       ))}
     </div>
-  )
+  );
 }
 
 export function TitleSkeleton({ className }: { className?: string }) {
-  return <Skeleton className={cn("h-6 w-3/4", className)} />
+  return <Skeleton className={cn("h-6 w-3/4", className)} />;
 }
 
 export function DateSkeleton({ className }: { className?: string }) {
-  return <Skeleton className={cn("h-4 w-24", className)} />
+  return <Skeleton className={cn("h-4 w-24", className)} />;
 }
 
 export function ImageSkeleton({ className }: { className?: string }) {
-  return <Skeleton className={cn("w-full aspect-video", className)} />
+  return <Skeleton className={cn("w-full aspect-video", className)} />;
 }
 
 export function TagsSkeleton({ count = 3, className }: SkeletonProps) {
@@ -35,7 +35,7 @@ export function TagsSkeleton({ count = 3, className }: SkeletonProps) {
         <Skeleton key={i} className={cn("h-6 w-16", className)} />
       ))}
     </div>
-  )
+  );
 }
 
 export function CardSkeleton({ className }: { className?: string }) {
@@ -48,5 +48,5 @@ export function CardSkeleton({ className }: { className?: string }) {
         <TagsSkeleton />
       </div>
     </div>
-  )
+  );
 }
