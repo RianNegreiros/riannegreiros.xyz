@@ -42,7 +42,7 @@ function convertPortableTextToHTML(content: PortableTextBlock[]): string {
 async function generateRssFeed() {
   const feed = new RSS({
     title: SITE_CONFIG.name,
-    description: SITE_CONFIG.description,
+    description: "RSS feed do meu blog pessoal",
     feed_url: `${process.env.VITE_BASE_URL}/rss.xml`,
     site_url: `${process.env.VITE_BASE_URL}`,
     language: "pt-BR",
