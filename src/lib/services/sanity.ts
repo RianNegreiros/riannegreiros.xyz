@@ -17,10 +17,9 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function fetchSanityData<T>(
   query: string,
-  params?: Record<string, any>,
+  params?: Record<string, unknown>,
 ): Promise<T> {
   return client.fetch(query, params);
 }
