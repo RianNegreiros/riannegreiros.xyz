@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://riannegreiros.com.br/sitemap.xml

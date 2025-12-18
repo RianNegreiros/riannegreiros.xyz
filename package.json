@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:rss && tsc -b && vite build",
+    "build": "npm run build:rss && npm run build:sitemap && tsc -b && vite build",
     "build:rss": "tsx scripts/generate-rss.ts",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
+    "build:sitemap": "tsx scripts/generate-sitemap.ts",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -40,6 +41,7 @@
     "react-router-dom": "^7.11.0",
     "react-share": "^5.2.2",
     "react-syntax-highlighter": "^16.1.0",
+    "sitemap": "^9.0.0",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18"
   },
