@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:rss && npm run build:sitemap && tsc -b && vite build",
+    "build": "npm run build:rss && npm run build:sitemap && npm run build:robots && tsc -b && vite build",
     "build:rss": "tsx scripts/generate-rss.ts",
     "build:sitemap": "tsx scripts/generate-sitemap.ts",
+    "build:robots": "tsx scripts/generate-robots.ts",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint .",
     "preview": "vite preview"
