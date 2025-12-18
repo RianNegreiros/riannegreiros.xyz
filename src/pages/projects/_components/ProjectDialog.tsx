@@ -1,4 +1,3 @@
-// Using regular img tag instead of Next.js Image
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -57,7 +56,6 @@ export function ProjectDialog({
               height={400}
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
-              data-blur={project.blurImage}
             />
           </MotionDiv>
 

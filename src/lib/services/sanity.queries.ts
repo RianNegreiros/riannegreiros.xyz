@@ -29,12 +29,11 @@ export const queries = {
       image,
       "slug": slug.current,
       overview,
-      "blurImage": image.asset->metadata.lqip,
+      "]": image.asset->metadata.lqip,
       content[]{
         ...,
         _type == 'image' => {
           ...,
-          "blurImage": asset->metadata.lqip,
           "url": asset->url
         }
       },
@@ -55,7 +54,6 @@ export const queries = {
       description,
       tags,
       "imageUrl": image.asset->url,
-      "blurImage": image.asset->metadata.lqip,
       "createdAt": _createdAt
     }`,
   },

@@ -15,7 +15,6 @@ export type Post = {
   image?: any;
   content?: any[];
   headings: Heading[];
-  blurImage?: string;
 };
 
 export type Project = {
@@ -25,7 +24,6 @@ export type Project = {
   description: string;
   tags: string[];
   imageUrl: string;
-  blurImage: string;
   createdAt: string;
 };
 
