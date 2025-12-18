@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { PortableText } from "@portabletext/react";
-import ShareButton from "./ShareButton";
-import TableOfContents from "./TableOfContents";
-import MobileTableOfContents from "./MobileTableOfContents";
-import { Suspense } from "react";
-import Loading from "./Loading";
-import CodeBlock from "./CodeBlock";
-import { fetchSanityData, queries, urlFor } from "@/lib/services";
-import type { Post } from "@/lib/types";
-import { formatDate, slugify } from "@/lib";
+import { PortableText } from '@portabletext/react'
+import ShareButton from './ShareButton'
+import TableOfContents from './TableOfContents'
+import MobileTableOfContents from './MobileTableOfContents'
+import { Suspense } from 'react'
+import Loading from './Loading'
+import CodeBlock from './CodeBlock'
+import { fetchSanityData, queries, urlFor } from '@/lib/services'
+import type { Post } from '@/lib/types'
+import { formatDate, slugify } from '@/lib'
 
 async function getData(slug: string) {
-  const query = queries.posts.bySlug(slug);
-  return await fetchSanityData<Post>(query);
+  const query = queries.posts.bySlug(slug)
+  return await fetchSanityData<Post>(query)
 }
 
 const PortableTextComponent = {
@@ -22,7 +22,7 @@ const PortableTextComponent = {
       <figure className="my-8">
         <img
           src={value.url}
-          alt={value.alt || "Image"}
+          alt={value.alt || 'Image'}
           className="rounded-lg w-full h-auto shadow-sm"
           width={0}
           height={0}
@@ -43,75 +43,69 @@ const PortableTextComponent = {
     ),
     h1: ({ children, value }: any) => {
       const text =
-        value.children?.map((child: any) => child.text || "").join("") || "";
+        value.children?.map((child: any) => child.text || '').join('') || ''
       return (
         <h1
           id={slugify(text)}
-          className="scroll-mt-20 text-3xl font-bold mb-6 mt-8 first:mt-0"
-        >
+          className="scroll-mt-20 text-3xl font-bold mb-6 mt-8 first:mt-0">
           {children}
         </h1>
-      );
+      )
     },
     h2: ({ children, value }: any) => {
       const text =
-        value.children?.map((child: any) => child.text || "").join("") || "";
+        value.children?.map((child: any) => child.text || '').join('') || ''
       return (
         <h2
           id={slugify(text)}
-          className="scroll-mt-20 text-2xl font-semibold mb-4 mt-8 first:mt-0 border-b border-border pb-2"
-        >
+          className="scroll-mt-20 text-2xl font-semibold mb-4 mt-8 first:mt-0 border-b border-border pb-2">
           {children}
         </h2>
-      );
+      )
     },
     h3: ({ children, value }: any) => {
       const text =
-        value.children?.map((child: any) => child.text || "").join("") || "";
+        value.children?.map((child: any) => child.text || '').join('') || ''
       return (
         <h3
           id={slugify(text)}
-          className="scroll-mt-20 text-xl font-semibold mb-3 mt-6 first:mt-0"
-        >
+          className="scroll-mt-20 text-xl font-semibold mb-3 mt-6 first:mt-0">
           {children}
         </h3>
-      );
+      )
     },
     h4: ({ children, value }: any) => {
       const text =
-        value.children?.map((child: any) => child.text || "").join("") || "";
+        value.children?.map((child: any) => child.text || '').join('') || ''
       return (
         <h4
           id={slugify(text)}
-          className="scroll-mt-20 text-lg font-medium mb-2 mt-5 first:mt-0"
-        >
+          className="scroll-mt-20 text-lg font-medium mb-2 mt-5 first:mt-0">
           {children}
         </h4>
-      );
+      )
     },
     h5: ({ children, value }: any) => {
       const text =
-        value.children?.map((child: any) => child.text || "").join("") || "";
+        value.children?.map((child: any) => child.text || '').join('') || ''
       return (
         <h5
           id={slugify(text)}
-          className="scroll-mt-20 text-base font-medium mb-2 mt-4 first:mt-0"
-        >
+          className="scroll-mt-20 text-base font-medium mb-2 mt-4 first:mt-0">
           {children}
         </h5>
-      );
+      )
     },
     h6: ({ children, value }: any) => {
       const text =
-        value.children?.map((child: any) => child.text || "").join("") || "";
+        value.children?.map((child: any) => child.text || '').join('') || ''
       return (
         <h6
           id={slugify(text)}
-          className="scroll-mt-20 text-sm font-medium mb-2 mt-4 first:mt-0 text-muted-foreground"
-        >
+          className="scroll-mt-20 text-sm font-medium mb-2 mt-4 first:mt-0 text-muted-foreground">
           {children}
         </h6>
-      );
+      )
     },
     blockquote: ({ children }: any) => (
       <blockquote className="border-l-4 border-primary pl-4 my-6 italic text-muted-foreground bg-muted/30 py-2 rounded-r-md">
@@ -147,34 +141,33 @@ const PortableTextComponent = {
       <a
         href={value?.href}
         className="text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
-        target={value?.href?.startsWith("http") ? "_blank" : undefined}
+        target={value?.href?.startsWith('http') ? '_blank' : undefined}
         rel={
-          value?.href?.startsWith("http") ? "noopener noreferrer" : undefined
-        }
-      >
+          value?.href?.startsWith('http') ? 'noopener noreferrer' : undefined
+        }>
         {children}
       </a>
     ),
   },
-};
+}
 
 export default async function PostContent({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params;
-  const data = await getData(slug);
+  const { slug } = await params
+  const data = await getData(slug)
 
   if (!data) {
-    return <div>Post not found</div>;
+    return <div>Post not found</div>
   }
 
   const shareParams = {
     slug: data.slug,
     body: `Confira este artigo: ${data.title}. Leia mais em:`,
     title: data.title,
-  };
+  }
 
   return (
     <Suspense fallback={<Loading />}>
@@ -223,5 +216,5 @@ export default async function PostContent({
         />
       </div>
     </Suspense>
-  );
+  )
 }

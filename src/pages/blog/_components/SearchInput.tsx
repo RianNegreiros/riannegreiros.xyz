@@ -1,57 +1,57 @@
-import { Search, Loader2 } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Input } from "@/components/ui/input";
+import { Search, Loader2 } from 'lucide-react'
+import { useCallback, useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Input } from '@/components/ui/input'
 
 function useDebounce(value: string, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+  const [debouncedValue, setDebouncedValue] = useState(value)
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
+      setDebouncedValue(value)
+    }, delay)
 
     return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
+      clearTimeout(handler)
+    }
+  }, [value, delay])
 
-  return debouncedValue;
+  return debouncedValue
 }
 
 export default function SearchInput() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const [search, setSearch] = useState(searchParams.get("search") ?? "");
-  const [isSearching, setIsSearching] = useState(false);
-  const debouncedSearch = useDebounce(search, 300);
+  const navigate = useNavigate()
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const [search, setSearch] = useState(searchParams.get('search') ?? '')
+  const [isSearching, setIsSearching] = useState(false)
+  const debouncedSearch = useDebounce(search, 300)
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(location.search);
+      const params = new URLSearchParams(location.search)
       if (value) {
-        params.set(name, value);
+        params.set(name, value)
       } else {
-        params.delete(name);
+        params.delete(name)
       }
-      return params.toString();
+      return params.toString()
     },
     [location.search],
-  );
+  )
 
   useEffect(() => {
     const updateSearch = async () => {
-      setIsSearching(true);
+      setIsSearching(true)
       try {
-        const queryString = createQueryString("search", debouncedSearch);
-        navigate(`${location.pathname}?${queryString}`, { replace: true });
+        const queryString = createQueryString('search', debouncedSearch)
+        navigate(`${location.pathname}?${queryString}`, { replace: true })
       } finally {
-        setIsSearching(false);
+        setIsSearching(false)
       }
-    };
-    updateSearch();
-  }, [debouncedSearch, createQueryString, location.pathname, navigate]);
+    }
+    updateSearch()
+  }, [debouncedSearch, createQueryString, location.pathname, navigate])
 
   return (
     <div className="relative mb-8">
@@ -71,5 +71,5 @@ export default function SearchInput() {
         aria-label="Buscar posts"
       />
     </div>
-  );
+  )
 }

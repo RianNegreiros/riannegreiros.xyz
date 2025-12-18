@@ -1,14 +1,14 @@
 export const navigationItems = [
   {
-    name: "Blog",
-    href: "/blog",
+    name: 'Blog',
+    href: '/blog',
   },
   {
-    name: "Projetos",
-    href: "/projects",
+    name: 'Projetos',
+    href: '/projects',
   },
   {
-    name: "Currículo",
-    href: "/resume",
+    name: 'Currículo',
+    href: '/resume',
   },
-];
+]

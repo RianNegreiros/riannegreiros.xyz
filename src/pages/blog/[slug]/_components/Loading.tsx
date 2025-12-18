@@ -3,15 +3,14 @@ import {
   DateSkeleton,
   ImageSkeleton,
   TextSkeleton,
-} from "@/components/ui/skeletons";
+} from '@/components/ui/skeletons'
 
 export default function Loading() {
   return (
     <div
       className="container mx-auto px-4 py-8 animate-pulse"
       role="status"
-      aria-live="polite"
-    >
+      aria-live="polite">
       <article className="max-w-4xl mx-auto">
         <TitleSkeleton className="h-12 mb-4" />
         <DateSkeleton className="w-1/2 mb-8" />
@@ -31,5 +30,5 @@ export default function Loading() {
         </div>
       </article>
     </div>
-  );
+  )
 }

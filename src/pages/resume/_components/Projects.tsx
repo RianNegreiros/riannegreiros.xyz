@@ -1,19 +1,19 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge'
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/card";
-import { Section } from "@/components/ui/section";
-import { RESUME_DATA } from "@/data/resume-data";
+} from '@/components/ui/card'
+import { Section } from '@/components/ui/section'
+import { RESUME_DATA } from '@/data/resume-data'
 
-type ProjectTagsArray = readonly string[];
+type ProjectTagsArray = readonly string[]
 
 interface ProjectLinkProps {
-  title: string;
-  link: { href: string; label: string };
+  title: string
+  link: { href: string; label: string }
 }
 
 function ProjectLink({ title, link }: ProjectLinkProps) {
@@ -24,8 +24,7 @@ function ProjectLink({ title, link }: ProjectLinkProps) {
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1 hover:underline"
-        aria-label={`${title} project (opens in new tab)`}
-      >
+        aria-label={`${title} project (opens in new tab)`}>
         {title}
         {link.href && (
           <span
@@ -36,53 +35,49 @@ function ProjectLink({ title, link }: ProjectLinkProps) {
       </a>
       <div
         className="hidden font-mono text-xs underline print:visible"
-        aria-hidden="true"
-      >
-        {link.href.replace("https://", "").replace("www.", "").replace("/", "")}
+        aria-hidden="true">
+        {link.href.replace('https://', '').replace('www.', '').replace('/', '')}
       </div>
     </>
-  );
+  )
 }
 
 interface ProjectTagsProps {
-  tags: ProjectTagsArray;
+  tags: ProjectTagsArray
 }
 
 function ProjectTags({ tags }: ProjectTagsProps) {
-  if (tags.length === 0) return null;
+  if (tags.length === 0) return null
 
   return (
     <ul
       className="mt-2 flex list-none flex-wrap gap-1 p-0"
-      aria-label="Technologies used"
-    >
+      aria-label="Technologies used">
       {tags.map((tag) => (
         <li key={tag}>
           <Badge
             className="px-1 py-0 text-[10px] print:px-1 print:py-0.5 print:text-[8px] print:leading-tight"
-            variant="secondary"
-          >
+            variant="secondary">
             {tag}
           </Badge>
         </li>
       ))}
     </ul>
-  );
+  )
 }
 
 interface ProjectCardProps {
-  title: string;
-  description: string;
-  tags: ProjectTagsArray;
-  link: { href: string; label: string };
+  title: string
+  description: string
+  tags: ProjectTagsArray
+  link: { href: string; label: string }
 }
 
 function ProjectCard({ title, description, tags, link }: ProjectCardProps) {
   return (
     <Card
       className="flex h-full flex-col overflow-hidden border p-3"
-      role="article"
-    >
+      role="article">
       <CardHeader>
         <div className="space-y-1">
           <CardTitle className="text-base">
@@ -90,8 +85,7 @@ function ProjectCard({ title, description, tags, link }: ProjectCardProps) {
           </CardTitle>
           <CardDescription
             className="text-pretty font-mono text-xs print:text-[10px]"
-            aria-label="Project description"
-          >
+            aria-label="Project description">
             {description}
           </CardDescription>
         </div>
@@ -100,11 +94,11 @@ function ProjectCard({ title, description, tags, link }: ProjectCardProps) {
         <ProjectTags tags={tags} />
       </CardContent>
     </Card>
-  );
+  )
 }
 
 interface ProjectsProps {
-  projects: (typeof RESUME_DATA)["projects"];
+  projects: (typeof RESUME_DATA)['projects']
 }
 
 export function Projects({ projects }: ProjectsProps) {
@@ -114,8 +108,7 @@ export function Projects({ projects }: ProjectsProps) {
       <div
         className="-mx-3 grid grid-cols-1 gap-3 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3"
         role="feed"
-        aria-labelledby="projetos"
-      >
+        aria-labelledby="projetos">
         {projects.map((project) => (
           <article key={project.title} className="h-full">
             <ProjectCard
@@ -128,5 +121,5 @@ export function Projects({ projects }: ProjectsProps) {
         ))}
       </div>
     </Section>
-  );
+  )
 }

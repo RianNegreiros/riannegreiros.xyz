@@ -1,10 +1,10 @@
-import { MotionDiv } from "@/components/MotionComponents";
+import { MotionDiv } from '@/components/MotionComponents'
 import {
   TitleSkeleton,
   DateSkeleton,
   ImageSkeleton,
   TextSkeleton,
-} from "@/components/ui/skeletons";
+} from '@/components/ui/skeletons'
 
 export default function PostSkeleton() {
   return (
@@ -13,8 +13,7 @@ export default function PostSkeleton() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto"
-      >
+        className="max-w-4xl mx-auto">
         <TitleSkeleton className="h-10 mb-4" />
         <DateSkeleton className="w-48 mb-8" />
         <ImageSkeleton className="h-64 mb-8" />
@@ -26,8 +25,7 @@ export default function PostSkeleton() {
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
+                transition={{ duration: 0.3, delay: index * 0.1 }}>
                 <TextSkeleton count={3} />
               </MotionDiv>
             ))}
@@ -44,5 +42,5 @@ export default function PostSkeleton() {
         </div>
       </MotionDiv>
     </div>
-  );
+  )
 }

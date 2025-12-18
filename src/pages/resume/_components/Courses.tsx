@@ -1,17 +1,17 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge'
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/card";
-import { Section } from "@/components/ui/section";
-import { RESUME_DATA } from "@/data/resume-data";
+} from '@/components/ui/card'
+import { Section } from '@/components/ui/section'
+import { RESUME_DATA } from '@/data/resume-data'
 
 interface CourseLinkProps {
-  title: string;
-  link: { href: string; label: string };
+  title: string
+  link: { href: string; label: string }
 }
 
 function CourseLink({ title, link }: CourseLinkProps) {
@@ -22,8 +22,7 @@ function CourseLink({ title, link }: CourseLinkProps) {
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1 hover:underline"
-        aria-label={`${title} course (opens in new tab)`}
-      >
+        aria-label={`${title} course (opens in new tab)`}>
         {title}
         {link.href && (
           <span
@@ -34,42 +33,39 @@ function CourseLink({ title, link }: CourseLinkProps) {
       </a>
       <div
         className="hidden font-mono text-xs underline print:visible"
-        aria-hidden="true"
-      >
-        {link.href.replace("https://", "").replace("www.", "").replace("/", "")}
+        aria-hidden="true">
+        {link.href.replace('https://', '').replace('www.', '').replace('/', '')}
       </div>
     </>
-  );
+  )
 }
 
 interface CoursePlatformProps {
-  platform: string;
+  platform: string
 }
 
 function CoursePlatform({ platform }: CoursePlatformProps) {
   return (
     <Badge
       className="px-1 py-0 text-[10px] print:px-1 print:py-0.5 print:text-[8px] print:leading-tight"
-      variant="outline"
-    >
+      variant="outline">
       {platform}
     </Badge>
-  );
+  )
 }
 
 interface CourseCardProps {
-  title: string;
-  description: string;
-  platform: string;
-  link: { href: string; label: string };
+  title: string
+  description: string
+  platform: string
+  link: { href: string; label: string }
 }
 
 function CourseCard({ title, description, platform, link }: CourseCardProps) {
   return (
     <Card
       className="flex h-full flex-col overflow-hidden border p-3"
-      role="article"
-    >
+      role="article">
       <CardHeader>
         <div className="space-y-1">
           <CardTitle className="text-base">
@@ -77,8 +73,7 @@ function CourseCard({ title, description, platform, link }: CourseCardProps) {
           </CardTitle>
           <CardDescription
             className="text-pretty font-mono text-xs print:text-[10px]"
-            aria-label="Course description"
-          >
+            aria-label="Course description">
             {description}
           </CardDescription>
         </div>
@@ -87,11 +82,11 @@ function CourseCard({ title, description, platform, link }: CourseCardProps) {
         <CoursePlatform platform={platform} />
       </CardContent>
     </Card>
-  );
+  )
 }
 
 interface CoursesProps {
-  courses: (typeof RESUME_DATA)["courses"];
+  courses: (typeof RESUME_DATA)['courses']
 }
 
 export function Courses({ courses }: CoursesProps) {
@@ -101,8 +96,7 @@ export function Courses({ courses }: CoursesProps) {
       <div
         className="-mx-3 grid grid-cols-1 gap-3 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3"
         role="feed"
-        aria-labelledby="cursos"
-      >
+        aria-labelledby="cursos">
         {courses.map((course) => (
           <article key={course.title} className="h-full">
             <CourseCard
@@ -115,5 +109,5 @@ export function Courses({ courses }: CoursesProps) {
         ))}
       </div>
     </Section>
-  );
+  )
 }

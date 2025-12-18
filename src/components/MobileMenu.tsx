@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from './ui/button'
 import {
   Sheet,
   SheetClose,
@@ -7,30 +7,29 @@ import {
   SheetFooter,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
-import { Link, Menu } from "lucide-react";
-import { useLocation } from "react-router-dom";
-import { cn } from "../lib/utils";
-import { useState } from "react";
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+} from './ui/sheet'
+import { Link, Menu } from 'lucide-react'
+import { useLocation } from 'react-router-dom'
+import { cn } from '../lib/utils'
+import { useState } from 'react'
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 
 const navigationItems = [
-  { name: "Home", href: "/" },
-  { name: "Blog", href: "/blog" },
-  { name: "Projects", href: "/projects" },
-  { name: "Resume", href: "/resume" },
-];
+  { name: 'Home', href: '/' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Resume', href: '/resume' },
+]
 
 export function MobileMenu() {
-  const location = useLocation();
-  const [open, setOpen] = useState(false);
+  const location = useLocation()
+  const [open, setOpen] = useState(false)
 
   return (
     <Sheet
       key={location.pathname}
       open={open}
-      onOpenChange={(state) => setOpen(state)}
-    >
+      onOpenChange={(state) => setOpen(state)}>
       <SheetTrigger asChild>
         <Button variant="outline" size="icon">
           <Menu className="h-4 w-4" />
@@ -52,11 +51,10 @@ export function MobileMenu() {
               to={item.href}
               className={cn(
                 location.pathname === item.href
-                  ? "bg-muted"
-                  : "hover:bg-muted hover:bg-opacity-75",
-                "group flex items-center px-2 py-2 text-md font-semibold rounded-md",
-              )}
-            >
+                  ? 'bg-muted'
+                  : 'hover:bg-muted hover:bg-opacity-75',
+                'group flex items-center px-2 py-2 text-md font-semibold rounded-md',
+              )}>
               {item.name}
             </Link>
           ))}
@@ -69,5 +67,5 @@ export function MobileMenu() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  );
+  )
 }

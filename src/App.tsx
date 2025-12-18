@@ -1,14 +1,14 @@
-import { Routes, Route } from "react-router-dom";
-import Blog from "./pages/blog";
-import Projects from "./pages/projects";
-import Resume from "./pages/resume";
-import TimelinePage from "./pages/timeline";
-import RssFeedPage from "./pages/rss";
-import NotFound from "./components/NotFound";
-import { Navbar } from "./components/Navbar";
-import { Providers } from "./components/Providers";
-import Footer from "./components/Footer";
-import BlogPost from "./pages/blog/[slug]";
+import { Routes, Route } from 'react-router-dom'
+import Blog from './pages/blog'
+import Projects from './pages/projects'
+import Resume from './pages/resume'
+import TimelinePage from './pages/timeline'
+import RssFeedPage from './pages/rss'
+import NotFound from './components/NotFound'
+import { Navbar } from './components/Navbar'
+import { Providers } from './components/Providers'
+import Footer from './components/Footer'
+import BlogPost from './pages/blog/[slug]'
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
       </main>
       <Footer />
     </Providers>
-  );
+  )
 }
 
-export default App;
+export default App

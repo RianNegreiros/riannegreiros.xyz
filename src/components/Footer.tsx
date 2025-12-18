@@ -1,6 +1,6 @@
-import { navigationItems } from "@/data/navigation-items";
-import { RESUME_DATA } from "@/data/resume-data";
-import { Link } from "react-router-dom";
+import { navigationItems } from '@/data/navigation-items'
+import { RESUME_DATA } from '@/data/resume-data'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
@@ -22,15 +22,14 @@ export default function Footer() {
             <Link
               className="mr-4 hover:underline md:mr-6"
               to="/rss"
-              target="_blank"
-            >
+              target="_blank">
               RSS Feed
             </Link>
           </li>
         </ul>
         <div className="px-4 py-6 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
-            © {new Date().getFullYear()}{" "}
+            © {new Date().getFullYear()}{' '}
             <Link className="hover:underline" to="/">
               riannegreiros.com.br
             </Link>
@@ -43,8 +42,7 @@ export default function Footer() {
                 key={social.name}
                 className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 aria-label={social.name}
-                target="_blank"
-              >
+                target="_blank">
                 <social.icon className="w-4 h-4" />
               </Link>
             ))}
@@ -52,5 +50,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }

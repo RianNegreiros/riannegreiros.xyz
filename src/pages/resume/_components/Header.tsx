@@ -1,10 +1,10 @@
-import { GlobeIcon, MailIcon, PhoneIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { RESUME_DATA } from "@/data/resume-data";
+import { GlobeIcon, MailIcon, PhoneIcon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { RESUME_DATA } from '@/data/resume-data'
 
 interface LocationLinkProps {
-  location: typeof RESUME_DATA.location;
-  locationLink: typeof RESUME_DATA.locationLink;
+  location: typeof RESUME_DATA.location
+  locationLink: typeof RESUME_DATA.locationLink
 }
 
 function LocationLink({ location, locationLink }: LocationLinkProps) {
@@ -15,19 +15,18 @@ function LocationLink({ location, locationLink }: LocationLinkProps) {
         href={locationLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Location: ${location}`}
-      >
+        aria-label={`Location: ${location}`}>
         <GlobeIcon className="size-3" aria-hidden="true" />
         {location}
       </a>
     </p>
-  );
+  )
 }
 
 interface SocialButtonProps {
-  href: string;
-  icon: React.ElementType;
-  label: string;
+  href: string
+  icon: React.ElementType
+  label: string
 }
 
 function SocialButton({ href, icon: Icon, label }: SocialButtonProps) {
@@ -37,17 +36,16 @@ function SocialButton({ href, icon: Icon, label }: SocialButtonProps) {
         href={href}
         aria-label={label}
         target="_blank"
-        rel="noopener noreferrer"
-      >
+        rel="noopener noreferrer">
         <Icon className="size-4" aria-hidden="true" />
       </a>
     </Button>
-  );
+  )
 }
 
 interface ContactButtonsProps {
-  contact: typeof RESUME_DATA.contact;
-  personalWebsiteUrl?: string;
+  contact: typeof RESUME_DATA.contact
+  personalWebsiteUrl?: string
 }
 
 function ContactButtons({ contact, personalWebsiteUrl }: ContactButtonsProps) {
@@ -55,8 +53,7 @@ function ContactButtons({ contact, personalWebsiteUrl }: ContactButtonsProps) {
     <div
       className="flex gap-x-1 pt-1 font-mono text-sm text-foreground/80 print:hidden"
       role="list"
-      aria-label="Contact links"
-    >
+      aria-label="Contact links">
       {personalWebsiteUrl && (
         <SocialButton
           href={personalWebsiteUrl}
@@ -87,26 +84,24 @@ function ContactButtons({ contact, personalWebsiteUrl }: ContactButtonsProps) {
         />
       ))}
     </div>
-  );
+  )
 }
 
 interface PrintContactProps {
-  contact: typeof RESUME_DATA.contact;
-  personalWebsiteUrl?: string;
+  contact: typeof RESUME_DATA.contact
+  personalWebsiteUrl?: string
 }
 
 function PrintContact({ contact, personalWebsiteUrl }: PrintContactProps) {
   return (
     <div
       className="hidden gap-x-2 font-mono text-sm text-foreground/80 print:flex print:text-[12px]"
-      aria-label="Print contact information"
-    >
+      aria-label="Print contact information">
       {personalWebsiteUrl && (
         <>
           <a
             className="underline hover:text-foreground/70"
-            href={personalWebsiteUrl}
-          >
+            href={personalWebsiteUrl}>
             {new URL(personalWebsiteUrl).hostname}
           </a>
           <span aria-hidden="true">/</span>
@@ -116,8 +111,7 @@ function PrintContact({ contact, personalWebsiteUrl }: PrintContactProps) {
         <>
           <a
             className="underline hover:text-foreground/70"
-            href={`mailto:${contact.email}`}
-          >
+            href={`mailto:${contact.email}`}>
             {contact.email}
           </a>
           <span aria-hidden="true">/</span>
@@ -126,13 +120,12 @@ function PrintContact({ contact, personalWebsiteUrl }: PrintContactProps) {
       {contact.tel && (
         <a
           className="underline hover:text-foreground/70"
-          href={`tel:${contact.tel}`}
-        >
+          href={`tel:${contact.tel}`}>
           {contact.tel}
         </a>
       )}
     </div>
-  );
+  )
 }
 
 export function Header() {
@@ -144,8 +137,7 @@ export function Header() {
         </h1>
         <p
           className="max-w-md text-pretty font-mono text-sm text-foreground/80 print:text-[12px]"
-          aria-labelledby="resume-name"
-        >
+          aria-labelledby="resume-name">
           {RESUME_DATA.about}
         </p>
 
@@ -165,5 +157,5 @@ export function Header() {
         />
       </div>
     </header>
-  );
+  )
 }
