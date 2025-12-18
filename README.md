@@ -1,73 +1,85 @@
-# React + TypeScript + Vite
+# riannegreiros.com.br
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the personal website and blog of Rian Negreiros, built with Vite, React, TypeScript, and TailwindCSS. It serves as a platform to showcase projects, share blog posts, and provide a professional resume.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation and Setup](#installation-and-setup)
+  - [Running the Development Server](#running-the-development-server)
+- [Acknowledgments](#acknowledgments)
 
-## React Compiler
+## Project Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+`riannegreiros.com.br` is a personal website that includes a blog, project portfolio, and resume. It is designed to be a central hub for Rian's professional presence online.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Timeline: [Home Page](https://www.riannegreiros.com.br) - Unify posts and projects in a timeline.
+- Personal Blog: [Blog Page](https://www.riannegreiros.com.br/blog) - Share insights and experiences through blog posts.
+- Project Showcase: [Projects Page](https://www.riannegreiros.com.br/projects) - Display various projects with detailed descriptions and links.
+- Professional Resume: [Resume Page](https://www.riannegreiros.com.br/resume) - Provide a professional resume with contact information and skills
+- RSS Feed: [RSS Feed](https://www.riannegreiros.com.br/api/rss) - Allow users to subscribe to updates from the blog.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Technologies Used
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Vite**: React build tool
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript
+- **TailwindCSS**: A utility-first CSS framework for rapid UI development
+- **Sanity.io**: A headless CMS for managing content
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+These instructions will help you set up and run the project on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/) (comes with Node.js) or [pnpm](https://pnpm.io/)
+
+### Installation and Setup
+
+1. **Clone the repository:**
+
+```bash
+  git clone https://github.com/RianNegreiros/riannegreiros.com.br.git
+  cd riannegreiros.com.br
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. **Install dependencies:**
+   Using npm:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+  pnpm install
 ```
+
+1. **Set up environment variables**
+
+```bash
+   cp .env.local.example .env.local
+```
+
+Then edit `.env.local` and add your Sanity project ID and base URL:
+
+- `VITE_SANITY_PROJECT_ID`: Your Sanity project ID
+- `VITE_BASE_URL`: Your site's base URL (e.g., <http://localhost:5173> for development)
+
+### Running the Development Server
+
+To start the development server, run:
+
+Using npm:
+
+```bash
+  pnpm run dev
+```
+
+## Acknowledgments
+
+The resume page layout is based on [cv](https://github.com/BartoszJarocki/cv) by **Bartosz Jarocki**. Licensed under the MIT License.
