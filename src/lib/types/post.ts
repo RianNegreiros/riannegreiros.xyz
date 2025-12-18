@@ -30,6 +30,5 @@ export interface Post {
   updatedAt?: string;
   headings: Heading[];
   image: any;
-  blurImage: string;
   tags?: string[];
 }

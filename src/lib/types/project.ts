@@ -2,7 +2,6 @@ export interface ProjectsCard {
   title: string;
   id: string;
   imageUrl: string;
-  blurImage: string;
   tags: string[];
   description: string;
   link: string;
