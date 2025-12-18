@@ -1,4 +1,0 @@
-# Netlify redirects for SPA
-/rss /rss.xml 200
-/sitemap /sitemap.xml 200
-/*    /index.html   200
