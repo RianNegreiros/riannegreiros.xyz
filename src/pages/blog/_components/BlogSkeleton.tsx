@@ -1,9 +1,9 @@
-import { MotionDiv } from "@/components/MotionComponents";
+import { MotionDiv } from '@/components/MotionComponents'
 import {
   DateSkeleton,
   TitleSkeleton,
   TextSkeleton,
-} from "@/components/ui/skeletons";
+} from '@/components/ui/skeletons'
 
 export default function BlogSkeleton() {
   return (
@@ -15,8 +15,7 @@ export default function BlogSkeleton() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="pb-6"
-          >
+            className="pb-6">
             <div className="space-y-2">
               <DateSkeleton />
               <TitleSkeleton />
@@ -26,5 +25,5 @@ export default function BlogSkeleton() {
         ))}
       </div>
     </div>
-  );
+  )
 }

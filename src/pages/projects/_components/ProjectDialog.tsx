@@ -1,6 +1,5 @@
-// Using regular img tag instead of Next.js Image
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import {
   Dialog,
   DialogContent,
@@ -8,15 +7,15 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
-import { GitHubIcon } from "@/components/icons";
-import { MotionDiv } from "@/components/MotionComponents";
-import type { ProjectsCard } from "@/lib/types";
+} from '@/components/ui/dialog'
+import { GitHubIcon } from '@/components/icons'
+import { MotionDiv } from '@/components/MotionComponents'
+import type { ProjectsCard } from '@/lib/types'
 
 interface ProjectDialogProps {
-  project: ProjectsCard | null;
-  isOpen: boolean;
-  onClose: () => void;
+  project: ProjectsCard | null
+  isOpen: boolean
+  onClose: () => void
 }
 
 export function ProjectDialog({
@@ -24,7 +23,7 @@ export function ProjectDialog({
   isOpen,
   onClose,
 }: ProjectDialogProps) {
-  if (!project) return null;
+  if (!project) return null
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -33,8 +32,7 @@ export function ProjectDialog({
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-        >
+          transition={{ duration: 0.2, ease: 'easeOut' }}>
           <DialogHeader className="space-y-2">
             <DialogTitle className="text-2xl font-bold">
               {project.title}
@@ -48,8 +46,7 @@ export function ProjectDialog({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="mt-6 aspect-video relative rounded-lg overflow-hidden border"
-          >
+            className="mt-6 aspect-video relative rounded-lg overflow-hidden border">
             <img
               src={project.imageUrl}
               alt={project.title}
@@ -57,7 +54,6 @@ export function ProjectDialog({
               height={400}
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
-              data-blur={project.blurImage}
             />
           </MotionDiv>
 
@@ -65,8 +61,7 @@ export function ProjectDialog({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
-            className="mt-6"
-          >
+            className="mt-6">
             <h3 className="text-sm font-medium mb-2">Tecnologias</h3>
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag: string, index: number) => (
@@ -74,8 +69,7 @@ export function ProjectDialog({
                   key={tag}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2, delay: 0.3 + index * 0.05 }}
-                >
+                  transition={{ duration: 0.2, delay: 0.3 + index * 0.05 }}>
                   <Badge variant="secondary">{tag}</Badge>
                 </MotionDiv>
               ))}
@@ -85,16 +79,14 @@ export function ProjectDialog({
           <MotionDiv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.4 }}
-          >
+            transition={{ duration: 0.3, delay: 0.4 }}>
             <DialogFooter className="mt-6">
               <Button asChild className="w-full sm:w-auto" variant="default">
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center"
-                >
+                  className="flex items-center justify-center">
                   <GitHubIcon className="mr-2 w-4 h-4" />
                   Ver código-fonte no Github
                 </a>
@@ -104,5 +96,5 @@ export function ProjectDialog({
         </MotionDiv>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

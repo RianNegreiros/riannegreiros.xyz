@@ -1,9 +1,9 @@
-import { RESUME_DATA } from "@/data/resume-data";
-import { Section } from "@/components/ui/section";
+import { RESUME_DATA } from '@/data/resume-data'
+import { Section } from '@/components/ui/section'
 
 interface AboutProps {
-  summary: typeof RESUME_DATA.summary;
-  className?: string;
+  summary: typeof RESUME_DATA.summary
+  className?: string
 }
 
 export function Summary({ summary, className }: AboutProps) {
@@ -14,10 +14,9 @@ export function Summary({ summary, className }: AboutProps) {
       </h2>
       <div
         className="text-pretty font-mono text-sm text-foreground/80 print:text-[12px]"
-        aria-labelledby="about-section"
-      >
+        aria-labelledby="about-section">
         {summary}
       </div>
     </Section>
-  );
+  )
 }

@@ -1,37 +1,37 @@
-import { queries, fetchSanityData } from "../lib/services";
-import type { PortfolioItem } from "../lib/types";
-import { useState, useMemo, useEffect } from "react";
+import { queries, fetchSanityData } from '../lib/services'
+import type { PortfolioItem } from '../lib/types'
+import { useState, useMemo, useEffect } from 'react'
 
 async function fetchPortfolioData(
   searchParam: string,
 ): Promise<PortfolioItem[]> {
-  const queryResult = queries.portfolio.search(searchParam);
-  return await fetchSanityData<PortfolioItem[]>(queryResult.query);
+  const queryResult = queries.portfolio.search(searchParam)
+  return await fetchSanityData<PortfolioItem[]>(queryResult.query)
 }
 
 export function usePortfolioSearch() {
-  const [search, setSearch] = useState("");
-  const [portfolioData, setPortfolioData] = useState<PortfolioItem[]>([]);
+  const [search, setSearch] = useState('')
+  const [portfolioData, setPortfolioData] = useState<PortfolioItem[]>([])
 
   useEffect(() => {
     const fetchResults = async () => {
       if (search) {
-        const results = await fetchPortfolioData(search);
-        setPortfolioData(results);
+        const results = await fetchPortfolioData(search)
+        setPortfolioData(results)
       } else {
-        setPortfolioData([]);
+        setPortfolioData([])
       }
-    };
-    fetchResults();
-  }, [search]);
+    }
+    fetchResults()
+  }, [search])
 
   const filteredResults = useMemo(() => {
-    if (!search.trim()) return [];
-    const searchLower = search.toLowerCase();
+    if (!search.trim()) return []
+    const searchLower = search.toLowerCase()
     return portfolioData.filter((item) =>
       item.title.toLowerCase().includes(searchLower),
-    );
-  }, [search, portfolioData]);
+    )
+  }, [search, portfolioData])
 
-  return { search, setSearch, filteredResults };
+  return { search, setSearch, filteredResults }
 }

@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Rss } from "lucide-react";
+import { Button } from '@/components/ui/button'
+import { ExternalLink, Rss } from 'lucide-react'
 
 export default function RssFeedPage() {
   return (
@@ -26,7 +26,7 @@ export default function RssFeedPage() {
 
       <div className="text-sm text-muted-foreground space-y-2">
         <p>
-          URL do RSS:{" "}
+          URL do RSS:{' '}
           <code className="bg-muted px-2 py-1 rounded">
             {window.location.origin}/rss.xml
           </code>
@@ -34,5 +34,5 @@ export default function RssFeedPage() {
         <p>Use esta URL em seu leitor de RSS favorito</p>
       </div>
     </div>
-  );
+  )
 }

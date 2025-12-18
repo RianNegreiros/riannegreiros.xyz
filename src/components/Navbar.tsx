@@ -1,20 +1,19 @@
-import { Link } from "react-router-dom";
-import { ModeToggle } from "./ModeToggle";
-import { MobileMenu } from "./MobileMenu";
-import { navigationItems } from "../data/navigation-items";
+import { Link } from 'react-router-dom'
+import { ModeToggle } from './ModeToggle'
+import { MobileMenu } from './MobileMenu'
+import { navigationItems } from '../data/navigation-items'
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
-} from "./ui/navigation-menu";
-import { navigationMenuTriggerStyle } from "./ui/variants";
+} from './ui/navigation-menu'
+import { navigationMenuTriggerStyle } from './ui/variants'
 
 export function Navbar() {
   return (
     <nav
       className="bg-background shadow-sm print:hidden"
-      aria-label="Main navigation"
-    >
+      aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex-shrink-0 md:w-1/4">
@@ -33,8 +32,7 @@ export function Navbar() {
                   <NavigationMenuItem key={index}>
                     <Link
                       to={item.href}
-                      className={navigationMenuTriggerStyle()}
-                    >
+                      className={navigationMenuTriggerStyle()}>
                       {item.name}
                     </Link>
                   </NavigationMenuItem>
@@ -52,5 +50,5 @@ export function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
