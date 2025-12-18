@@ -8,5 +8,8 @@ jobs:
   update-rss:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Netlify Build
-        run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK }}
+      - name: Deploy to Render
+        env:
+          DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl "$DEPLOY_URL"
