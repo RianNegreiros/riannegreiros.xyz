@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type Heading = {
+export type SanityHeading = {
   text: string
   level: string
 }
 
-export type Post = {
+export type SanityPost = {
   id: string
   title: string
   overview: string
@@ -14,10 +14,10 @@ export type Post = {
   updatedAt?: string
   image?: any
   content?: any[]
-  headings: Heading[]
+  headings: SanityHeading[]
 }
 
-export type Project = {
+export type SanityProject = {
   id: string
   title: string
   link: string
@@ -27,7 +27,7 @@ export type Project = {
   createdAt: string
 }
 
-export type PortfolioItem = {
+export type SanityPortfolioItem = {
   id: string
   _type: 'post' | 'project'
   title: string

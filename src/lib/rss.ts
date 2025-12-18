@@ -1,27 +1,9 @@
-import { createClient } from '@sanity/client'
-import {
-  createImageUrlBuilder,
-  type SanityImageSource,
-} from '@sanity/image-url'
 import type { PortableTextBlock } from '@portabletext/types'
 import { toHTML } from '@portabletext/to-html'
-import { SITE_CONFIG } from './constants'
 import { Feed } from 'feed'
-
-const client = createClient({
-  apiVersion: '2024-03-13',
-  dataset: 'production',
-  projectId: '091jywj8',
-  useCdn: true,
-  perspective: 'published',
-})
-
-const builder = createImageUrlBuilder(client)
-function urlFor(source: SanityImageSource) {
-  return builder.image(source)
-}
-
-interface Post {
+import { SITE_CONFIG } from './constants'
+import { fetchSanityData, urlFor } from './services'
+interface RSSPost {
   _id: string
   title: string
   slug: { current: string }
@@ -44,7 +26,7 @@ function convertPortableTextToHTML(content: PortableTextBlock[]): string {
 }
 
 export async function generateRSSFeed(baseUrl: string) {
-  const posts = await client.fetch(
+  const posts = await fetchSanityData<RSSPost[]>(
     `*[_type == 'post'] | order(firstPublishedDate desc)`,
   )
 
@@ -64,7 +46,7 @@ export async function generateRSSFeed(baseUrl: string) {
     },
   })
 
-  posts.forEach((post: Post) => {
+  posts.forEach((post: RSSPost) => {
     const contentHTML = convertPortableTextToHTML(post.content)
     feed.addItem({
       title: post.title,

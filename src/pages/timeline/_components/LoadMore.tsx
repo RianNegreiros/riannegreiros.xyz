@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { LoaderCircle } from 'lucide-react'
 import { getPortfolioData, getTotalPortfolioItems } from '@/lib/api'
-import type { PortfolioItem } from '@/lib/types/sanity'
+import type { SanityPortfolioItem } from '@/lib/types/sanity'
 import TimelineItem from './TimelineItem'
 
 let page = 1
@@ -10,7 +10,7 @@ const itemsPerPage = 10
 
 export default function LoadMore() {
   const { ref, inView } = useInView()
-  const [data, setData] = useState<PortfolioItem[]>([])
+  const [data, setData] = useState<SanityPortfolioItem[]>([])
   const [hasMore, setHasMore] = useState<boolean>(true)
   const [totalItems, setTotalItems] = useState<number>(0)
 

@@ -1,7 +1,7 @@
 import { Pencil, Briefcase, ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { MotionLi } from '@/components/MotionComponents'
-import type { PortfolioItem } from '@/lib/types/sanity'
+import type { SanityPortfolioItem } from '@/lib/types/sanity'
 import { formatDate } from '@/lib/date'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
@@ -11,7 +11,7 @@ const variants = {
   visible: { opacity: 1, y: 0 },
 }
 
-interface TimelineItemProps extends PortfolioItem {
+interface TimelineItemProps extends SanityPortfolioItem {
   index?: number
 }
 

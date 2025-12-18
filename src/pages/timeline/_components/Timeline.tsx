@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { getPortfolioData } from '@/lib/api'
-import type { PortfolioItem } from '@/lib/types/sanity'
+import type { SanityPortfolioItem } from '@/lib/types/sanity'
 import LoadMore from './LoadMore'
 import TimelineItem from './TimelineItem'
 import TimelineSkeleton from './TimelineSkeleton'
 
 export default function Timeline() {
-  const [items, setItems] = useState<PortfolioItem[]>([])
+  const [items, setItems] = useState<SanityPortfolioItem[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

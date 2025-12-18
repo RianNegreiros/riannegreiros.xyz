@@ -1,6 +1,5 @@
 import { fetchSanityData, queries } from './services'
-import type { PortfolioItem } from './types/sanity'
-import type { Post } from './types/post'
+import type { SanityPortfolioItem, SanityPost } from './types/sanity'
 
 export async function fetchPosts(
   pageNum = 0,
@@ -10,7 +9,7 @@ export async function fetchPosts(
   const start = pageNum * itemsPerPage
   const end = start + itemsPerPage
   const queryResult = queries.posts.list(start, end, searchQuery)
-  return fetchSanityData<Post[]>(queryResult.query, queryResult.params)
+  return fetchSanityData<SanityPost[]>(queryResult.query, queryResult.params)
 }
 
 export async function getTotalPosts() {
@@ -21,7 +20,7 @@ export async function getPortfolioData(pageNum = 0, itemsPerPage = 10) {
   const start = pageNum * itemsPerPage
   const end = start + itemsPerPage
   const query = queries.portfolio.timeline(start, end)
-  return fetchSanityData<PortfolioItem[]>(query)
+  return fetchSanityData<SanityPortfolioItem[]>(query)
 }
 
 export async function getTotalPortfolioItems() {

@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react'
 import ProjectCard from './ProjectCard'
 import Loading from './Loading'
 import { fetchSanityData, queries } from '@/lib/services'
-import type { Project } from '@/lib/types/sanity'
+import type { SanityProject } from '@/lib/types/sanity'
 
 async function getData() {
   const query = queries.projects.list
-  return await fetchSanityData<Project[]>(query)
+  return await fetchSanityData<SanityProject[]>(query)
 }
 
 export default function ProjectsList() {
-  const [data, setData] = useState<Project[]>([])
+  const [data, setData] = useState<SanityProject[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {

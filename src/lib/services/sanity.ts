@@ -7,7 +7,7 @@ import {
 export const client = createClient({
   apiVersion: '2024-03-13',
   dataset: 'production',
-  projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
+  projectId: '091jywj8',
   useCdn: true,
 })
 

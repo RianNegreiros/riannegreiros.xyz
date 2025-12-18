@@ -1,6 +1,8 @@
 export type { Post, Heading } from './post'
+export type { PortfolioItem, ProjectsCard } from './project'
 export type {
-  PortfolioItem as ProjectPortfolioItem,
-  ProjectsCard,
-} from './project'
-export type { PortfolioItem } from './sanity'
+  SanityPost,
+  SanityProject,
+  SanityPortfolioItem,
+  SanityHeading,
+} from './sanity'
