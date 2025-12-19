@@ -1,18 +1,41 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
+import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  return {
-    plugins: [react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss()
+  ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  },
+  build: {
+    target: 'es2022',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          sanity: ['@sanity/client', '@sanity/image-url'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-tooltip']
+        }
+      }
     },
-    base: env.VITE_BASE_URL,
+    chunkSizeWarningLimit: 500,
+    minify: 'esbuild',
+    cssMinify: 'lightningcss'
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', '@sanity/client', '@sanity/image-url'],
+    exclude: ['lucide-react']
+  },
+  server: {
+    hmr: {
+      overlay: false
+    }
   }
 })
