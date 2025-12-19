@@ -1,42 +1,52 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { LoaderCircle } from 'lucide-react'
 import { getPortfolioData, getTotalPortfolioItems } from '@/lib/api'
 import type { SanityPortfolioItem } from '@/lib/types/sanity'
 import TimelineItem from './TimelineItem'
 
-let page = 1
-const itemsPerPage = 10
+const ITEMS_PER_PAGE = 10
 
 export default function LoadMore() {
   const { ref, inView } = useInView()
   const [data, setData] = useState<SanityPortfolioItem[]>([])
   const [hasMore, setHasMore] = useState<boolean>(true)
-  const [totalItems, setTotalItems] = useState<number>(0)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [page, setPage] = useState<number>(0)
 
-  useEffect(() => {
-    getTotalPortfolioItems().then((total) => {
-      setTotalItems(total)
-    })
-  }, [])
-
-  useEffect(() => {
-    if (inView && hasMore) {
-      getPortfolioData(page, itemsPerPage).then((res) => {
-        setData((prevData) => [...prevData, ...res])
-        page++
-
-        if (data.length + res.length + itemsPerPage >= totalItems) {
-          setHasMore(false)
-        }
-      })
+  const loadMore = useCallback(async () => {
+    if (loading) return
+    
+    setLoading(true)
+    try {
+      const [newItems, totalItems] = await Promise.all([
+        getPortfolioData(page, ITEMS_PER_PAGE),
+        page === 0 ? getTotalPortfolioItems() : Promise.resolve(0)
+      ])
+      
+      setData(prev => page === 0 ? newItems : [...prev, ...newItems])
+      setPage(prev => prev + 1)
+      
+      if (page === 0) {
+        setHasMore(newItems.length === ITEMS_PER_PAGE && newItems.length < totalItems)
+      } else {
+        setHasMore(newItems.length === ITEMS_PER_PAGE)
+      }
+    } finally {
+      setLoading(false)
     }
-  }, [inView, hasMore, totalItems, data.length])
+  }, [page, loading])
+
+  useEffect(() => {
+    if (inView && hasMore && !loading) {
+      loadMore()
+    }
+  }, [inView, hasMore, loading, loadMore])
 
   return (
     <>
       {data.map((item, index) => (
-        <TimelineItem key={item.id} {...item} index={index} />
+        <TimelineItem key={item._id} {...item} index={index} />
       ))}
       {hasMore && (
         <div ref={ref} className="flex items-center justify-center mb-4">

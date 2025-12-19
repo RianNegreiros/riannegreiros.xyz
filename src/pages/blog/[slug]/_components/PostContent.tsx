@@ -12,8 +12,8 @@ import type { Post } from '@/lib/types'
 import { formatDate, slugify } from '@/lib'
 
 async function getData(slug: string) {
-  const query = queries.posts.bySlug(slug)
-  return await fetchSanityData<Post>(query)
+  const query = queries.posts.bySlug
+  return await fetchSanityData<Post>(query, { slug })
 }
 
 const PortableTextComponent = {

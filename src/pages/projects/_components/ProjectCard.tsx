@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ProjectDialog } from './ProjectDialog'
-import { ExternalLink } from 'lucide-react'
 import type { ProjectsCard } from '@/lib/types'
 
 interface ProjectCardModal {
@@ -27,7 +26,7 @@ export default function ProjectCard({ data }: ProjectCardModal) {
         className="m-5 max-w-4xl mx-auto grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
         {data.map((item, index) => (
           <motion.div
-            key={item.id}
+            key={`${item._id}_${index}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -46,7 +45,6 @@ export default function ProjectCard({ data }: ProjectCardModal) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2">
-                <ExternalLink className="h-4 w-4" />
                 <h2 className="font-medium text-lg hover:underline">
                   {item.title}
                 </h2>
@@ -55,10 +53,10 @@ export default function ProjectCard({ data }: ProjectCardModal) {
                 {item.description}
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {item.tags.map((tagItem: string, index: number) => (
+                {item.tags.map((tagItem: string) => (
                   <span
                     className="inline-flex items-center rounded-md bg-primary/10 px-3 py-1.5 text-xs sm:text-sm font-medium text-primary ring-2 ring-inset ring-primary/20"
-                    key={index}>
+                    key={tagItem}>
                     {tagItem}
                   </span>
                 ))}

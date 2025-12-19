@@ -19,7 +19,7 @@ export function Navbar() {
           <Link to="/" className="flex-shrink-0 md:w-1/4">
             <h1 className="text-3xl whitespace-nowrap">
               <span className="text-primary font-bold">Rian</span>
-              <span className="text-muted-foreground ml-2 opacity-50">
+              <span className="text-muted-foreground ml-2 opacity-75">
                 Negreiros
               </span>
             </h1>

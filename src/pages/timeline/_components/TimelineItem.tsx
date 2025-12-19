@@ -16,7 +16,7 @@ interface TimelineItemProps extends SanityPortfolioItem {
 }
 
 export default function TimelineItem({
-  id,
+  _id,
   _type,
   title,
   slug,
@@ -30,7 +30,7 @@ export default function TimelineItem({
 
   return (
     <MotionLi
-      key={`${_type}-${id}`}
+      key={`${_type}-${_id}`}
       className="mb-8 ms-6 relative"
       variants={variants}
       initial="hidden"

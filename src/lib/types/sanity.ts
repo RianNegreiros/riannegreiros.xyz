@@ -6,19 +6,31 @@ export type SanityHeading = {
 }
 
 export type SanityPost = {
-  id: string
+  _id: string
   title: string
   overview: string
   slug: string
   firstPublishedDate: string
   updatedAt?: string
-  image?: any
+  image?: {
+    asset: {
+      _id: string
+      url: string
+      metadata: {
+        lqip?: string
+        dimensions?: {
+          width: number
+          height: number
+        }
+      }
+    }
+  }
   content?: any[]
   headings: SanityHeading[]
 }
 
 export type SanityProject = {
-  id: string
+  _id: string
   title: string
   link: string
   description: string
@@ -28,13 +40,13 @@ export type SanityProject = {
 }
 
 export type SanityPortfolioItem = {
-  id: string
+  _id: string
   _type: 'post' | 'project'
   title: string
-  slug: string
+  slug?: string
   overview?: string
   description?: string
   link?: string
   firstPublishedDate: string
-  createdAt: string
+  _createdAt: string
 }

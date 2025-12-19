@@ -30,7 +30,7 @@ export default function Timeline() {
   return (
     <ol className="relative border-s border-gray-200 dark:border-gray-700">
       {items.map((item, index) => (
-        <TimelineItem key={item.id} {...item} index={index} />
+        <TimelineItem key={item._id} {...item} index={index} />
       ))}
       <LoadMore />
     </ol>

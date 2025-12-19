@@ -1,47 +1,61 @@
 export const queries = {
   posts: {
     list: (start: number, end: number, searchQuery?: string) => {
-      let query = `*[_type == 'post'`
+      const baseFilter = `_type == 'post' && defined(firstPublishedDate)`
+      let query = `*[${baseFilter}`
+      
       if (searchQuery) {
         query += ` && (title match $searchQuery || overview match $searchQuery)]`
       } else {
         query += ']'
       }
+      
       query += ` | order(firstPublishedDate desc) [${start}...${end}] {
-        "id": _id,
+        _id,
         title,
         overview,
         "slug": slug.current,
         firstPublishedDate
       }`
+      
       return {
         query,
         params: searchQuery ? { searchQuery: `*${searchQuery}*` } : {},
       }
     },
-    bySlug: (
-      slug: string,
-    ) => `*[_type == 'post' && slug.current == "${slug}"][0]{
-      "id": _id,
+    bySlug: `*[_type == 'post' && slug.current == $slug][0]{
+      _id,
       title,
       firstPublishedDate,
       updatedAt,
-      image,
       "slug": slug.current,
       overview,
-      "]": image.asset->metadata.lqip,
+      image{
+        asset->{
+          _id,
+          url,
+          metadata{
+            lqip,
+            dimensions
+          }
+        }
+      },
       content[]{
         ...,
         _type == 'image' => {
           ...,
-          "url": asset->url
+          asset->{
+            _id,
+            url,
+            metadata{
+              dimensions
+            }
+          }
         }
       },
-      "headings": content[]{
-        _type == "block" && style match "h*" => {
-          "text": pt::text(@),
-          "level": style
-        }
+      "headings": content[_type == "block" && style match "h*"]{
+        "text": pt::text(@),
+        "level": style
       }
     }`,
     count: `count(*[_type == 'post'])`,
@@ -59,31 +73,29 @@ export const queries = {
   },
   portfolio: {
     search: (searchParam: string) => ({
-      query: `*[_type in ['post', 'project'] && (title match $searchQuery || overview match $searchQuery || description match $searchQuery)]{
-        "id": _id,
+      query: `*[_type in ['post', 'project'] && defined(title) && (title match $searchQuery || overview match $searchQuery || description match $searchQuery)]{
+        _id,
         _type,
         title,
         "slug": slug.current,
         overview,
         description,
-        firstPublishedDate
-      }`,
+        firstPublishedDate,
+        _createdAt
+      } | order(coalesce(firstPublishedDate, _createdAt) desc)`,
       params: { searchQuery: `*${searchParam}*` },
     }),
-    count: `count(*[_type in ['post', 'project']])`,
-    timeline: (
-      start: number,
-      end: number,
-    ) => `*[_type in ["post", "project"]] | order(firstPublishedDate desc, _createdAt desc) [${start}...${end}] {
-      "id": _id,
+    count: `count(*[_type in ['post', 'project'] && defined(title)])`,
+    timeline: (start: number, end: number) => `*[_type in ["post", "project"] && defined(title)] | order(coalesce(firstPublishedDate, _createdAt) desc) [${start}...${end}] {
+      _id,
       _type,
       title,
-      link,
       "slug": slug.current,
       overview,
       description,
+      link,
       firstPublishedDate,
-      "createdAt": _createdAt
+      _createdAt
     }`,
   },
 }

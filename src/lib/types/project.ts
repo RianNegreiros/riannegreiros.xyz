@@ -1,6 +1,6 @@
 export interface ProjectsCard {
   title: string
-  id: string
+  _id: string
   imageUrl: string
   tags: string[]
   description: string
