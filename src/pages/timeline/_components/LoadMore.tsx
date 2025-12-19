@@ -16,19 +16,21 @@ export default function LoadMore() {
 
   const loadMore = useCallback(async () => {
     if (loading) return
-    
+
     setLoading(true)
     try {
       const [newItems, totalItems] = await Promise.all([
         getPortfolioData(page, ITEMS_PER_PAGE),
-        page === 0 ? getTotalPortfolioItems() : Promise.resolve(0)
+        page === 0 ? getTotalPortfolioItems() : Promise.resolve(0),
       ])
-      
-      setData(prev => page === 0 ? newItems : [...prev, ...newItems])
-      setPage(prev => prev + 1)
-      
+
+      setData((prev) => (page === 0 ? newItems : [...prev, ...newItems]))
+      setPage((prev) => prev + 1)
+
       if (page === 0) {
-        setHasMore(newItems.length === ITEMS_PER_PAGE && newItems.length < totalItems)
+        setHasMore(
+          newItems.length === ITEMS_PER_PAGE && newItems.length < totalItems,
+        )
       } else {
         setHasMore(newItems.length === ITEMS_PER_PAGE)
       }

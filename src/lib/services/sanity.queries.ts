@@ -3,13 +3,13 @@ export const queries = {
     list: (start: number, end: number, searchQuery?: string) => {
       const baseFilter = `_type == 'post' && defined(firstPublishedDate)`
       let query = `*[${baseFilter}`
-      
+
       if (searchQuery) {
         query += ` && (title match $searchQuery || overview match $searchQuery)]`
       } else {
         query += ']'
       }
-      
+
       query += ` | order(firstPublishedDate desc) [${start}...${end}] {
         _id,
         title,
@@ -17,7 +17,7 @@ export const queries = {
         "slug": slug.current,
         firstPublishedDate
       }`
-      
+
       return {
         query,
         params: searchQuery ? { searchQuery: `*${searchQuery}*` } : {},
@@ -86,7 +86,10 @@ export const queries = {
       params: { searchQuery: `*${searchParam}*` },
     }),
     count: `count(*[_type in ['post', 'project'] && defined(title)])`,
-    timeline: (start: number, end: number) => `*[_type in ["post", "project"] && defined(title)] | order(coalesce(firstPublishedDate, _createdAt) desc) [${start}...${end}] {
+    timeline: (
+      start: number,
+      end: number,
+    ) => `*[_type in ["post", "project"] && defined(title)] | order(coalesce(firstPublishedDate, _createdAt) desc) [${start}...${end}] {
       _id,
       _type,
       title,
