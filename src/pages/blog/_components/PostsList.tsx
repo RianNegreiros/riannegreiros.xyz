@@ -30,5 +30,13 @@ export default async function PostsList({
     getData(pageNum + 1, 10, searchQuery)
   }
 
-  return <PostsListClient data={data} searchQuery={searchQuery} />
+  return (
+    <PostsListClient
+      data={data}
+      searchQuery={searchQuery}
+      currentPage={pageNum + 1}
+      totalPages={Math.ceil(data.length / 10)}
+      onPageChange={() => {}}
+    />
+  )
 }

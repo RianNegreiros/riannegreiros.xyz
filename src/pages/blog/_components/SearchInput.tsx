@@ -1,5 +1,5 @@
 import { Search, Loader2 } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Input } from '@/components/ui/input'
 
@@ -7,13 +7,8 @@ function useDebounce(value: string, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value)
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value)
-    }, delay)
-
-    return () => {
-      clearTimeout(handler)
-    }
+    const handler = setTimeout(() => setDebouncedValue(value), delay)
+    return () => clearTimeout(handler)
   }, [value, delay])
 
   return debouncedValue
@@ -27,31 +22,24 @@ export default function SearchInput() {
   const [isSearching, setIsSearching] = useState(false)
   const debouncedSearch = useDebounce(search, 300)
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(location.search)
-      if (value) {
-        params.set(name, value)
-      } else {
-        params.delete(name)
-      }
-      return params.toString()
-    },
-    [location.search],
-  )
-
   useEffect(() => {
-    const updateSearch = async () => {
-      setIsSearching(true)
-      try {
-        const queryString = createQueryString('search', debouncedSearch)
-        navigate(`${location.pathname}?${queryString}`, { replace: true })
-      } finally {
-        setIsSearching(false)
-      }
+    setIsSearching(true)
+    
+    const params = new URLSearchParams(location.search)
+    if (debouncedSearch) {
+      params.set('search', debouncedSearch)
+    } else {
+      params.delete('search')
     }
-    updateSearch()
-  }, [debouncedSearch, createQueryString, location.pathname, navigate])
+    params.delete('page') // Reset to page 1 on search
+    
+    const queryString = params.toString()
+    navigate(`${location.pathname}${queryString ? `?${queryString}` : ''}`, { 
+      replace: true 
+    })
+    
+    setIsSearching(false)
+  }, [debouncedSearch, location.pathname, navigate])
 
   return (
     <div className="relative mb-8">
@@ -65,9 +53,7 @@ export default function SearchInput() {
         placeholder="Buscar posts..."
         className="pl-10"
         value={search}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setSearch(e.target.value)
-        }
+        onChange={(e) => setSearch(e.target.value)}
         aria-label="Buscar posts"
       />
     </div>
