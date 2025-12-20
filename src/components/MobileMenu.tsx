@@ -8,8 +8,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from './ui/sheet'
-import { Link, Menu } from 'lucide-react'
-import { useLocation } from 'react-router-dom'
+import { Menu } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 import { cn } from '../lib/utils'
 import { useState } from 'react'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
