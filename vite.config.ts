@@ -11,7 +11,14 @@ export default defineConfig({
     },
   },
   build: {
-    target: 'es2022',
+    target: 'esnext',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
     rollupOptions: {
       output: {
         manualChunks: {
@@ -21,14 +28,18 @@ export default defineConfig({
           ui: [
             '@radix-ui/react-dialog',
             '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-label',
+            '@radix-ui/react-navigation-menu',
+            '@radix-ui/react-separator',
+            '@radix-ui/react-slot',
+            '@radix-ui/react-toggle',
             '@radix-ui/react-tooltip',
+            '@radix-ui/react-visually-hidden',
           ],
         },
       },
     },
-    chunkSizeWarningLimit: 500,
-    minify: 'esbuild',
-    cssMinify: 'lightningcss',
+    cssCodeSplit: true,
   },
   optimizeDeps: {
     include: ['react', 'react-dom', '@sanity/client', '@sanity/image-url'],
