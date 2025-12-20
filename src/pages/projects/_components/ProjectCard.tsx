@@ -33,6 +33,7 @@ export default function ProjectCard({ data }: ProjectCardModal) {
             className="group block">
             <div className="relative aspect-16/12 overflow-hidden rounded-2xl">
               <img
+                loading="lazy"
                 src={item.imageUrl}
                 alt={`Projeto entitulado ${item.title} apresentando ${item.description}`}
                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl cursor-zoom-in"

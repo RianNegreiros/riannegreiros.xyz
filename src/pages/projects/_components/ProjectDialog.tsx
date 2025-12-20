@@ -48,6 +48,7 @@ export function ProjectDialog({
             transition={{ duration: 0.3, delay: 0.1 }}
             className="mt-6 aspect-video relative rounded-lg overflow-hidden border">
             <img
+              loading="lazy"
               src={project.imageUrl}
               alt={project.title}
               width={800}

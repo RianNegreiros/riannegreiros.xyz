@@ -24,7 +24,7 @@ export default function SearchInput() {
 
   useEffect(() => {
     setIsSearching(true)
-    
+
     const params = new URLSearchParams(location.search)
     if (debouncedSearch) {
       params.set('search', debouncedSearch)
@@ -32,12 +32,12 @@ export default function SearchInput() {
       params.delete('search')
     }
     params.delete('page') // Reset to page 1 on search
-    
+
     const queryString = params.toString()
-    navigate(`${location.pathname}${queryString ? `?${queryString}` : ''}`, { 
-      replace: true 
+    navigate(`${location.pathname}${queryString ? `?${queryString}` : ''}`, {
+      replace: true,
     })
-    
+
     setIsSearching(false)
   }, [debouncedSearch, location.pathname, navigate])
 

@@ -21,6 +21,7 @@ const PortableTextComponent = {
     image: ({ value }: any) => (
       <figure className="my-8">
         <img
+          loading="lazy"
           src={value.url}
           alt={value.alt || 'Image'}
           className="rounded-lg w-full h-auto shadow-sm"
@@ -180,6 +181,7 @@ export default async function PostContent({
 
           {data.image && (
             <img
+              loading="lazy"
               src={urlFor(data.image).url()}
               alt={data.image.alt ?? `Imagem de capa do post: ${data.title}`}
               width={1200}

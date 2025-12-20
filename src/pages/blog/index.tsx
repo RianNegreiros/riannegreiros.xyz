@@ -5,7 +5,15 @@ import BlogSkeleton from './_components/BlogSkeleton'
 import { useBlogPosts } from './_hooks/useBlogPosts'
 
 export default function PostsPage() {
-  const { posts, loading, searching, searchQuery, currentPage, totalPages, handlePageChange } = useBlogPosts()
+  const {
+    posts,
+    loading,
+    searching,
+    searchQuery,
+    currentPage,
+    totalPages,
+    handlePageChange,
+  } = useBlogPosts()
 
   // SEO for blog page
   useSEO({

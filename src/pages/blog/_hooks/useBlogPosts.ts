@@ -11,7 +11,7 @@ export function useBlogPosts() {
   const [loading, setLoading] = useState(true)
   const [searching, setSearching] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
-  
+
   const searchQuery = searchParams.get('search') || ''
   const currentPage = Number(searchParams.get('page')) || 1
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
@@ -19,11 +19,11 @@ export function useBlogPosts() {
   useEffect(() => {
     async function fetchPosts() {
       const isInitialLoad = loading
-      
+
       if (!isInitialLoad) {
         setSearching(true)
       }
-      
+
       try {
         let baseQuery = `*[_type == "post"`
 
@@ -36,14 +36,16 @@ export function useBlogPosts() {
         // Get total count and paginated posts in parallel
         const [total, data] = await Promise.all([
           client.fetch<number>(`count(${baseQuery})`),
-          client.fetch<Post[]>(`${baseQuery} | order(firstPublishedDate desc) [${(currentPage - 1) * POSTS_PER_PAGE}...${currentPage * POSTS_PER_PAGE}] {
+          client.fetch<
+            Post[]
+          >(`${baseQuery} | order(firstPublishedDate desc) [${(currentPage - 1) * POSTS_PER_PAGE}...${currentPage * POSTS_PER_PAGE}] {
             _id,
             title,
             "slug": slug.current,
             overview,
             firstPublishedDate,
             updatedAt
-          }`)
+          }`),
         ])
 
         setTotalPosts(total)
@@ -66,11 +68,11 @@ export function useBlogPosts() {
     } else {
       newParams.set('page', page.toString())
     }
-    
+
     if (searchQuery) {
       newParams.set('search', searchQuery)
     }
-    
+
     setSearchParams(newParams)
   }
 

@@ -35,7 +35,7 @@ export default function BlogPagination({
             className="cursor-pointer">
             1
           </PaginationLink>
-        </PaginationItem>
+        </PaginationItem>,
       )
 
       // Start ellipsis
@@ -43,7 +43,7 @@ export default function BlogPagination({
         items.push(
           <PaginationItem key="ellipsis-start">
             <PaginationEllipsis />
-          </PaginationItem>
+          </PaginationItem>,
         )
       }
 
@@ -60,7 +60,7 @@ export default function BlogPagination({
               className="cursor-pointer">
               {i}
             </PaginationLink>
-          </PaginationItem>
+          </PaginationItem>,
         )
       }
 
@@ -69,7 +69,7 @@ export default function BlogPagination({
         items.push(
           <PaginationItem key="ellipsis-end">
             <PaginationEllipsis />
-          </PaginationItem>
+          </PaginationItem>,
         )
       }
 
@@ -83,7 +83,7 @@ export default function BlogPagination({
               className="cursor-pointer">
               {totalPages}
             </PaginationLink>
-          </PaginationItem>
+          </PaginationItem>,
         )
       }
     } else {
@@ -97,7 +97,7 @@ export default function BlogPagination({
               className="cursor-pointer">
               {i}
             </PaginationLink>
-          </PaginationItem>
+          </PaginationItem>,
         )
       }
     }

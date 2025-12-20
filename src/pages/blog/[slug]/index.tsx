@@ -18,6 +18,7 @@ const createPortableTextComponents = () => ({
     image: ({ value }: any) => (
       <figure className="my-8">
         <img
+          loading="lazy"
           src={urlFor(value).url()}
           alt={value.alt || 'Image'}
           className="rounded-lg w-full h-auto shadow-sm"
@@ -230,6 +231,7 @@ export default function BlogPost() {
 
           {post.image && (
             <img
+              loading="lazy"
               src={urlFor(post.image).url()}
               alt={post.image.alt ?? `Imagem de capa do post: ${post.title}`}
               className="rounded-lg mb-8 w-full h-auto"
