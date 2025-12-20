@@ -31,7 +31,7 @@ export default function PostsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto mt-5">
+    <div className="max-w-4xl mx-auto">
       <SearchInput />
       {searching ? (
         <div className="flex justify-center py-8">

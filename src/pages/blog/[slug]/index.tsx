@@ -199,7 +199,7 @@ export default function BlogPost() {
 
   if (!post) {
     return (
-      <div className="max-w-4xl mx-auto mt-5">
+      <div className="mx-auto">
         <div className="text-center py-8">
           <p className="text-lg text-muted-foreground">Post não encontrado.</p>
         </div>
@@ -208,7 +208,7 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div>
       {post && (
         <BlogPostStructuredData
           title={post.title}
@@ -220,8 +220,8 @@ export default function BlogPost() {
         />
       )}
 
-      <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-8 max-w-6xl mx-auto">
-        <article className="max-w-4xl">
+      <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-8">
+        <article>
           <header className="mb-8">
             <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
             <p className="text-muted-foreground">

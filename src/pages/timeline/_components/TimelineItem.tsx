@@ -31,7 +31,7 @@ export default function TimelineItem({
   return (
     <MotionLi
       key={`${_type}-${_id}`}
-      className="mb-8 ms-6 relative"
+      className="my-8 ms-6 relative"
       variants={variants}
       initial="hidden"
       animate="visible"

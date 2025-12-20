@@ -17,7 +17,7 @@ export default function Page() {
   })
 
   return (
-    <main className="container relative max-w-4xl mx-auto mt-5 scroll-my-12 overflow-auto p-4 rounded-lg print:p-11 print:my-0 md:p-16 dark:bg-gray-900">
+    <div className="container relative max-w-4xl mx-auto scroll-my-12 overflow-auto p-4 rounded-lg print:p-11 print:my-0 md:p-16 dark:bg-gray-900">
       <div className="sr-only">
         <h1>{RESUME_DATA.name}&apos;s Resume</h1>
       </div>
@@ -47,6 +47,6 @@ export default function Page() {
           })),
         ]}
       />
-    </main>
+    </div>
   )
 }

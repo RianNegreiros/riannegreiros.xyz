@@ -6,17 +6,8 @@ export default function Footer() {
   return (
     <footer className="px-4 md:px-8 lg:px-10 print:hidden">
       <hr className="mb-4 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-      <div className="mx-auto max-w-7xl text-center p-2 py-4">
-        <Link to="/" className="inline-block mb-4">
-          <img
-            src="/favicon.png"
-            loading="lazy"
-            alt="Site Logo"
-            width={32}
-            height={32}
-          />
-        </Link>
-        <ul className="flex flex-wrap justify-center items-center text-gray-900 dark:text-white">
+      <div className="mx-auto max-w-7xl text-center">
+        <ul className="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
           {navigationItems.map((item, index) => (
             <li key={index}>
               <Link className="mr-4 hover:underline md:mr-6" to={item.href}>

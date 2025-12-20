@@ -1,4 +1,4 @@
-import { Search, Loader2 } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Input } from '@/components/ui/input'
@@ -19,12 +19,9 @@ export default function SearchInput() {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const [search, setSearch] = useState(searchParams.get('search') ?? '')
-  const [isSearching, setIsSearching] = useState(false)
   const debouncedSearch = useDebounce(search, 300)
 
   useEffect(() => {
-    setIsSearching(true)
-
     const params = new URLSearchParams(location.search)
     if (debouncedSearch) {
       params.set('search', debouncedSearch)
@@ -37,17 +34,11 @@ export default function SearchInput() {
     navigate(`${location.pathname}${queryString ? `?${queryString}` : ''}`, {
       replace: true,
     })
-
-    setIsSearching(false)
-  }, [debouncedSearch, location.pathname, navigate])
+  }, [debouncedSearch, location.pathname, navigate, location.search])
 
   return (
     <div className="relative mb-8">
-      {isSearching ? (
-        <Loader2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 animate-spin" />
-      ) : (
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-      )}
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
       <Input
         type="search"
         placeholder="Buscar posts..."

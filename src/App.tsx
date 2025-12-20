@@ -17,7 +17,7 @@ function App() {
   return (
     <Providers>
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4">
+      <main className="max-w-5xl mx-auto px-4 py-8">
         <Suspense fallback={<PageSkeleton />}>
           <Routes>
             <Route path="/" element={<TimelinePage />} />

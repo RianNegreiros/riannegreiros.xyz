@@ -28,7 +28,7 @@ export default function Timeline() {
     return <div className="text-center py-8">No items found.</div>
 
   return (
-    <ol className="relative border-s border-gray-200 dark:border-gray-700">
+    <ol className="relative border-s border-gray-200 dark:border-gray-700 min-h-100">
       {items.map((item, index) => (
         <TimelineItem key={item._id} {...item} index={index} />
       ))}

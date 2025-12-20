@@ -4,6 +4,7 @@ import { LoaderCircle } from 'lucide-react'
 import { getPortfolioData, getTotalPortfolioItems } from '@/lib/api'
 import type { SanityPortfolioItem } from '@/lib/types/sanity'
 import TimelineItem from './TimelineItem'
+import { MotionLi } from '@/components/MotionComponents'
 
 const ITEMS_PER_PAGE = 10
 
@@ -51,10 +52,12 @@ export default function LoadMore() {
         <TimelineItem key={item._id} {...item} index={index} />
       ))}
       {hasMore && (
-        <div ref={ref} className="flex items-center justify-center mb-4">
-          <LoaderCircle className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600" />
-          <span className="sr-only">Loading...</span>
-        </div>
+        <MotionLi className="flex items-center justify-center mb-4 list-none">
+          <div ref={ref} className="flex items-center justify-center p-4">
+            <LoaderCircle className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600" />
+            <span className="sr-only">Loading...</span>
+          </div>
+        </MotionLi>
       )}
     </>
   )

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { client } from '@/lib/services/sanity'
 import type { Post } from '@/lib/types'
@@ -15,12 +15,11 @@ export function useBlogPosts() {
   const searchQuery = searchParams.get('search') || ''
   const currentPage = Number(searchParams.get('page')) || 1
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
+  const initialLoad = useRef(true)
 
   useEffect(() => {
     async function fetchPosts() {
-      const isInitialLoad = loading
-
-      if (!isInitialLoad) {
+      if (!initialLoad.current) {
         setSearching(true)
       }
 
@@ -55,6 +54,7 @@ export function useBlogPosts() {
       } finally {
         setLoading(false)
         setSearching(false)
+        initialLoad.current = false
       }
     }
 

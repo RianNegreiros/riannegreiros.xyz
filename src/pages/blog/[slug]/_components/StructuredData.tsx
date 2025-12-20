@@ -24,7 +24,7 @@ export default function StructuredData({ post, baseUrl }: StructuredDataProps) {
       name: 'Rian Negreiros Dos Santos',
       logo: {
         '@type': 'ImageObject',
-        url: `${baseUrl}/favicon.png`,
+        url: `${baseUrl}/favicon-32x32.png`,
       },
     },
     description: post.overview,
