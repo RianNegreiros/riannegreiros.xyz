@@ -63,7 +63,7 @@ export default function TimelineItem({
           to={`/blog/${slug}`}
           className="block p-4 bg-card hover:bg-accent rounded-lg transition-colors duration-200 ease-in-out">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+            <h2 className="text-lg font-semibold text-foreground">{title}</h2>
             <Badge
               variant={isPost ? 'default' : 'secondary'}
               className="flex items-center">
@@ -85,7 +85,7 @@ export default function TimelineItem({
           rel="noopener noreferrer"
           className="block p-4 bg-card hover:bg-accent rounded-lg transition-colors duration-200 ease-in-out">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+            <h2 className="text-lg font-semibold text-foreground">{title}</h2>
             <Badge
               variant={isPost ? 'default' : 'secondary'}
               className="flex items-center">
