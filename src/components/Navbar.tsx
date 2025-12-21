@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { ModeToggle } from './ModeToggle'
-import { MobileMenu } from './MobileMenu'
 import { navigationItems } from '../data/navigation-items'
 import {
   NavigationMenu,
@@ -8,6 +7,11 @@ import {
   NavigationMenuList,
 } from './ui/navigation-menu'
 import { navigationMenuTriggerStyle } from './ui/variants'
+import { lazy, Suspense } from 'react'
+
+const MobileMenu = lazy(() =>
+  import('./MobileMenu').then((module) => ({ default: module.MobileMenu })),
+)
 
 export function Navbar() {
   return (
@@ -44,7 +48,9 @@ export function Navbar() {
           <div className="flex items-center space-x-4 md:w-1/4 justify-end">
             <ModeToggle />
             <div className="md:hidden">
-              <MobileMenu />
+              <Suspense fallback={null}>
+                <MobileMenu />
+              </Suspense>
             </div>
           </div>
         </div>

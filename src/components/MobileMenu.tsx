@@ -31,7 +31,7 @@ export function MobileMenu() {
       open={open}
       onOpenChange={(state) => setOpen(state)}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" aria-label="Open mobile menu">
           <Menu className="h-4 w-4" />
         </Button>
       </SheetTrigger>
