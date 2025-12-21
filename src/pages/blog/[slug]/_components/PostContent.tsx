@@ -18,24 +18,34 @@ async function getData(slug: string) {
 
 const PortableTextComponent = {
   types: {
-    image: ({ value }: any) => (
-      <figure className="my-8">
-        <img
-          loading="lazy"
-          src={value.url}
-          alt={value.alt || 'Image'}
-          className="rounded-lg w-full h-auto shadow-sm"
-          width={0}
-          height={0}
-          sizes="100vw"
-        />
-        {value.caption && (
-          <figcaption className="text-sm text-muted-foreground text-center mt-2 italic">
-            {value.caption}
-          </figcaption>
-        )}
-      </figure>
-    ),
+    image: ({ value }: any) => {
+      const imageUrl = urlFor(value)
+        .auto('format')
+        .quality(80)
+        .url()
+      const width = value.asset?.metadata?.dimensions?.width || 700
+      const height = value.asset?.metadata?.dimensions?.height || 400
+      const altText = value.alt || value.caption || 'Blog post image'
+
+      return (
+        <figure className="my-8">
+          <img
+            loading="lazy"
+            src={imageUrl}
+            alt={altText}
+            className="rounded-lg w-full h-auto shadow-sm"
+            width={width}
+            height={height}
+            sizes="100vw"
+          />
+          {value.caption && (
+            <figcaption className="text-sm text-muted-foreground text-center mt-2 italic">
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      )
+    },
     code: ({ value }: any) => <CodeBlock value={value} />,
   },
   block: {
@@ -109,7 +119,7 @@ const PortableTextComponent = {
       )
     },
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-primary pl-4 my-6 italic text-muted-foreground bg-muted/30 py-2 rounded-r-md">
+      <blockquote className="border-l-4 border-primary pl-4 my-6 italic text-muted-foreground bg-muted py-2 rounded-r-md text-base">
         {children}
       </blockquote>
     ),
@@ -134,7 +144,7 @@ const PortableTextComponent = {
     ),
     em: ({ children }: any) => <em className="italic">{children}</em>,
     code: ({ children }: any) => (
-      <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">
+      <code className="bg-muted/60 px-2 py-0.5 rounded-md border border-border/50 text-sm font-mono text-accent-foreground shadow-sm">
         {children}
       </code>
     ),
