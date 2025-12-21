@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import { Providers } from './components/Providers'
 import { lazy, Suspense } from 'react'
-import PageSkeleton from './components/PageSkeleton'
+import PageLoading from './components/PageLoading'
 
 const TimelinePage = lazy(() => import('./pages/timeline'))
 const Blog = lazy(() => import('./pages/blog'))
@@ -18,7 +18,7 @@ function App() {
     <Providers>
       <Navbar />
       <main className="max-w-5xl mx-auto px-4 py-8">
-        <Suspense fallback={<PageSkeleton />}>
+        <Suspense fallback={<PageLoading />}>
           <Routes>
             <Route path="/" element={<TimelinePage />} />
             <Route path="/blog" element={<Blog />} />
