@@ -1,10 +1,7 @@
-import { useState } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import {
-  dracula,
-  atomOneLight,
-} from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { vs2015, github } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { CopyButton } from './CopyButton'
+import { useTheme } from '@/hooks/useTheme'
 
 interface CodeBlockProps {
   value: {
@@ -14,20 +11,16 @@ interface CodeBlockProps {
 }
 
 export default function CodeBlock({ value }: CodeBlockProps) {
-  const [isDark] = useState(
-    () => window.matchMedia('(prefers-color-scheme: dark)').matches,
-  )
+  const { resolvedTheme } = useTheme()
 
   return (
-    <div style={{ position: 'relative' }} aria-label="Code block">
+    <div className="relative" aria-label="Code block">
       <CopyButton value={value.code} className="absolute right-0 top-0" />
       <SyntaxHighlighter
         language={value.language}
-        style={isDark ? dracula : atomOneLight}
+        style={resolvedTheme === 'dark' ? vs2015 : github}
         showLineNumbers
-        customStyle={{
-          borderRadius: '0.5rem',
-        }}>
+        customStyle={{ borderRadius: '0.5rem' }}>
         {value.code}
       </SyntaxHighlighter>
     </div>
