@@ -8,7 +8,7 @@ export default defineConfig({
   name: 'default',
   title: 'riannegreiros.com.br',
 
-  projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
+  projectId: '091jywj8',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool(), codeInput()],
