@@ -15,48 +15,64 @@ export default function ProjectCard({ data }: ProjectCardModal) {
     setSelected(project)
     setIsModalOpen(true)
   }
+
   const closeModal = () => setIsModalOpen(false)
 
   return (
-    <section>
+    <section className="w-full">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="m-5 max-w-4xl mx-auto grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {data.map((item, index) => (
           <motion.div
             key={`${item._id}_${index}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group block">
-            <div className="relative aspect-16/12 overflow-hidden rounded-2xl">
+            className="group">
+            <div className="relative aspect-video overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
               <img
                 loading="lazy"
                 src={item.imageUrl}
                 alt={`Projeto entitulado ${item.title} apresentando ${item.description}`}
-                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-2xl cursor-zoom-in"
+                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out cursor-zoom-in"
                 onClick={() => openModal(item)}
               />
             </div>
-            <div className="mt-4">
+
+            <div className="mt-4 space-y-3">
               <a
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2">
-                <h2 className="font-medium text-lg hover:underline">
+                className="inline-flex items-center gap-2 group/link">
+                <h2 className="font-semibold text-lg group-hover/link:text-primary transition-colors">
                   {item.title}
                 </h2>
+                <svg
+                  className="w-4 h-4 opacity-0 group-hover/link:opacity-100 transition-opacity"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
               </a>
-              <p className="mt-1 text-muted-foreground line-clamp-3">
+
+              <p className="text-muted-foreground line-clamp-2 leading-relaxed">
                 {item.description}
               </p>
-              <div className="mt-3 flex flex-wrap gap-2">
+
+              <div className="flex flex-wrap gap-2">
                 {item.tags.map((tagItem: string) => (
                   <span
-                    className="inline-flex items-center rounded-md bg-primary/10 px-3 py-1.5 text-xs sm:text-sm font-medium text-primary ring-2 ring-inset ring-primary/20"
+                    className="inline-flex items-center rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20"
                     key={tagItem}>
                     {tagItem}
                   </span>
@@ -66,6 +82,7 @@ export default function ProjectCard({ data }: ProjectCardModal) {
           </motion.div>
         ))}
       </motion.div>
+
       {selected && (
         <ProjectDialog
           project={selected}

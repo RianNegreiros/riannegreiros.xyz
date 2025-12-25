@@ -16,21 +16,27 @@ const Footer = lazy(() => import('./components/Footer'))
 function App() {
   return (
     <Providers>
-      <Navbar />
-      <main className="max-w-5xl mx-auto px-4 py-8">
-        <Suspense fallback={<PageLoading />}>
-          <Routes>
-            <Route path="/" element={<TimelinePage />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="/rss" element={<RssFeedPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </main>
-      <Footer />
+      <div className="flex min-h-screen flex-col">
+        <Navbar />
+
+        <main className="flex-1 w-full">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <Suspense fallback={<PageLoading />}>
+              <Routes>
+                <Route path="/" element={<TimelinePage />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/resume" element={<Resume />} />
+                <Route path="/rss" element={<RssFeedPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </div>
+        </main>
+
+        <Footer />
+      </div>
     </Providers>
   )
 }

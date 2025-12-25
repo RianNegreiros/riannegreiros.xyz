@@ -15,7 +15,6 @@ export default function PostsPage() {
     handlePageChange,
   } = useBlogPosts()
 
-  // SEO for blog page
   useSEO({
     title: searchQuery
       ? `Search: ${searchQuery} | Blog | Rian Negreiros`
@@ -31,11 +30,12 @@ export default function PostsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto">
       <SearchInput />
+
       {searching ? (
-        <div className="flex justify-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-gray-100"></div>
+        <div className="flex justify-center py-12">
+          <div className="animate-spin rounded-full h-10 w-10 border-2 border-primary border-t-transparent"></div>
         </div>
       ) : (
         <PostsListClient

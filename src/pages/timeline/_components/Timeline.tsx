@@ -24,11 +24,17 @@ export default function Timeline() {
   }, [])
 
   if (loading) return <TimelineSkeleton />
-  if (items.length === 0)
-    return <div className="text-center py-8">No items found.</div>
+
+  if (items.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-muted-foreground text-lg">No items found.</p>
+      </div>
+    )
+  }
 
   return (
-    <ol className="relative border-s border-gray-200 dark:border-gray-700 min-h-100">
+    <ol className="relative border-s-2 border-border ps-6 space-y-8">
       {items.map((item, index) => (
         <TimelineItem key={item._id} {...item} index={index} />
       ))}

@@ -9,5 +9,9 @@ export default function ProjectsPage() {
     url: `${window.location.origin}/projects`,
   })
 
-  return <ProjectsList />
+  return (
+    <div className="w-full">
+      <ProjectsList />
+    </div>
+  )
 }

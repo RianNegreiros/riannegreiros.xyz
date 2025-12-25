@@ -21,7 +21,8 @@ const createPortableTextComponents = () => ({
           loading="lazy"
           src={urlFor(value).url()}
           alt={value.alt || 'Image'}
-          className="rounded-lg w-full h-auto shadow-sm"
+          className="w-full rounded-lg shadow-sm"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {value.caption && (
           <figcaption className="text-sm text-muted-foreground text-center mt-2 italic">
@@ -220,46 +221,52 @@ export default function BlogPost() {
         />
       )}
 
-      <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-8">
-        <article>
-          <header className="mb-8">
-            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-            <p className="text-muted-foreground">
-              Publicado {formatDate(post.firstPublishedDate)}
-            </p>
-          </header>
+      <div className="container mx-auto px-4 py-8">
+        <div className="lg:grid lg:grid-cols-[1fr_280px] lg:gap-8">
+          <article className="w-full min-w-0">
+            <header className="mb-8">
+              <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+              <p className="text-muted-foreground">
+                Publicado {formatDate(post.firstPublishedDate)}
+              </p>
+              {post.image && (
+                <figure className="aspect-video overflow-hidden mb-8">
+                  <img
+                    loading="lazy"
+                    src={urlFor(post.image).url()}
+                    alt={
+                      post.image.alt ?? `Imagem de capa do post: ${post.title}`
+                    }
+                    className="w-full h-full object-cover rounded-lg shadow-sm"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </figure>
+              )}
+            </header>
 
-          {post.image && (
-            <img
-              loading="lazy"
-              src={urlFor(post.image).url()}
-              alt={post.image.alt ?? `Imagem de capa do post: ${post.title}`}
-              className="rounded-lg mb-8 w-full h-auto"
+            <div className="prose prose-lg dark:prose-invert max-w-none w-full">
+              <PortableText
+                value={post.content}
+                components={createPortableTextComponents()}
+              />
+            </div>
+
+            <ShareButton
+              slug={post.slug.current}
+              title={post.title}
+              body={post.overview || ''}
             />
-          )}
+          </article>
 
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            <PortableText
-              value={post.content}
-              components={createPortableTextComponents()}
-            />
-          </div>
-
-          <ShareButton
-            slug={post.slug.current}
-            title={post.title}
-            body={post.overview || ''}
-          />
-        </article>
-
-        <aside className="mt-8 lg:mt-0">
-          <div className="sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto toc-scroll">
-            <TableOfContents
-              className="hidden lg:block"
-              headings={post.headings || []}
-            />
-          </div>
-        </aside>
+          <aside className="mt-8 lg:mt-0">
+            <div className="sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto toc-scroll">
+              <TableOfContents
+                className="hidden lg:block"
+                headings={post.headings || []}
+              />
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   )
