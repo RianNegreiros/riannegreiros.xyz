@@ -49,7 +49,11 @@ export function useSEO({
     // Open Graph tags
     updateMeta('og:title', title, true)
     updateMeta('og:description', description, true)
-    updateMeta('og:image', new URL(image, window.location.origin).href, true)
+    updateMeta(
+      'og:image',
+      new URL(image, import.meta.env.VITE_BASE_URL).href,
+      true,
+    )
     updateMeta('og:url', url, true)
     updateMeta('og:type', type, true)
     updateMeta('og:site_name', 'Rian Negreiros', true)
@@ -58,7 +62,10 @@ export function useSEO({
     updateMeta('twitter:card', 'summary_large_image')
     updateMeta('twitter:title', title)
     updateMeta('twitter:description', description)
-    updateMeta('twitter:image', new URL(image, window.location.origin).href)
+    updateMeta(
+      'twitter:image',
+      new URL(image, import.meta.env.VITE_BASE_URL).href,
+    )
 
     // Article specific tags
     if (type === 'article') {

@@ -13,7 +13,7 @@ export default function Page() {
     title: 'Resume | Rian Negreiros',
     description:
       'Engenheiro de Software com experiência em desenvolvimento full-stack, tecnologias em nuvem e frameworks web..',
-    url: `${window.location.origin}/resume`,
+    url: `${import.meta.env.VITE_BASE_URL}/resume`,
   })
 
   return (

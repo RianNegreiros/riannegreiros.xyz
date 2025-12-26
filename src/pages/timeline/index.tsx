@@ -6,7 +6,7 @@ export default function TimelinePage() {
     title: 'Rian Negreiros Dos Santos',
     description:
       'Engenheiro de Software. Explore minha trajetória, projetos e insights técnicos.',
-    url: window.location.origin,
+    url: import.meta.env.VITE_BASE_URL,
   })
 
   return (

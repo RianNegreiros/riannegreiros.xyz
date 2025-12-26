@@ -28,7 +28,7 @@ export default function RssFeedPage() {
         <p>
           URL do RSS:{' '}
           <code className="bg-muted px-2 py-1 rounded">
-            {window.location.origin}/rss.xml
+            {import.meta.env.VITE_BASE_URL}/rss.xml
           </code>
         </p>
         <p>Use esta URL em seu leitor de RSS favorito</p>

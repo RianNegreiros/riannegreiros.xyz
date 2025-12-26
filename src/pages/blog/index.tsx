@@ -22,7 +22,7 @@ export default function PostsPage() {
     description: searchQuery
       ? `Search results for "${searchQuery}" in Rian Negreiros' blog`
       : 'Artigos técnicos e insights sobre engenharia de software, desenvolvimento web e tecnologia.',
-    url: `${window.location.origin}/blog${searchQuery ? `?search=${searchQuery}` : ''}`,
+    url: `${import.meta.env.VITE_BASE_URL}/blog${searchQuery ? `?search=${searchQuery}` : ''}`,
   })
 
   if (loading) {

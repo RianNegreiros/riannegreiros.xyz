@@ -6,7 +6,7 @@ export default function ProjectsPage() {
     title: 'Projects | Rian Negreiros',
     description:
       'Explore meus projetos de engenharia de software, contribuições para projetos e experimentos técnicos.',
-    url: `${window.location.origin}/projects`,
+    url: `${import.meta.env.VITE_BASE_URL}/projects`,
   })
 
   return (

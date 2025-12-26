@@ -15,7 +15,7 @@ type ShareButtonProps = {
 }
 
 export default function ShareButton({ slug, title, body }: ShareButtonProps) {
-  const baseUrl = import.meta.env.VITE_BASE_URL || window.location.origin
+  const baseUrl = import.meta.env.VITE_BASE_URL
   const url = `${baseUrl}/blog/${slug}`
 
   const [isMobile, setIsMobile] = useState(false)

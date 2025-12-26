@@ -171,7 +171,7 @@ export default function BlogPost() {
     title: post ? `${post.title} | Rian Negreiros` : 'Loading...',
     description: post?.overview || 'Blog post by Rian Negreiros',
     image: post?.image ? urlFor(post.image).url() : '/og-image.jpg',
-    url: `${window.location.origin}/blog/${slug}`,
+    url: `${import.meta.env.VITE_BASE_URL}/blog/${slug}`,
     type: 'article',
     publishedTime: post?.firstPublishedDate,
     modifiedTime: post?.updatedAt,
@@ -214,7 +214,7 @@ export default function BlogPost() {
         <BlogPostStructuredData
           title={post.title}
           description={post.overview || ''}
-          url={`${window.location.origin}/blog/${slug}`}
+          url={`${import.meta.env.VITE_BASE_URL}/blog/${slug}`}
           image={post.image ? urlFor(post.image).url() : undefined}
           publishedTime={post.firstPublishedDate}
           modifiedTime={post.updatedAt}
