@@ -8,4 +8,6 @@ export interface ThemeContextType {
   resolvedTheme: 'light' | 'dark'
 }
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined,
+)
