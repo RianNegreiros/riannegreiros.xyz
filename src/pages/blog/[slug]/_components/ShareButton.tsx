@@ -1,4 +1,3 @@
-/** eslint-disable @typescript-eslint/no-explicit-any */
 import { Share2, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -8,40 +7,26 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useState } from 'react'
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  TelegramShareButton,
+  RedditShareButton,
+  EmailShareButton,
+} from 'react-share'
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+  }
+}
 
 type ShareButtonProps = {
   slug: string
   title: string
   description?: string
-}
-
-const SHARE_PLATFORMS = {
-  twitter: (url: string, title: string) =>
-    `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
-  linkedin: (url: string) =>
-    `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-  facebook: (url: string) =>
-    `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-  whatsapp: (url: string, title: string) =>
-    `https://wa.me/?text=${title}%20${url}`,
-  telegram: (url: string, title: string) =>
-    `https://t.me/share/url?url=${url}&text=${title}`,
-  reddit: (url: string, title: string) =>
-    `https://reddit.com/submit?url=${url}&title=${title}`,
-  email: (url: string, title: string) =>
-    `mailto:?subject=${title}&body=Confira este artigo: ${url}`,
-} as const
-
-type Platform = keyof typeof SHARE_PLATFORMS
-
-const PLATFORM_LABELS: Record<Platform, string> = {
-  twitter: 'Twitter/X',
-  linkedin: 'LinkedIn',
-  facebook: 'Facebook',
-  whatsapp: 'WhatsApp',
-  telegram: 'Telegram',
-  reddit: 'Reddit',
-  email: 'E-mail',
 }
 
 export default function ShareButton({
@@ -80,23 +65,22 @@ export default function ShareButton({
   }
 
   const handleSocialShare = (
-    platform: Platform,
-    e: React.MouseEvent<HTMLDivElement>,
+    platform:
+      | 'twitter'
+      | 'linkedin'
+      | 'facebook'
+      | 'whatsapp'
+      | 'telegram'
+      | 'reddit'
+      | 'email',
   ) => {
-    e.preventDefault()
-    const encodedUrl = encodeURIComponent(url)
-    const encodedTitle = encodeURIComponent(title)
-    const shareUrl = SHARE_PLATFORMS[platform](encodedUrl, encodedTitle)
-
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      ;(window as any).gtag('event', 'share', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'share', {
         method: platform,
         content_type: 'article',
         item_id: slug,
       })
     }
-
-    window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=600')
   }
 
   const hasNativeShare = typeof navigator !== 'undefined' && !!navigator.share
@@ -135,13 +119,53 @@ export default function ShareButton({
 
         <div className="my-1 border-t border-border" />
 
-        {(Object.keys(SHARE_PLATFORMS) as Platform[]).map((platform) => (
-          <DropdownMenuItem
-            key={platform}
-            onClick={(e) => handleSocialShare(platform, e)}>
-            {PLATFORM_LABELS[platform]}
-          </DropdownMenuItem>
-        ))}
+        <TwitterShareButton
+          url={url}
+          title={title}
+          onClick={() => handleSocialShare('twitter')}>
+          <DropdownMenuItem>Twitter/X</DropdownMenuItem>
+        </TwitterShareButton>
+
+        <LinkedinShareButton
+          url={url}
+          onClick={() => handleSocialShare('linkedin')}>
+          <DropdownMenuItem>LinkedIn</DropdownMenuItem>
+        </LinkedinShareButton>
+
+        <FacebookShareButton
+          url={url}
+          onClick={() => handleSocialShare('facebook')}>
+          <DropdownMenuItem>Facebook</DropdownMenuItem>
+        </FacebookShareButton>
+
+        <WhatsappShareButton
+          url={url}
+          title={title}
+          onClick={() => handleSocialShare('whatsapp')}>
+          <DropdownMenuItem>WhatsApp</DropdownMenuItem>
+        </WhatsappShareButton>
+
+        <TelegramShareButton
+          url={url}
+          title={title}
+          onClick={() => handleSocialShare('telegram')}>
+          <DropdownMenuItem>Telegram</DropdownMenuItem>
+        </TelegramShareButton>
+
+        <RedditShareButton
+          url={url}
+          title={title}
+          onClick={() => handleSocialShare('reddit')}>
+          <DropdownMenuItem>Reddit</DropdownMenuItem>
+        </RedditShareButton>
+
+        <EmailShareButton
+          url={url}
+          subject={title}
+          body={description}
+          onClick={() => handleSocialShare('email')}>
+          <DropdownMenuItem>E-mail</DropdownMenuItem>
+        </EmailShareButton>
       </DropdownMenuContent>
     </DropdownMenu>
   )
