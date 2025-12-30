@@ -22,9 +22,7 @@ export interface Post {
   overview: string
   content: any
   _id: string
-  slug: {
-    current: string
-  }
+  slug: string
   _createdAt: string
   firstPublishedDate: string
   updatedAt?: string
