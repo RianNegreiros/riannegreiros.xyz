@@ -58,6 +58,16 @@ export default function BlogPost() {
     fetchPost()
   }, [slug])
 
+  useEffect(() => {
+    if (window.location.hash) {
+      const hash = window.location.hash.substring(1)
+      const element = document.getElementById(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }, [post])
+
   if (loading) {
     return <PostSkeleton />
   }
