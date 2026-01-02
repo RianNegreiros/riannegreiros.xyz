@@ -1,27 +1,32 @@
-import { Share2, Check } from 'lucide-react'
+import { Share2, Link as LinkIcon, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { useState } from 'react'
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { useState, useEffect } from 'react'
+import {
+  TwitterShareButton,
   FacebookShareButton,
   LinkedinShareButton,
-  TwitterShareButton,
   WhatsappShareButton,
   TelegramShareButton,
   RedditShareButton,
-  EmailShareButton,
+  TwitterIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  WhatsappIcon,
+  TelegramIcon,
+  RedditIcon,
+  EmailIcon,
 } from 'react-share'
-
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void
-  }
-}
+import { MotionDiv } from '@/components/MotionComponents'
 
 type ShareButtonProps = {
   slug: string
@@ -35,12 +40,25 @@ export default function ShareButton({
   description = '',
 }: ShareButtonProps) {
   const [copied, setCopied] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+
   const baseUrl = import.meta.env.VITE_BASE_URL || window.location.origin
   const url = `${baseUrl}/blog/${slug}`
 
-  const handleNativeShare = async () => {
-    if (!navigator.share) return
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent,
+        )
+      setIsMobile(mobile && !!navigator.share)
+    }
+    checkMobile()
+  }, [])
 
+  const handleNativeShare = async () => {
     try {
       await navigator.share({
         title,
@@ -64,109 +82,208 @@ export default function ShareButton({
     }
   }
 
-  const handleSocialShare = (
-    platform:
-      | 'twitter'
-      | 'linkedin'
-      | 'facebook'
-      | 'whatsapp'
-      | 'telegram'
-      | 'reddit'
-      | 'email',
-  ) => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'share', {
-        method: platform,
-        content_type: 'article',
-        item_id: slug,
-      })
+  const shareMessages = {
+    twitter: `Confira este artigo: ${title} - ${url}`,
+    linkedin: `Achei este artigo interessante: ${title} - ${url}`,
+    whatsapp: `Ei, achei que você poderia gostar deste artigo: ${title} - ${url}`,
+    telegram: `Dê uma olhada nisso: ${title} - ${url}`,
+    email: `Olá,\n\nAchei que você poderia achar este artigo interessante:\n\nTítulo: ${title}\nDescrição: ${description}\nLink: ${url}\n\nAtenciosamente,`,
+  }
+
+  const handleEmailShare = () => {
+    const mailtoUrl = `mailto:?subject=${encodeURIComponent(
+      `Confira este artigo: ${title}`,
+    )}&body=${encodeURIComponent(shareMessages.email)}`
+
+    const emailWindow = window.open(mailtoUrl, '_blank')
+    if (!emailWindow) {
+      setEmailError(true)
+      setTimeout(() => setEmailError(false), 3000)
     }
   }
 
-  const hasNativeShare = typeof navigator !== 'undefined' && !!navigator.share
-
-  if (hasNativeShare) {
+  if (isMobile) {
     return (
-      <Button
-        onClick={handleNativeShare}
-        variant="outline"
-        size="icon"
-        className="rounded-full shadow-lg hover:shadow-xl transition-shadow"
-        aria-label="Compartilhar post">
-        <Share2 className="h-4 w-4" />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <MotionDiv
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 17 }}>
+            <Button
+              onClick={handleNativeShare}
+              variant="outline"
+              size="icon"
+              className="shadow-xs"
+              aria-label="Compartilhar post">
+              <Share2 className="h-4 w-4" />
+            </Button>
+          </MotionDiv>
+        </TooltipTrigger>
+        <TooltipContent className="px-2 py-1 text-xs">
+          Compartilhar
+        </TooltipContent>
+      </Tooltip>
     )
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="icon"
-          className="rounded-full shadow-lg hover:shadow-xl transition-shadow"
-          aria-label="Abrir menu de compartilhamento">
-          <Share2 className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
-        <DropdownMenuItem onClick={handleCopyLink}>
-          <div className="flex items-center justify-between w-full">
-            <span>{copied ? 'Link copiado!' : 'Copiar link'}</span>
-            {copied && <Check className="h-4 w-4 text-green-500" />}
+    <Popover open={open} onOpenChange={setOpen}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              className="shadow-xs"
+              aria-label="Abrir menu de compartilhamento">
+              <Share2 className="h-4 w-4" />
+            </Button>
+          </PopoverTrigger>
+        </TooltipTrigger>
+        <TooltipContent className="px-2 py-1 text-xs">
+          Compartilhar
+        </TooltipContent>
+      </Tooltip>
+
+      <PopoverContent className="w-auto p-3" align="end">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  onClick={handleCopyLink}
+                  variant="outline"
+                  size="icon"
+                  className="shadow-xs h-8 w-8">
+                  {copied ? (
+                    <Check className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <LinkIcon className="h-4 w-4" />
+                  )}
+                  <span className="sr-only">
+                    {copied ? 'Link copiado' : 'Copiar link'}
+                  </span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className="px-2 py-1 text-xs">
+                {copied ? 'Link copiado!' : 'Copiar link'}
+              </TooltipContent>
+            </Tooltip>
+            <span className="text-sm text-muted-foreground">
+              {copied ? 'Link copiado!' : 'Copiar link'}
+            </span>
           </div>
-        </DropdownMenuItem>
 
-        <div className="my-1 border-t border-border" />
+          <div className="border-t pt-2" />
+          <div className="grid grid-cols-4 gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <TwitterShareButton
+                  url={url}
+                  title={shareMessages.twitter}
+                  className="hover:opacity-80 transition-opacity">
+                  <TwitterIcon size={32} round />
+                </TwitterShareButton>
+              </TooltipTrigger>
+              <TooltipContent className="px-2 py-1 text-xs">
+                Twitter/X
+              </TooltipContent>
+            </Tooltip>
 
-        <TwitterShareButton
-          url={url}
-          title={title}
-          onClick={() => handleSocialShare('twitter')}>
-          <DropdownMenuItem>Twitter/X</DropdownMenuItem>
-        </TwitterShareButton>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <FacebookShareButton
+                  url={url}
+                  hashtag="#article"
+                  className="hover:opacity-80 transition-opacity">
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+              </TooltipTrigger>
+              <TooltipContent className="px-2 py-1 text-xs">
+                Facebook
+              </TooltipContent>
+            </Tooltip>
 
-        <LinkedinShareButton
-          url={url}
-          onClick={() => handleSocialShare('linkedin')}>
-          <DropdownMenuItem>LinkedIn</DropdownMenuItem>
-        </LinkedinShareButton>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <LinkedinShareButton
+                  url={url}
+                  title={title}
+                  summary={shareMessages.linkedin}
+                  className="hover:opacity-80 transition-opacity">
+                  <LinkedinIcon size={32} round />
+                </LinkedinShareButton>
+              </TooltipTrigger>
+              <TooltipContent className="px-2 py-1 text-xs">
+                LinkedIn
+              </TooltipContent>
+            </Tooltip>
 
-        <FacebookShareButton
-          url={url}
-          onClick={() => handleSocialShare('facebook')}>
-          <DropdownMenuItem>Facebook</DropdownMenuItem>
-        </FacebookShareButton>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <WhatsappShareButton
+                  url={url}
+                  title={shareMessages.whatsapp}
+                  className="hover:opacity-80 transition-opacity">
+                  <WhatsappIcon size={32} round />
+                </WhatsappShareButton>
+              </TooltipTrigger>
+              <TooltipContent className="px-2 py-1 text-xs">
+                WhatsApp
+              </TooltipContent>
+            </Tooltip>
 
-        <WhatsappShareButton
-          url={url}
-          title={title}
-          onClick={() => handleSocialShare('whatsapp')}>
-          <DropdownMenuItem>WhatsApp</DropdownMenuItem>
-        </WhatsappShareButton>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <TelegramShareButton
+                  url={url}
+                  title={shareMessages.telegram}
+                  className="hover:opacity-80 transition-opacity">
+                  <TelegramIcon size={32} round />
+                </TelegramShareButton>
+              </TooltipTrigger>
+              <TooltipContent className="px-2 py-1 text-xs">
+                Telegram
+              </TooltipContent>
+            </Tooltip>
 
-        <TelegramShareButton
-          url={url}
-          title={title}
-          onClick={() => handleSocialShare('telegram')}>
-          <DropdownMenuItem>Telegram</DropdownMenuItem>
-        </TelegramShareButton>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <RedditShareButton
+                  url={url}
+                  title={title}
+                  className="hover:opacity-80 transition-opacity">
+                  <RedditIcon size={32} round />
+                </RedditShareButton>
+              </TooltipTrigger>
+              <TooltipContent className="px-2 py-1 text-xs">
+                Reddit
+              </TooltipContent>
+            </Tooltip>
 
-        <RedditShareButton
-          url={url}
-          title={title}
-          onClick={() => handleSocialShare('reddit')}>
-          <DropdownMenuItem>Reddit</DropdownMenuItem>
-        </RedditShareButton>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div
+                  onClick={handleEmailShare}
+                  className="hover:opacity-80 transition-opacity cursor-pointer">
+                  <EmailIcon size={32} round />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent className="px-2 py-1 text-xs">
+                {emailError ? 'Erro no email' : 'E-mail'}
+              </TooltipContent>
+            </Tooltip>
+          </div>
 
-        <EmailShareButton
-          url={url}
-          subject={title}
-          body={description}
-          onClick={() => handleSocialShare('email')}>
-          <DropdownMenuItem>E-mail</DropdownMenuItem>
-        </EmailShareButton>
-      </DropdownMenuContent>
-    </DropdownMenu>
+          {emailError && (
+            <div className="text-red-500 text-xs mt-2">
+              Falha ao abrir o cliente de email. Tente novamente ou copie o link
+              manualmente.
+            </div>
+          )}
+        </div>
+      </PopoverContent>
+    </Popover>
   )
 }
