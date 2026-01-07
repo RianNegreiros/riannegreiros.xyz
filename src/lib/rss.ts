@@ -31,14 +31,15 @@ export async function generateRSSFeed(baseUrl: string) {
   )
 
   const feed = new Feed({
-    title: 'RSS feed do meu blog pessoal',
-    description: 'This is my personal blog RSS feed',
+    title: 'Rian Negreiros Dos Santos Blog',
+    description: 'Blog pessoal de Rian Negreiros Dos Santos',
     id: baseUrl,
     link: baseUrl,
     language: 'pt-BR',
     image: `${baseUrl}/og-image.jpg`,
     favicon: `${baseUrl}/favicon.webp`,
-    copyright: '2025 Rian Negreiros Dos Santos. Todos os direitos reservado',
+    copyright: `Copyright © ${new Date().getFullYear()} Rian Negreiros Dos Santos. Todos os direitos reservados.`,
+    generator: 'Rian Negreiros Dos Santos Blog',
     author: {
       name: SITE_CONFIG.author,
       email: SITE_CONFIG.email,
