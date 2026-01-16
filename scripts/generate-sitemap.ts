@@ -17,7 +17,10 @@ const client = createClient({
   apiVersion: '2024-03-13',
 })
 
-const postSlugsQuery = `*[_type == 'post' && defined(slug.current)][].slug.current`
+const postSlugsQuery = `*[_type == 'post' && defined(slug.current)][]{
+  "slug": slug.current,
+  "lastmod": _updatedAt
+}`
 
 async function getPostSlugs() {
   return await client.fetch(postSlugsQuery)
@@ -47,15 +50,16 @@ async function generateSitemap() {
     Promise.resolve(getPageLinks()),
   ])
 
-  const postLinks = postSlugs.map((slug: string) => ({
-    url: `/blog/${slug}`,
+  const postLinks = postSlugs.map((post: { slug: string; lastmod: string }) => ({
+    url: `/blog/${post.slug}`,
     changefreq: 'weekly',
     priority: 0.8,
+    lastmod: post.lastmod,
   }))
 
   const links = [
-    { url: '/', changefreq: 'daily', priority: 1.0 },
-    ...pageLinks,
+    { url: '/', changefreq: 'daily', priority: 1.0, lastmod: new Date().toISOString() },
+    ...pageLinks.map(link => ({ ...link, lastmod: new Date().toISOString() })),
     ...postLinks,
   ]
 
