@@ -34,7 +34,7 @@ export default function BlogPost() {
   useSEO({
     title: post ? `${post.title} | Rian Negreiros` : 'Loading...',
     description: post?.overview || 'Blog post by Rian Negreiros',
-    image: post?.image ? urlFor(post.image).url() : '/og-image.jpg',
+    image: post?.image ? urlFor(post.image).url() : '/og-image.png',
     url: `${import.meta.env.VITE_BASE_URL}/blog/${slug}`,
     type: 'article',
     publishedTime: post?.firstPublishedDate,

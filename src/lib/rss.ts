@@ -36,7 +36,7 @@ export async function generateRSSFeed(baseUrl: string) {
     id: baseUrl,
     link: baseUrl,
     language: 'pt-BR',
-    image: `${baseUrl}/og-image.jpg`,
+    image: `${baseUrl}/og-image.png`,
     favicon: `${baseUrl}/favicon.webp`,
     copyright: `Copyright © ${new Date().getFullYear()} Rian Negreiros Dos Santos. Todos os direitos reservados.`,
     generator: 'Rian Negreiros Dos Santos Blog',

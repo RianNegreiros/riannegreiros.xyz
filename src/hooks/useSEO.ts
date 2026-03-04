@@ -13,7 +13,7 @@ interface SEOProps {
 export function useSEO({
   title = 'Rian Negreiros Dos Santos',
   description = 'Software Engineer',
-  image = '/og-image.jpg',
+  image = '/og-image.png',
   url = window.location.href,
   type = 'website',
   publishedTime,
