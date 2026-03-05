@@ -28,6 +28,25 @@ const createPortableTextComponents = () => ({
         )}
       </figure>
     ),
+    video: ({ value }: any) => (
+      <figure className="my-8">
+        <video
+          controls
+          autoPlay={false}
+          loop={false}
+          muted={false}
+          preload="metadata"
+          className="w-full rounded-xl shadow-md">
+          <source src={urlFor(value).url()} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {value.caption && (
+          <figcaption className="text-sm text-muted-foreground text-center mt-3 italic">
+            {value.caption}
+          </figcaption>
+        )}
+      </figure>
+    ),
     code: ({ value }: any) => <CodeBlock value={value} />,
   },
   block: {

@@ -58,6 +58,15 @@ export default {
             highlightedLines: true,
           },
         },
+        {
+          name: 'video',
+          type: 'file',
+          title: 'Video',
+          description: 'Upload MP4 video files',
+          options: {
+            accept: 'video/mp4',
+        },
+      },
       ],
     },
   ],
