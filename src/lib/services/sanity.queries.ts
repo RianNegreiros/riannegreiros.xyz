@@ -40,9 +40,7 @@ export const queries = {
           }
         }
       },
-      content[]{
-        ...,
-        _type == 'image' => {
+        content[]{
           ...,
           asset->{
             _id,
@@ -51,8 +49,7 @@ export const queries = {
               dimensions
             }
           }
-        }
-      },
+        },
       "headings": content[_type == "block" && style match "h*"]{
         "text": pt::text(@),
         "level": style

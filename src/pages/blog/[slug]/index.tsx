@@ -2,29 +2,12 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { client, urlFor } from '@/lib/services/sanity'
 import type { Post } from '@/lib/types'
-import { formatDate } from '@/lib'
+import { formatDate, queries } from '@/lib'
 import { useSEO } from '@/hooks/useSEO'
 import { BlogPostStructuredData } from '@/components/StructuredData'
 import PostContent from './_components/PostContent'
 import PostSkeleton from './_components/PostSkeleton'
 import TableOfContents from './_components/TableOfContents'
-
-const POST_QUERY = `*[_type == "post" && slug.current == $slug][0] {
-  _id,
-  title,
-  "slug": slug.current,
-  overview,
-  content,
-  image,
-  firstPublishedDate,
-  updatedAt,
-  "headings": content[]{
-    _type == "block" && style match "h*" => {
-      "text": pt::text(@),
-      "level": style
-    }
-  }
-}`
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
@@ -46,7 +29,7 @@ export default function BlogPost() {
       if (!slug) return
 
       try {
-        const data = await client.fetch<Post>(POST_QUERY, { slug })
+        const data = await client.fetch<Post>(queries.posts.bySlug, { slug })
         setPost(data)
       } catch (error) {
         console.error('Error fetching post:', error)
