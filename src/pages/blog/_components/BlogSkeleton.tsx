@@ -1,29 +1,38 @@
-import { MotionDiv } from '@/components/MotionComponents'
-import {
-  DateSkeleton,
-  TitleSkeleton,
-  TextSkeleton,
-} from '@/components/ui/skeletons'
+import { MotionDiv, MotionUl } from '@/components/MotionComponents'
+import { Skeleton } from '@/components/ui/skeleton'
+import { BlogPostSkeleton } from './BlogPostSkeleton'
 
-export default function BlogSkeleton() {
+interface BlogSkeletonProps {
+  withPagination?: boolean
+}
+
+export default function BlogSkeleton({
+  withPagination = true,
+}: BlogSkeletonProps) {
   return (
-    <div className="max-w-4xl mx-auto mt-5">
-      <div className="space-y-4">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <MotionDiv
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="pb-6">
-            <div className="space-y-2">
-              <DateSkeleton />
-              <TitleSkeleton />
-              <TextSkeleton count={2} />
-            </div>
-          </MotionDiv>
+    <MotionDiv
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="max-w-4xl mx-auto mt-5"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading posts">
+      <MotionUl
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="space-y-4">
+        {Array.from({ length: 10 }).map((_, index) => (
+          <BlogPostSkeleton key={index} index={index} />
         ))}
-      </div>
-    </div>
+      </MotionUl>
+
+      {withPagination && (
+        <div className="mt-8 flex justify-center">
+          <Skeleton className="w-64 h-10" />
+        </div>
+      )}
+    </MotionDiv>
   )
 }

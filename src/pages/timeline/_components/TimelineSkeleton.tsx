@@ -3,7 +3,6 @@ import {
   DateSkeleton,
   TitleSkeleton,
   TextSkeleton,
-  TagsSkeleton,
 } from '@/components/ui/skeletons'
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -13,17 +12,19 @@ export default function TimelineSkeleton() {
       {Array.from({ length: 5 }).map((_, index) => (
         <MotionLi
           key={index}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="mb-10 ms-6">
-          <Skeleton className="absolute w-6 h-6 rounded-full -start-3" />
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeInOut' }}
+          className="my-8 ms-6 relative">
+          <Skeleton className="absolute w-6 h-6 rounded-full -left-9 top-0 ring-8 ring-background" />
 
-          <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          <div className="block p-4 bg-card rounded-lg">
+            <div className="flex items-center justify-between mb-2">
+              <TitleSkeleton className="h-5 w-1/2" />
+              <Skeleton className="h-5 w-16 rounded-full" />
+            </div>
             <DateSkeleton className="mb-2" />
-            <TitleSkeleton className="mb-3" />
-            <TextSkeleton count={3} className="mb-4" />
-            <TagsSkeleton />
+            <TextSkeleton count={2} />
           </div>
         </MotionLi>
       ))}

@@ -50,16 +50,26 @@ async function generateSitemap() {
     Promise.resolve(getPageLinks()),
   ])
 
-  const postLinks = postSlugs.map((post: { slug: string; lastmod: string }) => ({
-    url: `/blog/${post.slug}`,
-    changefreq: 'weekly',
-    priority: 0.8,
-    lastmod: post.lastmod,
-  }))
+  const postLinks = postSlugs.map(
+    (post: { slug: string; lastmod: string }) => ({
+      url: `/blog/${post.slug}`,
+      changefreq: 'weekly',
+      priority: 0.8,
+      lastmod: post.lastmod,
+    }),
+  )
 
   const links = [
-    { url: '/', changefreq: 'daily', priority: 1.0, lastmod: new Date().toISOString() },
-    ...pageLinks.map(link => ({ ...link, lastmod: new Date().toISOString() })),
+    {
+      url: '/',
+      changefreq: 'daily',
+      priority: 1.0,
+      lastmod: new Date().toISOString(),
+    },
+    ...pageLinks.map((link) => ({
+      ...link,
+      lastmod: new Date().toISOString(),
+    })),
     ...postLinks,
   ]
 

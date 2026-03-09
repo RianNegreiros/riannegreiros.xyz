@@ -1,19 +1,13 @@
-import { MotionDiv } from '@/components/MotionComponents'
-import { CardSkeleton } from '@/components/ui/skeletons'
+import { ProjectCardSkeleton } from './ProjectCardSkeleton'
 
 export default function Loading() {
   return (
-    <div className="m-5 max-w-4xl mx-auto grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12 grid-cols-1">
-      {Array.from({ length: 6 }).map((_, index) => (
-        <MotionDiv
-          key={index}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden p-4">
-          <CardSkeleton />
-        </MotionDiv>
-      ))}
-    </div>
+    <section className="w-full">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <ProjectCardSkeleton key={index} index={index} />
+        ))}
+      </div>
+    </section>
   )
 }

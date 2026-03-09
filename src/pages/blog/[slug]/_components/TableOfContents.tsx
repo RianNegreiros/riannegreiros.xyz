@@ -1,5 +1,3 @@
-'use client'
-
 import { slugify } from '@/lib'
 import type { Heading } from '@/lib/types'
 import { cn } from '@/lib/utils'
