@@ -1,5 +1,5 @@
 {
-  "name": "riannegreiros.com.br",
+  "name": "Rian Negreiros Dos Santos",
   "short_name": "Rian Negreiros",
   "icons": [
     {
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#001024",
+  "background_color": "#001024",
   "display": "standalone"
 }
