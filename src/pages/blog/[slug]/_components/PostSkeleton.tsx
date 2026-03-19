@@ -1,10 +1,4 @@
-import { MotionDiv } from '@/components/MotionComponents'
-import {
-  TitleSkeleton,
-  DateSkeleton,
-  ImageSkeleton,
-  TextSkeleton,
-} from '@/components/ui/skeletons'
+import { TitleSkeleton, DateSkeleton, ImageSkeleton, TextSkeleton } from '@/components/ui/skeletons'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export default function PostSkeleton() {
@@ -14,11 +8,8 @@ export default function PostSkeleton() {
       role="status"
       aria-live="polite"
       aria-label="Loading post">
-      <MotionDiv
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="lg:grid lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_320px] lg:gap-12">
+      <div
+        className="lg:grid lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_320px] lg:gap-12 animate-slide-up">
         <article className="w-full min-w-0">
           <header className="mb-12">
             <TitleSkeleton className="h-10 sm:h-14 mb-4" />
@@ -28,13 +19,12 @@ export default function PostSkeleton() {
 
           <div className="space-y-6">
             {Array.from({ length: 6 }).map((_, index) => (
-              <MotionDiv
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.08 }}>
+                className="animate-slide-up"
+                style={{ animationDelay: `${index * 0.08}s`, animationFillMode: 'both' }}>
                 <TextSkeleton count={3} />
-              </MotionDiv>
+              </div>
             ))}
           </div>
         </article>
@@ -47,7 +37,7 @@ export default function PostSkeleton() {
             </div>
           </div>
         </aside>
-      </MotionDiv>
+      </div>
     </div>
   )
 }

@@ -1,15 +1,11 @@
-import { MotionDiv } from '@/components/MotionComponents'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export function ProjectCardSkeleton({ index }: { index: number }) {
   return (
-    <MotionDiv
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group">
+    <div
+      className="group animate-slide-up"
+      style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}>
       <Skeleton className="w-full aspect-video rounded-xl" />
-
       <div className="mt-4 space-y-3">
         <Skeleton className="h-5 w-2/3" />
         <Skeleton className="h-4 w-full" />
@@ -20,6 +16,6 @@ export function ProjectCardSkeleton({ index }: { index: number }) {
           ))}
         </div>
       </div>
-    </MotionDiv>
+    </div>
   )
 }

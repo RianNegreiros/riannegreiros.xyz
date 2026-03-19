@@ -1,4 +1,3 @@
-import { MotionUl } from '@/components/MotionComponents'
 import type { Post } from '@/lib/types'
 import BlogPagination from './BlogPagination'
 import PostItem from './PostItem'
@@ -12,34 +11,20 @@ interface PostsListClientProps {
   onPageChange: (page: number) => void
 }
 
-export default function PostsListClient({
-  data,
-  searchQuery,
-  currentPage,
-  totalPages,
-  onPageChange,
-}: PostsListClientProps) {
+export default function PostsListClient({ data, searchQuery, currentPage, totalPages, onPageChange }: PostsListClientProps) {
   if (!data?.length) {
     return <EmptyState searchQuery={searchQuery} />
   }
 
   return (
     <div className="space-y-8">
-      <MotionUl
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="space-y-4">
+      <ul className="space-y-4 animate-fade-in">
         {data.map((post, index) => (
           <PostItem key={post._id} post={post} index={index} />
         ))}
-      </MotionUl>
+      </ul>
 
-      <BlogPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={onPageChange}
-      />
+      <BlogPagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
     </div>
   )
 }

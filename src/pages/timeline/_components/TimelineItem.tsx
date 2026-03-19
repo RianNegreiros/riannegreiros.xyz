@@ -1,15 +1,8 @@
 import { Pencil, Briefcase, ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { MotionLi } from '@/components/MotionComponents'
 import type { SanityPortfolioItem } from '@/lib/types/sanity'
 import { formatDate } from '@/lib/date'
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-
-const variants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0 },
-}
 
 interface TimelineItemProps extends SanityPortfolioItem {
   index?: number
@@ -29,44 +22,26 @@ export default function TimelineItem({
   const isPost = _type === 'post'
 
   return (
-    <MotionLi
+    <li
       key={`${_type}-${_id}`}
-      className="my-8 ms-6 relative"
-      variants={variants}
-      initial="hidden"
-      animate="visible"
-      transition={{
-        delay: index * 0.1,
-        ease: 'easeInOut',
-        duration: 0.5,
-      }}
-      viewport={{ amount: 0.2 }}>
-      <motion.span
-        className="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-9 top-0 ring-8 ring-background"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: index * 0.1 + 0.2, duration: 0.3 }}>
+      className="my-8 ms-6 relative animate-slide-up"
+      style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}>
+      <span
+        className="absolute flex items-center justify-center w-6 h-6 bg-primary rounded-full -left-9 top-0 ring-8 ring-background animate-scale-in"
+        style={{ animationDelay: `${index * 0.1 + 0.2}s`, animationFillMode: 'both' }}>
         {isPost ? (
-          <Pencil
-            className="w-3 h-3 text-primary-foreground"
-            aria-hidden="true"
-          />
+          <Pencil className="w-3 h-3 text-primary-foreground" aria-hidden="true" />
         ) : (
-          <Briefcase
-            className="w-3 h-3 text-primary-foreground"
-            aria-hidden="true"
-          />
+          <Briefcase className="w-3 h-3 text-primary-foreground" aria-hidden="true" />
         )}
-      </motion.span>
+      </span>
       {isPost ? (
         <Link
           to={`/blog/${slug}`}
           className="block p-4 bg-card hover:bg-accent rounded-lg transition-colors duration-200 ease-in-out">
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-lg font-semibold text-foreground">{title}</h2>
-            <Badge
-              variant={isPost ? 'default' : 'secondary'}
-              className="flex items-center">
+            <Badge variant={isPost ? 'default' : 'secondary'} className="flex items-center">
               {isPost ? 'Post' : 'Projeto'}
               <ArrowUpRight className="ml-1 h-3 w-3" aria-hidden="true" />
             </Badge>
@@ -86,9 +61,7 @@ export default function TimelineItem({
           className="block p-4 bg-card hover:bg-accent rounded-lg transition-colors duration-200 ease-in-out">
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-lg font-semibold text-foreground">{title}</h2>
-            <Badge
-              variant={isPost ? 'default' : 'secondary'}
-              className="flex items-center">
+            <Badge variant={isPost ? 'default' : 'secondary'} className="flex items-center">
               {isPost ? 'Post' : 'Projeto'}
               <ArrowUpRight className="ml-1 h-3 w-3" aria-hidden="true" />
             </Badge>
@@ -101,6 +74,6 @@ export default function TimelineItem({
           </p>
         </a>
       )}
-    </MotionLi>
+    </li>
   )
 }

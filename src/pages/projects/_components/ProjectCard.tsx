@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import { ProjectDialog } from './ProjectDialog'
 import type { ProjectsCard } from '@/lib/types'
 
@@ -20,18 +19,12 @@ export default function ProjectCard({ data }: ProjectCardModal) {
 
   return (
     <section className="w-full">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 animate-fade-in">
         {data.map((item, index) => (
-          <motion.div
+          <div
             key={`${item._id}_${index}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group">
+            className="group animate-slide-up"
+            style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}>
             <div className="relative aspect-video overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
               <img
                 loading="lazy"
@@ -79,9 +72,9 @@ export default function ProjectCard({ data }: ProjectCardModal) {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
 
       {selected && (
         <ProjectDialog
