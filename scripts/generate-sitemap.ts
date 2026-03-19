@@ -27,21 +27,13 @@ async function getPostSlugs() {
 }
 
 function getPageLinks() {
-  const pagesDir = path.join(__dirname, '../src/pages')
-  const pages = fs.readdirSync(pagesDir)
+  const staticRoutes = ['/blog', '/projects', '/resume']
 
-  const excludedPages = ['_', '[', 'rss', 'timeline']
-
-  return pages
-    .filter(
-      (page) => !excludedPages.some((excluded) => page.includes(excluded)),
-    )
-    .map((page) => page.replace('index.tsx', ''))
-    .map((page) => ({
-      url: `/${page}`,
-      changefreq: 'monthly',
-      priority: 0.7,
-    }))
+  return staticRoutes.map((url) => ({
+    url,
+    changefreq: 'monthly',
+    priority: 0.7,
+  }))
 }
 
 async function generateSitemap() {

@@ -12,8 +12,5 @@ export * from './services'
 // API functions
 export * from './api'
 
-// RSS
-export * from './rss'
-
 // Types
 export * from './types'
