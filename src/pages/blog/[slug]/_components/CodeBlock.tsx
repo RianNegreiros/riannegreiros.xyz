@@ -1,5 +1,5 @@
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { vs2015, github } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { useEffect, useState } from 'react'
+import { codeToHtml } from 'shiki'
 import { CopyButton } from './CopyButton'
 import { useTheme } from '@/hooks/useTheme'
 
@@ -12,17 +12,30 @@ interface CodeBlockProps {
 
 export default function CodeBlock({ value }: CodeBlockProps) {
   const { resolvedTheme } = useTheme()
+  const [html, setHtml] = useState<string>('')
+
+  useEffect(() => {
+    codeToHtml(value.code, {
+      lang: value.language || 'plaintext',
+      theme: resolvedTheme === 'dark' ? 'github-dark' : 'github-light',
+    }).then(setHtml)
+  }, [value.code, value.language, resolvedTheme])
+
+  if (!html) {
+    return (
+      <pre className="relative m-2 rounded-lg p-4 bg-muted font-mono text-sm overflow-x-auto">
+        <code>{value.code}</code>
+      </pre>
+    )
+  }
 
   return (
     <div className="relative m-2" aria-label="Code block">
-      <CopyButton value={value.code} className="absolute right-0 top-0" />
-      <SyntaxHighlighter
-        language={value.language}
-        style={resolvedTheme === 'dark' ? vs2015 : github}
-        showLineNumbers
-        customStyle={{ borderRadius: '0.5rem' }}>
-        {value.code}
-      </SyntaxHighlighter>
+      <CopyButton value={value.code} className="absolute right-2 top-2 z-10" />
+      <div
+        className="rounded-lg overflow-hidden text-sm [&>pre]:p-4 [&>pre]:overflow-x-auto [&>pre]:m-0"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
     </div>
   )
 }
