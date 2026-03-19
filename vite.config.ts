@@ -18,6 +18,7 @@ export default defineConfig({
     },
   },
   build: {
+    modulePreload: true,
     target: 'esnext',
     minify: 'terser',
     cssMinify: 'lightningcss',
@@ -37,21 +38,17 @@ export default defineConfig({
           ui: [
             '@radix-ui/react-dialog',
             '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-label',
             '@radix-ui/react-navigation-menu',
             '@radix-ui/react-separator',
             '@radix-ui/react-slot',
-            '@radix-ui/react-toggle',
             '@radix-ui/react-tooltip',
             '@radix-ui/react-visually-hidden',
           ],
         },
       },
     },
-    cssCodeSplit: true,
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', '@sanity/client', '@sanity/image-url'],
     exclude: ['lucide-react'],
   },
   server: {
