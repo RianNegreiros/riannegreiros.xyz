@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { client, urlFor } from '@/lib/services/sanity'
+import { client, urlFor, optimizedImageUrl } from '@/lib/services/sanity'
 import type { Post } from '@/lib/types'
 import { formatDate, queries } from '@/lib'
 import { useSEO } from '@/hooks/useSEO'
@@ -94,13 +94,14 @@ export default function BlogPost() {
               {post.image && (
                 <figure className="mt-8 overflow-hidden rounded-xl shadow-lg">
                   <img
-                    loading="lazy"
-                    src={urlFor(post.image).url()}
+                    src={optimizedImageUrl(post.image, 800)}
+                    srcSet={`${optimizedImageUrl(post.image, 400)} 400w, ${optimizedImageUrl(post.image, 800)} 800w`}
                     alt={
                       post.image.alt ?? `Imagem de capa do post: ${post.title}`
                     }
                     className="w-full h-auto object-cover aspect-video"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    fetchPriority="high"
                   />
                 </figure>
               )}

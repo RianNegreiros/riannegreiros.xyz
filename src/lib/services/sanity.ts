@@ -17,6 +17,10 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
+export function optimizedImageUrl(source: SanityImageSource, width: number) {
+  return builder.image(source).width(width).format('webp').quality(80).url()
+}
+
 export async function fetchSanityData<T>(
   query: string,
   params?: Record<string, unknown>,
