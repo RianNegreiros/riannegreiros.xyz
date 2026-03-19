@@ -20,6 +20,7 @@ export default defineConfig({
   build: {
     target: 'esnext',
     minify: 'terser',
+    cssMinify: 'lightningcss',
     terserOptions: {
       compress: {
         drop_console: true,
@@ -32,6 +33,7 @@ export default defineConfig({
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
           sanity: ['@sanity/client', '@sanity/image-url'],
+          shiki: ['shiki'],
           ui: [
             '@radix-ui/react-dialog',
             '@radix-ui/react-dropdown-menu',
