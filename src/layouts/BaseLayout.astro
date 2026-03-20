@@ -4,6 +4,8 @@ import Footer from '@/components/Footer'
 import ThemeScript from '@/components/ThemeScript.astro'
 import '@/index.css'
 import { Navbar } from '@/components/Navbar'
+import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from '@vercel/speed-insights/astro'
 
 interface Props {
   title?: string
@@ -100,6 +102,9 @@ const currentPath =
     <ThemeScript />
 
     <ClientRouter />
+
+    <Analytics />
+    <SpeedInsights />
   </head>
   <body class="bg-background text-foreground">
     <div class="flex min-h-screen flex-col">
