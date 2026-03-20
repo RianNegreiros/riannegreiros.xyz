@@ -1,0 +1,20 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import ProjectsList from '@/components/projects/ProjectsList'
+
+export const prerender = false
+Astro.response.headers.set(
+  'Cache-Control',
+  's-maxage=60, stale-while-revalidate=300',
+)
+---
+
+<BaseLayout
+  title="Projetos | Rian Negreiros"
+  description="Explore meus projetos de engenharia de software: sistemas distribuídos, APIs REST, aplicações full-stack com Java, C#, Golang, Next.js e mais."
+>
+  <h1 class="sr-only">Projetos de Software — Rian Negreiros</h1>
+  <div class="w-full">
+    <ProjectsList client:load />
+  </div>
+</BaseLayout>

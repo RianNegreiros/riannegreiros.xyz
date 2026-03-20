@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import BlogList from '@/components/blog/BlogList'
+export const prerender = false
+Astro.response.headers.set(
+  'Cache-Control',
+  's-maxage=60, stale-while-revalidate=300',
+)
+---
+
+<BaseLayout
+  title="Blog | Rian Negreiros"
+  description="Artigos técnicos e insights sobre engenharia de software, desenvolvimento web, Java, Golang, C# e arquitetura de sistemas."
+>
+  <div class="mx-auto w-full max-w-4xl">
+    <BlogList client:load />
+  </div>
+</BaseLayout>

@@ -5,7 +5,7 @@ import {
 } from '@sanity/image-url'
 
 export const client = createClient({
-  apiVersion: '2024-03-13',
+  apiVersion: '2026-03-19',
   dataset: 'production',
   projectId: '091jywj8',
   useCdn: true,
@@ -18,7 +18,7 @@ export function urlFor(source: SanityImageSource) {
 }
 
 export function optimizedImageUrl(source: SanityImageSource, width: number) {
-  return builder.image(source).width(width).format('webp').quality(80).url()
+  return urlFor(source).width(width).format('webp').quality(80).fit('max').url()
 }
 
 export async function fetchSanityData<T>(

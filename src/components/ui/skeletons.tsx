@@ -25,7 +25,7 @@ export function DateSkeleton({ className }: { className?: string }) {
 }
 
 export function ImageSkeleton({ className }: { className?: string }) {
-  return <Skeleton className={cn('w-full aspect-video', className)} />
+  return <Skeleton className={cn('aspect-video w-full', className)} />
 }
 
 export function TagsSkeleton({ count = 3, className }: SkeletonProps) {

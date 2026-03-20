@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { RESUME_DATA } from '@/data/resume-data'
+import { Header } from '@/components/resume/Header'
+import { Summary } from '@/components/resume/Summary'
+import { Skills } from '@/components/resume/Skills'
+import { Education } from '@/components/resume/Education'
+import { Projects } from '@/components/resume/Projects'
+import { Courses } from '@/components/resume/Courses'
+import { CommandMenu } from '@/components/resume/CommandMenu'
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: RESUME_DATA.name,
+  jobTitle: RESUME_DATA.about,
+  url: import.meta.env.PUBLIC_BASE_URL,
+  email: RESUME_DATA.contact.email,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: RESUME_DATA.location,
+    addressCountry: 'BR',
+  },
+  sameAs: RESUME_DATA.contact.social.map((s: { url: string }) => s.url),
+  knowsAbout: [...RESUME_DATA.skills],
+  alumniOf: RESUME_DATA.education.map((e: { school: string }) => ({
+    '@type': 'CollegeOrUniversity',
+    name: e.school,
+  })),
+}
+---
+
+<BaseLayout
+  title="Currículo | Rian Negreiros"
+  description="Currículo de Rian Negreiros Dos Santos — Engenheiro de Software Backend com experiência em Java, C#, Golang, Spring, ASP.NET Core, PostgreSQL, Docker, AWS, Azure e GCP."
+  structuredData={structuredData}
+>
+  <div
+    class="relative container mx-auto max-w-4xl scroll-my-12 overflow-auto rounded-lg p-4 md:p-6 dark:bg-gray-900 print:my-0 print:p-11"
+  >
+    <h1 class="sr-only">{RESUME_DATA.name} — Currículo</h1>
+    <section
+      class="mx-auto w-full max-w-4xl space-y-8 print:space-y-4"
+      aria-label="Resume Content"
+    >
+      <Header />
+      <div class="space-y-8 print:space-y-4">
+        <Summary summary={RESUME_DATA.summary} />
+        <Skills skills={RESUME_DATA.skills} />
+        <Education education={RESUME_DATA.education} />
+        <Projects projects={RESUME_DATA.projects} />
+        <Courses courses={RESUME_DATA.courses} />
+      </div>
+    </section>
+    <CommandMenu
+      client:load
+      links={RESUME_DATA.contact.social.map(
+        (s: { url: string; name: string }) => ({ url: s.url, title: s.name }),
+      )}
+    />
+  </div>
+</BaseLayout>

@@ -20,7 +20,8 @@ function NavigationMenu({
         'group/navigation-menu relative flex max-w-max flex-1 items-center justify-center',
         className,
       )}
-      {...props}>
+      {...props}
+    >
       {children}
       {viewport && <NavigationMenuViewport />}
     </NavigationMenuPrimitive.Root>
@@ -65,7 +66,8 @@ function NavigationMenuTrigger({
     <NavigationMenuPrimitive.Trigger
       data-slot="navigation-menu-trigger"
       className={cn(navigationMenuTriggerStyle(), 'group', className)}
-      {...props}>
+      {...props}
+    >
       {children}{' '}
       <ChevronDownIcon
         className="relative top-px ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
@@ -117,7 +119,7 @@ function NavigationMenuLink({
     <NavigationMenuPrimitive.Link
       data-slot="navigation-menu-link"
       className={cn(
-        'flex flex-col gap-1 rounded-sm p-2 text-sm transition-all outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+        'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex flex-col gap-1 rounded-sm p-2 text-sm transition-all outline-none',
         className,
       )}
       {...props}
@@ -136,7 +138,8 @@ function NavigationMenuIndicator({
         'data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in top-full z-1 flex h-1.5 items-end justify-center overflow-hidden',
         className,
       )}
-      {...props}>
+      {...props}
+    >
       <div className="bg-border relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm shadow-md" />
     </NavigationMenuPrimitive.Indicator>
   )
