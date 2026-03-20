@@ -5,17 +5,7 @@ updates:
     schedule:
       interval: 'weekly'
     ignore:
-      - dependency-name: "*"
+      - dependency-name: '*'
         update-types:
-          - "version-update:semver-minor"
-          - "version-update:semver-patch"
-
-  - package-ecosystem: 'npm'
-    directory: '/sanity'
-    schedule:
-      interval: 'weekly'
-    ignore:
-      - dependency-name: "*"
-        update-types:
-          - "version-update:semver-minor"
-          - "version-update:semver-patch"
+          - 'version-update:semver-minor'
+          - 'version-update:semver-patch'
