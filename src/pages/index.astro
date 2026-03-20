@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Timeline from '@/components/timeline/Timeline'
+export const prerender = false
+Astro.response.headers.set(
+  'Cache-Control',
+  's-maxage=60, stale-while-revalidate=300',
+)
+---
+
+<BaseLayout
+  title="Rian Negreiros Dos Santos | Engenheiro de Software Backend"
+  description="Engenheiro de Software Backend do Rio de Janeiro. Explore minha trajetória, projetos e artigos técnicos sobre Java, C#, Golang, Spring e ASP.NET Core."
+>
+  <h1 class="sr-only">
+    Rian Negreiros Dos Santos — Engenheiro de Software Backend
+  </h1>
+  <div class="mx-auto w-full max-w-4xl">
+    <Timeline client:load />
+  </div>
+</BaseLayout>

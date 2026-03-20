@@ -1,0 +1,142 @@
+---
+import { createClient } from '@sanity/client'
+import { createImageUrlBuilder } from '@sanity/image-url'
+import type { Post } from '@/lib/types'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import PostContent from '@/components/blog/slug/PostContent'
+import TableOfContents from '@/components/blog/slug/TableOfContents'
+import MobileTableOfContents from '@/components/blog/slug/MobileTableOfContents'
+import { formatDate } from '@/lib'
+
+export const prerender = false
+Astro.response.headers.set(
+  'Cache-Control',
+  's-maxage=60, stale-while-revalidate=300',
+)
+
+const client = createClient({
+  projectId: '091jywj8',
+  dataset: 'production',
+  useCdn: true,
+  apiVersion: '2026-03-19',
+})
+
+const builder = createImageUrlBuilder(client)
+const urlFor = (source: any) => builder.image(source)
+
+const { slug } = Astro.params
+
+const post: Post | null = await client.fetch(
+  `*[_type == 'post' && slug.current == $slug][0]{
+    _id, title, firstPublishedDate, updatedAt,
+    "slug": slug.current, overview, tags,
+    image{ asset->{ _id, url, metadata{ lqip, dimensions } } },
+    content[]{ ..., asset->{ _id, url, metadata{ dimensions } } },
+    "headings": content[_type == "block" && style match "h*"]{
+      "text": pt::text(@), "level": style
+    }
+  }`,
+  { slug },
+)
+
+if (!post) {
+  return Astro.redirect('/404')
+}
+
+const postUrl = `${import.meta.env.PUBLIC_BASE_URL}/blog/${slug}`
+const ogImage = post.image
+  ? urlFor(post.image).width(1200).format('webp').url()
+  : '/og-image.png'
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.overview ?? '',
+  url: postUrl,
+  inLanguage: 'pt-BR',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+  author: {
+    '@type': 'Person',
+    name: 'Rian Negreiros Dos Santos',
+    url: 'https://riannegreiros.com.br',
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'Rian Negreiros Dos Santos',
+    url: 'https://riannegreiros.com.br',
+  },
+  ...(post.image && { image: urlFor(post.image).url() }),
+  ...(post.firstPublishedDate && { datePublished: post.firstPublishedDate }),
+  ...(post.updatedAt && { dateModified: post.updatedAt }),
+  ...(post.tags?.length && { keywords: post.tags.join(', ') }),
+}
+---
+
+<BaseLayout
+  title={`${post.title} | Rian Negreiros`}
+  description={post.overview ?? 'Blog post by Rian Negreiros'}
+  image={ogImage}
+  url={postUrl}
+  type="article"
+  publishedTime={post.firstPublishedDate}
+  modifiedTime={post.updatedAt}
+  structuredData={structuredData}
+>
+  <div class="container mx-auto px-4 py-8 sm:py-12">
+    <div
+      class="lg:grid lg:grid-cols-[1fr_280px] lg:gap-12 xl:grid-cols-[1fr_320px]"
+    >
+      <article class="w-full min-w-0">
+        <header class="mb-12">
+          <h1 class="mb-4 text-4xl leading-tight font-bold sm:text-5xl">
+            {post.title}
+          </h1>
+          <div class="text-muted-foreground flex items-center gap-2 text-sm">
+            <time datetime={post.firstPublishedDate}>
+              Publicado {formatDate(post.firstPublishedDate)}
+            </time>
+          </div>
+
+          {
+            post.image && (
+              <figure class="mt-8 overflow-hidden rounded-xl shadow-lg">
+                <img
+                  loading="eager"
+                  fetchpriority="high"
+                  src={urlFor(post.image).width(800).format('webp').url()}
+                  srcset={`
+                  ${urlFor(post.image).width(400).format('webp').url()} 400w,
+                  ${urlFor(post.image).width(800).format('webp').url()} 800w,
+                  ${urlFor(post.image).width(1200).format('webp').url()} 1200w
+                `}
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  alt={post.image.alt ?? `Imagem de capa: ${post.title}`}
+                  class="aspect-video h-auto w-full object-cover"
+                  width={800}
+                  height={450}
+                />
+              </figure>
+            )
+          }
+        </header>
+
+        <MobileTableOfContents headings={post.headings ?? []} client:load />
+
+        <PostContent post={post} client:load />
+      </article>
+
+      <aside class="mt-12 lg:mt-0">
+        <div
+          class="toc-scroll sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto"
+        >
+          <TableOfContents
+            className="hidden lg:block"
+            headings={post.headings ?? []}
+            client:load
+          />
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
