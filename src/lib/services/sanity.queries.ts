@@ -55,16 +55,16 @@ export const queries = {
         "level": style
       }
     }`,
-    count: `count(*[_type == 'post'])`,
+    count: `count(*[_type == 'post' && defined(firstPublishedDate)])`,
   },
   projects: {
     list: `*[_type == 'project'] | order(_createdAt desc) {
-      "id": _id,
+      _id,
       title,
       link,
       description,
       tags,
-      "imageUrl": image.asset->url,
+      image,
       "createdAt": _createdAt
     }`,
   },
@@ -83,19 +83,33 @@ export const queries = {
       params: { searchQuery: `*${searchParam}*` },
     }),
     count: `count(*[_type in ['post', 'project'] && defined(title)])`,
-    timeline: (
-      start: number,
-      end: number,
-    ) => `*[_type in ["post", "project"] && defined(title)] | order(coalesce(firstPublishedDate, _createdAt) desc) [${start}...${end}] {
-      _id,
-      _type,
-      title,
-      "slug": slug.current,
-      overview,
-      description,
-      link,
-      firstPublishedDate,
-      _createdAt
-    }`,
+    timeline: (start: number, limit: number) => ({
+      query: `*[_type in ["post", "project"] && defined(title) && (_type == "project" || defined(firstPublishedDate))] | order(coalesce(firstPublishedDate, _createdAt) desc) [$start...$end] {
+        _id,
+        _type,
+        title,
+        "slug": slug.current,
+        overview,
+        description,
+        link,
+        "displayDate": coalesce(firstPublishedDate, _createdAt),
+        _createdAt
+      }`,
+      params: { start, end: start + limit },
+    }),
   },
+  rss: `
+    *[_type == 'post' && defined(slug.current) && defined(firstPublishedDate)]
+    | order(firstPublishedDate desc) {
+      title, "slug": slug.current, overview, firstPublishedDate
+    }
+  `,
+  sitemap: `
+    *[_type == 'post' && defined(slug.current) && defined(firstPublishedDate)]
+    | order(firstPublishedDate desc) {
+      "slug": slug.current,
+      firstPublishedDate,
+      updatedAt
+    }
+  `,
 }

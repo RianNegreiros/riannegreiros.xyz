@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { ProjectDialog } from './ProjectDialog'
-import type { ProjectsCard } from '@/lib/types'
+import type { SanityProject } from '@/lib/types'
+import { optimizedImageUrl } from '@/lib/services/sanity'
 
 interface ProjectCardModal {
-  data: ProjectsCard[]
+  data: SanityProject[]
 }
 
 export default function ProjectCard({ data }: ProjectCardModal) {
-  const [selected, setSelected] = useState<ProjectsCard | null>(null)
+  const [selected, setSelected] = useState<SanityProject | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const openModal = (project: ProjectsCard) => {
+  const openModal = (project: SanityProject) => {
     setSelected(project)
     setIsModalOpen(true)
   }
@@ -32,9 +33,11 @@ export default function ProjectCard({ data }: ProjectCardModal) {
             <div className="relative aspect-video overflow-hidden rounded-xl shadow-md transition-shadow duration-300 hover:shadow-xl">
               <img
                 loading="lazy"
-                src={item.imageUrl}
+                src={optimizedImageUrl(item.image, 600)}
                 alt={`Projeto entitulado ${item.title} apresentando ${item.description}`}
                 className="h-full w-full cursor-zoom-in object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                width={600}
+                height={338}
                 onClick={() => openModal(item)}
               />
             </div>

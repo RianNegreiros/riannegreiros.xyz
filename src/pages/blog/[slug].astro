@@ -1,12 +1,11 @@
 ---
-import { createClient } from '@sanity/client'
-import { createImageUrlBuilder } from '@sanity/image-url'
-import type { Post } from '@/lib/types'
+import type { SanityPost } from '@/lib/types'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import PostContent from '@/components/blog/slug/PostContent'
 import TableOfContents from '@/components/blog/slug/TableOfContents'
 import MobileTableOfContents from '@/components/blog/slug/MobileTableOfContents'
 import { formatDate } from '@/lib'
+import { fetchSanityData, queries, urlFor } from '@/lib/services'
 
 export const prerender = false
 Astro.response.headers.set(
@@ -14,30 +13,9 @@ Astro.response.headers.set(
   's-maxage=60, stale-while-revalidate=300',
 )
 
-const client = createClient({
-  projectId: '091jywj8',
-  dataset: 'production',
-  useCdn: true,
-  apiVersion: '2026-03-19',
-})
-
-const builder = createImageUrlBuilder(client)
-const urlFor = (source: any) => builder.image(source)
-
 const { slug } = Astro.params
 
-const post: Post | null = await client.fetch(
-  `*[_type == 'post' && slug.current == $slug][0]{
-    _id, title, firstPublishedDate, updatedAt,
-    "slug": slug.current, overview, tags,
-    image{ asset->{ _id, url, metadata{ lqip, dimensions } } },
-    content[]{ ..., asset->{ _id, url, metadata{ dimensions } } },
-    "headings": content[_type == "block" && style match "h*"]{
-      "text": pt::text(@), "level": style
-    }
-  }`,
-  { slug },
-)
+const post = await fetchSanityData<SanityPost>(queries.posts.bySlug, { slug })
 
 if (!post) {
   return Astro.redirect('/404')
@@ -69,7 +47,6 @@ const structuredData = {
   ...(post.image && { image: urlFor(post.image).url() }),
   ...(post.firstPublishedDate && { datePublished: post.firstPublishedDate }),
   ...(post.updatedAt && { dateModified: post.updatedAt }),
-  ...(post.tags?.length && { keywords: post.tags.join(', ') }),
 }
 ---
 
@@ -121,9 +98,9 @@ const structuredData = {
           }
         </header>
 
-        <MobileTableOfContents headings={post.headings ?? []} client:load />
+        <MobileTableOfContents headings={post.headings ?? []} client:visible />
 
-        <PostContent post={post} client:load />
+        <PostContent post={post} client:idle />
       </article>
 
       <aside class="mt-12 lg:mt-0">
@@ -133,7 +110,7 @@ const structuredData = {
           <TableOfContents
             className="hidden lg:block"
             headings={post.headings ?? []}
-            client:load
+            client:visible
           />
         </div>
       </aside>

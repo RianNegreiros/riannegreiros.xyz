@@ -1,8 +1,8 @@
 import { formatDate } from '@/lib'
-import type { Post } from '@/lib/types'
+import type { SanityPost } from '@/lib/types'
 
 interface PostItemProps {
-  post: Post
+  post: SanityPost
   index: number
 }
 

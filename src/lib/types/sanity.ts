@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from '@portabletext/types'
+
 export type SanityHeading = {
   text: string
   level: string
@@ -22,8 +24,9 @@ export type SanityPost = {
         }
       }
     }
+    alt: string
   }
-  content?: any[]
+  content?: PortableTextBlock[]
   headings: SanityHeading[]
 }
 
@@ -33,7 +36,7 @@ export type SanityProject = {
   link: string
   description: string
   tags: string[]
-  imageUrl: string
+  image: { asset: { _ref: string } }
   createdAt: string
 }
 
@@ -45,6 +48,6 @@ export type SanityPortfolioItem = {
   overview?: string
   description?: string
   link?: string
-  firstPublishedDate: string
+  displayDate: string
   _createdAt: string
 }

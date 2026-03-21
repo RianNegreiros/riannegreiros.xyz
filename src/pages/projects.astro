@@ -1,12 +1,16 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import ProjectsList from '@/components/projects/ProjectsList'
+import ProjectCard from '@/components/projects/ProjectCard'
+import ProjectDialog from '@/components/projects/ProjectDialog'
+import { fetchProjects } from '@/lib/api'
 
 export const prerender = false
 Astro.response.headers.set(
   'Cache-Control',
   's-maxage=60, stale-while-revalidate=300',
 )
+
+const projects = await fetchProjects()
 ---
 
 <BaseLayout
@@ -15,6 +19,6 @@ Astro.response.headers.set(
 >
   <h1 class="sr-only">Projetos de Software — Rian Negreiros</h1>
   <div class="w-full">
-    <ProjectsList client:load />
+    <ProjectCard data={projects} client:idle />
   </div>
 </BaseLayout>

@@ -1,21 +1,9 @@
+import { fetchSanityData, queries } from '@/lib'
 import rss from '@astrojs/rss'
 import type { APIContext } from 'astro'
-import { createClient } from '@sanity/client'
-
-const client = createClient({
-  projectId: '091jywj8',
-  dataset: 'production',
-  useCdn: true,
-  apiVersion: '2026-03-19',
-})
 
 export async function GET(context: APIContext) {
-  const posts = await client.fetch(`
-    *[_type == 'post' && defined(slug.current) && defined(firstPublishedDate)]
-    | order(firstPublishedDate desc) {
-      title, "slug": slug.current, overview, firstPublishedDate
-    }
-  `)
+  const posts = await fetchSanityData<any>(queries.rss)
 
   return rss({
     title: 'Rian Negreiros — Blog',

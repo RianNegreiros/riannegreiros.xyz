@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { optimizedImageUrl } from '@/lib/services/sanity'
 import {
   Dialog,
   DialogContent,
@@ -9,10 +10,10 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog'
 import { GitHubIcon } from '@/components/icons'
-import type { ProjectsCard } from '@/lib/types'
+import type { SanityProject } from '@/lib/types'
 
 interface ProjectDialogProps {
-  project: ProjectsCard | null
+  project: SanityProject | null
   isOpen: boolean
   onClose: () => void
 }
@@ -43,7 +44,7 @@ export function ProjectDialog({
           >
             <img
               loading="lazy"
-              src={project.imageUrl}
+              src={optimizedImageUrl(project.image, 800)}
               alt={project.title}
               width={800}
               height={400}

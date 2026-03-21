@@ -1,24 +1,10 @@
+import { fetchSanityData, queries } from '@/lib'
 import type { APIContext } from 'astro'
-import { createClient } from '@sanity/client'
-
-const client = createClient({
-  projectId: '091jywj8',
-  dataset: 'production',
-  useCdn: true,
-  apiVersion: '2026-03-19',
-})
 
 const STATIC_ROUTES = ['/', '/blog', '/projects', '/resume']
 
 export async function GET(context: APIContext) {
-  const posts = await client.fetch(`
-    *[_type == 'post' && defined(slug.current) && defined(firstPublishedDate)]
-    | order(firstPublishedDate desc) {
-      "slug": slug.current,
-      firstPublishedDate,
-      updatedAt
-    }
-  `)
+  const posts = await fetchSanityData<any>(queries.sitemap)
 
   const baseUrl = context.site!.href.replace(/\/$/, '')
   const today = new Date().toISOString().split('T')[0]
