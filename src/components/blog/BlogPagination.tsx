@@ -21,86 +21,22 @@ export default function BlogPagination({
 }: BlogPaginationProps) {
   if (totalPages <= 1) return null
 
-  const renderPaginationItems = () => {
-    const items = []
-    const showEllipsis = totalPages > 7
+  const pages: (number | 'ellipsis')[] = []
 
-    if (showEllipsis) {
-      items.push(
-        <PaginationItem key={1}>
-          <PaginationLink
-            onClick={() => onPageChange(1)}
-            isActive={currentPage === 1}
-            className="cursor-pointer"
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>,
-      )
-
-      if (currentPage > 4) {
-        items.push(
-          <PaginationItem key="ellipsis-start">
-            <PaginationEllipsis />
-          </PaginationItem>,
-        )
-      }
-
-      const start = Math.max(2, currentPage - 1)
-      const end = Math.min(totalPages - 1, currentPage + 1)
-
-      for (let i = start; i <= end; i++) {
-        items.push(
-          <PaginationItem key={i}>
-            <PaginationLink
-              onClick={() => onPageChange(i)}
-              isActive={currentPage === i}
-              className="cursor-pointer"
-            >
-              {i}
-            </PaginationLink>
-          </PaginationItem>,
-        )
-      }
-
-      if (currentPage < totalPages - 3) {
-        items.push(
-          <PaginationItem key="ellipsis-end">
-            <PaginationEllipsis />
-          </PaginationItem>,
-        )
-      }
-
-      if (totalPages > 1) {
-        items.push(
-          <PaginationItem key={totalPages}>
-            <PaginationLink
-              onClick={() => onPageChange(totalPages)}
-              isActive={currentPage === totalPages}
-              className="cursor-pointer"
-            >
-              {totalPages}
-            </PaginationLink>
-          </PaginationItem>,
-        )
-      }
-    } else {
-      for (let i = 1; i <= totalPages; i++) {
-        items.push(
-          <PaginationItem key={i}>
-            <PaginationLink
-              onClick={() => onPageChange(i)}
-              isActive={currentPage === i}
-              className="cursor-pointer"
-            >
-              {i}
-            </PaginationLink>
-          </PaginationItem>,
-        )
-      }
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) pages.push(i)
+  } else {
+    pages.push(1)
+    if (currentPage > 4) pages.push('ellipsis')
+    for (
+      let i = Math.max(2, currentPage - 1);
+      i <= Math.min(totalPages - 1, currentPage + 1);
+      i++
+    ) {
+      pages.push(i)
     }
-
-    return items
+    if (currentPage < totalPages - 3) pages.push('ellipsis')
+    pages.push(totalPages)
   }
 
   return (
@@ -109,20 +45,32 @@ export default function BlogPagination({
         <PaginationItem>
           <PaginationPrevious
             onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-            className={`cursor-pointer ${
-              currentPage === 1 ? 'pointer-events-none opacity-50' : ''
-            }`}
+            className={`cursor-pointer ${currentPage === 1 ? 'pointer-events-none opacity-50' : ''}`}
           />
         </PaginationItem>
 
-        {renderPaginationItems()}
+        {pages.map((page, i) =>
+          page === 'ellipsis' ? (
+            <PaginationItem key={`ellipsis-${i}`}>
+              <PaginationEllipsis />
+            </PaginationItem>
+          ) : (
+            <PaginationItem key={page}>
+              <PaginationLink
+                onClick={() => onPageChange(page)}
+                isActive={currentPage === page}
+                className="cursor-pointer"
+              >
+                {page}
+              </PaginationLink>
+            </PaginationItem>
+          ),
+        )}
 
         <PaginationItem>
           <PaginationNext
             onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-            className={`cursor-pointer ${
-              currentPage === totalPages ? 'pointer-events-none opacity-50' : ''
-            }`}
+            className={`cursor-pointer ${currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}`}
           />
         </PaginationItem>
       </PaginationContent>

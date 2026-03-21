@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { getPortfolioData } from '@/lib/api'
 import type { SanityPortfolioItem } from '@/lib/types/sanity'
 import LoadMore from './LoadMore'
@@ -7,25 +7,38 @@ import TimelineSkeleton from './TimelineSkeleton'
 
 const ITEMS_PER_PAGE = 5
 
-export default function Timeline() {
-  const [items, setItems] = useState<SanityPortfolioItem[]>([])
-  const [loading, setLoading] = useState(true)
+export default function Timeline({
+  initialItems = [],
+}: {
+  initialItems?: SanityPortfolioItem[]
+}) {
+  const [items, setItems] = useState<SanityPortfolioItem[]>(initialItems)
+  const [loading, setLoading] = useState(initialItems.length === 0)
   const [hasMore, setHasMore] = useState<boolean>(true)
-  const [page, setPage] = useState<number>(0)
+  const [page, setPage] = useState<number>(initialItems.length > 0 ? 1 : 0)
+  const fetchingRef = useRef(false)
 
   const fetchData = useCallback(async (pageNum: number) => {
+    if (fetchingRef.current) return
+    fetchingRef.current = true
+    setLoading(true)
     try {
-      const newItems = await getPortfolioData(pageNum, ITEMS_PER_PAGE)
+      const { items: newItems, hasMore: more } = await getPortfolioData(
+        pageNum,
+        ITEMS_PER_PAGE,
+      )
       setItems((prev) => (pageNum === 0 ? newItems : [...prev, ...newItems]))
-      setHasMore(newItems.length === ITEMS_PER_PAGE)
+      setHasMore(more)
     } catch (error) {
       console.error('Failed to fetch timeline data:', error)
     } finally {
       setLoading(false)
+      fetchingRef.current = false
     }
   }, [])
 
   useEffect(() => {
+    if (initialItems.length > 0 && page === 1) return
     fetchData(page)
   }, [page, fetchData])
 
@@ -35,7 +48,7 @@ export default function Timeline() {
     }
   }, [loading, hasMore])
 
-  if (loading && page === 0) return <TimelineSkeleton />
+  if (loading && items.length === 0) return <TimelineSkeleton />
   if (items.length === 0)
     return <div className="py-8 text-center">No items found.</div>
 

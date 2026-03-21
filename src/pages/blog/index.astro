@@ -1,11 +1,21 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import BlogList from '@/components/blog/BlogList'
+import { fetchPosts, getTotalPosts } from '@/lib/api'
+
 export const prerender = false
 Astro.response.headers.set(
   'Cache-Control',
   's-maxage=60, stale-while-revalidate=300',
 )
+
+const pageParam = Number(Astro.url.searchParams.get('page') ?? 1)
+const currentPage = Math.max(1, pageParam) - 1
+
+const [initialPosts, initialTotal] = await Promise.all([
+  fetchPosts(currentPage, 10),
+  getTotalPosts(),
+])
 ---
 
 <BaseLayout
@@ -13,6 +23,10 @@ Astro.response.headers.set(
   description="Artigos técnicos e insights sobre engenharia de software, desenvolvimento web, Java, Golang, C# e arquitetura de sistemas."
 >
   <div class="mx-auto w-full max-w-4xl">
-    <BlogList client:load />
+    <BlogList
+      initialPosts={initialPosts}
+      initialTotal={initialTotal}
+      client:load
+    />
   </div>
 </BaseLayout>

@@ -22,34 +22,49 @@ interface BlogListProps {
   initialTotal?: number
 }
 
-export default function BlogList({ initialPosts = [], initialTotal = 0 }: BlogListProps) {
+export default function BlogList({
+  initialPosts = [],
+  initialTotal = 0,
+}: BlogListProps) {
   const [posts, setPosts] = useState<SanityPost[]>(initialPosts)
-  const [totalPages, setTotalPages] = useState(Math.ceil(initialTotal / ITEMS_PER_PAGE) || 1)
+  const [totalPages, setTotalPages] = useState(
+    Math.ceil(initialTotal / ITEMS_PER_PAGE) || 1,
+  )
   const [loading, setLoading] = useState(initialPosts.length === 0)
   const [urlState, setUrlState] = useState(getUrlParams)
   const fetchingRef = useRef(false)
+  const isInitialRender = useRef(true)
 
-  const fetchData = useCallback(async (pageNum: number, searchQuery: string) => {
-    if (fetchingRef.current) return
-    fetchingRef.current = true
-    setLoading(true)
-    try {
-      const [data, total] = await Promise.all([
-        fetchPosts(pageNum, ITEMS_PER_PAGE, searchQuery) as Promise<SanityPost[]>,
-        getTotalPosts(),
-      ])
-      setPosts(data)
-      setTotalPages(Math.ceil(total / ITEMS_PER_PAGE))
-    } catch (e) {
-      console.error('Failed to fetch posts:', e)
-    } finally {
-      setLoading(false)
-      fetchingRef.current = false
-    }
-  }, [])
+  const fetchData = useCallback(
+    async (pageNum: number, searchQuery: string) => {
+      if (fetchingRef.current) return
+      fetchingRef.current = true
+      setLoading(true)
+      try {
+        const [data, total] = await Promise.all([
+          fetchPosts(pageNum, ITEMS_PER_PAGE, searchQuery) as Promise<
+            SanityPost[]
+          >,
+          getTotalPosts(),
+        ])
+        setPosts(data)
+        setTotalPages(Math.ceil(total / ITEMS_PER_PAGE))
+      } catch (e) {
+        console.error('Failed to fetch posts:', e)
+      } finally {
+        setLoading(false)
+        fetchingRef.current = false
+      }
+    },
+    [],
+  )
 
   useEffect(() => {
-    if (initialPosts.length > 0 && urlState.page === 0 && !urlState.search) return
+    if (isInitialRender.current) {
+      isInitialRender.current = false
+      if (initialPosts.length > 0 && urlState.page === 0 && !urlState.search)
+        return
+    }
     fetchData(urlState.page, urlState.search)
   }, [urlState, fetchData])
 
@@ -64,6 +79,7 @@ export default function BlogList({ initialPosts = [], initialTotal = 0 }: BlogLi
     params.set('page', String(newPage + 1))
     window.history.pushState({}, '', `${window.location.pathname}?${params}`)
     window.dispatchEvent(new PopStateEvent('popstate'))
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   if (loading) return <BlogSkeleton />

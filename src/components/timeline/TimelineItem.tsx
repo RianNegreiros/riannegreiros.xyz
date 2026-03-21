@@ -20,7 +20,9 @@ export default function TimelineItem({
 }: TimelineItemProps) {
   const isPost = _type === 'post'
   const href = isPost ? `/blog/${slug}` : (link ?? '#')
-  const linkProps = isPost ? {} : { target: '_blank', rel: 'noopener noreferrer' }
+  const linkProps = isPost
+    ? {}
+    : { target: '_blank', rel: 'noopener noreferrer' }
 
   return (
     <li
@@ -29,12 +31,21 @@ export default function TimelineItem({
     >
       <span
         className="bg-primary ring-background animate-scale-in absolute top-0 -left-9 flex h-6 w-6 items-center justify-center rounded-full ring-8"
-        style={{ animationDelay: `${index * 0.1 + 0.2}s`, animationFillMode: 'both' }}
+        style={{
+          animationDelay: `${index * 0.1 + 0.2}s`,
+          animationFillMode: 'both',
+        }}
       >
         {isPost ? (
-          <Pencil className="text-primary-foreground h-3 w-3" aria-hidden="true" />
+          <Pencil
+            className="text-primary-foreground h-3 w-3"
+            aria-hidden="true"
+          />
         ) : (
-          <Briefcase className="text-primary-foreground h-3 w-3" aria-hidden="true" />
+          <Briefcase
+            className="text-primary-foreground h-3 w-3"
+            aria-hidden="true"
+          />
         )}
       </span>
 
@@ -45,13 +56,20 @@ export default function TimelineItem({
       >
         <div className="mb-2 flex items-center justify-between">
           <h2 className="text-foreground text-lg font-semibold">{title}</h2>
-          <Badge variant={isPost ? 'default' : 'secondary'} className="flex items-center">
+          <Badge
+            variant={isPost ? 'default' : 'secondary'}
+            className="flex items-center"
+          >
             {isPost ? 'Post' : 'Projeto'}
             <ArrowUpRight className="ml-1 h-3 w-3" aria-hidden="true" />
           </Badge>
         </div>
-        <p className="text-muted-foreground mb-2 text-sm">{formatDate(displayDate)}</p>
-        <p className="text-foreground line-clamp-2 text-sm">{isPost ? overview : description}</p>
+        <p className="text-muted-foreground mb-2 text-sm">
+          {formatDate(displayDate)}
+        </p>
+        <p className="text-foreground line-clamp-2 text-sm">
+          {isPost ? overview : description}
+        </p>
       </a>
     </li>
   )

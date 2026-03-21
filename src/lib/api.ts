@@ -24,7 +24,10 @@ export async function getPortfolioData(pageNum = 0, itemsPerPage = 10) {
   const start = pageNum * itemsPerPage
   const { query, params } = queries.portfolio.timeline(start, itemsPerPage + 1)
   const items = await fetchSanityData<SanityPortfolioItem[]>(query, params)
-  return { items: items.slice(0, itemsPerPage), hasMore: items.length > itemsPerPage }
+  return {
+    items: items.slice(0, itemsPerPage),
+    hasMore: items.length > itemsPerPage,
+  }
 }
 
 export async function getTotalPortfolioItems() {
