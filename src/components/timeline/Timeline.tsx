@@ -16,6 +16,7 @@ export default function Timeline({
   const [loading, setLoading] = useState(initialItems.length === 0)
   const [hasMore, setHasMore] = useState<boolean>(true)
   const [page, setPage] = useState<number>(initialItems.length > 0 ? 1 : 0)
+  const [error, setError] = useState<string | null>(null)
   const fetchingRef = useRef(false)
 
   const fetchData = useCallback(async (pageNum: number) => {
@@ -31,6 +32,7 @@ export default function Timeline({
       setHasMore(more)
     } catch (error) {
       console.error('Failed to fetch timeline data:', error)
+      setError('Não foi possível carregar os itens. Tente novamente.')
     } finally {
       setLoading(false)
       fetchingRef.current = false
@@ -51,6 +53,22 @@ export default function Timeline({
   if (loading && items.length === 0) return <TimelineSkeleton />
   if (items.length === 0)
     return <div className="py-8 text-center">No items found.</div>
+
+  if (error)
+    return (
+      <div className="text-muted-foreground py-8 text-center">
+        <p>{error}</p>
+        <button
+          onClick={() => {
+            setError(null)
+            fetchData(page)
+          }}
+          className="mt-4 underline"
+        >
+          Tentar novamente
+        </button>
+      </div>
+    )
 
   return (
     <ol className="relative min-h-100 border-s border-gray-200 dark:border-gray-700">
