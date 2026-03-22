@@ -30,10 +30,16 @@ const portableTextComponents = {
       <figure className="group my-8">
         <img
           loading="lazy"
-          src={urlFor(value).url()}
-          alt={value.alt || 'Image'}
-          className="w-full rounded-xl shadow-md transition-shadow duration-300 group-hover:shadow-xl"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          src={urlFor(value).width(800).format('webp').quality(80).url()}
+          srcSet={`
+            ${urlFor(value).width(400).format('webp').quality(80).url()} 400w,
+            ${urlFor(value).width(800).format('webp').quality(80).url()} 800w,
+            ${urlFor(value).width(1200).format('webp').quality(75).url()} 1200w
+          `}
+          sizes="(max-width: 768px) 100vw, 800px"
+          width={800}
+          height={450}
+          alt={value.alt || ''}
         />
         {value.caption && (
           <figcaption className="text-muted-foreground mt-3 text-center text-sm italic">
