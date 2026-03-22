@@ -1,5 +1,9 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import { BlogPostSkeleton } from './BlogPostSkeleton'
+import {
+  DateSkeleton,
+  TitleSkeleton,
+  TextSkeleton,
+} from '@/components/ui/skeletons'
 
 interface BlogSkeletonProps {
   withPagination?: boolean
@@ -17,7 +21,20 @@ export default function BlogSkeleton({
     >
       <ul className="animate-fade-in space-y-4">
         {Array.from({ length: 10 }).map((_, index) => (
-          <BlogPostSkeleton key={index} index={index} />
+          <li
+            key={index}
+            className="animate-slide-up pb-6"
+            style={{
+              animationDelay: `${index * 0.1}s`,
+              animationFillMode: 'both',
+            }}
+          >
+            <div className="mb-2">
+              <DateSkeleton />
+              <TitleSkeleton className="mt-1 h-6" />
+            </div>
+            <TextSkeleton count={2} />
+          </li>
         ))}
       </ul>
 

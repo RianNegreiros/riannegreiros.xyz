@@ -1,5 +1,4 @@
-import * as React from 'react'
-
+import { useState, useEffect } from 'react'
 import {
   CommandDialog,
   CommandEmpty,
@@ -12,21 +11,20 @@ import {
 import { Button } from '@/components/ui/button'
 import { CommandIcon } from 'lucide-react'
 
-interface Props {
+interface CommandMenuProps {
   links: { url: string; title: string }[]
 }
 
-export const CommandMenu = ({ links }: Props) => {
-  const [open, setOpen] = React.useState(false)
+export function CommandMenu({ links }: CommandMenuProps) {
+  const [open, setOpen] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'j' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
-        setOpen((open) => !open)
+        setOpen((prev) => !prev)
       }
     }
-
     document.addEventListener('keydown', down)
     return () => document.removeEventListener('keydown', down)
   }, [])
@@ -41,7 +39,7 @@ export const CommandMenu = ({ links }: Props) => {
         para abrir o menu de comandos
       </p>
       <Button
-        onClick={() => setOpen((open) => !open)}
+        onClick={() => setOpen((prev) => !prev)}
         variant="outline"
         size="icon"
         className="fixed right-4 bottom-4 flex rounded-full shadow-2xl xl:hidden print:hidden"

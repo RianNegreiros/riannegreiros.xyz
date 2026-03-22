@@ -44,7 +44,11 @@ const portableTextComponents = {
     ),
     video: ({ value }: any) => (
       <figure className="my-8">
-        <video controls preload="metadata" className="w-full rounded-xl shadow-md">
+        <video
+          controls
+          preload="metadata"
+          className="w-full rounded-xl shadow-md"
+        >
           <source src={value.asset?.url} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -56,12 +60,30 @@ const portableTextComponents = {
     normal: ({ children }: any) => (
       <p className="text-foreground/90 mb-6 leading-relaxed">{children}</p>
     ),
-    h1: makeHeading('h1', 'mt-12 mb-6 scroll-mt-24 text-4xl font-bold first:mt-0'),
-    h2: makeHeading('h2', 'border-border/50 mt-10 mb-5 scroll-mt-24 border-b pb-3 text-3xl font-semibold first:mt-0'),
-    h3: makeHeading('h3', 'mt-8 mb-4 scroll-mt-24 text-2xl font-semibold first:mt-0'),
-    h4: makeHeading('h4', 'mt-6 mb-3 scroll-mt-24 text-xl font-medium first:mt-0'),
-    h5: makeHeading('h5', 'mt-5 mb-3 scroll-mt-24 text-lg font-medium first:mt-0'),
-    h6: makeHeading('h6', 'text-muted-foreground mt-4 mb-2 scroll-mt-24 text-base font-medium first:mt-0'),
+    h1: makeHeading(
+      'h1',
+      'mt-12 mb-6 scroll-mt-24 text-4xl font-bold first:mt-0',
+    ),
+    h2: makeHeading(
+      'h2',
+      'border-border/50 mt-10 mb-5 scroll-mt-24 border-b pb-3 text-3xl font-semibold first:mt-0',
+    ),
+    h3: makeHeading(
+      'h3',
+      'mt-8 mb-4 scroll-mt-24 text-2xl font-semibold first:mt-0',
+    ),
+    h4: makeHeading(
+      'h4',
+      'mt-6 mb-3 scroll-mt-24 text-xl font-medium first:mt-0',
+    ),
+    h5: makeHeading(
+      'h5',
+      'mt-5 mb-3 scroll-mt-24 text-lg font-medium first:mt-0',
+    ),
+    h6: makeHeading(
+      'h6',
+      'text-muted-foreground mt-4 mb-2 scroll-mt-24 text-base font-medium first:mt-0',
+    ),
     blockquote: ({ children }: any) => (
       <blockquote className="border-primary/60 text-muted-foreground bg-muted/40 my-8 rounded-r-lg border-l-4 py-4 pl-6 italic">
         {children}
@@ -73,7 +95,9 @@ const portableTextComponents = {
       <ul className="mb-6 ml-4 list-inside list-disc space-y-2">{children}</ul>
     ),
     number: ({ children }: any) => (
-      <ol className="mb-6 ml-4 list-inside list-decimal space-y-2">{children}</ol>
+      <ol className="mb-6 ml-4 list-inside list-decimal space-y-2">
+        {children}
+      </ol>
     ),
   },
   marks: {
@@ -91,7 +115,9 @@ const portableTextComponents = {
         href={value?.href}
         className="text-primary hover:text-primary/80 decoration-primary/30 underline underline-offset-4 transition-colors duration-200"
         target={value?.href?.startsWith('http') ? '_blank' : undefined}
-        rel={value?.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+        rel={
+          value?.href?.startsWith('http') ? 'noopener noreferrer' : undefined
+        }
       >
         {children}
       </a>
@@ -103,13 +129,22 @@ export default function PostContent({ post }: PostContentProps) {
   return (
     <>
       <div className="prose prose-lg dark:prose-invert max-w-none">
-        <PortableText value={post.content ?? []} components={portableTextComponents} />
+        <PortableText
+          value={post.content ?? []}
+          components={portableTextComponents}
+        />
       </div>
 
       <div className="border-border mt-12 border-t pt-8">
         <div className="flex items-center justify-between">
-          <p className="text-muted-foreground text-sm">Gostou deste artigo? Compartilhe!</p>
-          <ShareButton slug={post.slug} title={post.title} description={post.overview} />
+          <p className="text-muted-foreground text-sm">
+            Gostou deste artigo? Compartilhe!
+          </p>
+          <ShareButton
+            slug={post.slug}
+            title={post.title}
+            description={post.overview}
+          />
         </div>
       </div>
     </>

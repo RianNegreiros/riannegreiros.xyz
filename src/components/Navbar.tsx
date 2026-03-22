@@ -7,7 +7,7 @@ import {
 } from './ui/navigation-menu'
 import { navigationMenuTriggerStyle } from './ui/variants'
 import { lazy, Suspense } from 'react'
-import { ThemeProvider } from '../contexts/ThemeContext'
+import { ThemeProvider } from '../contexts/theme'
 
 const MobileMenu = lazy(() =>
   import('./MobileMenu').then((module) => ({ default: module.MobileMenu })),

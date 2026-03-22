@@ -1,11 +1,18 @@
 import { slugify } from '@/lib'
-import type { Heading } from '@/lib/types'
+import type { SanityHeading } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
+import { ListIcon } from 'lucide-react'
 
 interface TableOfContentsProps {
-  headings: Heading[]
+  headings: SanityHeading[]
   className?: string
+}
+
+const INDENT: Record<string, string> = {
+  h2: 'ml-0',
+  h3: 'ml-3',
+  h4: 'ml-6',
 }
 
 export default function TableOfContents({
@@ -14,41 +21,27 @@ export default function TableOfContents({
 }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>('')
 
-  const filteredData = headings.filter(
-    (heading) => Object.keys(heading).length !== 0,
-  )
+  const filtered = headings.filter((h) => Object.keys(h).length !== 0)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
-          }
+          if (entry.isIntersecting) setActiveId(entry.target.id)
         })
       },
-      {
-        rootMargin: '-80px 0px -80% 0px',
-        threshold: 0.1,
-      },
+      { rootMargin: '-80px 0px -80% 0px', threshold: 0.1 },
     )
 
-    const headingElements = filteredData
-      .map((heading) => document.getElementById(slugify(heading.text)))
-      .filter(Boolean)
+    const elements = filtered
+      .map((h) => document.getElementById(slugify(h.text)))
+      .filter(Boolean) as HTMLElement[]
 
-    headingElements.forEach((element) => {
-      if (element) observer.observe(element)
-    })
+    elements.forEach((el) => observer.observe(el))
+    return () => elements.forEach((el) => observer.unobserve(el))
+  }, [filtered])
 
-    return () => {
-      headingElements.forEach((element) => {
-        if (element) observer.unobserve(element)
-      })
-    }
-  }, [filteredData])
-
-  if (filteredData.length === 0) return null
+  if (filtered.length === 0) return null
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -57,10 +50,7 @@ export default function TableOfContents({
     e.preventDefault()
     const element = document.getElementById(slugify(headingText))
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
       window.history.replaceState(null, '', `#${slugify(headingText)}`)
     }
   }
@@ -74,61 +64,42 @@ export default function TableOfContents({
       aria-label="Tabela de Conteúdos"
     >
       <h4 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
-        <svg
-          className="h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
+        <ListIcon className="h-4 w-4" />
         Tabela de Conteúdos
       </h4>
       <ul className="space-y-2 text-sm">
-        {filteredData.map((heading, index) => {
+        {filtered.map((heading, index) => {
           const headingId = slugify(heading.text)
           const isActive = activeId === headingId
+          const isH2 = heading.level === 'h2'
 
           return (
             <li
               key={`${heading.text}-${index}`}
-              className={cn('relative transition-all duration-200', {
-                'ml-0': heading.level === 'h2',
-                'ml-3': heading.level === 'h3',
-                'ml-6': heading.level === 'h4',
-                'ml-9': heading.level === 'h5' || heading.level === 'h6',
-              })}
+              className={cn(
+                'relative transition-all duration-200',
+                INDENT[heading.level] ?? 'ml-9',
+              )}
             >
               <div
                 className={cn(
                   'bg-primary absolute top-1 -left-3 h-4 w-0.5 rounded-full transition-opacity duration-200',
-                  {
-                    'opacity-100': isActive,
-                    'opacity-0': !isActive,
-                  },
+                  isActive ? 'opacity-100' : 'opacity-0',
                 )}
               />
-
               <a
                 href={`#${headingId}`}
                 onClick={(e) => handleClick(e, heading.text)}
                 className={cn(
                   'hover:bg-muted/50 -mx-2 block rounded-md px-2 py-1 leading-relaxed transition-all duration-200',
-                  {
-                    'text-primary bg-primary/5 font-semibold':
-                      isActive && heading.level === 'h2',
-                    'text-primary bg-primary/5 font-medium':
-                      isActive && heading.level !== 'h2',
-                    'text-foreground hover:text-primary font-medium':
-                      !isActive && heading.level === 'h2',
-                    'text-muted-foreground hover:text-foreground font-normal':
-                      !isActive && heading.level !== 'h2',
-                  },
+                  isActive && isH2 && 'text-primary bg-primary/5 font-semibold',
+                  isActive && !isH2 && 'text-primary bg-primary/5 font-medium',
+                  !isActive &&
+                    isH2 &&
+                    'text-foreground hover:text-primary font-medium',
+                  !isActive &&
+                    !isH2 &&
+                    'text-muted-foreground hover:text-foreground font-normal',
                 )}
               >
                 <span className="block truncate" title={heading.text}>

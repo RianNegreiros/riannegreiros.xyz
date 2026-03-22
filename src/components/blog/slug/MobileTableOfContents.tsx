@@ -1,11 +1,18 @@
 import { slugify } from '@/lib'
-import type { Heading } from '@/lib/types'
+import type { SanityHeading } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import { ListIcon, ChevronDownIcon } from 'lucide-react'
 
 interface MobileTableOfContentsProps {
-  headings: Heading[]
+  headings: SanityHeading[]
   className?: string
+}
+
+const INDENT: Record<string, string> = {
+  h2: 'ml-0',
+  h3: 'ml-3',
+  h4: 'ml-6',
 }
 
 export default function MobileTableOfContents({
@@ -14,19 +21,13 @@ export default function MobileTableOfContents({
 }: MobileTableOfContentsProps) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const filteredData = headings.filter(
-    (heading) => Object.keys(heading).length !== 0,
-  )
-
-  if (filteredData.length === 0) return null
+  const filtered = headings.filter((h) => Object.keys(h).length !== 0)
+  if (filtered.length === 0) return null
 
   const handleClick = (headingText: string) => {
     const element = document.getElementById(slugify(headingText))
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
       setIsOpen(false)
       window.history.replaceState(null, '', `#${slugify(headingText)}`)
     }
@@ -41,36 +42,14 @@ export default function MobileTableOfContents({
         aria-controls="mobile-toc"
       >
         <span className="flex items-center gap-2 text-sm font-medium">
-          <svg
-            className="h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+          <ListIcon className="h-4 w-4" />
           Tabela de Conteúdos
         </span>
-        <svg
+        <ChevronDownIcon
           className={cn('h-4 w-4 transition-transform duration-200', {
             'rotate-180': isOpen,
           })}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        />
       </button>
 
       {isOpen && (
@@ -79,25 +58,18 @@ export default function MobileTableOfContents({
           className="bg-card animate-in slide-in-from-top-2 mt-2 rounded-lg border p-4 shadow-sm duration-200"
         >
           <ul className="space-y-2 text-sm">
-            {filteredData.map((heading, index) => (
+            {filtered.map((heading, index) => (
               <li
                 key={`${heading.text}-${index}`}
-                className={cn('relative', {
-                  'ml-0': heading.level === 'h2',
-                  'ml-3': heading.level === 'h3',
-                  'ml-6': heading.level === 'h4',
-                  'ml-9': heading.level === 'h5' || heading.level === 'h6',
-                })}
+                className={cn('relative', INDENT[heading.level] ?? 'ml-9')}
               >
                 <button
                   onClick={() => handleClick(heading.text)}
                   className={cn(
                     'hover:bg-muted/50 -mx-2 block w-full rounded-md px-2 py-2 text-left leading-relaxed transition-colors duration-200',
-                    {
-                      'text-foreground font-medium': heading.level === 'h2',
-                      'text-muted-foreground font-normal':
-                        heading.level !== 'h2',
-                    },
+                    heading.level === 'h2'
+                      ? 'text-foreground font-medium'
+                      : 'text-muted-foreground font-normal',
                   )}
                 >
                   <span className="block truncate" title={heading.text}>

@@ -1,14 +1,14 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { ClipboardIcon, CheckIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-interface SimpleCopyButtonProps {
+interface CopyButtonProps {
   value: string
   className?: string
 }
 
-export function CopyButton({ value, className }: SimpleCopyButtonProps) {
-  const [hasCopied, setHasCopied] = React.useState(false)
+export function CopyButton({ value, className }: CopyButtonProps) {
+  const [hasCopied, setHasCopied] = useState(false)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(value).then(() => {
@@ -23,8 +23,9 @@ export function CopyButton({ value, className }: SimpleCopyButtonProps) {
       variant="ghost"
       className={`relative z-10 h-8 w-8 dark:text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50 ${className}`}
       onClick={handleCopy}
+      aria-label={hasCopied ? 'Copied' : 'Copy'}
     >
-      <span className="sr-only">Copy</span>
+      <span className="sr-only">{hasCopied ? 'Copied' : 'Copy'}</span>
       {hasCopied ? (
         <CheckIcon className="h-4 w-4" />
       ) : (

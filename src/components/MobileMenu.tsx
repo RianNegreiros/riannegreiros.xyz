@@ -13,12 +13,9 @@ import { cn } from '../lib/utils'
 import { useState } from 'react'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 
-const navigationItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Projetos', href: '/projects' },
-  { name: 'Currículo', href: '/resume' },
-]
+import { navigationItems as sharedItems } from '../data/navigation-items'
+
+const navigationItems = [{ name: 'Home', href: '/' }, ...sharedItems]
 
 interface MobileMenuProps {
   currentPath: string

@@ -1,5 +1,16 @@
-import { useEffect, useState } from 'react'
-import { ThemeContext, type Theme } from './theme-context'
+import { createContext, useEffect, useState } from 'react'
+
+export type Theme = 'light' | 'dark' | 'system'
+
+export interface ThemeContextType {
+  theme: Theme
+  setTheme: (theme: Theme) => void
+  resolvedTheme: 'light' | 'dark'
+}
+
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined,
+)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
@@ -7,7 +18,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return (localStorage.getItem('theme') as Theme) || 'system'
   })
 
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light')
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') return 'light'
+    return document.documentElement.classList.contains('dark')
+      ? 'dark'
+      : 'light'
+  })
 
   useEffect(() => {
     const updateResolvedTheme = () => {
@@ -15,7 +31,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         theme === 'dark' ||
         (theme === 'system' &&
           window.matchMedia('(prefers-color-scheme: dark)').matches)
-
       setResolvedTheme(isDark ? 'dark' : 'light')
       document.documentElement.classList.toggle('dark', isDark)
     }

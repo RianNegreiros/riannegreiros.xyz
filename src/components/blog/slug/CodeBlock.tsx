@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { codeToHtml } from 'shiki'
 import { CopyButton } from './CopyButton'
 
 interface CodeBlockProps {
@@ -20,19 +19,17 @@ export default function CodeBlock({ value }: CodeBlockProps) {
   useEffect(() => {
     const theme = getResolvedTheme()
 
-    codeToHtml(value.code, {
-      lang: value.language || 'plaintext',
-      theme: theme === 'dark' ? 'github-dark' : 'github-light',
-    }).then(setHtml)
+    const highlight = (t: 'dark' | 'light') =>
+      import('shiki').then(({ codeToHtml }) =>
+        codeToHtml(value.code, {
+          lang: value.language || 'plaintext',
+          theme: t === 'dark' ? 'github-dark' : 'github-light',
+        }).then(setHtml),
+      )
 
-    const observer = new MutationObserver(() => {
-      const newTheme = getResolvedTheme()
-      codeToHtml(value.code, {
-        lang: value.language || 'plaintext',
-        theme: newTheme === 'dark' ? 'github-dark' : 'github-light',
-      }).then(setHtml)
-    })
+    highlight(theme)
 
+    const observer = new MutationObserver(() => highlight(getResolvedTheme()))
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class'],
