@@ -42,9 +42,12 @@ export default function ShareButton({
   const [open, setOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [emailError, setEmailError] = useState(false)
+  const [url, setUrl] = useState('')
 
-  const baseUrl = import.meta.env.PUBLIC_BASE_URL || window.location.origin
-  const url = `${baseUrl}/blog/${slug}`
+  useEffect(() => {
+    const baseUrl = import.meta.env.PUBLIC_BASE_URL || window.location.origin
+    setUrl(`${baseUrl}/blog/${slug}`)
+  }, [])
 
   useEffect(() => {
     const checkMobile = () => {
