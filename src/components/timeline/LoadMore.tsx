@@ -23,9 +23,12 @@ export default function LoadMore({
 
   return (
     <>
-      {hasMore && (
+      {hasMore && !loading && (
+        <li ref={ref} className="list-none" aria-hidden="true" />
+      )}
+      {loading && (
         <li className="mb-4 flex list-none items-center justify-center">
-          <div ref={ref} className="flex items-center justify-center p-4">
+          <div className="flex items-center justify-center p-4">
             <LoaderCircle className="h-8 w-8 animate-spin text-gray-200 dark:text-gray-600" />
             <span className="sr-only">Loading...</span>
           </div>

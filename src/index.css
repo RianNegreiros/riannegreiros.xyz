@@ -254,6 +254,10 @@
     animation: fm-fade-in 0.5s ease both;
   }
 
+  .animate-fade-out {
+    animation: fm-fade-in 0.3s ease both reverse;
+  }
+
   .animate-slide-up {
     animation: fm-slide-up 0.5s ease both;
   }

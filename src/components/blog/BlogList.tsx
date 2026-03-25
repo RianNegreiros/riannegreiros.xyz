@@ -5,6 +5,7 @@ import PostItem from './PostItem'
 import BlogPagination from './BlogPagination'
 import BlogSkeleton from './BlogSkeleton'
 import SearchInput from './SearchInput'
+import { useFadingState } from '@/hooks/useFadingSate'
 
 const ITEMS_PER_PAGE = 10
 
@@ -31,6 +32,7 @@ export default function BlogList({
     Math.ceil(initialTotal / ITEMS_PER_PAGE) || 1,
   )
   const [loading, setLoading] = useState(initialPosts.length === 0)
+  const skeleton = useFadingState(loading)
   const [urlState, setUrlState] = useState(getUrlParams)
   const fetchingRef = useRef(false)
   const isInitialRender = useRef(true)
@@ -82,13 +84,17 @@ export default function BlogList({
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  if (loading) return <BlogSkeleton />
-
   return (
     <>
       <SearchInput />
 
-      {!posts.length ? (
+      {skeleton.visible ? (
+        <div
+          className={skeleton.fading ? 'animate-fade-out' : 'animate-fade-in'}
+        >
+          <BlogSkeleton />
+        </div>
+      ) : !posts.length ? (
         <div className="py-8 text-center">
           <p className="text-muted-foreground text-lg">
             {urlState.search

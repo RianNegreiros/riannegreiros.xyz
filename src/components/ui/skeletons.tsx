@@ -6,11 +6,16 @@ interface SkeletonProps {
   count?: number
 }
 
+const LINE_WIDTHS = ['w-full', 'w-5/6', 'w-3/4']
+
 export function TextSkeleton({ className, count = 1 }: SkeletonProps) {
   return (
     <div className="space-y-2">
       {Array.from({ length: count }).map((_, i) => (
-        <Skeleton key={i} className={cn('h-4', className)} />
+        <Skeleton
+          key={i}
+          className={cn('h-4', LINE_WIDTHS[i % LINE_WIDTHS.length], className)}
+        />
       ))}
     </div>
   )
