@@ -3,8 +3,6 @@ import { getPortfolioData } from '@/lib/api'
 import type { SanityPortfolioItem } from '@/lib/types/sanity'
 import LoadMore from './LoadMore'
 import TimelineItem from './TimelineItem'
-import TimelineSkeleton from './TimelineSkeleton'
-import { useFadingState } from '@/hooks/useFadingSate'
 
 const ITEMS_PER_PAGE = 5
 
@@ -15,7 +13,6 @@ export default function Timeline({
 }) {
   const [items, setItems] = useState<SanityPortfolioItem[]>(initialItems)
   const [loading, setLoading] = useState(initialItems.length === 0)
-  const skeleton = useFadingState(loading && items.length === 0)
   const [hasMore, setHasMore] = useState<boolean>(true)
   const [page, setPage] = useState<number>(initialItems.length > 0 ? 1 : 0)
   const [error, setError] = useState<string | null>(null)
@@ -52,12 +49,8 @@ export default function Timeline({
     }
   }, [loading, hasMore])
 
-  if (skeleton.visible)
-    return (
-      <div className={skeleton.fading ? 'animate-fade-out' : 'animate-fade-in'}>
-        <TimelineSkeleton />
-      </div>
-    )
+  if (loading && items.length === 0)
+    return <div className="py-8 text-center text-muted-foreground">Carregando...</div>
 
   if (error)
     return (
