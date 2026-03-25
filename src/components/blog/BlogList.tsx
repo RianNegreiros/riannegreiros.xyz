@@ -86,7 +86,9 @@ export default function BlogList({
       <SearchInput />
 
       {loading ? (
-        <div className="py-8 text-center text-muted-foreground">Carregando...</div>
+        <div className="text-muted-foreground py-8 text-center">
+          Carregando...
+        </div>
       ) : !posts.length ? (
         <div className="py-8 text-center">
           <p className="text-muted-foreground text-lg">
@@ -102,11 +104,13 @@ export default function BlogList({
               <PostItem key={post._id} post={post} index={index} />
             ))}
           </ul>
-          <BlogPagination
-            currentPage={urlState.page + 1}
-            totalPages={totalPages}
-            onPageChange={(page) => handlePageChange(page - 1)}
-          />
+          {!urlState.search && (
+            <BlogPagination
+              currentPage={urlState.page + 1}
+              totalPages={totalPages}
+              onPageChange={(page) => handlePageChange(page - 1)}
+            />
+          )}
         </div>
       )}
     </>
