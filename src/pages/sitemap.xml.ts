@@ -27,12 +27,14 @@ export async function GET(context: APIContext) {
         updatedAt?: string
       }) => {
         const lastmod = post.updatedAt ?? post.firstPublishedDate
+        const ageMs = Date.now() - new Date(lastmod).getTime()
+        const priority = ageMs < 90 * 24 * 60 * 60 * 1000 ? '0.9' : '0.8'
         return `
   <url>
     <loc>${baseUrl}/blog/${post.slug}</loc>
     <lastmod>${new Date(lastmod).toISOString().split('T')[0]}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>${priority}</priority>
   </url>`
       },
     )
