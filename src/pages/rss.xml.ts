@@ -22,7 +22,7 @@ export async function GET(context: APIContext) {
     items: posts.map((post: SanityPost) => ({
       title: post.title,
       description: post.overview,
-      link: `/blog/${post.slug}/`,
+      link: `/blog/${post.slug}`,
       pubDate: post.firstPublishedDate,
     })),
   })
