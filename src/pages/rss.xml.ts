@@ -1,6 +1,6 @@
-import { fetchSanityData, queries } from '@/lib'
 import rss from '@astrojs/rss'
 import type { APIContext } from 'astro'
+import { fetchSanityData, queries, type SanityPost } from '@/lib'
 
 export async function GET(context: APIContext) {
   const posts = await fetchSanityData<any>(queries.rss)
@@ -9,11 +9,21 @@ export async function GET(context: APIContext) {
     title: 'Rian Negreiros — Blog',
     description: 'Artigos sobre engenharia de software.',
     site: context.site!.href,
-    items: posts.map((post: any) => ({
+
+    xmlns: {
+      atom: 'http://www.w3.org/2005/Atom',
+    },
+    customData: [
+      '<language>pt-BR</language>',
+      `<atom:link href="${new URL('/rss.xml', context.site).href}" rel="self" type="application/rss+xml" />`,
+      `<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
+    ].join(''),
+
+    items: posts.map((post: SanityPost) => ({
       title: post.title,
-      pubDate: new Date(post.firstPublishedDate),
-      description: post.overview ?? '',
-      link: `/blog/${post.slug}`,
+      description: post.overview,
+      link: `/blog/${post.slug}/`,
+      pubDate: post.firstPublishedDate,
     })),
   })
 }
