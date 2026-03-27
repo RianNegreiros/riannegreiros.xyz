@@ -4,8 +4,6 @@ import Footer from '@/components/Footer'
 import ThemeScript from '@/components/ThemeScript.astro'
 import '@/index.css'
 import { Navbar } from '@/components/Navbar'
-import Analytics from '@vercel/analytics/astro'
-import SpeedInsights from '@vercel/speed-insights/astro'
 
 interface Props {
   title?: string
@@ -45,6 +43,7 @@ const canonicalUrl = url.replace(/\/$/, '') || url
 
 <!doctype html>
 <html lang="pt-BR">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -118,8 +117,6 @@ const canonicalUrl = url.replace(/\/$/, '') || url
 
     <ClientRouter />
 
-    <Analytics />
-    <SpeedInsights />
   </head>
   <body class="bg-background text-foreground">
     <div class="flex min-h-screen flex-col">

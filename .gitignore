@@ -26,4 +26,5 @@ pnpm-debug.log*
 .vscode/
 
 .vercel
+.netlify
 package-lock.json
