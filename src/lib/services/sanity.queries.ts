@@ -101,7 +101,25 @@ export const queries = {
   rss: `
     *[_type == 'post' && defined(slug.current) && defined(firstPublishedDate)]
     | order(firstPublishedDate desc) {
-      title, "slug": slug.current, overview, firstPublishedDate
+      title,
+      "slug": slug.current,
+      overview,
+      firstPublishedDate,
+      image{
+        asset->{
+          url
+        }
+      },
+      content[]{
+        ...,
+        asset->{
+          _id,
+          url,
+          metadata{
+            dimensions
+          }
+        }
+      }
     }
   `,
   sitemap: `
