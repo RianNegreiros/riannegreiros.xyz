@@ -50,7 +50,11 @@ export default function Timeline({
   }, [loading, hasMore])
 
   if (loading && items.length === 0)
-    return <div className="py-8 text-center text-muted-foreground">Carregando...</div>
+    return (
+      <div className="text-muted-foreground py-8 text-center">
+        Carregando...
+      </div>
+    )
 
   if (error)
     return (
