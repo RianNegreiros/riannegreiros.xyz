@@ -26,9 +26,13 @@ export default defineConfig({
     optimizeDeps: {
       include: ['react-dom/client'],
     },
-    build: {
-      chunkSizeWarningLimit: 1000,
-    },
+  build: {
+    chunkSizeWarningLimit: 1000,
+    target: 'es2022',
+  },
+  esbuild: {
+    target: 'es2022',
+  },
   },
     experimental: {
     svgo: {
