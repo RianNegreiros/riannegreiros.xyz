@@ -1,0 +1,17 @@
+[[redirects]]
+  from = "http://riannegreiros.com.br/*"
+  to = "https://riannegreiros.com.br/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.riannegreiros.com.br/*"
+  to = "https://riannegreiros.com.br/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.riannegreiros.com.br/*"
+  to = "https://riannegreiros.com.br/:splat"
+  status = 301
+  force = true
