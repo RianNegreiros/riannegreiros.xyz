@@ -2,7 +2,9 @@ import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
 import tailwindcss from '@tailwindcss/vite'
 
-import netlify from '@astrojs/netlify';
+
+import vercel from '@astrojs/vercel';
+
 
 export default defineConfig({
   site: 'https://riannegreiros.com.br',
@@ -34,21 +36,23 @@ export default defineConfig({
     target: 'es2022',
   },
   },
-    experimental: {
-    svgo: {
-      multipass: true,
-      floatPrecision: 2,
-      plugins: [
-        'preset-default',
-        'removeXMLNS',
-        {
-          name: "removeXlink",
-          params: {
-            includeLegacy: true
-          }
+
+  experimental: {
+  svgo: {
+    multipass: true,
+    floatPrecision: 2,
+    plugins: [
+      'preset-default',
+      'removeXMLNS',
+      {
+        name: "removeXlink",
+        params: {
+          includeLegacy: true
         }
-      ]
-    }
-  },
-  adapter: netlify(),
+      }
+    ]
+  }
+},
+
+  adapter: vercel(),
 })

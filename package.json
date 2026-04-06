@@ -13,10 +13,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "^7.0.4",
     "@astrojs/node": "^10.0.3",
     "@astrojs/react": "^5.0.1",
     "@astrojs/rss": "^4.0.17",
+    "@astrojs/vercel": "^10.0.4",
     "@portabletext/react": "^6.0.3",
     "@portabletext/to-html": "^5.0.2",
     "@portabletext/types": "^4.0.2",
