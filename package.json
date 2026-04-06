@@ -51,5 +51,8 @@
     "sharp": "^0.34.5",
     "shiki": "^4.0.2",
     "typescript": "~6.0.2"
+  },
+    "pnpm": {
+    "onlyBuiltDependencies": ["@parcel/watcher", "esbuild", "sharp"]
   }
 }
