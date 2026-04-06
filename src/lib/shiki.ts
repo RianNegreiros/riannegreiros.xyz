@@ -1,6 +1,8 @@
 import { createHighlighter, type Highlighter } from 'shiki'
 
-let highlighter: Highlighter | null = null
+declare global {
+  var __shikiHighlighter: Highlighter | undefined
+}
 
 const THEMES = ['github-dark', 'github-light']
 const LANGUAGES = [
@@ -20,13 +22,14 @@ const LANGUAGES = [
 ]
 
 export async function getHighlighter(): Promise<Highlighter> {
-  if (highlighter) return highlighter
+  if (globalThis.__shikiHighlighter) return globalThis.__shikiHighlighter
 
-  highlighter = await createHighlighter({
+  const highlighter = await createHighlighter({
     themes: THEMES,
     langs: LANGUAGES,
   })
 
+  globalThis.__shikiHighlighter = highlighter
   return highlighter
 }
 
