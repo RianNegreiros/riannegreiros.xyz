@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { highlight } from '@/lib/shiki'
 import { CopyButton } from './CopyButton'
 
 interface CodeBlockProps {
@@ -15,28 +16,31 @@ function getResolvedTheme(): 'dark' | 'light' {
 
 export default function CodeBlock({ value }: CodeBlockProps) {
   const [html, setHtml] = useState<string>('')
+  const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>(() =>
+    getResolvedTheme(),
+  )
 
   useEffect(() => {
-    const theme = getResolvedTheme()
+    highlight(
+      value.code,
+      value.language,
+      currentTheme === 'dark' ? 'github-dark' : 'github-light',
+    )
+      .then(setHtml)
+      .catch(console.error)
+  }, [value.code, value.language, currentTheme])
 
-    const highlight = (t: 'dark' | 'light') =>
-      import('shiki').then(({ codeToHtml }) =>
-        codeToHtml(value.code, {
-          lang: value.language || 'plaintext',
-          theme: t === 'dark' ? 'github-dark' : 'github-light',
-        }).then(setHtml),
-      )
+  useEffect(() => {
+    const updateTheme = () => setCurrentTheme(getResolvedTheme())
 
-    highlight(theme)
-
-    const observer = new MutationObserver(() => highlight(getResolvedTheme()))
+    const observer = new MutationObserver(updateTheme)
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class'],
     })
 
     return () => observer.disconnect()
-  }, [value.code, value.language])
+  }, [])
 
   if (!html) {
     return (

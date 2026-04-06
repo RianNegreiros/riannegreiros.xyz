@@ -9,7 +9,7 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   site: 'https://riannegreiros.com.br',
   output: 'server',
-  trailingSlash: 'never',
+  trailingSlash: 'ignore',
 
   integrations: [
     react(),
