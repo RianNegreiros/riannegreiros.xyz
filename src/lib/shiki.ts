@@ -19,6 +19,7 @@ const LANGUAGES = [
   'plaintext',
   'csharp',
   'yaml',
+  'xml',
 ]
 
 export async function getHighlighter(): Promise<Highlighter> {
