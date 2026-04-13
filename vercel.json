@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/blog/upload-e-exclusao-de-imagens-no-sprint-boot-com-google-cloud-storage",
+      "destination": "/blog/upload-e-exclusao-de-imagens-no-spring-boot-com-google-cloud-storage",
+      "permanent": true
+    },
+    {
+      "source": "/blog/git-na-pratica-o-guia-para-desenvolvedores-backend-que-estao-comecando",
+      "destination": "/blog/git-na-pratica-o-guia-para-desenvolvedores-que-estao-comecando",
+      "permanent": true
+    }
+  ]
+}
