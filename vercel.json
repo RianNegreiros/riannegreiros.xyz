@@ -9,6 +9,16 @@
       "source": "/blog/git-na-pratica-o-guia-para-desenvolvedores-backend-que-estao-comecando",
       "destination": "/blog/git-na-pratica-o-guia-para-desenvolvedores-que-estao-comecando",
       "permanent": true
+    },
+    {
+      "source": "/blog/o-que-e-o-git-e-por-que-usa-lo",
+      "destination": "/blog/git-na-pratica-o-guia-para-desenvolvedores-que-estao-comecando",
+      "permanent": true
+    },
+    {
+      "source": "/blog/introducao-a-autenticacao-na-web",
+      "destination": "/blog/como-aplicacoes-web-se-tornam-seguras-jwt-na-pratica",
+      "permanent": true
     }
   ]
 }
