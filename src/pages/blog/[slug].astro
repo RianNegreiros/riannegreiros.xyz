@@ -18,7 +18,7 @@ const { slug } = Astro.params
 const post = await fetchSanityData<SanityPost>(queries.posts.bySlug, { slug })
 
 if (!post) {
-  return Astro.redirect('/404')
+  return new Response(null, { status: 404, statusText: 'Not Found' })
 }
 
 const postUrl = `${import.meta.env.PUBLIC_BASE_URL}/blog/${slug}`
