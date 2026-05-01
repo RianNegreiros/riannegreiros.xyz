@@ -2,18 +2,14 @@ import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
 import tailwindcss from '@tailwindcss/vite'
 
-
-import vercel from '@astrojs/vercel';
-
+import netlify from '@astrojs/netlify'
 
 export default defineConfig({
   site: 'https://riannegreiros.com.br',
   output: 'server',
   trailingSlash: 'ignore',
 
-  integrations: [
-    react(),
-  ],
+  integrations: [react()],
 
   build: {
     assets: '_assets',
@@ -28,31 +24,31 @@ export default defineConfig({
     optimizeDeps: {
       include: ['react-dom/client'],
     },
-  build: {
-    chunkSizeWarningLimit: 1000,
-    target: 'es2022',
-  },
-  esbuild: {
-    target: 'es2022',
-  },
+    build: {
+      chunkSizeWarningLimit: 1000,
+      target: 'es2022',
+    },
+    esbuild: {
+      target: 'es2022',
+    },
   },
 
   experimental: {
-  svgo: {
-    multipass: true,
-    floatPrecision: 2,
-    plugins: [
-      'preset-default',
-      'removeXMLNS',
-      {
-        name: "removeXlink",
-        params: {
-          includeLegacy: true
-        }
-      }
-    ]
-  }
-},
+    svgo: {
+      multipass: true,
+      floatPrecision: 2,
+      plugins: [
+        'preset-default',
+        'removeXMLNS',
+        {
+          name: 'removeXlink',
+          params: {
+            includeLegacy: true,
+          },
+        },
+      ],
+    },
+  },
 
-  adapter: vercel(),
+  adapter: netlify(),
 })
