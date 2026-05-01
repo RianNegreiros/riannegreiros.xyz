@@ -13,7 +13,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "^7.0.8",
     "@astrojs/node": "^10.0.4",
     "@astrojs/react": "^5.0.3",
     "@astrojs/rss": "^4.0.18",
@@ -30,7 +29,7 @@
     "@sanity/client": "^7.20.0",
     "@sanity/image-url": "^2.1.1",
     "@tailwindcss/vite": "^4.2.2",
-    "astro": "^6.1.4",
+    "astro": "^6.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -43,6 +42,7 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
+    "@astrojs/netlify": "^7.0.8",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "prettier": "^3.8.1",

@@ -33,22 +33,5 @@ export default defineConfig({
     },
   },
 
-  experimental: {
-    svgo: {
-      multipass: true,
-      floatPrecision: 2,
-      plugins: [
-        'preset-default',
-        'removeXMLNS',
-        {
-          name: 'removeXlink',
-          params: {
-            includeLegacy: true,
-          },
-        },
-      ],
-    },
-  },
-
   adapter: netlify(),
 })
