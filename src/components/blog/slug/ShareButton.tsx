@@ -45,7 +45,7 @@ export default function ShareButton({
   const [url, setUrl] = useState('')
 
   useEffect(() => {
-    const baseUrl = import.meta.env.PUBLIC_BASE_URL || window.location.origin
+    const baseUrl = window.location.origin
     setUrl(`${baseUrl}/blog/${slug}`)
   }, [])
 

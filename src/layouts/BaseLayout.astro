@@ -17,7 +17,7 @@ interface Props {
   structuredData?: object
 }
 
-const BASE_URL = import.meta.env.PUBLIC_BASE_URL ?? Astro.site?.href ?? ''
+const BASE_URL = Astro.site?.href ?? ''
 
 const {
   title = 'Rian Negreiros Dos Santos',

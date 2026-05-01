@@ -21,7 +21,7 @@ if (!post) {
   return new Response(null, { status: 404, statusText: 'Not Found' })
 }
 
-const postUrl = `${import.meta.env.PUBLIC_BASE_URL}/blog/${slug}`
+const postUrl = `${Astro.site?.href ?? ''}/blog/${slug}`
 const ogImage = post.image
   ? urlFor(post.image).width(1200).format('webp').url()
   : '/og-image.png'
