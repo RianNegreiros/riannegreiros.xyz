@@ -1,3 +1,7 @@
+https://www.riannegreiros.com.br/*  https://riannegreiros.com.br/:splat  301!
+http://riannegreiros.com.br/*       https://riannegreiros.com.br/:splat  301!
+http://www.riannegreiros.com.br/*   https://riannegreiros.com.br/:splat  301!
+
 /blog/upload-e-exclusao-de-imagens-no-sprint-boot-com-google-cloud-storage     /blog/upload-e-exclusao-de-imagens-no-spring-boot-com-google-cloud-storage     301
 /blog/git-na-pratica-o-guia-para-desenvolvedores-backend-que-estao-comecando   /blog/git-na-pratica-o-guia-para-desenvolvedores-que-estao-comecando           301
 /blog/o-que-e-o-git-e-por-que-usa-lo                                           /blog/git-na-pratica-o-guia-para-desenvolvedores-que-estao-comecando           301

@@ -19,11 +19,18 @@ interface Props {
 
 const BASE_URL = Astro.site?.href ?? ''
 
+const _canonicalPath =
+  Astro.url.pathname.length > 1
+    ? Astro.url.pathname.replace(/\/$/, '')
+    : Astro.url.pathname
+const _siteOrigin = Astro.site?.origin ?? ''
+const _defaultUrl = `${_siteOrigin}${_canonicalPath}`
+
 const {
   title = 'Rian Negreiros Dos Santos',
   description = 'Engenheiro de Software Backend do Rio de Janeiro.',
   image = 'og-image.png',
-  url = Astro.url.href,
+  url = _defaultUrl,
   type = 'website',
   publishedTime,
   modifiedTime,
@@ -33,10 +40,7 @@ const {
 
 const absoluteImage = image.startsWith('http') ? image : `${BASE_URL}${image}`
 
-const currentPath =
-  Astro.url.pathname.length > 1
-    ? Astro.url.pathname.replace(/\/$/, '')
-    : Astro.url.pathname
+const currentPath = _canonicalPath
 
 const canonicalUrl = url.replace(/\/$/, '') || url
 ---
