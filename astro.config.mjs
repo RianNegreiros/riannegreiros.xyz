@@ -33,5 +33,8 @@ export default defineConfig({
     },
   },
 
-  adapter: netlify(),
+  adapter: netlify({
+    middlewareMode: "edge",
+    cacheOnDemandPages: true,
+  }),
 })
